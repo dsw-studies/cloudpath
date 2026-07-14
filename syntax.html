@@ -225,7 +225,11 @@
 </style>
 </head>
 <body>
-<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+<div id="langSwitcher" style="position:fixed; top:14px; right:18px; z-index:200; display:flex; gap:6px;">
+  <button class="lang-btn" data-lang="ru" onclick="setLang('ru')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">RU</button>
+  <button class="lang-btn" data-lang="pl" onclick="setLang('pl')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">PL</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">EN</button>
+</div>
 
 
 <nav class="toc">
@@ -583,6 +587,7 @@ resource "aws_instance" "web_server" {
 
 <script>
 const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Синтаксис языков программирования": "Składnia języków programowania", "базовый конспект: переменные, условия, циклы, функции": "podstawowy konspekt: zmienne, warunki, pętle, funkcje", "Это шпаргалка по основам, а не полный курс — держи её открытой рядом, когда пишешь первый код на новом языке. Для практики: пиши тот же самый пример (калькулятор, список задач) на каждом языке по очереди.": "To ściąga z podstaw, a nie pełny kurs — trzymaj ją otwartą obok, gdy piszesz pierwszy kod w nowym języku. Do ćwiczeń: napisz ten sam przykład (kalkulator, listę zadań) w każdym języku po kolei.", "Отступы вместо { } — код внутри блока сдвинут пробелами.": "Wcięcia zamiast { } — kod wewnątrz bloku jest przesunięty spacjami.", "# переменная и типы": "# zmienna i typy", "# условие": "# warunek", "# цикл": "# pętla", "# функция": "# funkcja", "# класс (ООП)": "# klasa (OOP)", "Строго типизирован, всё внутри классов, блоки в { }.": "Silnie typowany, wszystko wewnątrz klas, bloki w { }.", "// переменная": "// zmienna", "// условие": "// warunek", "// цикл": "// pętla", "// класс и метод": "// klasa i metoda", "Очень похож на Java по синтаксису — легко переключаться между ними.": "Bardzo podobny do Javy pod względem składni — łatwo się między nimi przełączać.", "// класс": "// klasa", "Язык запросов к базе данных — не программирование в обычном смысле, а декларативные команды.": "Język zapytań do bazy danych — nie programowanie w zwykłym sensie, tylko deklaratywne polecenia.", "-- создание таблицы": "-- tworzenie tabeli", "-- вставка данных": "-- wstawianie danych", "-- выборка": "-- pobieranie danych", "-- изменение": "-- modyfikacja", "-- соединение таблиц": "-- łączenie tabel", "HTML — структура страницы, CSS — её оформление.": "HTML — struktura strony, CSS — jej wygląd.", "Делает страницу интерактивной — работает в браузере и на сервере (Node.js).": "Sprawia, że strona jest interaktywna — działa w przeglądarce i na serwerze (Node.js).", "// переменные": "// zmienne", "// функция-стрелка + массив": "// funkcja strzałkowa + tablica", "// переменные: val — неизменяемая, var — изменяемая": "// zmienne: val — niezmienna, var — zmienna", "Низкоуровневый контроль над памятью, компилируется напрямую в машинный код.": "Niskopoziomowa kontrola nad pamięcią, kompilowany bezpośrednio do kodu maszynowego.", "Серверный язык, изначально для веб-страниц — до сих пор держит значительную долю back-end рынка.": "Język serwerowy, pierwotnie dla stron internetowych — nadal ma znaczący udział na rynku back-endu.", "Скрипты для Linux-терминала — автоматизация рутинных задач.": "Skrypty dla terminala Linux — automatyzacja rutynowych zadań.", "Формат конфигурации — используется в Docker Compose, Kubernetes, CI/CD. Отступы важны, как в Python.": "Format konfiguracji — używany w Docker Compose, Kubernetes, CI/CD. Wcięcia są ważne, tak jak w Pythonie.", "# docker-compose.yml пример": "# przykład docker-compose.yml", "Описываешь, какая инфраструктура нужна — Terraform сам создаёт её в облаке.": "Opisujesz, jaka infrastruktura jest potrzebna — Terraform sam ją tworzy w chmurze.", "# описываем провайдера": "# opisujemy dostawcę", "# описываем ресурс: виртуальный сервер": "# opisujemy zasób: serwer wirtualny"};
+const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "Синтаксис языков программирования": "Programming language syntax", "базовый конспект: переменные, условия, циклы, функции": "quick reference: variables, conditionals, loops, functions", "Это шпаргалка по основам, а не полный курс — держи её открытой рядом, когда пишешь первый код на новом языке. Для практики: пиши тот же самый пример (калькулятор, список задач) на каждом языке по очереди.": "This is a cheat sheet on the basics, not a full course — keep it open next to you when writing your first code in a new language. For practice: write the same example (a calculator, a to-do list) in each language in turn.", "Отступы вместо { } — код внутри блока сдвинут пробелами.": "Indentation instead of { } — code inside a block is offset with spaces.", "# переменная и типы": "# variable and types", "# условие": "# conditional", "# цикл": "# loop", "# функция": "# function", "# класс (ООП)": "# class (OOP)", "Строго типизирован, всё внутри классов, блоки в { }.": "Strictly typed, everything lives inside classes, blocks are wrapped in { }.", "// переменная": "// variable", "// условие": "// conditional", "// цикл": "// loop", "// класс и метод": "// class and method", "Очень похож на Java по синтаксису — легко переключаться между ними.": "Very similar to Java in syntax — easy to switch between the two.", "// класс": "// class", "Язык запросов к базе данных — не программирование в обычном смысле, а декларативные команды.": "A database query language — not programming in the usual sense, but declarative commands.", "-- создание таблицы": "-- create table", "-- вставка данных": "-- insert data", "-- выборка": "-- select", "-- изменение": "-- update", "-- соединение таблиц": "-- join tables", "HTML — структура страницы, CSS — её оформление.": "HTML is the page's structure, CSS is its styling.", "Делает страницу интерактивной — работает в браузере и на сервере (Node.js).": "Makes the page interactive — runs in the browser and on the server (Node.js).", "// переменные": "// variables", "// функция-стрелка + массив": "// arrow function + array", "// переменные: val — неизменяемая, var — изменяемая": "// variables: val — immutable, var — mutable", "Низкоуровневый контроль над памятью, компилируется напрямую в машинный код.": "Low-level control over memory, compiles directly to machine code.", "Серверный язык, изначально для веб-страниц — до сих пор держит значительную долю back-end рынка.": "A server-side language, originally for web pages — still holds a significant share of the back-end market.", "Скрипты для Linux-терминала — автоматизация рутинных задач.": "Scripts for the Linux terminal — automating routine tasks.", "Формат конфигурации — используется в Docker Compose, Kubernetes, CI/CD. Отступы важны, как в Python.": "A configuration format — used in Docker Compose, Kubernetes, CI/CD. Indentation matters, just like in Python.", "# docker-compose.yml пример": "# docker-compose.yml example", "Описываешь, какая инфраструктура нужна — Terraform сам создаёт её в облаке.": "You describe the infrastructure you need — Terraform creates it in the cloud for you.", "# описываем провайдера": "# declare the provider", "# описываем ресурс: виртуальный сервер": "# declare a resource: a virtual server"};
 let currentLang = 'ru';
 const __i18nNodes = [];
 (function initI18nNodes(){
@@ -592,7 +597,7 @@ const __i18nNodes = [];
       if(!p) return NodeFilter.FILTER_REJECT;
       const tag = p.tagName;
       if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
-      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(p.closest && p.closest('#langSwitcher')) return NodeFilter.FILTER_REJECT;
       if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }
@@ -600,22 +605,32 @@ const __i18nNodes = [];
   let n;
   while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
 })();
-function toggleLang(){
-  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+const LANG_DICT = {pl: I18N_PL, en: I18N_EN};
+function setLang(lang){
+  currentLang = lang;
   __i18nNodes.forEach(function(item){
-    if(currentLang === 'pl'){
-      const key = item.orig.trim();
-      if(I18N_PL[key]){
-        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
-      }
-    } else {
+    if(currentLang === 'ru'){
       item.node.nodeValue = item.orig;
+    } else {
+      const dict = LANG_DICT[currentLang];
+      const key = item.orig.trim();
+      if(dict[key]){
+        item.node.nodeValue = item.orig.replace(key, dict[key]);
+      } else {
+        item.node.nodeValue = item.orig;
+      }
     }
   });
   document.documentElement.lang = currentLang;
-  const btn = document.getElementById('langToggleBtn');
-  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    const active = b.dataset.lang === currentLang;
+    b.style.background = active ? 'var(--accent)' : 'var(--panel)';
+    b.style.color = active ? '#062622' : 'var(--text)';
+    b.style.borderColor = active ? 'var(--accent)' : 'var(--line)';
+    b.style.fontWeight = active ? '700' : '400';
+  });
 }
+setLang('ru');
 </script>
 </body>
 </html>

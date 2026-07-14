@@ -225,7 +225,11 @@
 </style>
 </head>
 <body>
-<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+<div id="langSwitcher" style="position:fixed; top:14px; right:18px; z-index:200; display:flex; gap:6px;">
+  <button class="lang-btn" data-lang="ru" onclick="setLang('ru')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">RU</button>
+  <button class="lang-btn" data-lang="pl" onclick="setLang('pl')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">PL</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">EN</button>
+</div>
 
 
 <nav class="toc">
@@ -329,6 +333,7 @@
 
 <script>
 const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Языки программирования": "Języki programowania", "официальные сайты": "oficjalne strony", "Sem 1 · основа, ML, скрипты": "Sem 1 · podstawa, ML, skrypty", "официальная документация": "oficjalna dokumentacja", "Sem 2 · ООП": "Sem 2 · OOP", "альтернатива Java": "alternatywa dla Javy", "Sem 2–3 · базы данных": "Sem 2–3 · bazy danych", "альтернатива": "alternatywa", "Sem 3, 5 · веб/фронтенд": "Sem 3, 5 · web/front-end", "JS вне браузера, back-end": "JS poza przeglądarką, back-end", "если выберешь Wybieralny I": "jeśli wybierzesz Wybieralny I", "справочник": "przewodnik", "Linux, автоматизация": "Linux, automatyzacja"};
+const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "Языки программирования": "Programming languages", "официальные сайты": "official websites", "Sem 1 · основа, ML, скрипты": "Sem 1 · basics, ML, scripting", "официальная документация": "official documentation", "Sem 2 · ООП": "Sem 2 · OOP", "альтернатива Java": "Java alternative", "Sem 2–3 · базы данных": "Sem 2–3 · databases", "альтернатива": "alternative", "Sem 3, 5 · веб/фронтенд": "Sem 3, 5 · web/front-end", "JS вне браузера, back-end": "JS outside the browser, back-end", "если выберешь Wybieralny I": "if you choose Wybieralny I", "справочник": "reference", "Linux, автоматизация": "Linux, automation"};
 let currentLang = 'ru';
 const __i18nNodes = [];
 (function initI18nNodes(){
@@ -338,7 +343,7 @@ const __i18nNodes = [];
       if(!p) return NodeFilter.FILTER_REJECT;
       const tag = p.tagName;
       if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
-      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(p.closest && p.closest('#langSwitcher')) return NodeFilter.FILTER_REJECT;
       if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }
@@ -346,22 +351,32 @@ const __i18nNodes = [];
   let n;
   while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
 })();
-function toggleLang(){
-  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+const LANG_DICT = {pl: I18N_PL, en: I18N_EN};
+function setLang(lang){
+  currentLang = lang;
   __i18nNodes.forEach(function(item){
-    if(currentLang === 'pl'){
-      const key = item.orig.trim();
-      if(I18N_PL[key]){
-        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
-      }
-    } else {
+    if(currentLang === 'ru'){
       item.node.nodeValue = item.orig;
+    } else {
+      const dict = LANG_DICT[currentLang];
+      const key = item.orig.trim();
+      if(dict[key]){
+        item.node.nodeValue = item.orig.replace(key, dict[key]);
+      } else {
+        item.node.nodeValue = item.orig;
+      }
     }
   });
   document.documentElement.lang = currentLang;
-  const btn = document.getElementById('langToggleBtn');
-  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    const active = b.dataset.lang === currentLang;
+    b.style.background = active ? 'var(--accent)' : 'var(--panel)';
+    b.style.color = active ? '#062622' : 'var(--text)';
+    b.style.borderColor = active ? 'var(--accent)' : 'var(--line)';
+    b.style.fontWeight = active ? '700' : '400';
+  });
 }
+setLang('ru');
 </script>
 </body>
 </html>

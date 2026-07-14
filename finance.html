@@ -225,7 +225,11 @@
 </style>
 </head>
 <body>
-<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+<div id="langSwitcher" style="position:fixed; top:14px; right:18px; z-index:200; display:flex; gap:6px;">
+  <button class="lang-btn" data-lang="ru" onclick="setLang('ru')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">RU</button>
+  <button class="lang-btn" data-lang="pl" onclick="setLang('pl')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">PL</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">EN</button>
+</div>
 
 
 <nav class="toc">
@@ -280,6 +284,7 @@
 
 <script>
 const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Финансовый ориентир": "Orientacyjne finanse", "не фин. консультация": "nie porada finansowa", "4–5к zł": "4–5 tys. zł", "подработка, 2 курс (~20ч/нед)": "dorabianie, 2 rok (~20h/tydz.)", "7–8к zł": "7–8 tys. zł", "подработка, 3–4 курс (~16ч/нед)": "dorabianie, 3–4 rok (~16h/tydz.)", "9–14к zł": "9–14 tys. zł", "junior после диплома": "junior po dyplomie", "16–23к zł": "16–23 tys. zł", "mid, +2–3 года опыта": "mid, +2–3 lata doświadczenia", "Жильё:": "Mieszkanie:", "Rodzinny Kredyt Mieszkaniowy (RKM) — гарантия BGK до 100 000 zł заменяет первоначальный взнос. При квартире до ~500 000 zł можно обойтись без своих накоплений на взнос. Программа действует до конца 2030 года.": "Rodzinny Kredyt Mieszkaniowy (RKM) — gwarancja BGK do 100 000 zł zastępuje wkład własny. Przy mieszkaniu do ~500 000 zł można obejść się bez własnych oszczędności na wkład. Program obowiązuje do końca 2030 roku."};
+const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "Финансовый ориентир": "Financial reference points", "не фин. консультация": "not financial advice", "4–5к zł": "4–5k zł", "подработка, 2 курс (~20ч/нед)": "side job, year 2 (~20h/week)", "7–8к zł": "7–8k zł", "подработка, 3–4 курс (~16ч/нед)": "side job, year 3–4 (~16h/week)", "9–14к zł": "9–14k zł", "junior после диплома": "junior after graduation", "16–23к zł": "16–23k zł", "mid, +2–3 года опыта": "mid, +2–3 years of experience", "Жильё:": "Housing:", "Rodzinny Kredyt Mieszkaniowy (RKM) — гарантия BGK до 100 000 zł заменяет первоначальный взнос. При квартире до ~500 000 zł можно обойтись без своих накоплений на взнос. Программа действует до конца 2030 года.": "Rodzinny Kredyt Mieszkaniowy (RKM) — a BGK guarantee of up to 100,000 zł replaces the down payment. For an apartment up to ~500,000 zł, you can get by without your own down-payment savings. The program runs until the end of 2030."};
 let currentLang = 'ru';
 const __i18nNodes = [];
 (function initI18nNodes(){
@@ -289,7 +294,7 @@ const __i18nNodes = [];
       if(!p) return NodeFilter.FILTER_REJECT;
       const tag = p.tagName;
       if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
-      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(p.closest && p.closest('#langSwitcher')) return NodeFilter.FILTER_REJECT;
       if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }
@@ -297,22 +302,32 @@ const __i18nNodes = [];
   let n;
   while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
 })();
-function toggleLang(){
-  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+const LANG_DICT = {pl: I18N_PL, en: I18N_EN};
+function setLang(lang){
+  currentLang = lang;
   __i18nNodes.forEach(function(item){
-    if(currentLang === 'pl'){
-      const key = item.orig.trim();
-      if(I18N_PL[key]){
-        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
-      }
-    } else {
+    if(currentLang === 'ru'){
       item.node.nodeValue = item.orig;
+    } else {
+      const dict = LANG_DICT[currentLang];
+      const key = item.orig.trim();
+      if(dict[key]){
+        item.node.nodeValue = item.orig.replace(key, dict[key]);
+      } else {
+        item.node.nodeValue = item.orig;
+      }
     }
   });
   document.documentElement.lang = currentLang;
-  const btn = document.getElementById('langToggleBtn');
-  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    const active = b.dataset.lang === currentLang;
+    b.style.background = active ? 'var(--accent)' : 'var(--panel)';
+    b.style.color = active ? '#062622' : 'var(--text)';
+    b.style.borderColor = active ? 'var(--accent)' : 'var(--line)';
+    b.style.fontWeight = active ? '700' : '400';
+  });
 }
+setLang('ru');
 </script>
 </body>
 </html>

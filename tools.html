@@ -225,7 +225,11 @@
 </style>
 </head>
 <body>
-<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+<div id="langSwitcher" style="position:fixed; top:14px; right:18px; z-index:200; display:flex; gap:6px;">
+  <button class="lang-btn" data-lang="ru" onclick="setLang('ru')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">RU</button>
+  <button class="lang-btn" data-lang="pl" onclick="setLang('pl')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">PL</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">EN</button>
+</div>
 
 
 <nav class="toc">
@@ -358,6 +362,7 @@
 
 <script>
 const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Приложения и инструменты": "Aplikacje i narzędzia", "прямые ссылки на установку": "bezpośrednie linki do instalacji", "💻 IDE / редакторы": "💻 IDE / edytory", "основной редактор, с 1 семестра": "główny edytor, od 1 semestru", "для Python": "dla Pythona", "для Java (Community — бесплатно)": "dla Javy (Community — za darmo)", "🐙 Версионный контроль": "🐙 Kontrola wersji", "ставить сразу": "instalować od razu", "у тебя уже есть аккаунт — используй с 1 семестра": "masz już konto — używaj od 1 semestru", "если не хочешь через терминал": "jeśli nie chcesz przez terminal", "🐳 Контейнеризация / виртуализация": "🐳 Konteneryzacja / wirtualizacja", "локальный Kubernetes": "lokalny Kubernetes", "фаза подготовки": "faza przygotowania", "если на Windows": "jeśli na Windows", "🗄️ Базы данных": "🗄️ Bazy danych", "универсальный клиент БД": "uniwersalny klient baz danych", "для PostgreSQL": "dla PostgreSQL", "для MySQL": "dla MySQL", "☁️ Облако": "☁️ Chmura", "завести аккаунт к сем. 4": "założyć konto do sem. 4", "альтернатива AWS": "alternatywa dla AWS", "🔌 API / тестирование": "🔌 API / testowanie", "📐 Диаграммы и дизайн": "📐 Diagramy i design", "⌨️ Терминал": "⌨️ Terminal", "для Mac": "dla Maca", "📋 Организация учёбы": "📋 Organizacja nauki", "трекинг заданий/дедлайнов": "śledzenie zadań/terminów", "альтернатива": "alternatywa", "💬 Коммуникация": "💬 Komunikacja", "групповые проекты": "projekty grupowe", "📄 Офис": "📄 Biuro", "отчёты, диплом": "raporty, dyplom", "бесплатная альтернатива": "darmowa alternatywa", "💡 Всё, кроме IntelliJ Ultimate и части офисных пакетов — бесплатно. Ставь по необходимости: Git + VS Code + Python — с первой недели, остальное подтягивай по ходу семестров.": "💡 Wszystko oprócz IntelliJ Ultimate i części pakietów biurowych jest darmowe. Instaluj w miarę potrzeb: Git + VS Code + Python — od pierwszego tygodnia, resztę dociągaj w trakcie semestrów."};
+const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "Приложения и инструменты": "Apps and tools", "прямые ссылки на установку": "direct install links", "💻 IDE / редакторы": "💻 IDEs / editors", "основной редактор, с 1 семестра": "main editor, from semester 1", "для Python": "for Python", "для Java (Community — бесплатно)": "for Java (Community — free)", "🐙 Версионный контроль": "🐙 Version control", "ставить сразу": "install right away", "у тебя уже есть аккаунт — используй с 1 семестра": "you already have an account — use it from semester 1", "если не хочешь через терминал": "if you don't want to use the terminal", "🐳 Контейнеризация / виртуализация": "🐳 Containerization / virtualization", "локальный Kubernetes": "local Kubernetes", "фаза подготовки": "prep phase", "если на Windows": "if on Windows", "🗄️ Базы данных": "🗄️ Databases", "универсальный клиент БД": "universal DB client", "для PostgreSQL": "for PostgreSQL", "для MySQL": "for MySQL", "☁️ Облако": "☁️ Cloud", "завести аккаунт к сем. 4": "get an account by sem. 4", "альтернатива AWS": "AWS alternative", "🔌 API / тестирование": "🔌 API / testing", "📐 Диаграммы и дизайн": "📐 Diagrams and design", "⌨️ Терминал": "⌨️ Terminal", "для Mac": "for Mac", "📋 Организация учёбы": "📋 Study organization", "трекинг заданий/дедлайнов": "tracking assignments/deadlines", "альтернатива": "alternative", "💬 Коммуникация": "💬 Communication", "групповые проекты": "group projects", "📄 Офис": "📄 Office", "отчёты, диплом": "reports, thesis", "бесплатная альтернатива": "free alternative", "💡 Всё, кроме IntelliJ Ultimate и части офисных пакетов — бесплатно. Ставь по необходимости: Git + VS Code + Python — с первой недели, остальное подтягивай по ходу семестров.": "💡 Everything except IntelliJ Ultimate and part of the office suites is free. Install as needed: Git + VS Code + Python from week one, add the rest as the semesters go on."};
 let currentLang = 'ru';
 const __i18nNodes = [];
 (function initI18nNodes(){
@@ -367,7 +372,7 @@ const __i18nNodes = [];
       if(!p) return NodeFilter.FILTER_REJECT;
       const tag = p.tagName;
       if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
-      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(p.closest && p.closest('#langSwitcher')) return NodeFilter.FILTER_REJECT;
       if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }
@@ -375,22 +380,32 @@ const __i18nNodes = [];
   let n;
   while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
 })();
-function toggleLang(){
-  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+const LANG_DICT = {pl: I18N_PL, en: I18N_EN};
+function setLang(lang){
+  currentLang = lang;
   __i18nNodes.forEach(function(item){
-    if(currentLang === 'pl'){
-      const key = item.orig.trim();
-      if(I18N_PL[key]){
-        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
-      }
-    } else {
+    if(currentLang === 'ru'){
       item.node.nodeValue = item.orig;
+    } else {
+      const dict = LANG_DICT[currentLang];
+      const key = item.orig.trim();
+      if(dict[key]){
+        item.node.nodeValue = item.orig.replace(key, dict[key]);
+      } else {
+        item.node.nodeValue = item.orig;
+      }
     }
   });
   document.documentElement.lang = currentLang;
-  const btn = document.getElementById('langToggleBtn');
-  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    const active = b.dataset.lang === currentLang;
+    b.style.background = active ? 'var(--accent)' : 'var(--panel)';
+    b.style.color = active ? '#062622' : 'var(--text)';
+    b.style.borderColor = active ? 'var(--accent)' : 'var(--line)';
+    b.style.fontWeight = active ? '700' : '400';
+  });
 }
+setLang('ru');
 </script>
 </body>
 </html>

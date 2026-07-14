@@ -225,7 +225,11 @@
 </style>
 </head>
 <body>
-<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+<div id="langSwitcher" style="position:fixed; top:14px; right:18px; z-index:200; display:flex; gap:6px;">
+  <button class="lang-btn" data-lang="ru" onclick="setLang('ru')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">RU</button>
+  <button class="lang-btn" data-lang="pl" onclick="setLang('pl')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">PL</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">EN</button>
+</div>
 
 
 <nav class="toc">
@@ -344,6 +348,7 @@
 
 <script>
 const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Английский язык — конспект для учёбы": "Język angielski — konspekt do nauki", "грамматика · IT-лексика · фразы": "gramatyka · słownictwo IT · zwroty", "Это не полный курс (его физически не засунуть в один файл), а рабочий конспект основной грамматики + словарь, которые реально понадобятся на парах и в IT. Полноценно учить язык — через Duolingo/iTalki из раздела «Прочие ресурсы» ниже, а сюда возвращайся, когда нужно быстро что-то вспомнить.": "To nie pełny kurs (fizycznie nie zmieściłby się w jednym pliku), tylko roboczy konspekt podstawowej gramatyki + słownik, które naprawdę przydadzą się na zajęciach i w IT. Pełną naukę języka prowadź przez Duolingo/iTalki z sekcji „Inne zasoby” poniżej, a tutaj wracaj, gdy trzeba coś szybko przypomnieć.", "Основные времена (грамматика)": "Podstawowe czasy (gramatyka)", "Время": "Czas", "Формула": "Wzór", "Пример": "Przykład", "Когда используем": "Kiedy używamy", "Регулярные действия, факты": "Czynności regularne, fakty", "Действие прямо сейчас": "Czynność właśnie teraz", "Законченное действие в прошлом": "Czynność zakończona w przeszłości", "Связь прошлого с настоящим, опыт": "Związek przeszłości z teraźniejszością, doświadczenie", "Планы, предсказания": "Plany, przewidywania", "Гипотетическая ситуация": "Sytuacja hipotetyczna", "IT / Cloud словарь по темам": "Słownik IT / Cloud według tematów", "Общая работа с кодом": "Ogólna praca z kodem", "ошибка в коде / отлаживать": "błąd w kodzie / debugować", "разворачивать / развёртывание приложения": "wdrażać / wdrożenie aplikacji", "зафиксировать изменения / запрос на слияние кода": "zatwierdzić zmiany / żądanie scalenia kodu", "собрать проект / сборка не удалась": "zbudować projekt / build się nie powiódł", "получить данные с сервера / отправить на сервер": "pobrać dane z serwera / wysłać na serwer", "устаревший, \"унаследованный\" код": "przestarzały, \"odziedziczony\" kod", "переписать код без изменения его поведения": "przepisać kod bez zmiany jego zachowania", "Облако / инфраструктура": "Chmura / infrastruktura", "выделить/подготовить ресурсы (сервер, диск)": "przydzielić/przygotować zasoby (serwer, dysk)", "масштабировать (увеличить/уменьшить мощности)": "skalować (zwiększyć/zmniejszyć moc)", "время бесперебойной работы / простой": "czas nieprzerwanej pracy / przestój", "задержка ответа сервера": "opóźnienie odpowiedzi serwera", "пропускная способность": "przepustowość", "отказоустойчивый": "odporny na awarie", "инфраструктура на своих серверах (не в облаке)": "infrastruktura na własnych serwerach (nie w chmurze)", "Работа / собеседования": "Praca / rozmowy kwalifikacyjne", "находить и устранять причину проблемы": "znajdować i usuwać przyczynę problemu", "заинтересованная сторона в проекте": "interesariusz w projekcie", "крайний срок / контрольная точка проекта": "termin ostateczny / kamień milowy projektu", "вводить нового сотрудника в курс дела": "wdrażać nowego pracownika", "практический опыт": "doświadczenie praktyczne", "набор технологий, используемых в проекте": "zestaw technologii używanych w projekcie", "Готовые фразы": "Gotowe zwroty", "На паре / семинаре": "Na zajęciach / seminarium", "Повторите, пожалуйста": "Proszę powtórzyć", "Можете объяснить иначе?": "Czy może Pan/Pani wyjaśnić to inaczej?", "У меня вопрос о...": "Mam pytanie dotyczące...", "Я не уверен, что понял эту часть": "Nie jestem pewien, czy zrozumiałem tę część", "На практике / собеседовании": "Na praktyce / rozmowie kwalifikacyjnej", "Я отвечаю за...": "Odpowiadam za...", "Можете провести меня по шагам?": "Czy może Pan/Pani przeprowadzić mnie krok po kroku?", "Я столкнулся с проблемой в...": "Napotkałem problem w...", "Я вернусь к этому вопросу позже": "Wrócę do tego pytania później"};
+const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "Английский язык — конспект для учёбы": "English — study notes", "грамматика · IT-лексика · фразы": "grammar · IT vocabulary · phrases", "Это не полный курс (его физически не засунуть в один файл), а рабочий конспект основной грамматики + словарь, которые реально понадобятся на парах и в IT. Полноценно учить язык — через Duolingo/iTalki из раздела «Прочие ресурсы» ниже, а сюда возвращайся, когда нужно быстро что-то вспомнить.": "This isn't a full course (it physically wouldn't fit in one file), just a working set of notes on core grammar + vocabulary that you'll actually need in class and in IT. Learn the language properly through Duolingo/iTalki from the \"Other resources\" section below, and come back here when you need a quick refresher.", "Основные времена (грамматика)": "Main tenses (grammar)", "Время": "Tense", "Формула": "Formula", "Пример": "Example", "Когда используем": "When we use it", "Регулярные действия, факты": "Regular actions, facts", "Действие прямо сейчас": "An action happening right now", "Законченное действие в прошлом": "A completed action in the past", "Связь прошлого с настоящим, опыт": "A link between the past and present, experience", "Планы, предсказания": "Plans, predictions", "Гипотетическая ситуация": "A hypothetical situation", "IT / Cloud словарь по темам": "IT / Cloud vocabulary by topic", "Общая работа с кодом": "General work with code", "ошибка в коде / отлаживать": "an error in the code / to debug", "разворачивать / развёртывание приложения": "to deploy / application deployment", "зафиксировать изменения / запрос на слияние кода": "to commit changes / a pull request", "собрать проект / сборка не удалась": "to build the project / the build failed", "получить данные с сервера / отправить на сервер": "to fetch data from the server / to push to the server", "устаревший, \"унаследованный\" код": "outdated, \"legacy\" code", "переписать код без изменения его поведения": "to rewrite code without changing its behavior", "Облако / инфраструктура": "Cloud / infrastructure", "выделить/подготовить ресурсы (сервер, диск)": "to provision resources (a server, a disk)", "масштабировать (увеличить/уменьшить мощности)": "to scale (increase/decrease capacity)", "время бесперебойной работы / простой": "uptime / downtime", "задержка ответа сервера": "server response latency", "пропускная способность": "throughput", "отказоустойчивый": "fault-tolerant", "инфраструктура на своих серверах (не в облаке)": "infrastructure on your own servers (not in the cloud), on-premises", "Работа / собеседования": "Work / interviews", "находить и устранять причину проблемы": "to troubleshoot", "заинтересованная сторона в проекте": "a project stakeholder", "крайний срок / контрольная точка проекта": "a deadline / a project milestone", "вводить нового сотрудника в курс дела": "to onboard a new employee", "практический опыт": "hands-on experience", "набор технологий, используемых в проекте": "the tech stack used in a project", "Готовые фразы": "Ready-to-use phrases", "На паре / семинаре": "In class / seminar", "Повторите, пожалуйста": "Please repeat that", "Можете объяснить иначе?": "Could you explain it differently?", "У меня вопрос о...": "I have a question about...", "Я не уверен, что понял эту часть": "I'm not sure I understood this part", "На практике / собеседовании": "On internship / at an interview", "Я отвечаю за...": "I'm responsible for...", "Можете провести меня по шагам?": "Could you walk me through this?", "Я столкнулся с проблемой в...": "I ran into an issue with...", "Я вернусь к этому вопросу позже": "Let me get back to you on that"};
 let currentLang = 'ru';
 const __i18nNodes = [];
 (function initI18nNodes(){
@@ -353,7 +358,7 @@ const __i18nNodes = [];
       if(!p) return NodeFilter.FILTER_REJECT;
       const tag = p.tagName;
       if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
-      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(p.closest && p.closest('#langSwitcher')) return NodeFilter.FILTER_REJECT;
       if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }
@@ -361,22 +366,32 @@ const __i18nNodes = [];
   let n;
   while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
 })();
-function toggleLang(){
-  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+const LANG_DICT = {pl: I18N_PL, en: I18N_EN};
+function setLang(lang){
+  currentLang = lang;
   __i18nNodes.forEach(function(item){
-    if(currentLang === 'pl'){
-      const key = item.orig.trim();
-      if(I18N_PL[key]){
-        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
-      }
-    } else {
+    if(currentLang === 'ru'){
       item.node.nodeValue = item.orig;
+    } else {
+      const dict = LANG_DICT[currentLang];
+      const key = item.orig.trim();
+      if(dict[key]){
+        item.node.nodeValue = item.orig.replace(key, dict[key]);
+      } else {
+        item.node.nodeValue = item.orig;
+      }
     }
   });
   document.documentElement.lang = currentLang;
-  const btn = document.getElementById('langToggleBtn');
-  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    const active = b.dataset.lang === currentLang;
+    b.style.background = active ? 'var(--accent)' : 'var(--panel)';
+    b.style.color = active ? '#062622' : 'var(--text)';
+    b.style.borderColor = active ? 'var(--accent)' : 'var(--line)';
+    b.style.fontWeight = active ? '700' : '400';
+  });
 }
+setLang('ru');
 </script>
 </body>
 </html>

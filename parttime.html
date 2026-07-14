@@ -226,7 +226,11 @@
 </head>
 <body>
 
-<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+<div id="langSwitcher" style="position:fixed; top:14px; right:18px; z-index:200; display:flex; gap:6px;">
+  <button class="lang-btn" data-lang="ru" onclick="setLang('ru')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">RU</button>
+  <button class="lang-btn" data-lang="pl" onclick="setLang('pl')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">PL</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">EN</button>
+</div>
 
 <nav class="toc">
   <div class="brand">CloudPath</div>
@@ -328,6 +332,7 @@
 
 <script>
 const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "поиск работы, агентства, юр. нюансы": "szukanie pracy, agencje, niuanse prawne", "💼 Общие job-борды": "💼 Ogólne portale z ofertami pracy", "крупнейший польский сайт вакансий": "największy polski serwis z ofertami pracy", "подработки, склады, курьеры, разовые": "dorywcze prace, magazyny, kurierzy, jednorazowe", "вакансии + отзывы о работодателях": "oferty pracy + opinie o pracodawcach", "агрегатор со всей Польши": "agregator ofert z całej Polski", "ещё один агрегатор": "kolejny agregator", "часто студенческие вакансии": "często oferty dla studentów", "👨‍💻 IT-специфичные": "👨‍💻 Specyficzne dla IT", "вилки зарплат сразу в вакансии": "widełki płacowe od razu w ogłoszeniu", "стажировки и junior-позиции": "staże i stanowiska junior", "польский IT-рынок": "polski rynek IT", "фильтр по Wrocław + remote": "filtr po Wrocław + remote", "Искать теги:": "Szukaj tagów:", "🏢 Кадровые агентства": "🏢 Agencje pracy", "склады, офис, IT": "magazyny, biuro, IT", "Хороший вариант, если ещё нет опыта / польского на уровне B2": "Dobra opcja, jeśli nie masz jeszcze doświadczenia / polskiego na poziomie B2", "🎓 Через университет и комьюнити": "🎓 Przez uczelnię i społeczność", ", база вакансий и практик": ", baza ofert pracy i praktyk", "Erasmus Student Network (ESN) Wrocław — группы для иностранных студентов, часто делятся вакансиями": "Erasmus Student Network (ESN) Wrocław — grupy dla studentów zagranicznych, często udostępniają oferty pracy", "Facebook-группы: «Praca Wrocław», «Praca dla studentów Wrocław», «Українці у Вроцлаві — робота»": "Grupy na Facebooku: „Praca Wrocław”, „Praca dla studentów Wrocław”, „Українці у Вроцлаві — робота”", "Telegram-каналы для украинцев/иностранцев во Вроцлаве с подработками": "Kanały na Telegramie dla Ukraińców/cudzoziemców we Wrocławiu z ofertami dorywczej pracy", "Юридические нюансы для студента": "Niuanse prawne dla studenta", "Умова zlecenie (договор поручения)": "Umowa zlecenie", "Самый частый формат подработки. Если студент младше 26 лет — работодатель не платит за него взносы ZUS (соцстрах), поэтому такие вакансии особенно охотно предлагают студентам.": "Najczęstsza forma dorabiania. Jeśli student ma mniej niż 26 lat — pracodawca nie płaci za niego składek ZUS, dlatego takie oferty są chętnie kierowane do studentów.", "Ulga dla młodych (льгота для молодых)": "Ulga dla młodych", "Доход до 26 лет освобождён от PIT (подоходного налога) в пределах годового лимита (~85 528 zł/год, сумму стоит перепроверять на актуальный год). На практике часто означает зарплату «на руки» без вычета налога.": "Dochód do 26. roku życia jest zwolniony z PIT w ramach rocznego limitu (~85 528 zł/rok, kwotę warto zweryfikować na bieżący rok). W praktyce często oznacza to wypłatę „na rękę” bez potrącenia podatku.", "PIT-2 / оформление": "PIT-2 / formalności", "При устройстве попросят PESEL, номер счёta и, если нужно, подписать PIT-2 — уточнять у работодателя, что именно требуется под конкретный тип договора.": "Przy zatrudnieniu poproszą o PESEL, numer konta i, jeśli trzeba, o podpisanie PIT-2 — warto dopytać pracodawcę, co dokładnie jest wymagane przy danym typie umowy.", "Легальность": "Legalność", "Для иностранцев вне ЕС — подработка легальна в рамках учёбы (студенческий статус даёт право работать без отдельного разрешения на работу), но лучше уточнять актуальные правила на": "Dla cudzoziemców spoza UE — dorabianie jest legalne w ramach studiów (status studenta daje prawo do pracy bez osobnego zezwolenia na pracę), ale lepiej sprawdzić aktualne przepisy na", "или в Welcome Center уни.": "lub w Welcome Center uczelni.", "Совет:": "Rada:", "на 1–2 курсе, пока польский и английский ещё подтягиваются, проще заходить через кадровые агентства (склад, логистика, колл-центр с русским/украинским языком) или подработки через ESN/уни. С 3 курса, когда появляется база (Python, Linux, сети), уже реально целиться в IT-стажировки на No Fluff Jobs и Just Join IT — они прямо помечены как": "na 1–2 roku, dopóki polski i angielski są jeszcze na dorobku, łatwiej jest zacząć przez agencje pracy (magazyn, logistyka, call center z językiem rosyjskim/ukraińskim) lub dorywcze prace przez ESN/uczelnię. Od 3 roku, gdy pojawia się baza (Python, Linux, sieci), realne staje się celowanie w staże IT na No Fluff Jobs i Just Join IT — są tam wprost oznaczone jako"};
+const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "поиск работы, агентства, юр. нюансы": "job hunting, agencies, legal nuances", "💼 Общие job-борды": "💼 General job boards", "крупнейший польский сайт вакансий": "the biggest Polish job site", "подработки, склады, курьеры, разовые": "side jobs, warehouses, couriers, one-off gigs", "вакансии + отзывы о работодателях": "job listings + employer reviews", "агрегатор со всей Польши": "an aggregator covering all of Poland", "ещё один агрегатор": "another aggregator", "часто студенческие вакансии": "often has student jobs", "👨‍💻 IT-специфичные": "👨‍💻 IT-specific", "вилки зарплат сразу в вакансии": "salary ranges shown right in the listing", "стажировки и junior-позиции": "internships and junior positions", "польский IT-рынок": "the Polish IT market", "фильтр по Wrocław + remote": "filter by Wrocław + remote", "Искать теги:": "Search for tags:", "🏢 Кадровые агентства": "🏢 Staffing agencies", "склады, офис, IT": "warehouses, office, IT", "Хороший вариант, если ещё нет опыта / польского на уровне B2": "A good option if you don't have experience yet / Polish at B2 level", "🎓 Через университет и комьюнити": "🎓 Through the university and community", ", база вакансий и практик": ", a database of jobs and internships", "Erasmus Student Network (ESN) Wrocław — группы для иностранных студентов, часто делятся вакансиями": "Erasmus Student Network (ESN) Wrocław — groups for international students, often share job openings", "Facebook-группы: «Praca Wrocław», «Praca dla studentów Wrocław», «Українці у Вроцлаві — робота»": "Facebook groups: \"Praca Wrocław\", \"Praca dla studentów Wrocław\", \"Українці у Вроцлаві — робота\"", "Telegram-каналы для украинцев/иностранцев во Вроцлаве с подработками": "Telegram channels for Ukrainians/foreigners in Wrocław with side-job listings", "Юридические нюансы для студента": "Legal nuances for a student", "Умова zlecenie (договор поручения)": "Umowa zlecenie (contract of mandate)", "Самый частый формат подработки. Если студент младше 26 лет — работодатель не платит за него взносы ZUS (соцстрах), поэтому такие вакансии особенно охотно предлагают студентам.": "The most common form of side job. If the student is under 26, the employer doesn't pay ZUS (social insurance) contributions for them, which is why such jobs are especially often offered to students.", "Ulga dla młodych (льгота для молодых)": "Ulga dla młodych (relief for young people)", "Доход до 26 лет освобождён от PIT (подоходного налога) в пределах годового лимита (~85 528 zł/год, сумму стоит перепроверять на актуальный год). На практике часто означает зарплату «на руки» без вычета налога.": "Income up to age 26 is exempt from PIT (income tax) within an annual limit (~85,528 zł/year — double-check the current-year figure). In practice this often means getting your pay \"in hand\" with no tax withheld.", "PIT-2 / оформление": "PIT-2 / paperwork", "При устройстве попросят PESEL, номер счёta и, если нужно, подписать PIT-2 — уточнять у работодателя, что именно требуется под конкретный тип договора.": "When you're hired, they'll ask for your PESEL, account number, and, if needed, to sign a PIT-2 — check with the employer exactly what's required for that specific type of contract.", "Легальность": "Legality", "Для иностранцев вне ЕС — подработка легальна в рамках учёбы (студенческий статус даёт право работать без отдельного разрешения на работу), но лучше уточнять актуальные правила на": "For non-EU foreigners, side work is legal as part of your studies (student status gives you the right to work without a separate work permit), but it's best to check the current rules on", "или в Welcome Center уни.": "or at the university's Welcome Center.", "Совет:": "Tip:", "на 1–2 курсе, пока польский и английский ещё подтягиваются, проще заходить через кадровые агентства (склад, логистика, колл-центр с русским/украинским языком) или подработки через ESN/уни. С 3 курса, когда появляется база (Python, Linux, сети), уже реально целиться в IT-стажировки на No Fluff Jobs и Just Join IT — они прямо помечены как": "in year 1–2, while your Polish and English are still catching up, it's easier to get in through staffing agencies (warehouse, logistics, a call center with Russian/Ukrainian) or side jobs via ESN/the university. From year 3, once you have a base (Python, Linux, networking), it's realistic to aim for IT internships on No Fluff Jobs and Just Join IT — they're clearly tagged as"};
 let currentLang = 'ru';
 const __i18nNodes = [];
 (function initI18nNodes(){
@@ -337,7 +342,7 @@ const __i18nNodes = [];
       if(!p) return NodeFilter.FILTER_REJECT;
       const tag = p.tagName;
       if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
-      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(p.closest && p.closest('#langSwitcher')) return NodeFilter.FILTER_REJECT;
       if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       return NodeFilter.FILTER_ACCEPT;
     }
@@ -345,22 +350,32 @@ const __i18nNodes = [];
   let n;
   while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
 })();
-function toggleLang(){
-  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+const LANG_DICT = {pl: I18N_PL, en: I18N_EN};
+function setLang(lang){
+  currentLang = lang;
   __i18nNodes.forEach(function(item){
-    if(currentLang === 'pl'){
-      const key = item.orig.trim();
-      if(I18N_PL[key]){
-        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
-      }
-    } else {
+    if(currentLang === 'ru'){
       item.node.nodeValue = item.orig;
+    } else {
+      const dict = LANG_DICT[currentLang];
+      const key = item.orig.trim();
+      if(dict[key]){
+        item.node.nodeValue = item.orig.replace(key, dict[key]);
+      } else {
+        item.node.nodeValue = item.orig;
+      }
     }
   });
   document.documentElement.lang = currentLang;
-  const btn = document.getElementById('langToggleBtn');
-  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    const active = b.dataset.lang === currentLang;
+    b.style.background = active ? 'var(--accent)' : 'var(--panel)';
+    b.style.color = active ? '#062622' : 'var(--text)';
+    b.style.borderColor = active ? 'var(--accent)' : 'var(--line)';
+    b.style.fontWeight = active ? '700' : '400';
+  });
 }
+setLang('ru');
 </script>
 </body>
 </html>
