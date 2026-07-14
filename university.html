@@ -163,6 +163,22 @@
   .term-card dt:first-child{margin-top:0;}
   .term-card dd{margin:3px 0 0; color:var(--text); font-size:13px; line-height:1.5;}
 
+  /* countdown / calendar */
+  .date-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px; margin-bottom:8px;}
+  .date-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; display:flex; flex-direction:column; gap:10px;}
+  .date-card .dc-head{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
+  .date-card h4{margin:0; font-size:13.5px; font-weight:600; line-height:1.35;}
+  .date-card .dc-when{font-family:var(--mono); color:var(--muted); font-size:11.5px; white-space:nowrap;}
+  .date-card .dc-status{font-family:var(--mono); font-size:12px; padding:3px 10px; border-radius:20px; align-self:flex-start;}
+  .date-card .dc-status.upcoming{background:#173a33; color:var(--accent);}
+  .date-card .dc-status.soon{background:#3a2a17; color:var(--amber);}
+  .date-card .dc-status.past{background:#1b2a3c; color:var(--muted);}
+  .date-card .dc-ics{
+    align-self:flex-start; background:transparent; border:1px solid var(--line); color:var(--muted);
+    font-family:var(--mono); font-size:11.5px; padding:6px 12px; border-radius:8px; cursor:pointer;
+  }
+  .date-card .dc-ics:hover{color:var(--accent); border-color:var(--accent-dim);}
+
   .subj-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
   .subj-card h3{margin:0 0 6px; font-size:15px; color:var(--accent);}
   .subj-card .simple{color:var(--text); font-size:13.5px; margin:6px 0;}
@@ -265,6 +281,10 @@
   <div class="callout">
     <b>Главное:</b> почти всё завязано на один логин — <code>dswNRALBUMU</code> (номер альбома придёт на e-mail вместе с доступом к USOSweb). Этим же логином/паролем от USOSweb ты входишь в Moodle и Microsoft 365. Логин в USOSweb станет доступен <b>с 1 октября</b>. Если ты уже был студентом Ideis и продолжаешь учёбу (напр. переходишь на 2 ступень) — данные для входа не меняются.
   </div>
+
+  <h3 style="margin-top:26px; font-size:15px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em;">📅 Важные даты</h3>
+  <div class="date-grid" id="dateGrid"></div>
+
 
   <h3 style="margin-top:26px; font-size:15px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em;">Порталы, которые нужны с первого дня</h3>
   <div class="res-grid">
@@ -432,6 +452,106 @@
 
 
 <script>
+  const KEY_DATES = [
+    {
+      id: 'usos-login',
+      title: '🔑 Открытие логина в USOSweb',
+      note: 'C этого дня доступен логин dswNRALBUMU для USOSweb / Moodle / Microsoft 365',
+      date: '2025-10-01',
+      allDay: true
+    },
+    {
+      id: 'first-payment',
+      title: '💳 Срок первого взноса за обучение',
+      note: 'Первая оплата czesnego — независимо от выбранной системы платежей',
+      date: '2025-10-15',
+      allDay: true
+    },
+    {
+      id: 'mos-deadline',
+      title: '🛂 MOS: рекомендуемый срок бумажной заявки',
+      note: 'Если срок пребывания истекает около 27.04.2026 — подать заявление заранее',
+      date: '2026-04-26',
+      allDay: true
+    }
+  ];
+
+  function fmtDate(iso){
+    const d = new Date(iso + 'T00:00:00');
+    return d.toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'});
+  }
+
+  function daysDiff(iso){
+    const today = new Date(); today.setHours(0,0,0,0);
+    const target = new Date(iso + 'T00:00:00');
+    return Math.round((target - today) / 86400000);
+  }
+
+  function statusFor(diff){
+    if(diff < 0) return {cls:'past', text: 'прошло ' + Math.abs(diff) + ' дн. назад'};
+    if(diff === 0) return {cls:'soon', text: 'сегодня'};
+    if(diff <= 14) return {cls:'soon', text: 'через ' + diff + ' дн.'};
+    return {cls:'upcoming', text: 'через ' + diff + ' дн.'};
+  }
+
+  function icsDate(iso){
+    return iso.replace(/-/g, '');
+  }
+  function icsNextDay(iso){
+    const d = new Date(iso + 'T00:00:00');
+    d.setDate(d.getDate() + 1);
+    return d.toISOString().slice(0,10).replace(/-/g,'');
+  }
+  function downloadIcs(ev){
+    const uid = ev.id + '@cloudpath.roadmap';
+    const dtstamp = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+    const ics = [
+      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//CloudPath Roadmap//RU','CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      'UID:' + uid,
+      'DTSTAMP:' + dtstamp,
+      'DTSTART;VALUE=DATE:' + icsDate(ev.date),
+      'DTEND;VALUE=DATE:' + icsNextDay(ev.date),
+      'SUMMARY:' + ev.title.replace(/,/g,'\\,'),
+      'DESCRIPTION:' + ev.note.replace(/,/g,'\\,'),
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = ev.id + '.ics';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+  }
+
+  function renderDates(){
+    const grid = document.getElementById('dateGrid');
+    if(!grid) return;
+    grid.innerHTML = KEY_DATES.map(ev => {
+      const diff = daysDiff(ev.date);
+      const st = statusFor(diff);
+      return `
+        <div class="date-card">
+          <div class="dc-head">
+            <h4>${ev.title}</h4>
+            <span class="dc-when">${fmtDate(ev.date)}</span>
+          </div>
+          <span class="dc-status ${st.cls}">${st.text}</span>
+          <p style="margin:0; color:var(--muted); font-size:12px; line-height:1.45;">${ev.note}</p>
+          <button class="dc-ics" data-id="${ev.id}">＋ добавить в календарь (.ics)</button>
+        </div>`;
+    }).join('');
+    grid.querySelectorAll('.dc-ics').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const ev = KEY_DATES.find(e => e.id === btn.dataset.id);
+        if(ev) downloadIcs(ev);
+      });
+    });
+  }
+  renderDates();
+</script>
+
+<script>
 const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "ABC студента — Uniwersytet DSW Ideis Wrocław": "ABC studenta — Uniwersytet DSW Ideis Wrocław", "все порталы, логины и оргвопросы с сайта уник": "wszystkie portale, loginy i sprawy organizacyjne z uczelni", "Главное:": "Najważniejsze:", "почти всё завязано на один логин —": "prawie wszystko opiera się na jednym loginie —", "(номер альбома придёт на e-mail вместе с доступом к USOSweb). Этим же логином/паролем от USOSweb ты входишь в Moodle и Microsoft 365. Логин в USOSweb станет доступен": "(numer albumu przyjdzie na e-mail razem z dostępem do USOSweb). Tym samym loginem/hasłem z USOSweb logujesz się do Moodle i Microsoft 365. Login w USOSweb stanie się dostępny", "с 1 октября": "od 1 października", ". Если ты уже был студентом Ideis и продолжаешь учёбу (напр. переходишь на 2 ступень) — данные для входа не меняются.": ". Jeśli byłeś już studentem Ideis i kontynuujesz naukę (np. przechodzisz na 2 stopień) — dane logowania się nie zmieniają.", "Порталы, которые нужны с первого дня": "Portale potrzebne od pierwszego dnia", "🔑 USOSweb": "🔑 USOSweb", "оценки, новости, платежи": "oceny, ogłoszenia, płatności", "Логин:": "Login:", "· пароль задаёшь сам": "· hasło ustawiasz sam", "📚 Moodle": "📚 Moodle", "материалы курсов, e-learning": "materiały kursów, e-learning", "Вход — теми же данными, что и в USOSweb": "Logowanie — tymi samymi danymi co w USOSweb", "📧 Microsoft 365 (A3)": "📧 Microsoft 365 (A3)", "Outlook, Teams, Word, Excel, PowerPoint, OneNote, SharePoint": "Outlook, Teams, Word, Excel, PowerPoint, OneNote, SharePoint", ", пароль — от USOSweb": ", hasło — z USOSweb", "Аккаунты активируются со 2-й половины сентября": "Konta aktywują się od 2. połowy września", "🗓️ Harmonogram zjazdów (расписание)": "🗓️ Harmonogram zjazdów (plan zajęć)", "Plany zajęć — правый верхний угол": "Plany zajęć — prawy górny róg", "Wydział Studiów Stosowanych → свой kierunek → specjalność оставить пустым → Nabór 2025/2026 Zima → свой tryb (stacjonarne/niestacjonarne)": "Wydział Studiów Stosowanych → swój kierunek → specjalność zostawić puste → Nabór 2025/2026 Zima → swój tryb (stacjonarne/niestacjonarne)", "📖 Katalog biblioteczny": "📖 Katalog biblioteczny", "поиск книг": "wyszukiwanie książek", "электронная библиотека": "biblioteka elektroniczna", "💼 JobTeaser": "💼 JobTeaser", "стажировки и вакансии от Biura Karier": "staże i oferty pracy od Biura Karier", "🎓 Konto Kandydata": "🎓 Konto Kandydata", "кабинет абитуриента до зачисления": "panel kandydata przed przyjęciem", "Оргвопросы": "Sprawy organizacyjne", "Студенческий билет": "Legitymacja studencka", "mLegitymacja": "mLegitymacja", "С 2025/2026 основной билет — mLegitymacja в приложении": "Od 2025/2026 podstawowa legitymacja to mLegitymacja w aplikacji", "mObywatel": "mObywatel", ". Выдаётся автоматически каждому студенту с номером PESEL, отдельная заявка не нужна.": ". Wydawana automatycznie każdemu studentowi z numerem PESEL, osobny wniosek nie jest potrzebny.", "Пластиковая ELS": "Plastikowa ELS", "Только по заявлению или если нет PESEL. Стоимость — 22 zł. Заявление подаётся в Dziekanacie.": "Tylko na wniosek lub jeśli nie ma PESEL. Koszt — 22 zł. Wniosek składa się w dziekanacie.", "Оплата и счета": "Płatności i konta", "Первый взнос": "Pierwsza wpłata", "Персональный номер счёта придёт на e-mail. Срок первой оплаты —": "Indywidualny numer konta przyjdzie na e-mail. Termin pierwszej wpłaty —", "15 октября 2025": "15 października 2025", ", неzaвисимо от выбранной системы оплат. В переводе указывать: имя, фамилия + «opłata za X ratę czesnego».": ", niezależnie od wybranego systemu płatności. W przelewie podawać: imię, nazwisko + „opłata za X ratę czesnego”.", "Счёт-фактура (VAT)": "Faktura (VAT)", "Оформляется по письменному заявлению в Dziale Obsługi Finansowej Studenta (каб. 107a).": "Wystawiana na pisemny wniosek w Dziale Obsługi Finansowej Studenta (pok. 107a).", "Медстраховка (NFZ)": "Ubezpieczenie zdrowotne (NFZ)", "Работаешь официально": "Pracujesz oficjalnie", "Страхует работодатель — университет и семья зарегистрировать не могут.": "Ubezpiecza pracodawca — uczelnia ani rodzina nie mogą Cię zarejestrować.", "До 26 лет, без своей страховки": "Do 26 lat, bez własnego ubezpieczenia", "Можно быть застрахованным как член семьи (родители, супруг(а), в некоторых случаях — бабушка/дедушка).": "Można być ubezpieczonym jako członek rodziny (rodzice, małżonek/małżonka, w niektórych przypadkach — babcia/dziadek).", "После 26 лет": "Po 26. roku życia", "Нужно подать заявление на страхование через уни:": "Trzeba złożyć wniosek o ubezpieczenie przez uczelnię:", "Иностранцы не из ЕС": "Cudzoziemcy spoza UE", "Как правило — добровольное страхование через отделение NFZ по месту проживания, взносы платишь сам (кроме Karty Polaka).": "Zazwyczaj — dobrowolne ubezpieczenie przez oddział NFZ właściwy dla miejsca zamieszkania, składki opłacasz sam (poza Kartą Polaka).", "Стипендии": "Stypendia", "Виды": "Rodzaje", "Ректора, для людей с инвалидностью, социальная, единовременная материальная помощь (zapomoga).": "Rektorskie, dla osób z niepełnosprawnością, socjalne, jednorazowa pomoc materialna (zapomoga).", "Сроки подачи": "Terminy składania", "Уточнять в Dziale Obsługi Finansowej Studenta.": "Sprawdzać w Dziale Obsługi Finansowej Studenta.", "Welcome Week": "Welcome Week", "Что это": "Co to jest", "Вводная неделя знакомства с уни: тематические мастер-классы (криминология, психология, медиадизайн, йога, wendo для девушек), настолки, кинопоказы, outdoor-вечеринка. Следить за анонсами на сайте и в соцсетях.": "Tydzień wprowadzający zapoznający z uczelnią: tematyczne warsztaty (kryminologia, psychologia, mediadesign, joga, wendo dla dziewczyn), planszówki, pokazy filmów, impreza plenerowa. Śledzić ogłoszenia na stronie i w social mediach.", "Система MOS (для иностранцев)": "System MOS (dla cudzoziemców)", "Что изменилось": "Co się zmieniło", "С 27 апреля 2026 заявления на временный/постоянный вид на жительство и статус долгосрочного резидента ЕС подаются": "Od 27 kwietnia 2026 wnioski o pobyt czasowy/stały oraz status rezydenta długoterminowego UE składa się", "только онлайн": "wyłącznie online", "через": "przez", "MOS": "MOS", ". Нужен profil zaufany или электронная подпись, старые аккаунты MOS не работают.": ". Potrzebny jest profil zaufany lub podpis elektroniczny, stare konta MOS nie działają.", "Важно": "Ważne", "В заявлении указывать e-mail уни:": "We wniosku podawać e-mail uczelni:", "— иначе университет не сможет прислать и подписать нужное приложение к заявлению.": "— w przeciwnym razie uczelnia nie będzie mogła przesłać i podpisać potrzebnego załącznika do wniosku.", "Если срок пребывания истекает около 27.04.2026": "Jeśli termin pobytu upływa około 27.04.2026", "Рекомендуется подать заявление в бумажном виде заранее, до 26.04.2026.": "Zaleca się złożenie wniosku w formie papierowej z wyprzedzeniem, do 26.04.2026.", "Подробнее": "Więcej informacji", "Контакты подразделений (Strzegomska 55, Wrocław)": "Kontakty do działów (Strzegomska 55, Wrocław)", "Dziekanat": "Dziekanat", "Общий e-mail": "Ogólny e-mail", "Informatyka (куратор)": "Informatyka (opiekun)", "· +48 608 695 291": "· +48 608 695 291", "Директор деканата": "Dyrektor dziekanatu", "Barbara Jabłonkowska ·": "Barbara Jabłonkowska ·", "· +48 662 195 269": "· +48 662 195 269", "Часы работы": "Godziny pracy", "вт–чт 10:00–14:00, вс 9:00–14:00, сб 9:00–14:00, пн и пт — закрыто": "wt–czw 10:00–14:00, nd 9:00–14:00, sb 9:00–14:00, pon i pt — zamknięte", "Dział Obsługi Finansowej Studenta": "Dział Obsługi Finansowej Studenta", "E-mail": "E-mail", "Телефон": "Telefon", "вт–чт 10:00–14:00, вс 9:00–14:00 (выходные дежурства приостановлены с июля 2026, возобновятся с 19.09.2026)": "wt–czw 10:00–14:00, nd 9:00–14:00 (dyżury weekendowe zawieszone od lipca 2026, wznowione od 19.09.2026)", "Biblioteka": "Biblioteka", "пн–чт 9:00–16:00, сб 9:00–15:00, вс 9:00–14:00, пт — закрыто": "pon–czw 9:00–16:00, sb 9:00–15:00, nd 9:00–14:00, pt — zamknięte", "Biuro Karier i Praktyk": "Biuro Karier i Praktyk", "Общий контакт": "Kontakt ogólny", "По практикам": "W sprawie praktyk", "Карьерное консультирование": "Doradztwo zawodowe", "Dział Współpracy Międzynarodowej / Welcome Center": "Dział Współpracy Międzynarodowej / Welcome Center", "пн–пт 9:00–15:00": "pon–pt 9:00–15:00", "Прочее": "Pozostałe", "Helpdesk (USOSweb, MS365)": "Helpdesk (USOSweb, MS365)", "HR / страхование": "HR / ubezpieczenie", "Парковка": "Parking", "Бесплатная у здания на Strzegomskiej 47 — позвонить по номеру на шлагбауме": "Bezpłatny przy budynku na Strzegomskiej 47 — zadzwonić pod numer na szlabanie", "💡 Если что-то не работает с логином в USOSweb/Moodle/MS365 — сначала helpdesk@dsw.edu.pl, а не Google: это внутренние системы уни, готовых решений в интернете нет.": "💡 Jeśli coś nie działa z logowaniem do USOSweb/Moodle/MS365 — najpierw helpdesk@dsw.edu.pl, a nie Google: to wewnętrzne systemy uczelni, gotowych rozwiązań w internecie nie ma."};
 const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "ABC студента — Uniwersytet DSW Ideis Wrocław": "ABC of a student — Uniwersytet DSW Ideis Wrocław", "все порталы, логины и оргвопросы с сайта уник": "all the portals, logins, and admin matters from the university website", "Главное:": "Main thing:", "почти всё завязано на один логин —": "almost everything is tied to one login —", "(номер альбома придёт на e-mail вместе с доступом к USOSweb). Этим же логином/паролем от USOSweb ты входишь в Moodle и Microsoft 365. Логин в USOSweb станет доступен": "(the album number will arrive by e-mail together with USOSweb access). You use the same USOSweb login/password to sign in to Moodle and Microsoft 365. The USOSweb login becomes available", "с 1 октября": "from October 1", ". Если ты уже был студентом Ideis и продолжаешь учёбу (напр. переходишь на 2 ступень) — данные для входа не меняются.": ". If you were already an Ideis student and are continuing your studies (e.g. moving to the 2nd degree) — your login details don't change.", "Порталы, которые нужны с первого дня": "Portals you need from day one", "🔑 USOSweb": "🔑 USOSweb", "оценки, новости, платежи": "grades, news, payments", "Логин:": "Login:", "· пароль задаёшь сам": "· you set the password yourself", "📚 Moodle": "📚 Moodle", "материалы курсов, e-learning": "course materials, e-learning", "Вход — теми же данными, что и в USOSweb": "Sign in with the same credentials as USOSweb", "📧 Microsoft 365 (A3)": "📧 Microsoft 365 (A3)", "Outlook, Teams, Word, Excel, PowerPoint, OneNote, SharePoint": "Outlook, Teams, Word, Excel, PowerPoint, OneNote, SharePoint", ", пароль — от USOSweb": ", password — the same as USOSweb", "Аккаунты активируются со 2-й половины сентября": "Accounts activate from the 2nd half of September", "🗓️ Harmonogram zjazdów (расписание)": "🗓️ Harmonogram zjazdów (schedule)", "Plany zajęć — правый верхний угол": "Plany zajęć — top right corner", "Wydział Studiów Stosowanych → свой kierunek → specjalność оставить пустым → Nabór 2025/2026 Zima → свой tryb (stacjonarne/niestacjonarne)": "Wydział Studiów Stosowanych → your kierunek → leave specjalność empty → Nabór 2025/2026 Zima → your tryb (stacjonarne/niestacjonarne)", "📖 Katalog biblioteczny": "📖 Katalog biblioteczny", "поиск книг": "book search", "электронная библиотека": "digital library", "💼 JobTeaser": "💼 JobTeaser", "стажировки и вакансии от Biura Karier": "internships and job openings from Biuro Karier", "🎓 Konto Kandydata": "🎓 Konto Kandydata", "кабинет абитуриента до зачисления": "applicant portal before enrollment", "Оргвопросы": "Administrative matters", "Студенческий билет": "Student ID", "mLegitymacja": "mLegitymacja", "С 2025/2026 основной билет — mLegitymacja в приложении": "From 2025/2026 the primary ID is mLegitymacja in the app", "mObywatel": "mObywatel", ". Выдаётся автоматически каждому студенту с номером PESEL, отдельная заявка не нужна.": ". It's issued automatically to every student with a PESEL number, no separate application is needed.", "Пластиковая ELS": "Plastic ELS card", "Только по заявлению или если нет PESEL. Стоимость — 22 zł. Заявление подаётся в Dziekanacie.": "Only on request or if you have no PESEL. Cost — 22 zł. The application is submitted at the Dziekanat.", "Оплата и счета": "Payments and accounts", "Первый взнос": "First installment", "Персональный номер счёта придёт на e-mail. Срок первой оплаты —": "Your personal account number will arrive by e-mail. The first payment deadline is —", "15 октября 2025": "October 15, 2025", ", неzaвисимо от выбранной системы оплат. В переводе указывать: имя, фамилия + «opłata za X ratę czesnego».": ", regardless of the payment plan chosen. In the transfer title, include: first name, last name + \"opłata za X ratę czesnego\".", "Счёт-фактура (VAT)": "VAT invoice", "Оформляется по письменному заявлению в Dziale Obsługi Finansowej Studenta (каб. 107a).": "Issued on written request at the Dział Obsługi Finansowej Studenta (room 107a).", "Медстраховка (NFZ)": "Health insurance (NFZ)", "Работаешь официально": "You work officially", "Страхует работодатель — университет и семья зарегистрировать не могут.": "Your employer provides insurance — the university and family members cannot register you.", "До 26 лет, без своей страховки": "Under 26, without your own insurance", "Можно быть застрахованным как член семьи (родители, супруг(а), в некоторых случаях — бабушка/дедушка).": "You can be insured as a family member (parents, spouse, and in some cases — grandparents).", "После 26 лет": "After turning 26", "Нужно подать заявление на страхование через уни:": "You need to submit an insurance application through the university:", "Иностранцы не из ЕС": "Non-EU foreigners", "Как правило — добровольное страхование через отделение NFZ по месту проживания, взносы платишь сам (кроме Karty Polaka).": "Usually voluntary insurance through the NFZ branch at your place of residence, you pay the contributions yourself (except with Karta Polaka).", "Стипендии": "Scholarships", "Виды": "Types", "Ректора, для людей с инвалидностью, социальная, единовременная материальная помощь (zapomoga).": "Rector's, for people with disabilities, social, one-time financial aid (zapomoga).", "Сроки подачи": "Submission deadlines", "Уточнять в Dziale Obsługi Finansowej Studenta.": "Check with the Dział Obsługi Finansowej Studenta.", "Welcome Week": "Welcome Week", "Что это": "What it is", "Вводная неделя знакомства с уни: тематические мастер-классы (криминология, психология, медиадизайн, йога, wendo для девушек), настолки, кинопоказы, outdoor-вечеринка. Следить за анонсами на сайте и в соцсетях.": "An introductory week to get to know the university: themed workshops (criminology, psychology, media design, yoga, wendo for girls), board games, film screenings, an outdoor party. Watch for announcements on the website and social media.", "Система MOS (для иностранцев)": "The MOS system (for foreigners)", "Что изменилось": "What changed", "С 27 апреля 2026 заявления на временный/постоянный вид на жительство и статус долгосрочного резидента ЕС подаются": "From April 27, 2026, applications for temporary/permanent residence and EU long-term resident status are submitted", "только онлайн": "only online", "через": "via", "MOS": "MOS", ". Нужен profil zaufany или электронная подпись, старые аккаунты MOS не работают.": ". You need a profil zaufany or an electronic signature, old MOS accounts no longer work.", "Важно": "Important", "В заявлении указывать e-mail уни:": "In the application, provide your university e-mail:", "— иначе университет не сможет прислать и подписать нужное приложение к заявлению.": "— otherwise the university won't be able to send and sign the required attachment to the application.", "Если срок пребывания истекает около 27.04.2026": "If your period of stay expires around April 27, 2026", "Рекомендуется подать заявление в бумажном виде заранее, до 26.04.2026.": "It's recommended to submit a paper application in advance, by April 26, 2026.", "Подробнее": "More details", "Контакты подразделений (Strzegomska 55, Wrocław)": "Department contacts (Strzegomska 55, Wrocław)", "Dziekanat": "Dziekanat", "Общий e-mail": "General e-mail", "Informatyka (куратор)": "Informatyka (coordinator)", "· +48 608 695 291": "· +48 608 695 291", "Директор деканата": "Head of the dziekanat", "Barbara Jabłonkowska ·": "Barbara Jabłonkowska ·", "· +48 662 195 269": "· +48 662 195 269", "Часы работы": "Office hours", "вт–чт 10:00–14:00, вс 9:00–14:00, сб 9:00–14:00, пн и пт — закрыто": "Tue–Thu 10:00–14:00, Sun 9:00–14:00, Sat 9:00–14:00, closed Mon and Fri", "Dział Obsługi Finansowej Studenta": "Dział Obsługi Finansowej Studenta", "E-mail": "E-mail", "Телефон": "Phone", "вт–чт 10:00–14:00, вс 9:00–14:00 (выходные дежурства приостановлены с июля 2026, возобновятся с 19.09.2026)": "Tue–Thu 10:00–14:00, Sun 9:00–14:00 (weekend hours suspended since July 2026, resuming from Sept 19, 2026)", "Biblioteka": "Biblioteka", "пн–чт 9:00–16:00, сб 9:00–15:00, вс 9:00–14:00, пт — закрыто": "Mon–Thu 9:00–16:00, Sat 9:00–15:00, Sun 9:00–14:00, closed Fri", "Biuro Karier i Praktyk": "Biuro Karier i Praktyk", "Общий контакт": "General contact", "По практикам": "For internships", "Карьерное консультирование": "Career counseling", "Dział Współpracy Międzynarodowej / Welcome Center": "Dział Współpracy Międzynarodowej / Welcome Center", "пн–пт 9:00–15:00": "Mon–Fri 9:00–15:00", "Прочее": "Other", "Helpdesk (USOSweb, MS365)": "Helpdesk (USOSweb, MS365)", "HR / страхование": "HR / insurance", "Парковка": "Parking", "Бесплатная у здания на Strzegomskiej 47 — позвонить по номеру на шлагбауме": "Free by the building at Strzegomska 47 — call the number on the barrier", "💡 Если что-то не работает с логином в USOSweb/Moodle/MS365 — сначала helpdesk@dsw.edu.pl, а не Google: это внутренние системы уни, готовых решений в интернете нет.": "💡 If something isn't working with your login on USOSweb/Moodle/MS365 — try helpdesk@dsw.edu.pl first, not Google: these are internal university systems, there are no ready-made answers online."};
 let currentLang = 'ru';
@@ -478,5 +598,7 @@ function setLang(lang){
 }
 setLang('ru');
 </script>
+<script src="search-data.js"></script>
+<script src="search-widget.js"></script>
 </body>
 </html>

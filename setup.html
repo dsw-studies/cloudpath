@@ -264,7 +264,7 @@
   <div class="callout" style="margin-bottom:16px;">Порядок ниже — с первой недели учёбы. Не обязательно ставить всё сразу: Git + VS Code + Python нужны с первого дня, остальное — ближе к семестру, где оно появляется в таблице выше.</div>
 
   <div class="pipeline">
-    <div class="stage">
+    <div class="stage" id="step-git-github-ssh-ключ">
       <div class="stage-head" onclick="this.parentElement.classList.toggle('open')">
         <div class="l"><span class="stage-num">01</span><span class="stage-title">Git + GitHub + SSH-ключ</span></div>
         <span class="chev">›</span>
@@ -294,7 +294,7 @@ git config --global user.email "твоя_почта@example.com"</pre>
       </div>
     </div>
 
-    <div class="stage">
+    <div class="stage" id="step-vs-code-расширения">
       <div class="stage-head" onclick="this.parentElement.classList.toggle('open')">
         <div class="l"><span class="stage-num">02</span><span class="stage-title">VS Code + расширения</span></div>
         <span class="chev">›</span>
@@ -309,7 +309,7 @@ git config --global user.email "твоя_почта@example.com"</pre>
       </div>
     </div>
 
-    <div class="stage">
+    <div class="stage" id="step-python">
       <div class="stage-head" onclick="this.parentElement.classList.toggle('open')">
         <div class="l"><span class="stage-num">03</span><span class="stage-title">Python</span></div>
         <span class="chev">›</span>
@@ -333,7 +333,7 @@ source venv/bin/activate</pre>
       </div>
     </div>
 
-    <div class="stage">
+    <div class="stage" id="step-linux-wsl2-если-у-тебя-windows">
       <div class="stage-head" onclick="this.parentElement.classList.toggle('open')">
         <div class="l"><span class="stage-num">04</span><span class="stage-title">Linux (WSL2, если у тебя Windows)</span></div>
         <span class="chev">›</span>
@@ -354,7 +354,7 @@ source venv/bin/activate</pre>
       </div>
     </div>
 
-    <div class="stage">
+    <div class="stage" id="step-docker-desktop">
       <div class="stage-head" onclick="this.parentElement.classList.toggle('open')">
         <div class="l"><span class="stage-num">05</span><span class="stage-title">Docker Desktop</span></div>
         <span class="chev">›</span>
@@ -372,7 +372,7 @@ source venv/bin/activate</pre>
       </div>
     </div>
 
-    <div class="stage">
+    <div class="stage" id="step-aws-free-tier-аккаунт-безопасно">
       <div class="stage-head" onclick="this.parentElement.classList.toggle('open')">
         <div class="l"><span class="stage-num">06</span><span class="stage-title">AWS Free Tier — аккаунт безопасно</span></div>
         <span class="chev">›</span>
@@ -448,5 +448,7 @@ function setLang(lang){
 }
 setLang('ru');
 </script>
+<script src="search-data.js"></script>
+<script src="search-widget.js"></script>
 </body>
 </html>
