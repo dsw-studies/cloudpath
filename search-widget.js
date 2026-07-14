@@ -6,13 +6,29 @@
 
   var CURRENT_PAGE = (location.pathname.split('/').pop() || 'index.html');
 
-  var KIND_LABEL = {
-    page: 'Страница', section: 'Раздел', sub: 'Подраздел',
-    term: 'Термин глоссария', item: 'Пункт', row: 'Предмет'
-  };
   var KIND_ICON = {
     page: '📄', section: '📚', sub: '▸', term: '📖', item: '☑️', row: '🎓'
   };
+
+  function lang(){
+    return (document.documentElement.lang || 'ru').toLowerCase();
+  }
+  function ui(){
+    var all = window.SITE_SEARCH_UI || {};
+    return all[lang()] || all.ru || {};
+  }
+  function kindLabel(k){
+    var u = ui();
+    var map = {page:'k_page', section:'k_section', sub:'k_sub', term:'k_term', item:'k_item', row:'k_row'};
+    return u[map[k]] || '';
+  }
+  function tr(text){
+    var l = lang();
+    if(l === 'ru' || !text) return text;
+    var dict = (l === 'en') ? window.SITE_I18N_EN : (l === 'pl') ? window.SITE_I18N_PL : null;
+    if(!dict) return text;
+    return dict[text] || text;
+  }
 
   /* ---------- styles ---------- */
   var style = document.createElement('style');
@@ -71,7 +87,7 @@
     if(!toc) return;
     var btn = document.createElement('div');
     btn.className = 'ss-trigger';
-    btn.innerHTML = '<span>🔎 Поиск по сайту</span><kbd>Ctrl K</kbd>';
+    btn.innerHTML = '<span class="ss-trigger-label">' + esc(ui().trigger || '🔎 Search') + '</span><kbd>Ctrl K</kbd>';
     btn.addEventListener('click', openSearch);
     var brand = toc.querySelector('.brand');
     if(brand && brand.nextSibling){
@@ -79,7 +95,30 @@
     } else {
       toc.appendChild(btn);
     }
+    triggerBtn = btn;
   }
+  var triggerBtn = null;
+  function refreshChrome(){
+    if(triggerBtn){
+      var span = triggerBtn.querySelector('.ss-trigger-label');
+      if(span) span.textContent = ui().trigger || '🔎 Search';
+    }
+    if(input) input.setAttribute('placeholder', ui().placeholder || '');
+    if(overlay){
+      var foot = overlay.querySelector('#siteSearchFoot');
+      if(foot){
+        var u = ui();
+        foot.innerHTML =
+          '<span><kbd>↑↓</kbd> ' + esc(u.nav_updown || '') + '</span>' +
+          '<span><kbd>Enter</kbd> ' + esc(u.nav_enter || '') + '</span>' +
+          '<span><kbd>Esc</kbd> ' + esc(u.nav_esc || '') + '</span>';
+      }
+    }
+    if(overlay && input){ render(input.value); }
+  }
+  // re-sync chrome whenever the page's language switches (setLang sets documentElement.lang)
+  var __langObserver = new MutationObserver(refreshChrome);
+  __langObserver.observe(document.documentElement, {attributes:true, attributeFilter:['lang']});
 
   /* ---------- modal DOM ---------- */
   var overlay, input, resultsEl;
@@ -90,11 +129,11 @@
       '<div id="siteSearchBox">' +
         '<div id="siteSearchInputRow">' +
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
-          '<input id="siteSearchInput" type="text" placeholder="Искать по всем 16 страницам… (глоссарий, синтаксис, семестры)" autocomplete="off" spellcheck="false">' +
+          '<input id="siteSearchInput" type="text" placeholder="' + esc(ui().placeholder || '') + '" autocomplete="off" spellcheck="false">' +
           '<span id="siteSearchEsc">ESC</span>' +
         '</div>' +
         '<div id="siteSearchResults"></div>' +
-        '<div id="siteSearchFoot"><span><kbd>↑↓</kbd> навигация</span><span><kbd>Enter</kbd> перейти</span><span><kbd>Esc</kbd> закрыть</span></div>' +
+        '<div id="siteSearchFoot"><span><kbd>↑↓</kbd> ' + esc(ui().nav_updown || '') + '</span><span><kbd>Enter</kbd> ' + esc(ui().nav_enter || '') + '</span><span><kbd>Esc</kbd> ' + esc(ui().nav_esc || '') + '</span></div>' +
       '</div>';
     document.body.appendChild(overlay);
     input = overlay.querySelector('#siteSearchInput');
@@ -123,10 +162,11 @@
 
   function score(entry, q){
     var t = entry.t.toLowerCase(), s = (entry.s || '').toLowerCase();
-    if(t === q) return 100;
-    if(t.indexOf(q) === 0) return 80;
-    if(t.indexOf(q) !== -1) return 60;
-    if(s.indexOf(q) !== -1) return 30;
+    var tt = tr(entry.t).toLowerCase(), ts = tr(entry.s || '').toLowerCase();
+    if(t === q || tt === q) return 100;
+    if(t.indexOf(q) === 0 || tt.indexOf(q) === 0) return 80;
+    if(t.indexOf(q) !== -1 || tt.indexOf(q) !== -1) return 60;
+    if(s.indexOf(q) !== -1 || ts.indexOf(q) !== -1) return 30;
     return 0;
   }
 
@@ -154,11 +194,12 @@
     currentResults = search(query);
     activeIndex = currentResults.length ? 0 : -1;
     if(!query.trim()){
-      resultsEl.innerHTML = '<div class="ss-empty">Начни печатать: например «kubernetes», «docker», «python», «ects», «стипенд»…</div>';
+      resultsEl.innerHTML = '<div class="ss-empty">' + esc(ui().empty_hint || '') + '</div>';
       return;
     }
     if(!currentResults.length){
-      resultsEl.innerHTML = '<div class="ss-empty">Ничего не найдено по запросу «' + esc(query) + '»</div>';
+      var noRes = (ui().no_results || '«{q}»').replace('{q}', esc(query));
+      resultsEl.innerHTML = '<div class="ss-empty">' + noRes + '</div>';
       return;
     }
     var q = query.trim();
@@ -166,16 +207,16 @@
     var lastPage = null;
     currentResults.forEach(function(e, i){
       if(e.p !== lastPage){
-        html += '<div class="ss-group">' + esc(pageTitle(e.p)) + '</div>';
+        html += '<div class="ss-group">' + esc(tr(pageTitle(e.p))) + '</div>';
         lastPage = e.p;
       }
       html += '<div class="ss-item' + (i === activeIndex ? ' active' : '') + '" data-i="' + i + '">' +
         '<span class="ic">' + (KIND_ICON[e.k] || '•') + '</span>' +
         '<span class="body">' +
-          '<div class="ttl">' + markMatch(e.t, q) + '</div>' +
-          (e.s ? '<div class="snip">' + esc(e.s) + '</div>' : '') +
+          '<div class="ttl">' + markMatch(tr(e.t), q) + '</div>' +
+          (e.s ? '<div class="snip">' + esc(tr(e.s)) + '</div>' : '') +
         '</span>' +
-        '<span class="pg">' + esc(KIND_LABEL[e.k] || '') + '</span>' +
+        '<span class="pg">' + esc(kindLabel(e.k)) + '</span>' +
       '</div>';
     });
     resultsEl.innerHTML = html;
