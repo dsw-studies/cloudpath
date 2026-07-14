@@ -217,7 +217,6 @@
   <div class="brand">CloudPath</div>
   <a href="#checklist">✅ Мой чек-лист</a>
   <a href="#glossary">Глоссарий (чайник)</a>
-  <a href="#prep">0 · Подготовка</a>
   <a href="#semesters">Семестры 1–7</a>
   <a href="#specdeep">Спец. курсы подробно</a>
   <a href="#languages">Языки</a>
@@ -260,14 +259,113 @@
   </div>
 
   <div class="todo-group">
-    <h4>Фаза 0 · Подготовка (10 недель) <span class="cnt"></span></h4>
-    <div class="todo-item"><input type="checkbox" id="p0-1"><label for="p0-1">Недели 1–2: установил Linux (VirtualBox/WSL2), начал Duolingo</label></div>
-    <div class="todo-item"><input type="checkbox" id="p0-2"><label for="p0-2">Недели 3–4: 300–500 англ. слов, файловая система Linux, chmod/chown</label></div>
-    <div class="todo-item"><input type="checkbox" id="p0-3"><label for="p0-3">Недели 5–6: IT-лексика, freeCodeCamp с англ. субтитрами, apt/пакеты</label></div>
-    <div class="todo-item"><input type="checkbox" id="p0-4"><label for="p0-4">Недели 7–8: английские субтитры везде, SSH и удалённые серверы</label></div>
-    <div class="todo-item"><input type="checkbox" id="p0-5"><label for="p0-5">Недели 9–10: разговорная практика (iTalki/Tandem), простые bash-скрипты</label></div>
-    <div class="todo-item"><input type="checkbox" id="p0-6"><label for="p0-6">Завёл репозиторий на GitHub для учебных проектов</label></div>
-    <div class="todo-item"><input type="checkbox" id="p0-7"><label for="p0-7">Установил базовый набор: Git, VS Code, Python</label></div>
+    <h4>Фаза 0 · W01 — Установка Linux + старт английского (Дни 1–7) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d1"><label for="p0-d1">День 1 (Пн): VirtualBox/WSL2, Ubuntu/Debian, рабочий стол · Duolingo — регистрация, первый урок</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d2"><label for="p0-d2">День 2 (Вт): ls, cd, pwd, mkdir, clear · Duolingo + алфавит и произношение</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d3"><label for="p0-d3">День 3 (Ср): touch, cp, mv, rm · Duolingo + базовые фразы приветствия</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d4"><label for="p0-d4">День 4 (Чт): man и --help · Duolingo + глагол to be (am/is/are)</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d5"><label for="p0-d5">День 5 (Пт): абсолютный vs относительный путь · Duolingo + числа и время</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d6"><label for="p0-d6">День 6 (Сб): повтор команд недели + редактор nano · Duolingo + видео с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d7"><label for="p0-d7">День 7 (Вс) 🔁: повтор всех команд недели · 🔁 Duolingo streak</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W02 — Базовый набор (Git · VS Code · Python) (Дни 8–14) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d8"><label for="p0-d8">День 8 (Пн): Git install, git config --global · Duolingo + простые предложения</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d9"><label for="p0-d9">День 9 (Вт): VS Code install, интерфейс + встроенный терминал · Duolingo + present simple</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d10"><label for="p0-d10">День 10 (Ср): Python3 и pip, python3 --version · Duolingo + вопросительные предложения</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d11"><label for="p0-d11">День 11 (Чт): аккаунт GitHub, первый репозиторий · Duolingo + местоимения (I/you/he/she/it)</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d12"><label for="p0-d12">День 12 (Пт): git init, git add, git commit · Duolingo + прилагательные</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d13"><label for="p0-d13">День 13 (Сб): git push/pull, .gitignore · Duolingo + видео с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d14"><label for="p0-d14">День 14 (Вс) 🔁: повтор git-цикла (init→add→commit→push) · 🔁 Duolingo streak, обзор недели</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W03 — Файловая система Linux + первые 150 слов (Дни 15–21) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d15"><label for="p0-d15">День 15 (Пн): структура ФС /, /home, /etc, /var, /usr · +15–20 новых IT-слов</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d16"><label for="p0-d16">День 16 (Вт): права доступа rwx, 3 группы · +слова + повторение вчерашних</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d17"><label for="p0-d17">День 17 (Ср): chmod числовой (755, 644) и символьный (u+x, g-w) · past simple</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d18"><label for="p0-d18">День 18 (Чт): chown, разница chmod vs chown · +слова + present continuous</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d19"><label for="p0-d19">День 19 (Пт): практика — структура проекта с разными правами на папки · диалоги на бытовые темы</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d20"><label for="p0-d20">День 20 (Сб): повтор прав доступа, мини-тест себе · видео с субтитрами + новые слова</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d21"><label for="p0-d21">День 21 (Вс) 🔁: повтор chmod/chown на 5 примерах · 🔁 повтор слов недели (Anki)</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W04 — Поиск, ссылки, пайпы + слова 150→300 (Дни 22–28) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d22"><label for="p0-d22">День 22 (Пн): жёсткие и символические ссылки, ln, ln -s · +15–20 новых слов</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d23"><label for="p0-d23">День 23 (Вт): поиск файлов find (имя, тип, дата) · future simple (will)</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d24"><label for="p0-d24">День 24 (Ср): grep, базовые флаги -i -r -n · +слова</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d25"><label for="p0-d25">День 25 (Чт): редиректы и пайпы &gt;, &gt;&gt;, | · модальные глаголы can, must, should</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d26"><label for="p0-d26">День 26 (Пт): практика find + grep + pipe на реальной папке · +слова</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d27"><label for="p0-d27">День 27 (Сб): повтор недели, мини-квиз по find/grep/пайпам · видео с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d28"><label for="p0-d28">День 28 (Вс) 🔁: повтор команд недель 3–4 · 🔁 повтор 300 слов (Anki/карточки)</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W05 — Процессы, пакеты + freeCodeCamp (Дни 29–35) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d29"><label for="p0-d29">День 29 (Пн): процессы ps, top, htop · freeCodeCamp — первый урок с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d30"><label for="p0-d30">День 30 (Вт): управление процессами kill, jobs, bg, fg · freeCodeCamp + разбор слов</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d31"><label for="p0-d31">День 31 (Ср): apt update / upgrade / install / remove · freeCodeCamp</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d32"><label for="p0-d32">День 32 (Чт): apt search, dpkg -l · freeCodeCamp + IT-словарь</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d33"><label for="p0-d33">День 33 (Пт): systemctl start/stop/status/enable · freeCodeCamp</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d34"><label for="p0-d34">День 34 (Сб): повтор процессов и пакетных менеджеров · freeCodeCamp + видео с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d35"><label for="p0-d35">День 35 (Вс) 🔁: повтор ps/kill/apt на практике · 🔁 список новых IT-терминов за неделю</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W06 — Окружение и автоматизация база + freeCodeCamp (Дни 36–42) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d36"><label for="p0-d36">День 36 (Пн): переменные окружения и PATH · freeCodeCamp</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d37"><label for="p0-d37">День 37 (Вт): ~/.bashrc, алиасы (alias ll='ls -la') · freeCodeCamp</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d38"><label for="p0-d38">День 38 (Ср): архивы tar -czvf / -xzvf, zip/unzip · freeCodeCamp</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d39"><label for="p0-d39">День 39 (Чт): cron и crontab -e — основы · freeCodeCamp</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d40"><label for="p0-d40">День 40 (Пт): практика — собрать .bashrc с 5+ алиасами · freeCodeCamp</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d41"><label for="p0-d41">День 41 (Сб): повтор недели: PATH, алиасы, архивы, cron · freeCodeCamp + видео с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d42"><label for="p0-d42">День 42 (Вс) 🔁: закрепить .bashrc и cron на практике · 🔁 итог модуля freeCodeCamp</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W07 — SSH и удалённые серверы + субтитры везде (Дни 43–49) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d43"><label for="p0-d43">День 43 (Пн): SSH, установка openssh-client/server · с этого дня — всё только с англ. субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d44"><label for="p0-d44">День 44 (Вт): генерация ключей ssh-keygen, ключ vs пароль · субтитры + технический подкаст (эп. 1)</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d45"><label for="p0-d45">День 45 (Ср): подключение к удалённому серверу по SSH (VPS/облако) · субтитры + подкаст</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d46"><label for="p0-d46">День 46 (Чт): scp и rsync — копирование файлов туда/обратно · субтитры везде</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d47"><label for="p0-d47">День 47 (Пт): SSH-конфиг ~/.ssh/config — алиасы подключения · субтитры везде</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d48"><label for="p0-d48">День 48 (Сб): практика — подключиться, скопировать файл, отключиться · видео/подкаст с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d49"><label for="p0-d49">День 49 (Вс) 🔁: повтор цикла SSH-подключения · 🔁 обзор новой техн. лексики недели</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W08 — SSH продвинутый уровень + практика на сервере (Дни 50–56) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d50"><label for="p0-d50">День 50 (Пн): port forwarding через SSH (-L) · субтитры везде</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d51"><label for="p0-d51">День 51 (Вт): tmux/screen — сессии без обрыва связи · субтитры + подкаст</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d52"><label for="p0-d52">День 52 (Ср): базовая безопасность SSH — только вход по ключам · субтитры + техн. блог/статья</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d53"><label for="p0-d53">День 53 (Чт): практика на реальном сервере (например AWS Free Tier) · субтитры везде</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d54"><label for="p0-d54">День 54 (Пт): повтор всех SSH-тем недель 7–8 · субтитры везде</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d55"><label for="p0-d55">День 55 (Сб): мини-проект — настроить сервер с нуля по SSH · видео с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d56"><label for="p0-d56">День 56 (Вс) 🔁: разобрать ошибки/непонятные моменты по SSH · 🔁 обзор недели</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W09 — Bash-скрипты + первая разговорная практика (Дни 57–63) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d57"><label for="p0-d57">День 57 (Пн): основы bash-скрипта, #!/bin/bash, chmod +x, «hello world» · первое занятие iTalki/Tandem</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d58"><label for="p0-d58">День 58 (Вт): переменные и ввод пользователя (read) в bash · занятие/переписка iTalki/Tandem</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d59"><label for="p0-d59">День 59 (Ср): условия if/else в bash-скриптах · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d60"><label for="p0-d60">День 60 (Чт): циклы for и while в bash · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d61"><label for="p0-d61">День 61 (Пт): функции в bash-скриптах · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d62"><label for="p0-d62">День 62 (Сб): практика — скрипт автоматизации (бэкап папки в архив) · разговорная практика + видео с субтитрами</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d63"><label for="p0-d63">День 63 (Вс) 🔁: прогнать написанные за неделю скрипты · 🔁 обзор недели, что было сложно в разговоре</label></div>
+  </div>
+
+  <div class="todo-group">
+    <h4>Фаза 0 · W10 — Финальная неделя: скрипты, повторение, речь (Дни 64–70) <span class="cnt"></span></h4>
+    <div class="todo-item"><input type="checkbox" id="p0-d64"><label for="p0-d64">День 64 (Пн): аргументы скрипта $1, $2, $@, $# · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d65"><label for="p0-d65">День 65 (Вт): обработка ошибок в bash: exit codes, set -e · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d66"><label for="p0-d66">День 66 (Ср): финальный мини-проект — скрипт автоматизации рутинной задачи · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d67"><label for="p0-d67">День 67 (Чт): ревью всех тем — команды, права, процессы, SSH, скрипты · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d68"><label for="p0-d68">День 68 (Пт): привести в порядок GitHub-репозиторий, залить скрипты и заметки · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d69"><label for="p0-d69">День 69 (Сб): финальное повторение — мини-тест себе по всей Фазе 0 · разговорная практика</label></div>
+    <div class="todo-item"><input type="checkbox" id="p0-d70"><label for="p0-d70">День 70 (Вс) 🎓: итог — чек-лист выше закрыт, Фаза 0 завершена, можно начинать 1 семестр · 🎓 последнее занятие iTalki/Tandem перед стартом учёбы</label></div>
   </div>
 
   <div class="todo-group">
@@ -427,30 +525,6 @@
     </div>
   </div>
 </section>
-
-<section id="prep">
-  <div class="section-head"><h2>Фаза 0 — подготовка</h2><span class="tag">10 недель до старта</span></div>
-  <div class="pipeline">
-    <div class="stage open">
-      <div class="stage-head" onclick="this.parentElement.classList.toggle('open')">
-        <div class="l"><span class="stage-num">W01–10</span><span class="stage-title">Английский + Linux + подтягивание базы</span></div>
-        <span class="chev">›</span>
-      </div>
-      <div class="stage-body">
-        <table>
-          <tr><th>Недели</th><th>Английский</th><th>Linux</th></tr>
-          <tr><td>1–2</td><td>Duolingo 15-20 мин/день, база грамматики</td><td>Установить Ubuntu/Debian (VirtualBox/WSL2)</td></tr>
-          <tr><td>3–4</td><td>300–500 слов, грамматика</td><td>Файловая система, chmod/chown</td></tr>
-          <tr><td>5–6</td><td>IT-лексика, freeCodeCamp с англ. субтитрами</td><td>Процессы, apt/пакетные менеджеры</td></tr>
-          <tr><td>7–8</td><td>Английские субтитры везде</td><td>SSH, удалённые серверы</td></tr>
-          <tr><td>9–10</td><td>iTalki/Tandem — разговорная практика</td><td>Простые bash-скрипты</td></tr>
-        </table>
-        <div class="practice-note">🐙 GitHub у тебя уже есть — заведи там с первой недели репозиторий для учебных проектов, пригодится с 1 семестра.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="semesters">
   <div class="section-head"><h2>Учебный план по семестрам</h2><span class="tag">Cloud specialization</span></div>
   <div class="pipeline">
