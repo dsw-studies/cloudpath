@@ -35,7 +35,9 @@
     position:fixed; top:0; left:0; height:100vh; width:200px;
     background:#0D1826; border-right:1px solid var(--line);
     padding:28px 18px; overflow-y:auto; z-index:50;
+    scrollbar-width:none; -ms-overflow-style:none;
   }
+  .toc::-webkit-scrollbar{display:none;}
   .toc .brand{font-family:var(--mono); color:var(--accent); font-size:12px; letter-spacing:.08em; margin-bottom:22px; text-transform:uppercase;}
   .toc a{
     display:block; color:var(--muted); font-size:13px; padding:7px 0;
@@ -136,8 +138,11 @@
     border:1px solid var(--line); border-radius:10px; padding:12px 16px;
   }
   .check-item .box{ width:18px; height:18px; border:2px solid var(--accent-dim); border-radius:5px; flex:none; }
+  .check-item input.cert-box{ width:18px; height:18px; flex:none; accent-color:var(--accent); cursor:pointer; }
   .check-item b{font-size:14px;}
   .check-item span{color:var(--muted); font-size:12px; font-family:var(--mono); margin-left:auto;}
+  .check-item.done{border-color:var(--accent-dim);}
+  .check-item.done b{color:var(--muted); text-decoration:line-through;}
 
   .fin-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
   .fin-card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
@@ -211,10 +216,7 @@
   .grammar-table th{text-align:left; font-family:var(--mono); color:var(--muted); font-size:11px; text-transform:uppercase; padding:6px 10px; border-bottom:1px solid var(--line);}
   .grammar-table td{padding:8px 10px; border-bottom:1px solid #1b2a3c; vertical-align:top;}
   .grammar-table td.formula{font-family:var(--mono); color:var(--accent); font-size:12.5px;}
-: показываем только активный раздел --- */
-  .wrap > section{display:none;}
-  .wrap > section.active{display:block; animation:fadein .18s ease;}
-  @keyframes fadein{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+/* --- показываем все разделы (мультистраничный сайт) --- */
   .toc a{cursor:pointer;}
   .toc .tab-hint{
     font-family:var(--mono); color:var(--muted); font-size:10.5px; opacity:.6;
@@ -261,12 +263,12 @@
 <section id="certs">
 
   <div class="section-head"><h2>Сертификаты</h2><span class="tag">по приоритету</span></div>
-  <div class="checklist">
-    <div class="check-item"><div class="box"></div><b><a href="https://aws.amazon.com/certification/certified-cloud-practitioner" target="_blank">AWS Cloud Practitioner</a> / <a href="https://learn.microsoft.com/credentials/certifications/azure-fundamentals" target="_blank">Azure AZ-900</a></b><span>сем. 4–5 · база</span></div>
-    <div class="check-item"><div class="box"></div><b><a href="https://aws.amazon.com/certification/certified-solutions-architect-associate" target="_blank">AWS Solutions Architect Associate</a> / <a href="https://learn.microsoft.com/credentials/certifications/azure-administrator" target="_blank">Azure AZ-104</a></b><span>сем. 6</span></div>
-    <div class="check-item"><div class="box"></div><b><a href="https://developer.hashicorp.com/terraform/tutorials/certification-003" target="_blank">Terraform Associate</a></b><span>сем. 6</span></div>
-    <div class="check-item"><div class="box"></div><b><a href="https://www.cncf.io/certification/cka" target="_blank">Kubernetes CKA</a></b><span>сем. 7</span></div>
-    <div class="check-item"><div class="box"></div><b><a href="https://www.comptia.org/certifications/security" target="_blank">CompTIA Security+</a></b><span>сем. 7 · опционально</span></div>
+  <div class="checklist" id="certsChecklist">
+    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-1"><b><a href="https://aws.amazon.com/certification/certified-cloud-practitioner" target="_blank">AWS Cloud Practitioner</a> / <a href="https://learn.microsoft.com/credentials/certifications/azure-fundamentals" target="_blank">Azure AZ-900</a></b><span>сем. 4–5 · база</span></div>
+    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-2"><b><a href="https://aws.amazon.com/certification/certified-solutions-architect-associate" target="_blank">AWS Solutions Architect Associate</a> / <a href="https://learn.microsoft.com/credentials/certifications/azure-administrator" target="_blank">Azure AZ-104</a></b><span>сем. 6</span></div>
+    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-3"><b><a href="https://developer.hashicorp.com/terraform/tutorials/certification-003" target="_blank">Terraform Associate</a></b><span>сем. 6</span></div>
+    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-4"><b><a href="https://www.cncf.io/certification/cka" target="_blank">Kubernetes CKA</a></b><span>сем. 7</span></div>
+    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-5"><b><a href="https://www.comptia.org/certifications/security" target="_blank">CompTIA Security+</a></b><span>сем. 7 · опционально</span></div>
   </div>
 
 </section>
@@ -281,8 +283,35 @@
 
 
 <script>
-const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "по приоритету": "według priorytetu", "сем. 4–5 · база": "sem. 4–5 · podstawa", "сем. 6": "sem. 6", "сем. 7": "sem. 7", "сем. 7 · опционально": "sem. 7 · opcjonalnie"};
-const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "по приоритету": "by priority", "сем. 4–5 · база": "sem. 4–5 · basics", "сем. 6": "sem. 6", "сем. 7": "sem. 7", "сем. 7 · опционально": "sem. 7 · optional"};
+  const CERTS_STORAGE_KEY = 'cloud_roadmap_certs_v1';
+  const certBoxes = [...document.querySelectorAll('.cert-box')];
+  function loadCertState(){
+    try{ return JSON.parse(localStorage.getItem(CERTS_STORAGE_KEY)) || {}; }
+    catch(e){ return {}; }
+  }
+  function saveCertState(state){
+    try{ localStorage.setItem(CERTS_STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+  function applyCertState(state){
+    certBoxes.forEach(b => {
+      b.checked = !!state[b.id];
+      b.closest('.check-item').classList.toggle('done', b.checked);
+    });
+  }
+  certBoxes.forEach(b => {
+    b.addEventListener('change', () => {
+      const state = loadCertState();
+      state[b.id] = b.checked;
+      saveCertState(state);
+      b.closest('.check-item').classList.toggle('done', b.checked);
+    });
+  });
+  applyCertState(loadCertState());
+</script>
+
+<script>
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "по приоритету": "według priorytetu", "сем. 4–5 · база": "sem. 4–5 · podstawa", "сем. 6": "sem. 6", "сем. 7": "sem. 7", "сем. 7 · опционально": "sem. 7 · opcjonalnie", "Сертификаты — CloudPath": "Certyfikaty — CloudPath"};
+const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "по приоритету": "by priority", "сем. 4–5 · база": "sem. 4–5 · basics", "сем. 6": "sem. 6", "сем. 7": "sem. 7", "сем. 7 · опционально": "sem. 7 · optional", "Сертификаты — CloudPath": "Certificates — CloudPath"};
 let currentLang = 'ru';
 const __i18nNodes = [];
 (function initI18nNodes(){

@@ -35,7 +35,9 @@
     position:fixed; top:0; left:0; height:100vh; width:200px;
     background:#0D1826; border-right:1px solid var(--line);
     padding:28px 18px; overflow-y:auto; z-index:50;
+    scrollbar-width:none; -ms-overflow-style:none;
   }
+  .toc::-webkit-scrollbar{display:none;}
   .toc .brand{font-family:var(--mono); color:var(--accent); font-size:12px; letter-spacing:.08em; margin-bottom:22px; text-transform:uppercase;}
   .toc a{
     display:block; color:var(--muted); font-size:13px; padding:7px 0;
@@ -211,10 +213,7 @@
   .grammar-table th{text-align:left; font-family:var(--mono); color:var(--muted); font-size:11px; text-transform:uppercase; padding:6px 10px; border-bottom:1px solid var(--line);}
   .grammar-table td{padding:8px 10px; border-bottom:1px solid #1b2a3c; vertical-align:top;}
   .grammar-table td.formula{font-family:var(--mono); color:var(--accent); font-size:12.5px;}
-: показываем только активный раздел --- */
-  .wrap > section{display:none;}
-  .wrap > section.active{display:block; animation:fadein .18s ease;}
-  @keyframes fadein{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+/* --- показываем все разделы (мультистраничный сайт) --- */
   .toc a{cursor:pointer;}
   .toc .tab-hint{
     font-family:var(--mono); color:var(--muted); font-size:10.5px; opacity:.6;
@@ -332,8 +331,8 @@
 
 
 <script>
-const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Языки программирования": "Języki programowania", "официальные сайты": "oficjalne strony", "Sem 1 · основа, ML, скрипты": "Sem 1 · podstawa, ML, skrypty", "официальная документация": "oficjalna dokumentacja", "Sem 2 · ООП": "Sem 2 · OOP", "альтернатива Java": "alternatywa dla Javy", "Sem 2–3 · базы данных": "Sem 2–3 · bazy danych", "альтернатива": "alternatywa", "Sem 3, 5 · веб/фронтенд": "Sem 3, 5 · web/front-end", "JS вне браузера, back-end": "JS poza przeglądarką, back-end", "если выберешь Wybieralny I": "jeśli wybierzesz Wybieralny I", "справочник": "przewodnik", "Linux, автоматизация": "Linux, automatyzacja"};
-const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "Языки программирования": "Programming languages", "официальные сайты": "official websites", "Sem 1 · основа, ML, скрипты": "Sem 1 · basics, ML, scripting", "официальная документация": "official documentation", "Sem 2 · ООП": "Sem 2 · OOP", "альтернатива Java": "Java alternative", "Sem 2–3 · базы данных": "Sem 2–3 · databases", "альтернатива": "alternative", "Sem 3, 5 · веб/фронтенд": "Sem 3, 5 · web/front-end", "JS вне браузера, back-end": "JS outside the browser, back-end", "если выберешь Wybieralny I": "if you choose Wybieralny I", "справочник": "reference", "Linux, автоматизация": "Linux, automation"};
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Языки программирования": "Języki programowania", "официальные сайты": "oficjalne strony", "Sem 1 · основа, ML, скрипты": "Sem 1 · podstawa, ML, skrypty", "официальная документация": "oficjalna dokumentacja", "Sem 2 · ООП": "Sem 2 · OOP", "альтернатива Java": "alternatywa dla Javy", "Sem 2–3 · базы данных": "Sem 2–3 · bazy danych", "альтернатива": "alternatywa", "Sem 3, 5 · веб/фронтенд": "Sem 3, 5 · web/front-end", "JS вне браузера, back-end": "JS poza przeglądarką, back-end", "если выберешь Wybieralny I": "jeśli wybierzesz Wybieralny I", "справочник": "przewodnik", "Linux, автоматизация": "Linux, automatyzacja", "Языки программирования — CloudPath": "Języki programowania — CloudPath"};
+const I18N_EN = {"✅ Мой чек-лист": "✅ My checklist", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "Языки программирования": "Programming languages", "официальные сайты": "official websites", "Sem 1 · основа, ML, скрипты": "Sem 1 · basics, ML, scripting", "официальная документация": "official documentation", "Sem 2 · ООП": "Sem 2 · OOP", "альтернатива Java": "Java alternative", "Sem 2–3 · базы данных": "Sem 2–3 · databases", "альтернатива": "alternative", "Sem 3, 5 · веб/фронтенд": "Sem 3, 5 · web/front-end", "JS вне браузера, back-end": "JS outside the browser, back-end", "если выберешь Wybieralny I": "if you choose Wybieralny I", "справочник": "reference", "Linux, автоматизация": "Linux, automation", "Языки программирования — CloudPath": "Programming languages — CloudPath"};
 let currentLang = 'ru';
 const __i18nNodes = [];
 (function initI18nNodes(){
