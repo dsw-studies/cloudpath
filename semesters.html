@@ -225,6 +225,8 @@
 </style>
 </head>
 <body>
+<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+
 
 <nav class="toc">
   <div class="brand">CloudPath</div>
@@ -411,5 +413,42 @@
 
 
 
+
+<script>
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Учебный план по семестрам": "Program nauki w podziale na semestry", "Матан, физика, Python, алгоритмы": "Analiza matematyczna, fizyka, Python, algorytmy", "Предмет": "Przedmiot", "Форма": "Forma", "Часы": "Godziny", "ООП, ОС, базы данных, графика": "OOP, systemy operacyjne, bazy danych, grafika", "Сети, архитектура систем, языки": "Sieci, architektura systemów, języki", "→ Выбор специализации на след. семестр: Cloud Computing подтверждён": "→ Wybór specjalizacji na kolejny semestr: Cloud Computing potwierdzony", "Старт специализации + практика I": "Start specjalizacji + praktyka I", "🛠 Praktyka zawodowa I — 8 недель, 240ч, 9,5 ECTS": "🛠 Praktyka zawodowa I — 8 tygodni, 240h, 9,5 ECTS", "Front-end, выборные, практика II": "Front-end, przedmioty wybieralne, praktyka II", "🛠 Praktyka zawodowa II — 8 недель, 240ч, 9,5 ECTS": "🛠 Praktyka zawodowa II — 8 tygodni, 240h, 9,5 ECTS", "Back-end, ядро специализации, практика III": "Back-end, rdzeń specjalizacji, praktyka III", "🛠 Praktyka zawodowa III — 8 недель, 240ч, 9,5 ECTS": "🛠 Praktyka zawodowa III — 8 tygodni, 240h, 9,5 ECTS", "ML в облаке, безопасность, диплом": "ML w chmurze, bezpieczeństwo, dyplom", "🛠 Praktyka zawodowa IV — 8 недель, 240ч, 9,5 ECTS · 🎓 защита диплома": "🛠 Praktyka zawodowa IV — 8 tygodni, 240h, 9,5 ECTS · 🎓 obrona dyplomu"};
+let currentLang = 'ru';
+const __i18nNodes = [];
+(function initI18nNodes(){
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const p = node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let n;
+  while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
+})();
+function toggleLang(){
+  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+  __i18nNodes.forEach(function(item){
+    if(currentLang === 'pl'){
+      const key = item.orig.trim();
+      if(I18N_PL[key]){
+        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
+      }
+    } else {
+      item.node.nodeValue = item.orig;
+    }
+  });
+  document.documentElement.lang = currentLang;
+  const btn = document.getElementById('langToggleBtn');
+  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+}
+</script>
 </body>
 </html>

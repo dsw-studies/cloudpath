@@ -225,6 +225,8 @@
 </style>
 </head>
 <body>
+<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+
 
 <nav class="toc">
   <div class="brand">CloudPath</div>
@@ -368,5 +370,42 @@
 
 
 
+
+<script>
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Курсы специализации (★) простыми словами": "Kursy specjalizacyjne (★) prostymi słowami", "что это, зачем, где учить бесплатно": "co to jest, po co, gdzie uczyć się za darmo", "Учит, как вообще устроено облако: типы сервисов (IaaS/PaaS/SaaS), регионы и зоны доступности, как считать стоимость, как проектировать отказоустойчивую систему.": "Uczy, jak w ogóle działa chmura: typy usług (IaaS/PaaS/SaaS), regiony i strefy dostępności, jak liczyć koszty, jak projektować system odporny na awarie.", "Это фундамент всей специализации — без этого остальные ★-курсы будут непонятны.": "To fundament całej specjalizacji — bez tego pozostałe kursy ★ będą niezrozumiałe.", "MS Learn: AZ-900 путь": "MS Learn: ścieżka AZ-900", "Виртуальные машины vs контейнеры, Docker: образы, контейнеры, Dockerfile, docker-compose.": "Maszyny wirtualne vs kontenery, Docker: obrazy, kontenery, Dockerfile, docker-compose.", "Docker — обязательный навык на 90% вакансий Cloud/DevOps.": "Docker — obowiązkowa umiejętność w 90% ofert pracy Cloud/DevOps.", "YouTube: Docker для начинающих": "YouTube: Docker dla początkujących", "Killercoda: практика в браузере": "Killercoda: praktyka w przeglądarce", "Сборка приложений через визуальные платформы (Bubble, Power Apps, n8n) — без ручного написания кода.": "Budowanie aplikacji przez platformy wizualne (Bubble, Power Apps, n8n) — bez ręcznego pisania kodu.", "Полезно для быстрых прототипов и автоматизации задач без разработчика.": "Przydatne do szybkich prototypów i automatyzacji zadań bez programisty.", "YouTube: NoCode обзор": "YouTube: przegląd NoCode", "HTML/CSS/JavaScript + фреймворк (React/Vue) — интерфейсы, которые видит пользователь.": "HTML/CSS/JavaScript + framework (React/Vue) — interfejsy, które widzi użytkownik.", "Нужно, чтобы понимать полный цикл разработки приложения, даже если специализируешься на облаке.": "Potrzebne, żeby rozumieć pełny cykl tworzenia aplikacji, nawet jeśli specjalizujesz się w chmurze.", "Конкретные сервисы AWS/Azure: compute (EC2/VM), storage (S3/Blob), сети (VPC), базы данных (RDS).": "Konkretne usługi AWS/Azure: compute (EC2/VM), storage (S3/Blob), sieci (VPC), bazy danych (RDS).", "Прямая подготовка к AWS Solutions Architect Associate / Azure AZ-104.": "Bezpośrednie przygotowanie do AWS Solutions Architect Associate / Azure AZ-104.", "Серверная логика, REST API, работа с базой данных со стороны сервера (Node.js/PHP/Python).": "Logika serwerowa, REST API, praca z bazą danych po stronie serwera (Node.js/PHP/Python).", "Облачный инженер часто разворачивает и настраивает именно back-end приложения.": "Inżynier chmurowy często wdraża i konfiguruje właśnie aplikacje back-end.", "Postman: тестирование API": "Postman: testowanie API", "Как отдельные сервисы общаются: REST, message queues (Kafka/RabbitMQ), микросервисы vs монолит.": "Jak poszczególne usługi się komunikują: REST, kolejki wiadomości (Kafka/RabbitMQ), mikroserwisy vs monolit.", "Ключевая тема для собеседований на позиции Cloud/Backend Engineer.": "Kluczowy temat na rozmowach kwalifikacyjnych na stanowiska Cloud/Backend Engineer.", "YouTube: очереди сообщений": "YouTube: kolejki wiadomości", "Распределённые вычисления: как множество серверов работают как единая система + основы блокчейна.": "Obliczenia rozproszone: jak wiele serwerów działa jak jeden system + podstawy blockchainu.", "Даёт понимание отказоустойчивости и консенсуса — применимо и вне блокчейна (Kubernetes, распределённые БД).": "Daje zrozumienie odporności na awarie i konsensusu — przydatne też poza blockchainem (Kubernetes, rozproszone bazy danych).", "Как обучать и разворачивать модели машинного обучения на облачных платформах (AWS SageMaker, Azure ML, GCP Vertex AI).": "Jak trenować i wdrażać modele uczenia maszynowego na platformach chmurowych (AWS SageMaker, Azure ML, GCP Vertex AI).", "Соединяет твою специализацию Cloud с ИИ — самый быстрорастущий сегмент рынка труда 2026-2030.": "Łączy Twoją specjalizację Cloud z AI — najszybciej rosnący segment rynku pracy 2026-2030.", "Защита облачных приложений: IAM (управление доступом), шифрование, логирование, алерты, инструменты типа CloudWatch/Prometheus/Grafana.": "Ochrona aplikacji chmurowych: IAM (zarządzanie dostępem), szyfrowanie, logowanie, alerty, narzędzia typu CloudWatch/Prometheus/Grafana.", "Безопасность — обязательный навык, а не опция, для любого Cloud Engineer.": "Bezpieczeństwo to obowiązkowa umiejętność, a nie opcja, dla każdego Cloud Engineera."};
+let currentLang = 'ru';
+const __i18nNodes = [];
+(function initI18nNodes(){
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const p = node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let n;
+  while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
+})();
+function toggleLang(){
+  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+  __i18nNodes.forEach(function(item){
+    if(currentLang === 'pl'){
+      const key = item.orig.trim();
+      if(I18N_PL[key]){
+        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
+      }
+    } else {
+      item.node.nodeValue = item.orig;
+    }
+  });
+  document.documentElement.lang = currentLang;
+  const btn = document.getElementById('langToggleBtn');
+  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+}
+</script>
 </body>
 </html>

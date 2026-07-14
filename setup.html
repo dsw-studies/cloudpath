@@ -225,6 +225,8 @@
 </style>
 </head>
 <body>
+<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+
 
 <nav class="toc">
   <div class="brand">CloudPath</div>
@@ -394,5 +396,42 @@ source venv/bin/activate</pre>
 
 
 
+
+<script>
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Установка с нуля — по шагам": "Instalacja od zera — krok po kroku", "конкретные команды, не просто ссылки": "konkretne polecenia, nie tylko linki", "Порядок ниже — с первой недели учёбы. Не обязательно ставить всё сразу: Git + VS Code + Python нужны с первого дня, остальное — ближе к семестру, где оно появляется в таблице выше.": "Kolejność poniżej — od pierwszego tygodnia nauki. Nie trzeba instalować wszystkiego od razu: Git + VS Code + Python są potrzebne od pierwszego dnia, reszta — bliżej semestru, w którym pojawia się w tabeli powyżej.", "Git + GitHub + SSH-ключ": "Git + GitHub + klucz SSH", "Скачай и установи Git:": "Pobierz i zainstaluj Git:", "(на Windows на всех экранах установщика можно жать «Next» с настройками по умолчанию).": "(na Windows na wszystkich ekranach instalatora można klikać „Next” z ustawieniami domyślnymi).", "Открой терминал (на Windows — Git Bash, на Mac/Linux — обычный терминал) и представься Git:": "Otwórz terminal (na Windows — Git Bash, na Mac/Linux — zwykły terminal) i przedstaw się Gitowi:", "git config --global user.name \"Твоё Имя\"\\ngit config --global user.email \"твоя_почта@example.com\"": "git config --global user.name \"Twoje Imię\"\\ngit config --global user.email \"twoj_email@example.com\"", "Создай SSH-ключ, чтобы не вводить пароль каждый раз:": "Utwórz klucz SSH, żeby nie wpisywać hasła za każdym razem:", "ssh-keygen -t ed25519 -C \"твоя_почта@example.com\"": "ssh-keygen -t ed25519 -C \"twoj_email@example.com\"", "# на все вопросы просто жми Enter (оставить по умолчанию)": "# na wszystkie pytania po prostu wciśnij Enter (zostaw domyślne)", "Скопируй публичный ключ:": "Skopiuj klucz publiczny:", "На": "Na", "→ «New SSH key» → вставь скопированное → Save.": "→ „New SSH key” → wklej skopiowane → Save.", "Проверь, что всё работает:": "Sprawdź, czy wszystko działa:", "# должно ответить: \"Hi username! You\\'ve successfully authenticated\"": "# powinno odpowiedzieć: \"Hi username! You\\'ve successfully authenticated\"", "VS Code + расширения": "VS Code + rozszerzenia", "Скачай с": "Pobierz z", ", установи как обычную программу.": ", zainstaluj jak zwykły program.", "Открой вкладку расширений:": "Otwórz zakładkę rozszerzeń:", "Найди и нажми «Install» на каждом:": "Znajdź i kliknij „Install” przy każdym z nich:", "Встроенный терминал открывается сочетанием": "Wbudowany terminal otwiera się skrótem", "— все команды из этого гайда можно вводить прямо туда.": "— wszystkie polecenia z tego przewodnika można wpisywać właśnie tam.", "Скачай на": "Pobierz na", "(последняя версия 3.x).": "(najnowsza wersja 3.x).", "на первом экране установщика обязательно поставь галочку «Add python.exe to PATH» — без неё команда": "na pierwszym ekranie instalatora koniecznie zaznacz „Add python.exe to PATH” — bez tego polecenie", "не будет работать в терминале.": "nie będzie działać w terminalu.", "Проверь установку:": "Sprawdź instalację:", "Для учебных проектов создавай отдельное окружение (venv), чтобы библиотеки разных проектов не конфликтовали:": "Dla projektów szkolnych twórz osobne środowisko (venv), żeby biblioteki różnych projektów się nie kłóciły:", "# активация на Windows:": "# aktywacja na Windows:", "# активация на Mac/Linux:": "# aktywacja na Mac/Linux:", "Linux (WSL2, если у тебя Windows)": "Linux (WSL2, jeśli masz Windows)", "Открой PowerShell": "Otwórz PowerShell", "от имени администратора": "jako administrator", "(правый клик → «Запуск от имени администратора»).": "(prawy klik → „Uruchom jako administrator”).", "Введи одну команду — она сама установит Linux (Ubuntu) внутри Windows:": "Wpisz jedno polecenie — samo zainstaluje Linuksa (Ubuntu) wewnątrz Windows:", "Перезагрузи компьютер, когда попросит.": "Zrestartuj komputer, gdy o to poprosi.", "После перезагрузки откроется окно Ubuntu — придумай себе username и пароль (пароль не будет отображаться при вводе, это нормально).": "Po restarcie otworzy się okno Ubuntu — wymyśl sobie nazwę użytkownika i hasło (hasło nie będzie widoczne podczas wpisywania, to normalne).", "Проверь версию:": "Sprawdź wersję:", "Альтернатива без WSL2 —": "Alternatywa bez WSL2 —", "с образом Ubuntu, если хочешь полностью отдельную виртуальную машину.": "z obrazem Ubuntu, jeśli chcesz w pełni osobną maszynę wirtualną.", "Установи, перезагрузи компьютер.": "Zainstaluj, zrestartuj komputer.", "На Windows при первом запуске выбери backend": "Na Windows przy pierwszym uruchomieniu wybierz backend", "(не Hyper-V), если он предложит.": "(nie Hyper-V), jeśli zaproponuje.", "Открой Docker Desktop — жди, пока в углу появится «Docker is running».": "Otwórz Docker Desktop — czekaj, aż w rogu pojawi się „Docker is running”.", "Проверь в терминале, что всё работает:": "Sprawdź w terminalu, czy wszystko działa:", "Если видишь текст \"Hello from Docker!\" — всё установлено правильно.": "Jeśli widzisz tekst \"Hello from Docker!\" — wszystko zainstalowane poprawnie.", "AWS Free Tier — аккаунт безопасно": "AWS Free Tier — bezpieczne konto", "Регистрация на": "Rejestracja na", "— нужна карта (для верификации, спишется символическая сумма и вернётся).": "— potrzebna karta (do weryfikacji, pobrana zostanie symboliczna kwota i zwrócona).", "Сразу после регистрации, до всего остального:": "Zaraz po rejestracji, przed wszystkim innym:", "зайди в Billing → Budgets → Create a budget → «Zero spend budget» — это бесплатное оповещение на почту, если вообще возникнет любой платёж. Это главная защита от неожиданных счетов.": "wejdź w Billing → Budgets → Create a budget → „Zero spend budget” — to darmowe powiadomienie na e-mail, jeśli w ogóle pojawi się jakakolwiek opłata. To główne zabezpieczenie przed nieoczekiwanymi rachunkami.", "Включи двухфакторную аутентификацию (MFA) на root-аккаунте: Security credentials → Multi-factor authentication.": "Włącz uwierzytelnianie dwuskładnikowe (MFA) na koncie root: Security credentials → Multi-factor authentication.", "Не работай под root каждый день — создай отдельного IAM-пользователя для себя: IAM → Users → Add user, с правами": "Nie pracuj codziennie na koncie root — utwórz dla siebie osobnego użytkownika IAM: IAM → Users → Add user, z uprawnieniami", "для учёбы.": "do nauki.", "Заходи в консоль дальше уже под этим IAM-пользователем, не под root.": "Loguj się do konsoli dalej już jako ten użytkownik IAM, nie jako root.", "⚠️ Free Tier даёт лимиты (например, 750 часов EC2 t2.micro в месяц). Превышение лимита = реальный платёж. Budget-алерт из шага 2 — не опция, а обязательный шаг.": "⚠️ Free Tier ma limity (np. 750 godzin EC2 t2.micro miesięcznie). Przekroczenie limitu = realna opłata. Alert budżetowy z kroku 2 to nie opcja, tylko obowiązkowy krok."};
+let currentLang = 'ru';
+const __i18nNodes = [];
+(function initI18nNodes(){
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const p = node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let n;
+  while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
+})();
+function toggleLang(){
+  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+  __i18nNodes.forEach(function(item){
+    if(currentLang === 'pl'){
+      const key = item.orig.trim();
+      if(I18N_PL[key]){
+        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
+      }
+    } else {
+      item.node.nodeValue = item.orig;
+    }
+  });
+  document.documentElement.lang = currentLang;
+  const btn = document.getElementById('langToggleBtn');
+  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+}
+</script>
 </body>
 </html>

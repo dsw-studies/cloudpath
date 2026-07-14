@@ -225,6 +225,8 @@
 </style>
 </head>
 <body>
+<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+
 
 <nav class="toc">
   <div class="brand">CloudPath</div>
@@ -327,5 +329,42 @@
 
 
 
+
+<script>
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Глоссарий для чайника": "Słowniczek dla początkujących", "все термины из этого документа простыми словами": "wszystkie terminy z tego dokumentu prostymi słowami", "Читай эту секцию первой, если какое-то слово в роадмапе непонятно. Возвращайся сюда в любой момент за 3,5 года — тут расшифровано всё, что встречается ниже.": "Czytaj tę sekcję jako pierwszą, jeśli jakieś słowo w roadmapie jest niezrozumiałe. Wracaj tu w dowolnym momencie przez cały okres 3,5 roku — tu wyjaśnione jest wszystko, co pojawia się poniżej.", "Учёба / документы": "Nauka / dokumenty", "Европейская система зачётных единиц. 1 ECTS ≈ 25-30 часов работы студента (лекции + самостоятельная работа). Семестр = обычно 30 ECTS.": "Europejski system punktów zaliczeniowych. 1 ECTS ≈ 25-30 godzin pracy studenta (wykłady + praca własna). Semestr = zwykle 30 ECTS.", "Предмет заканчивается экзаменом — обычно письменный тест/задача в сессию.": "Przedmiot kończy się egzaminem — zwykle pisemny test/zadanie w sesji.", "Зачёт с оценкой — без формального экзамена, но с итоговой оценкой по работе в семестре.": "Zaliczenie na ocenę — bez formalnego egzaminu, ale z oceną końcową za pracę w semestrze.", "Простой зачёт (сдал/не сдал), без оценки в диплом.": "Zwykłe zaliczenie (zdał/nie zdał), bez oceny w dyplomie.", "Обязательная производственная практика — стажировка в компании, засчитывается в ECTS.": "Obowiązkowa praktyka zawodowa — staż w firmie, zaliczana do ECTS.", "Занятия, где готовишь и защищаешь дипломную работу поэтапно.": "Zajęcia, na których etapami przygotowujesz i bronisz pracy dyplomowej.", "Предмет по выбору — из списка нескольких выбираешь один.": "Przedmiot do wyboru — z listy kilku wybierasz jeden.", "Облако (Cloud)": "Chmura (Cloud)", "Аренда вычислительных мощностей (серверов, хранилищ, баз данных) у провайдера (AWS, Azure, GCP) через интернет вместо покупки своего железа.": "Wynajem mocy obliczeniowej (serwerów, magazynów, baz danych) u dostawcy (AWS, Azure, GCP) przez internet zamiast kupowania własnego sprzętu.", "Три крупнейших облачных провайдера: Amazon Web Services, Microsoft Azure, Google Cloud Platform.": "Trzej najwięksi dostawcy chmury: Amazon Web Services, Microsoft Azure, Google Cloud Platform.", "Виртуализация": "Wirtualizacja", "Технология, позволяющая на одном физическом сервере запускать несколько независимых \"виртуальных\" компьютеров.": "Technologia pozwalająca na jednym fizycznym serwerze uruchamiać kilka niezależnych \"wirtualnych\" komputerów.", "Контейнеризация": "Konteneryzacja", "Упаковка приложения со всем нужным окружением в лёгкий изолированный \"контейнер\", который одинаково работает везде.": "Zapakowanie aplikacji razem z całym potrzebnym środowiskiem w lekki, izolowany \"kontener\", który działa tak samo wszędzie.", "Самый популярный инструмент контейнеризации.": "Najpopularniejsze narzędzie do konteneryzacji.", "Система, которая автоматически управляет множеством контейнеров: запускает, масштабирует, перезапускает при сбое.": "System, który automatycznie zarządza wieloma kontenerami: uruchamia, skaluje, restartuje w razie awarii.", "Описание серверов и инфраструктуры кодом (файлами), а не ручными кликами в панели управления.": "Opisywanie serwerów i infrastruktury kodem (plikami), zamiast ręcznego klikania w panelu.", "Популярный инструмент для IaC — один и тот же код разворачивает инфраструктуру в AWS, Azure и др.": "Popularne narzędzie do IaC — ten sam kod wdraża infrastrukturę w AWS, Azure i innych.", "Continuous Integration / Continuous Deployment — автоматическая проверка и доставка кода в продакшн при каждом изменении.": "Continuous Integration / Continuous Deployment — automatyczne sprawdzanie i wdrażanie kodu na produkcję przy każdej zmianie.", "Разработка": "Rozwój oprogramowania", "Та часть приложения, которую видит и с которой взаимодействует пользователь (сайт, кнопки, интерфейс).": "Ta część aplikacji, którą widzi i z którą wchodzi w interakcję użytkownik (strona, przyciski, interfejs).", "\"Невидимая\" серверная часть: логика, база данных, обработка запросов.": "\"Niewidoczna\" część serwerowa: logika, baza danych, obsługa zapytań.", "Application Programming Interface — правила, по которым программы обмениваются данными друг с другом.": "Application Programming Interface — reguły, według których programy wymieniają między sobą dane.", "Git — система контроля версий кода (история изменений). GitHub — сайт для хранения Git-репозиториев и совместной работы.": "Git — system kontroli wersji kodu (historia zmian). GitHub — serwis do przechowywania repozytoriów Git i wspólnej pracy.", "Integrated Development Environment — программа-редактор с подсветкой кода, автодополнением, отладкой (VS Code, PyCharm, IntelliJ).": "Integrated Development Environment — program-edytor z podświetlaniem składni, autouzupełnianiem, debugowaniem (VS Code, PyCharm, IntelliJ).", "ООП (OOП)": "OOP (programowanie obiektowe)", "Объектно-ориентированное программирование — стиль написания кода через объекты с свойствами и поведением.": "Programowanie obiektowe — styl pisania kodu za pomocą obiektów z właściwościami i zachowaniem.", "Создание приложений почти без написания кода, через визуальные конструкторы.": "Tworzenie aplikacji niemal bez pisania kodu, za pomocą wizualnych kreatorów.", "SQL / БД": "SQL / bazy danych", "Structured Query Language — язык запросов к реляционным базам данных (таблицы, строки, столбцы).": "Structured Query Language — język zapytań do relacyjnych baz danych (tabele, wiersze, kolumny).", "Сети и безопасность": "Sieci i bezpieczeństwo", "Secure Shell — защищённый способ подключиться к удалённому серверу через терминал.": "Secure Shell — bezpieczny sposób łączenia się ze zdalnym serwerem przez terminal.", "Виртуальная частная сеть — зашифрованное соединение поверх обычного интернета.": "Wirtualna sieć prywatna — zaszyfrowane połączenie nałożone na zwykły internet.", "\"Файрвол\" — фильтр сетевого трафика, блокирует нежелательные подключения.": "\"Firewall\" — filtr ruchu sieciowego, blokuje niepożądane połączenia.", "Шифрование": "Szyfrowanie", "Преобразование данных так, что прочитать их может только тот, у кого есть ключ.": "Przekształcenie danych tak, że odczytać je może tylko ten, kto ma klucz.", "Мониторинг": "Monitoring", "Постоянное отслеживание состояния серверов/приложений (нагрузка, ошибки, доступность).": "Ciągłe śledzenie stanu serwerów/aplikacji (obciążenie, błędy, dostępność).", "Распределённая база данных, где записи (блоки) нельзя незаметно изменить задним числом.": "Rozproszona baza danych, w której zapisów (bloków) nie da się niepostrzeżenie zmienić z datą wsteczną.", "Работа / карьера": "Praca / kariera", "Уровни опыта разработчика: начинающий → уверенный специалист → эксперт, ведущий проекты.": "Poziomy doświadczenia programisty: początkujący → pewny siebie specjalista → ekspert prowadzący projekty.", "Сертификация (AWS/Azure/K8s)": "Certyfikacja (AWS/Azure/K8s)", "Официальный экзамен от вендора, подтверждающий знания — сильно повышает шансы на работу.": "Oficjalny egzamin od dostawcy, potwierdzający wiedzę — mocno zwiększa szanse na pracę.", "Rodzinny Kredyt Mieszkaniowy — польская госпрограмма ипотеки без первого взноса (гарантия от BGK).": "Rodzinny Kredyt Mieszkaniowy — polski program rządowy kredytu hipotecznego bez wkładu własnego (gwarancja z BGK)."};
+let currentLang = 'ru';
+const __i18nNodes = [];
+(function initI18nNodes(){
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const p = node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let n;
+  while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
+})();
+function toggleLang(){
+  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+  __i18nNodes.forEach(function(item){
+    if(currentLang === 'pl'){
+      const key = item.orig.trim();
+      if(I18N_PL[key]){
+        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
+      }
+    } else {
+      item.node.nodeValue = item.orig;
+    }
+  });
+  document.documentElement.lang = currentLang;
+  const btn = document.getElementById('langToggleBtn');
+  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+}
+</script>
 </body>
 </html>

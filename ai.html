@@ -225,6 +225,8 @@
 </style>
 </head>
 <body>
+<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+
 
 <nav class="toc">
   <div class="brand">CloudPath</div>
@@ -323,5 +325,42 @@
 
 
 
+
+<script>
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Работа с ИИ на учёбе": "Praca z AI podczas nauki", "как использовать Claude/ChatGPT на каждом этапе": "jak korzystać z Claude/ChatGPT na każdym etapie", "Главное правило:": "Główna zasada:", "ИИ — это инструмент для понимания и ускорения, а не замена собственных знаний. На экзаменах и защите диплома спрашивают тебя, а не ИИ. Используй его, чтобы разбираться быстрее и глубже, а не чтобы не думать.": "AI to narzędzie do rozumienia i przyspieszania, a nie zamiennik własnej wiedzy. Na egzaminach i obronie dyplomu pytają Ciebie, a nie AI. Używaj go, żeby rozumieć szybciej i głębiej, a nie żeby nie myśleć.", "Разбор непонятной темы с лекции": "Wyjaśnianie niezrozumiałego tematu z wykładu", "Если что-то на лекции осталось непонятным — попроси объяснить простыми словами и с примером, прежде чем читать учебник.": "Jeśli coś na wykładzie pozostało niezrozumiałe — poproś o wyjaśnienie prostymi słowami i z przykładem, zanim sięgniesz po podręcznik.", "Промпт: \"Объясни [тема] простыми словами, как чайнику. Дай короткий пример из реальной жизни.\"": "Prompt: \"Wyjaśnij [temat] prostymi słowami, jak dla początkującego. Podaj krótki przykład z życia.\"", "Написание и отладка кода": "Pisanie i debugowanie kodu", "ИИ хорош как \"напарник\": объясняет ошибки, предлагает варианты решения. Но пиши код сам, а не копируй бездумно — иначе не сдашь устную часть/защиту проекта.": "AI jest dobry jako \"partner\": wyjaśnia błędy, proponuje warianty rozwiązania. Ale pisz kod sam, a nie kopiuj bezmyślnie — inaczej nie zdasz części ustnej/obrony projektu.", "Промпт: \"Вот код и ошибка: [...]. Объясни, почему она возникает, но не переписывай всё за меня — подскажи, что исправить.\"": "Prompt: \"Oto kod i błąd: [...]. Wyjaśnij, dlaczego występuje, ale nie przepisuj wszystkiego za mnie — podpowiedz, co poprawić.\"", "Подготовка к экзаменам": "Przygotowanie do egzaminów", "Попроси ИИ составить список вопросов по теме и проверять твои ответы, как экзаменатор — это активное повторение, которое запоминается лучше пассивного чтения.": "Poproś AI o ułożenie listy pytań na temat i sprawdzanie Twoich odpowiedzi jak egzaminator — to aktywne powtarzanie, które zapamiętuje się lepiej niż bierne czytanie.", "Промпт: \"Составь 10 вопросов по теме [X] уровня экзамена в университете и по очереди проверяй мои ответы, указывая на ошибки.\"": "Prompt: \"Ułóż 10 pytań na temat [X] na poziomie egzaminu uniwersyteckiego i po kolei sprawdzaj moje odpowiedzi, wskazując błędy.\"", "Дипломный проект и семинары": "Projekt dyplomowy i seminaria", "ИИ полезен для структурирования работы, поиска источников по теме, проверки логики текста. Итоговый текст и идею должен формулировать ты — руководитель и комиссия быстро видят разницу.": "AI jest przydatny do strukturyzowania pracy, wyszukiwania źródeł na temat, sprawdzania logiki tekstu. Ostateczny tekst i pomysł musisz sformułować Ty — promotor i komisja szybko widzą różnicę.", "Промпт: \"Вот план моей главы диплома: [...]. Проверь логику и структуру, укажи, где не хватает аргументов.\"": "Prompt: \"Oto plan mojego rozdziału pracy dyplomowej: [...]. Sprawdź logikę i strukturę, wskaż, gdzie brakuje argumentów.\"", "Английский язык": "Język angielski", "Практикуй письмо и разговор с ИИ: проси исправлять ошибки, объяснять грамматику, вести диалог на IT-темы.": "Ćwicz pisanie i rozmowę z AI: proś o poprawianie błędów, wyjaśnianie gramatyki, prowadzenie dialogu na tematy IT.", "Промпт: \"Побудь моим собеседником для практики английского на IT-темы. Исправляй мои ошибки после каждой моей реплики.\"": "Prompt: \"Bądź moim rozmówcą do ćwiczenia angielskiego na tematy IT. Poprawiaj moje błędy po każdej mojej wypowiedzi.\"", "Практика (Praktyka zawodowa) и облачные задачи": "Praktyka (Praktyka zawodowa) i zadania chmurowe", "На практике в компании ИИ ускоряет чтение чужого кода/документации и написание конфигов (Terraform, YAML, Dockerfile) — но всегда проверяй, что оно реально делает, прежде чем запускать на реальном сервере.": "Na praktyce w firmie AI przyspiesza czytanie cudzego kodu/dokumentacji i pisanie konfigów (Terraform, YAML, Dockerfile) — ale zawsze sprawdzaj, co to naprawdę robi, zanim uruchomisz na prawdziwym serwerze.", "Промпт: \"Объясни построчно, что делает этот Terraform/YAML файл, и какие у него могут быть побочные эффекты.\"": "Prompt: \"Wyjaśnij linia po linii, co robi ten plik Terraform/YAML, i jakie może mieć skutki uboczne.\"", "Инструменты:": "Narzędzia:", "и": "i", "— для объяснений и текста.": "— do wyjaśnień i tekstu.", "— автодополнение кода прямо в редакторе (у студентов есть бесплатный доступ через": "— autouzupełnianie kodu bezpośrednio w edytorze (studenci mają darmowy dostęp przez"};
+let currentLang = 'ru';
+const __i18nNodes = [];
+(function initI18nNodes(){
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const p = node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let n;
+  while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
+})();
+function toggleLang(){
+  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+  __i18nNodes.forEach(function(item){
+    if(currentLang === 'pl'){
+      const key = item.orig.trim();
+      if(I18N_PL[key]){
+        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
+      }
+    } else {
+      item.node.nodeValue = item.orig;
+    }
+  });
+  document.documentElement.lang = currentLang;
+  const btn = document.getElementById('langToggleBtn');
+  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+}
+</script>
 </body>
 </html>

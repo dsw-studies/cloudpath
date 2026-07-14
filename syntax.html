@@ -225,6 +225,8 @@
 </style>
 </head>
 <body>
+<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+
 
 <nav class="toc">
   <div class="brand">CloudPath</div>
@@ -578,5 +580,42 @@ resource "aws_instance" "web_server" {
 
 
 
+
+<script>
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Синтаксис языков программирования": "Składnia języków programowania", "базовый конспект: переменные, условия, циклы, функции": "podstawowy konspekt: zmienne, warunki, pętle, funkcje", "Это шпаргалка по основам, а не полный курс — держи её открытой рядом, когда пишешь первый код на новом языке. Для практики: пиши тот же самый пример (калькулятор, список задач) на каждом языке по очереди.": "To ściąga z podstaw, a nie pełny kurs — trzymaj ją otwartą obok, gdy piszesz pierwszy kod w nowym języku. Do ćwiczeń: napisz ten sam przykład (kalkulator, listę zadań) w każdym języku po kolei.", "Отступы вместо { } — код внутри блока сдвинут пробелами.": "Wcięcia zamiast { } — kod wewnątrz bloku jest przesunięty spacjami.", "# переменная и типы": "# zmienna i typy", "# условие": "# warunek", "# цикл": "# pętla", "# функция": "# funkcja", "# класс (ООП)": "# klasa (OOP)", "Строго типизирован, всё внутри классов, блоки в { }.": "Silnie typowany, wszystko wewnątrz klas, bloki w { }.", "// переменная": "// zmienna", "// условие": "// warunek", "// цикл": "// pętla", "// класс и метод": "// klasa i metoda", "Очень похож на Java по синтаксису — легко переключаться между ними.": "Bardzo podobny do Javy pod względem składni — łatwo się między nimi przełączać.", "// класс": "// klasa", "Язык запросов к базе данных — не программирование в обычном смысле, а декларативные команды.": "Język zapytań do bazy danych — nie programowanie w zwykłym sensie, tylko deklaratywne polecenia.", "-- создание таблицы": "-- tworzenie tabeli", "-- вставка данных": "-- wstawianie danych", "-- выборка": "-- pobieranie danych", "-- изменение": "-- modyfikacja", "-- соединение таблиц": "-- łączenie tabel", "HTML — структура страницы, CSS — её оформление.": "HTML — struktura strony, CSS — jej wygląd.", "Делает страницу интерактивной — работает в браузере и на сервере (Node.js).": "Sprawia, że strona jest interaktywna — działa w przeglądarce i na serwerze (Node.js).", "// переменные": "// zmienne", "// функция-стрелка + массив": "// funkcja strzałkowa + tablica", "// переменные: val — неизменяемая, var — изменяемая": "// zmienne: val — niezmienna, var — zmienna", "Низкоуровневый контроль над памятью, компилируется напрямую в машинный код.": "Niskopoziomowa kontrola nad pamięcią, kompilowany bezpośrednio do kodu maszynowego.", "Серверный язык, изначально для веб-страниц — до сих пор держит значительную долю back-end рынка.": "Język serwerowy, pierwotnie dla stron internetowych — nadal ma znaczący udział na rynku back-endu.", "Скрипты для Linux-терминала — автоматизация рутинных задач.": "Skrypty dla terminala Linux — automatyzacja rutynowych zadań.", "Формат конфигурации — используется в Docker Compose, Kubernetes, CI/CD. Отступы важны, как в Python.": "Format konfiguracji — używany w Docker Compose, Kubernetes, CI/CD. Wcięcia są ważne, tak jak w Pythonie.", "# docker-compose.yml пример": "# przykład docker-compose.yml", "Описываешь, какая инфраструктура нужна — Terraform сам создаёт её в облаке.": "Opisujesz, jaka infrastruktura jest potrzebna — Terraform sam ją tworzy w chmurze.", "# описываем провайдера": "# opisujemy dostawcę", "# описываем ресурс: виртуальный сервер": "# opisujemy zasób: serwer wirtualny"};
+let currentLang = 'ru';
+const __i18nNodes = [];
+(function initI18nNodes(){
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const p = node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let n;
+  while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
+})();
+function toggleLang(){
+  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+  __i18nNodes.forEach(function(item){
+    if(currentLang === 'pl'){
+      const key = item.orig.trim();
+      if(I18N_PL[key]){
+        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
+      }
+    } else {
+      item.node.nodeValue = item.orig;
+    }
+  });
+  document.documentElement.lang = currentLang;
+  const btn = document.getElementById('langToggleBtn');
+  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+}
+</script>
 </body>
 </html>

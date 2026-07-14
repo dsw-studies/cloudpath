@@ -225,6 +225,8 @@
 </style>
 </head>
 <body>
+<button id="langToggleBtn" onclick="toggleLang()" style="position:fixed; top:14px; right:18px; z-index:200; background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 12px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3);">🌐 PL</button>
+
 
 <nav class="toc">
   <div class="brand">CloudPath</div>
@@ -353,5 +355,42 @@
 
 
 
+
+<script>
+const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Приложения и инструменты": "Aplikacje i narzędzia", "прямые ссылки на установку": "bezpośrednie linki do instalacji", "💻 IDE / редакторы": "💻 IDE / edytory", "основной редактор, с 1 семестра": "główny edytor, od 1 semestru", "для Python": "dla Pythona", "для Java (Community — бесплатно)": "dla Javy (Community — za darmo)", "🐙 Версионный контроль": "🐙 Kontrola wersji", "ставить сразу": "instalować od razu", "у тебя уже есть аккаунт — используй с 1 семестра": "masz już konto — używaj od 1 semestru", "если не хочешь через терминал": "jeśli nie chcesz przez terminal", "🐳 Контейнеризация / виртуализация": "🐳 Konteneryzacja / wirtualizacja", "локальный Kubernetes": "lokalny Kubernetes", "фаза подготовки": "faza przygotowania", "если на Windows": "jeśli na Windows", "🗄️ Базы данных": "🗄️ Bazy danych", "универсальный клиент БД": "uniwersalny klient baz danych", "для PostgreSQL": "dla PostgreSQL", "для MySQL": "dla MySQL", "☁️ Облако": "☁️ Chmura", "завести аккаунт к сем. 4": "założyć konto do sem. 4", "альтернатива AWS": "alternatywa dla AWS", "🔌 API / тестирование": "🔌 API / testowanie", "📐 Диаграммы и дизайн": "📐 Diagramy i design", "⌨️ Терминал": "⌨️ Terminal", "для Mac": "dla Maca", "📋 Организация учёбы": "📋 Organizacja nauki", "трекинг заданий/дедлайнов": "śledzenie zadań/terminów", "альтернатива": "alternatywa", "💬 Коммуникация": "💬 Komunikacja", "групповые проекты": "projekty grupowe", "📄 Офис": "📄 Biuro", "отчёты, диплом": "raporty, dyplom", "бесплатная альтернатива": "darmowa alternatywa", "💡 Всё, кроме IntelliJ Ultimate и части офисных пакетов — бесплатно. Ставь по необходимости: Git + VS Code + Python — с первой недели, остальное подтягивай по ходу семестров.": "💡 Wszystko oprócz IntelliJ Ultimate i części pakietów biurowych jest darmowe. Instaluj w miarę potrzeb: Git + VS Code + Python — od pierwszego tygodnia, resztę dociągaj w trakcie semestrów."};
+let currentLang = 'ru';
+const __i18nNodes = [];
+(function initI18nNodes(){
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const p = node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      if(p.id === 'langToggleBtn') return NodeFilter.FILTER_REJECT;
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let n;
+  while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
+})();
+function toggleLang(){
+  currentLang = currentLang === 'ru' ? 'pl' : 'ru';
+  __i18nNodes.forEach(function(item){
+    if(currentLang === 'pl'){
+      const key = item.orig.trim();
+      if(I18N_PL[key]){
+        item.node.nodeValue = item.orig.replace(key, I18N_PL[key]);
+      }
+    } else {
+      item.node.nodeValue = item.orig;
+    }
+  });
+  document.documentElement.lang = currentLang;
+  const btn = document.getElementById('langToggleBtn');
+  if(btn) btn.textContent = currentLang === 'ru' ? '\ud83c\udf10 PL' : '\ud83c\udf10 RU';
+}
+</script>
 </body>
 </html>
