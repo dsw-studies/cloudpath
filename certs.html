@@ -137,12 +137,8 @@
     display:flex; align-items:center; gap:12px; background:var(--panel);
     border:1px solid var(--line); border-radius:10px; padding:12px 16px;
   }
-  .check-item .box{ width:18px; height:18px; border:2px solid var(--accent-dim); border-radius:5px; flex:none; }
-  .check-item input.cert-box{ width:18px; height:18px; flex:none; accent-color:var(--accent); cursor:pointer; }
   .check-item b{font-size:14px;}
   .check-item span{color:var(--muted); font-size:12px; font-family:var(--mono); margin-left:auto;}
-  .check-item.done{border-color:var(--accent-dim);}
-  .check-item.done b{color:var(--muted); text-decoration:line-through;}
 
   .fin-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
   .fin-card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
@@ -249,6 +245,7 @@
   <a href="setup.html">Установка с нуля</a>
   <a href="certs.html" class="active">Сертификаты</a>
   <a href="finance.html">Финансы / RKM</a>
+  <a href="housing.html">Жильё</a>
   <a href="parttime.html">Подработка</a>
   <a href="legal.html">Легализация пребывания</a>
   <a href="faq.html">FAQ — если что-то пошло не так</a>
@@ -266,11 +263,11 @@
 
   <div class="section-head"><h2>Сертификаты</h2><span class="tag">по приоритету</span></div>
   <div class="checklist" id="certsChecklist">
-    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-1"><b><a href="https://aws.amazon.com/certification/certified-cloud-practitioner" target="_blank">AWS Cloud Practitioner</a> / <a href="https://learn.microsoft.com/credentials/certifications/azure-fundamentals" target="_blank">Azure AZ-900</a></b><span>сем. 4–5 · база</span></div>
-    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-2"><b><a href="https://aws.amazon.com/certification/certified-solutions-architect-associate" target="_blank">AWS Solutions Architect Associate</a> / <a href="https://learn.microsoft.com/credentials/certifications/azure-administrator" target="_blank">Azure AZ-104</a></b><span>сем. 6</span></div>
-    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-3"><b><a href="https://developer.hashicorp.com/terraform/tutorials/certification-003" target="_blank">Terraform Associate</a></b><span>сем. 6</span></div>
-    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-4"><b><a href="https://www.cncf.io/certification/cka" target="_blank">Kubernetes CKA</a></b><span>сем. 7</span></div>
-    <div class="check-item"><input type="checkbox" class="cert-box" id="cert-5"><b><a href="https://www.comptia.org/certifications/security" target="_blank">CompTIA Security+</a></b><span>сем. 7 · опционально</span></div>
+    <div class="check-item"><b><a href="https://aws.amazon.com/certification/certified-cloud-practitioner" target="_blank">AWS Cloud Practitioner</a> / <a href="https://learn.microsoft.com/credentials/certifications/azure-fundamentals" target="_blank">Azure AZ-900</a></b><span>сем. 4–5 · база</span></div>
+    <div class="check-item"><b><a href="https://aws.amazon.com/certification/certified-solutions-architect-associate" target="_blank">AWS Solutions Architect Associate</a> / <a href="https://learn.microsoft.com/credentials/certifications/azure-administrator" target="_blank">Azure AZ-104</a></b><span>сем. 6</span></div>
+    <div class="check-item"><b><a href="https://developer.hashicorp.com/terraform/tutorials/certification-003" target="_blank">Terraform Associate</a></b><span>сем. 6</span></div>
+    <div class="check-item"><b><a href="https://www.cncf.io/certification/cka" target="_blank">Kubernetes CKA</a></b><span>сем. 7</span></div>
+    <div class="check-item"><b><a href="https://www.comptia.org/certifications/security" target="_blank">CompTIA Security+</a></b><span>сем. 7 · опционально</span></div>
   </div>
 
 </section>
@@ -283,33 +280,6 @@
 
 
 
-
-<script>
-  const CERTS_STORAGE_KEY = 'cloud_roadmap_certs_v1';
-  const certBoxes = [...document.querySelectorAll('.cert-box')];
-  function loadCertState(){
-    try{ return JSON.parse(localStorage.getItem(CERTS_STORAGE_KEY)) || {}; }
-    catch(e){ return {}; }
-  }
-  function saveCertState(state){
-    try{ localStorage.setItem(CERTS_STORAGE_KEY, JSON.stringify(state)); }catch(e){}
-  }
-  function applyCertState(state){
-    certBoxes.forEach(b => {
-      b.checked = !!state[b.id];
-      b.closest('.check-item').classList.toggle('done', b.checked);
-    });
-  }
-  certBoxes.forEach(b => {
-    b.addEventListener('change', () => {
-      const state = loadCertState();
-      state[b.id] = b.checked;
-      saveCertState(state);
-      b.closest('.check-item').classList.toggle('done', b.checked);
-    });
-  });
-  applyCertState(loadCertState());
-</script>
 
 <script>
 const I18N_PL = {"✅ Мой чек-лист": "✅ Moja lista kontrolna", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "по приоритету": "według priorytetu", "сем. 4–5 · база": "sem. 4–5 · podstawa", "сем. 6": "sem. 6", "сем. 7": "sem. 7", "сем. 7 · опционально": "sem. 7 · opcjonalnie", "Сертификаты — CloudPath": "Certyfikaty — CloudPath"};
