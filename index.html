@@ -218,6 +218,18 @@
   .dash-card.dc-done .dc-frac{color:var(--accent);}
   @media (max-width:520px){ .dash-top{flex-direction:column; align-items:flex-start;} }
 
+  .dates-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px;}
+  .date-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px;}
+  .date-card .dd{font-family:var(--mono); font-size:28px; font-weight:700; color:var(--accent); line-height:1.1;}
+  .date-card .dd span{font-size:12px; color:var(--muted); font-weight:400; margin-left:4px;}
+  .date-card .lbl{font-size:13px; margin-top:8px; color:var(--text);}
+  .date-card .when{font-family:var(--mono); font-size:11px; color:var(--muted); margin-top:4px;}
+  .date-card.soon{border-color:var(--amber);}
+  .date-card.soon .dd{color:var(--amber);}
+  .date-card.today{border-color:var(--violet);}
+  .date-card.today .dd{color:var(--violet);}
+  .date-card.past{opacity:.4;}
+
   .todo-group{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 18px; margin-bottom:12px;}
   .todo-group h4{font-family:var(--mono); color:var(--violet); font-size:12.5px; margin:2px 0 10px; text-transform:uppercase; letter-spacing:.05em; display:flex; justify-content:space-between;}
   .todo-group h4 .cnt{color:var(--muted); text-transform:none; letter-spacing:0;}
@@ -275,6 +287,8 @@
   <a href="certs.html">Сертификаты</a>
   <a href="finance.html">Финансы / RKM</a>
   <a href="parttime.html">Подработка</a>
+  <a href="legal.html">Легализация пребывания</a>
+  <a href="faq.html">FAQ — если что-то пошло не так</a>
   <a href="resources.html">Ресурсы</a>
   <a href="university.html">ABC студента DSW Ideis</a>
 </nav>
@@ -294,6 +308,12 @@
 </div>
 
 <div class="wrap">
+
+<section id="keydates" style="margin-top:40px;">
+  <div class="section-head"><h2 id="kdTitle">⏳ Ключевые даты</h2><span class="tag" id="kdTag">обратный отсчёт</span></div>
+  <div class="callout" style="margin-bottom:18px;" id="kdNote"><b>Важно:</b> даты ниже — примерные ориентиры (типовой учебный год DSW), а не официальный harmonogram. Открой Harmonogram zjazdów в своём кабинете (раздел «ABC студента») и поправь даты в файле — ищи <code>KEY_DATES</code> в конце index.html.</div>
+  <div class="dates-grid" id="datesGrid"></div>
+</section>
 
 <section id="checklist">
 
@@ -599,6 +619,56 @@
   }
   renderDashCards();
 
+  /* ---------- key dates countdown ---------- */
+  // Примерные даты-заглушки — поправь под свой реальный Harmonogram zjazdów.
+  const KEY_DATES = [
+    {id:'sem1start', date:'2026-10-01', label:{ru:'Старт занятий — Семестр 1', pl:'Start zajęć — Semestr 1', en:'Classes start — Semester 1'}},
+    {id:'sem1exams', date:'2027-01-26', label:{ru:'Зимняя сессия — экзамены (Сем. 1)', pl:'Sesja zimowa — egzaminy (Sem. 1)', en:'Winter session — exams (Sem. 1)'}},
+    {id:'sem4start', date:'2028-02-14', label:{ru:'Старт Семестра 4 — специализация Cloud', pl:'Start Semestru 4 — specjalizacja Cloud', en:'Semester 4 start — Cloud specialization'}},
+    {id:'praktyka1', date:'2028-03-01', label:{ru:'Дедлайн подачи на Praktyka zawodowa I', pl:'Termin zgłoszenia na Praktykę zawodową I', en:'Deadline to apply — Praktyka zawodowa I'}},
+    {id:'sem7start', date:'2029-10-01', label:{ru:'Старт Семестра 7 — финал', pl:'Start Semestru 7 — finał', en:'Semester 7 start — final'}},
+    {id:'diploma', date:'2030-06-30', label:{ru:'Защита дипломной работы (ориентир)', pl:'Obrona pracy dyplomowej (orientacyjnie)', en:'Diploma defense (target date)'}},
+  ];
+  const DATE_LOCALE = {ru:'ru-RU', pl:'pl-PL', en:'en-US'};
+  const DATE_UNITS = {
+    ru:{days:'дн.', today:'сегодня', ago:'дн. назад', title:'⏳ Ключевые даты', tag:'обратный отсчёт'},
+    pl:{days:'dni', today:'dziś', ago:'dni temu', title:'⏳ Kluczowe daty', tag:'odliczanie'},
+    en:{days:'days', today:'today', ago:'days ago', title:'⏳ Key dates', tag:'countdown'},
+  };
+  function renderDates(){
+    const grid = document.getElementById('datesGrid');
+    if(!grid) return;
+    const lang = (typeof currentLang !== 'undefined') ? currentLang : 'ru';
+    const u = DATE_UNITS[lang] || DATE_UNITS.ru;
+    const now = new Date(); now.setHours(0,0,0,0);
+    const items = KEY_DATES.map(d => {
+      const dt = new Date(d.date + 'T00:00:00');
+      const diff = Math.round((dt - now) / 86400000);
+      return {...d, dt, diff};
+    });
+    const future = items.filter(i => i.diff >= 0).sort((a,b) => a.diff - b.diff);
+    const past = items.filter(i => i.diff < 0).sort((a,b) => b.diff - a.diff);
+    const ordered = [...future, ...past];
+    grid.innerHTML = ordered.map(i => {
+      let cls = 'date-card';
+      if(i.diff < 0) cls += ' past';
+      else if(i.diff === 0) cls += ' today';
+      else if(i.diff <= 14) cls += ' soon';
+      const dateStr = i.dt.toLocaleDateString(DATE_LOCALE[lang] || 'ru-RU', {day:'2-digit', month:'long', year:'numeric'});
+      let ddHtml;
+      if(i.diff < 0) ddHtml = Math.abs(i.diff) + '<span>' + u.ago + '</span>';
+      else if(i.diff === 0) ddHtml = u.today;
+      else ddHtml = i.diff + '<span>' + u.days + '</span>';
+      const label = (i.label && (i.label[lang] || i.label.ru)) || '';
+      return '<div class="' + cls + '"><div class="dd">' + ddHtml + '</div><div class="lbl">' + label + '</div><div class="when">' + dateStr + '</div></div>';
+    }).join('');
+    const titleEl = document.getElementById('kdTitle');
+    const tagEl = document.getElementById('kdTag');
+    if(titleEl) titleEl.textContent = u.title;
+    if(tagEl) tagEl.textContent = u.tag;
+  }
+  renderDates();
+
   function loadState(){
     try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
     catch(e){ return {}; }
@@ -695,10 +765,12 @@ function setLang(lang){
     b.style.fontWeight = active ? '700' : '400';
   });
   if(typeof updateDashboard === 'function') updateDashboard();
+  if(typeof renderDates === 'function') renderDates();
 }
 setLang('ru');
 </script>
 <script src="search-data.js"></script>
 <script src="search-widget.js"></script>
+<script src="glossary-tooltips.js"></script>
 </body>
 </html>
