@@ -1,0 +1,11 @@
+{
+  "name": "CloudPath — путь в Cloud Computing",
+  "short_name": "CloudPath",
+  "description": "Практический справочник и учебный план студента DSW.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1420",
+  "theme_color": "#0B1420",
+  "lang": "ru",
+  "icons": [{ "src": "/cloudpath-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

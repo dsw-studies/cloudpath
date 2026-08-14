@@ -85,8 +85,10 @@
   function addTriggerButton(){
     var toc = document.querySelector('nav.toc');
     if(!toc) return;
-    var btn = document.createElement('div');
+    var btn = document.createElement('button');
     btn.className = 'ss-trigger';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', ui().trigger || 'Открыть поиск');
     btn.innerHTML = '<span class="ss-trigger-label">' + esc(ui().trigger || '🔎 Search') + '</span><kbd>Ctrl K</kbd>';
     btn.addEventListener('click', openSearch);
     var brand = toc.querySelector('.brand');
@@ -125,14 +127,17 @@
   function buildModal(){
     overlay = document.createElement('div');
     overlay.id = 'siteSearchOverlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', ui().trigger || 'Поиск по сайту');
     overlay.innerHTML =
       '<div id="siteSearchBox">' +
         '<div id="siteSearchInputRow">' +
           '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' +
-          '<input id="siteSearchInput" type="text" placeholder="' + esc(ui().placeholder || '') + '" autocomplete="off" spellcheck="false">' +
+          '<input id="siteSearchInput" type="search" role="combobox" aria-autocomplete="list" aria-controls="siteSearchResults" aria-expanded="true" placeholder="' + esc(ui().placeholder || '') + '" autocomplete="off" spellcheck="false">' +
           '<span id="siteSearchEsc">ESC</span>' +
         '</div>' +
-        '<div id="siteSearchResults"></div>' +
+        '<div id="siteSearchResults" role="listbox" aria-label="Результаты поиска"></div>' +
         '<div id="siteSearchFoot"><span><kbd>↑↓</kbd> ' + esc(ui().nav_updown || '') + '</span><span><kbd>Enter</kbd> ' + esc(ui().nav_enter || '') + '</span><span><kbd>Esc</kbd> ' + esc(ui().nav_esc || '') + '</span></div>' +
       '</div>';
     document.body.appendChild(overlay);
@@ -210,7 +215,7 @@
         html += '<div class="ss-group">' + esc(tr(pageTitle(e.p))) + '</div>';
         lastPage = e.p;
       }
-      html += '<div class="ss-item' + (i === activeIndex ? ' active' : '') + '" data-i="' + i + '">' +
+      html += '<div class="ss-item' + (i === activeIndex ? ' active' : '') + '" role="option" aria-selected="' + (i === activeIndex ? 'true' : 'false') + '" data-i="' + i + '">' +
         '<span class="ic">' + (KIND_ICON[e.k] || '•') + '</span>' +
         '<span class="body">' +
           '<div class="ttl">' + markMatch(tr(e.t), q) + '</div>' +
@@ -234,6 +239,7 @@
     items.forEach(function(el){ el.classList.remove('active'); });
     var el = items[activeIndex];
     el.classList.add('active');
+    items.forEach(function(item){ item.setAttribute('aria-selected', item === el ? 'true' : 'false'); });
     el.scrollIntoView({block: 'nearest'});
   }
 
@@ -268,8 +274,10 @@
     setTimeout(function(){ el.classList.remove('ss-highlight'); }, 2200);
   }
 
+  var previousFocus = null;
   function openSearch(){
     if(!overlay) buildModal();
+    previousFocus = document.activeElement;
     overlay.classList.add('open');
     input.value = '';
     render('');
@@ -277,6 +285,7 @@
   }
   function closeSearch(){
     if(overlay) overlay.classList.remove('open');
+    if(previousFocus && previousFocus.focus) previousFocus.focus();
   }
 
   document.addEventListener('keydown', function(e){

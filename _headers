@@ -1,0 +1,15 @@
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Frame-Options: SAMEORIGIN
+
+/*.css
+  Cache-Control: public, max-age=604800
+
+/*.js
+  Cache-Control: public, max-age=604800
+
+/*.svg
+  Cache-Control: public, max-age=2592000
