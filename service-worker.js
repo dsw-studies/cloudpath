@@ -1,8 +1,13 @@
-const CACHE = 'cloudpath-notes-v1';
-const CORE = ['/', '/index.html', '/notebook.css', '/notebook.js', '/cloudpath-icon.svg', '/manifest.webmanifest'];
+const CACHE = 'cloudpath-v4';
+const CORE = ['/', '/index.html', '/dashboard.css', '/dashboard.js', '/enhanced.css', '/site-enhancements.js', '/plan-48.js', '/search-data.js', '/search-widget.js', '/glossary-tooltips.js', '/cloudpath-icon.svg'];
+
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET' || new URL(event.request.url).origin !== location.origin) return;
-  event.respondWith(fetch(event.request).then(response => { const copy=response.clone(); caches.open(CACHE).then(cache=>cache.put(event.request,copy)); return response; }).catch(()=>caches.match(event.request).then(hit=>hit||caches.match('/index.html'))));
+  event.respondWith(fetch(event.request).then(response => {
+    const copy = response.clone();
+    caches.open(CACHE).then(cache => cache.put(event.request, copy));
+    return response;
+  }).catch(() => caches.match(event.request).then(hit => hit || caches.match('/'))));
 });

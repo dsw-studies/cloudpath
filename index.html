@@ -1,11 +1,119 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0B1420"><meta name="robots" content="noindex,nofollow,noarchive"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="cloudpath-icon.svg" type="image/svg+xml"><title>CloudPath — учебный блокнот</title><link rel="stylesheet" href="notebook.css"></head>
-<body><div class="app">
-<aside class="sidebar"><div class="brand"><img src="cloudpath-icon.svg" alt=""><span>CLOUDPATH / NOTES</span></div><nav class="nav"><button class="active" type="button">⌂ Главная</button><button id="newNoteSide" type="button">＋ Новый конспект</button><button id="allNotes" type="button">≡ Все конспекты</button><a href="semesters.html">◫ Семестры</a><a href="resources.html">↗ Материалы</a></nav><div class="sidebar-footer">Данные сохраняются в этом браузере.<br><a href="legacy-home.html">Открыть старую главную</a></div></aside>
-<main class="main"><header class="topbar"><div class="search"><input id="search" type="search" placeholder="Поиск по конспектам, предметам и тегам…" aria-label="Поиск"></div><button class="btn" id="importBtn" type="button">Импорт</button><button class="btn" id="exportBtn" type="button">Экспорт</button><button class="btn primary" id="newNote" type="button">＋ <span class="btn-label">Новый конспект</span></button><input id="importFile" class="hidden" type="file" accept="application/json"></header>
-<div class="content"><section class="hero"><div><div class="eyebrow">Личный учебный блокнот</div><h1>Моя учёба — в одном месте.</h1><p>Конспекты лекций, код, формулы, материалы к зачётам и быстрый поиск.</p></div><div class="date-chip" id="today"></div></section>
-<section class="stats"><div class="stat"><b id="noteCount">0</b><span>всего конспектов</span></div><div class="stat"><b id="subjectCount">0</b><span>предметов с записями</span></div><div class="stat"><b id="recentCount">0</b><span>обновлено за 7 дней</span></div></section>
-<section class="section"><div class="section-head"><h2>Предметы</h2><span>1 семестр · Informatyka</span></div><div class="subjects" id="subjects"></div></section>
-<section class="section" id="notesSection"><div class="section-head"><h2 id="notesLabel">Последние конспекты</h2><span>Нажми на запись, чтобы открыть</span></div><div class="notes" id="notes"></div></section>
-</div></main></div>
-<div class="modal" id="modal"><section class="editor" role="dialog" aria-modal="true" aria-labelledby="editorTitle"><header class="editor-head"><strong id="editorTitle">Новый конспект</strong><button class="btn" id="closeEditor" type="button">✕</button></header><div class="editor-body"><div class="row"><div class="field"><label for="noteTitle">Название</label><input id="noteTitle" placeholder="Например: Матрицы и определители"></div><div class="field"><label for="noteDate">Дата</label><input id="noteDate" type="date"></div></div><div class="row"><div class="field"><label for="noteSubject">Предмет</label><select id="noteSubject"></select></div><div class="field"><label for="noteTags">Теги</label><input id="noteTags" placeholder="экзамен, важное, повторить"></div></div><div class="field"><label for="noteContent">Конспект</label><textarea id="noteContent" placeholder="Пиши сюда конспект. Можно вставлять формулы, код, ссылки и списки…"></textarea><div class="hint">Ctrl/Cmd + S — сохранить. Записи хранятся локально; делай экспорт для резервной копии.</div></div></div><footer class="editor-actions"><button class="btn danger hidden" id="deleteBtn" type="button">Удалить</button><div class="right"><button class="btn" id="cancelBtn" type="button">Отмена</button><button class="btn primary" id="saveBtn" type="button">Сохранить</button></div></footer></section></div><div class="toast" id="toast"></div>
-<script src="notebook.js"></script><script>if('serviceWorker'in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));</script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1420">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>CloudPath — учебный кабинет</title>
+  <link rel="icon" href="cloudpath-icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Перейти к содержанию</a>
+
+<nav class="toc" aria-label="Навигация CloudPath">
+  <div class="brand">CloudPath</div>
+  <a href="index.html" class="active">⌂ Учебный кабинет</a>
+  <a href="glossary.html">Глоссарий (чайник)</a>
+  <a href="semesters.html">Семестры 1–7</a>
+  <a href="specdeep.html">Спец. курсы подробно</a>
+  <a href="languages.html">Языки</a>
+  <a href="syntax.html">Синтаксис языков</a>
+  <a href="courses.html">Бесплатные курсы</a>
+  <a href="english.html">Английский</a>
+  <a href="ai.html">Работа с ИИ</a>
+  <a href="tools.html">Приложения</a>
+  <a href="setup.html">Установка с нуля</a>
+  <a href="certs.html">Сертификаты</a>
+  <a href="finance.html">Финансы / RKM</a>
+  <a href="housing.html">Жильё</a>
+  <a href="parttime.html">Подработка</a>
+  <a href="legal.html">Легализация пребывания</a>
+  <a href="faq.html">FAQ — если что-то пошло не так</a>
+  <a href="resources.html">Ресурсы</a>
+  <a href="university.html">ABC студента DSW Ideis</a>
+</nav>
+
+<main class="main" id="main-content">
+  <header class="hero">
+    <div class="eyebrow">DSW Wrocław · Informatyka · 1 semestr</div>
+    <h1>Учёба, расписание и конспекты.</h1>
+    <p>Личный учебный кабинет CloudPath: расписание DSW, записи по предметам и короткий список вещей на пары.</p>
+    <div class="quick-links">
+      <a class="button primary" href="#schedule">Расписание</a>
+      <a class="button" href="#notes">Конспекты</a>
+      <a class="button" href="#bag">Что брать</a>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section id="schedule">
+      <div class="section-head">
+        <div><div class="kicker">DSW · 2026/2027 Zima</div><h2>Расписание</h2></div>
+        <a class="button small" href="https://harmonogramy.ideis.pl/Plany/PlanyTokow/1469" target="_blank" rel="noopener">Открыть официальный полный план ↗</a>
+      </div>
+      <div class="notice"><b>Важно:</b> ниже сохранены занятия, которые уже подтверждены в найденном плане для Informatyka S. Официальный план может меняться — ссылка справа ведёт на актуальную версию DSW.</div>
+      <div id="scheduleList" class="schedule-list"></div>
+    </section>
+
+    <section id="notes">
+      <div class="section-head">
+        <div><div class="kicker">Локально в браузере</div><h2>Конспекты</h2></div>
+        <div class="toolbar">
+          <button class="button small" id="importBtn" type="button">Импорт</button>
+          <button class="button small" id="exportBtn" type="button">Экспорт</button>
+          <button class="button primary small" id="newNote" type="button">＋ Новый конспект</button>
+          <input id="importFile" type="file" accept="application/json" hidden>
+        </div>
+      </div>
+
+      <div class="notes-controls">
+        <input id="search" class="search" type="search" placeholder="Поиск по конспектам, предметам и тегам…">
+        <select id="subjectFilter" class="select" aria-label="Фильтр по предмету"></select>
+      </div>
+      <div class="note-stats">
+        <div><b id="noteCount">0</b><span>конспектов</span></div>
+        <div><b id="subjectCount">0</b><span>предметов</span></div>
+        <div><b id="recentCount">0</b><span>обновлено за 7 дней</span></div>
+      </div>
+      <div id="notesList" class="notes-list"></div>
+    </section>
+
+    <section id="bag">
+      <div class="section-head">
+        <div><div class="kicker">На обычный учебный день</div><h2>Что брать с собой</h2></div>
+      </div>
+      <div class="bag-grid">
+        <article><span>💻</span><h3>Техника</h3><p>Ноутбук, зарядка для ноутбука, телефон, power bank, наушники.</p></article>
+        <article><span>✍️</span><h3>Для записей</h3><p>Ручка и небольшой блокнот — на случай, если ноутбук не нужен или сядет батарея.</p></article>
+        <article><span>🪪</span><h3>Документы</h3><p>Документ удостоверения личности и студенческий, когда его получишь.</p></article>
+        <article><span>🥤</span><h3>На длинный день</h3><p>Вода и перекус. Особенно когда пары идут почти подряд до вечера.</p></article>
+        <article><span>📍</span><h3>Перед выходом</h3><p>Сохрани скрин расписания и номера аудиторий. S55 = Strzegomska 55, S47 = Strzegomska 47.</p></article>
+        <article><span>🌐</span><h3>Distance learning</h3><p>Для онлайн-дней проверь Microsoft Teams, календарь, Outlook и Moodle заранее.</p></article>
+      </div>
+    </section>
+  </div>
+
+  <footer>CloudPath · личный учебный кабинет</footer>
+</main>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <section class="editor" role="dialog" aria-modal="true" aria-labelledby="editorTitle">
+    <header class="editor-head"><strong id="editorTitle">Новый конспект</strong><button class="button small" id="closeEditor" type="button">✕</button></header>
+    <div class="editor-body">
+      <div class="form-row"><label>Название<input id="noteTitle" placeholder="Например: Матрицы и определители"></label><label>Дата<input id="noteDate" type="date"></label></div>
+      <div class="form-row"><label>Предмет<select id="noteSubject"></select></label><label>Теги<input id="noteTags" placeholder="экзамен, важное, повторить"></label></div>
+      <label>Конспект<textarea id="noteContent" placeholder="Пиши сюда конспект: определения, формулы, код, ссылки, вопросы…"></textarea></label>
+      <div class="hint">Ctrl/Cmd + S — сохранить. Конспекты хранятся в localStorage этого браузера; экспортируй JSON для резервной копии.</div>
+    </div>
+    <footer class="editor-actions"><button class="button danger" id="deleteBtn" type="button" hidden>Удалить</button><div><button class="button" id="cancelBtn" type="button">Отмена</button><button class="button primary" id="saveBtn" type="button">Сохранить</button></div></footer>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="dashboard.js"></script>
+<script>if('serviceWorker'in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));</script>
+</body>
+</html>

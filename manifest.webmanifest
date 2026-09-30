@@ -1,7 +1,7 @@
 {
-  "name": "CloudPath — учебный блокнот",
+  "name": "CloudPath — путь в Cloud Computing",
   "short_name": "CloudPath",
-  "description": "Личный учебный блокнот для конспектов, предметов и подготовки к занятиям.",
+  "description": "Практический справочник и учебный план студента DSW.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0B1420",
