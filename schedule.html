@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1420">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>Расписание — CloudPath</title>
+  <link rel="icon" href="cloudpath-icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Перейти к содержанию</a>
+<nav class="toc" aria-label="Навигация CloudPath">
+  <div class="brand">CloudPath</div>
+  <a href="index.html">⌂ Учебный кабинет</a>
+  <a href="schedule.html" class="active">🗓 Расписание</a>
+  <a href="glossary.html">Глоссарий (чайник)</a>
+  <a href="semesters.html">Семестры 1–7</a>
+  <a href="specdeep.html">Спец. курсы подробно</a>
+  <a href="languages.html">Языки</a>
+  <a href="syntax.html">Синтаксис языков</a>
+  <a href="courses.html">Бесплатные курсы</a>
+  <a href="english.html">Английский</a>
+  <a href="ai.html">Работа с ИИ</a>
+  <a href="tools.html">Приложения</a>
+  <a href="setup.html">Установка с нуля</a>
+  <a href="certs.html">Сертификаты</a>
+  <a href="finance.html">Финансы / RKM</a>
+  <a href="housing.html">Жильё</a>
+  <a href="parttime.html">Подработка</a>
+  <a href="legal.html">Легализация пребывания</a>
+  <a href="faq.html">FAQ — если что-то пошло не так</a>
+  <a href="resources.html">Ресурсы</a>
+  <a href="university.html">ABC студента DSW Ideis</a>
+</nav>
+<main class="main" id="main-content">
+  <header class="hero">
+    <div class="eyebrow">DSW Wrocław · Informatyka · Ćw1S</div>
+    <h1>Расписание.</h1>
+    <p>Твой учебный план для группы 1: лекции WykS и занятия Ćw1S. Данные перенесены из актуального PDF DSW от 2 октября 2026.</p>
+    <div class="quick-links">
+      <a class="button primary" href="#scheduleList">К занятиям</a>
+      <a class="button" href="https://harmonogramy.ideis.pl/" target="_blank" rel="noopener">Официальный план ↗</a>
+    </div>
+  </header>
+  <div class="wrap">
+    <section>
+      <div class="section-head"><div><div class="kicker">1–28 октября 2026</div><h2>Группа Ćw1S</h2></div></div>
+      <div class="notice"><b>Важно:</b> показываются WykS и Ćw1S. Строки Ćw2S скрыты. «Egzamin» и «Zaliczenie ocena» — форма итоговой аттестации предмета, а не экзамен в этот день.</div>
+      <div id="scheduleList" class="schedule-list"></div>
+    </section>
+  </div>
+  <footer>CloudPath · расписание DSW</footer>
+</main>
+<script src="schedule.js"></script>
+<script>if('serviceWorker'in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));</script>
+</body>
+</html>

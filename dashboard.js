@@ -14,11 +14,53 @@
       ['12:30–14:00','Programowanie w języku Python 1','Wykład','S55 111','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
       ['14:15–15:45','Fizyka 1','Wykład','S55 111','mgr Artur Rokosa','Egzamin']
     ]},
+    {date:'2026-10-03',label:'Суббота · 3 октября',free:true,items:[]},
+    {date:'2026-10-04',label:'Воскресенье · 4 октября',free:true,items:[]},
+    {date:'2026-10-05',label:'Понедельник · 5 октября',items:[
+      ['10:45–12:15','Podstawy informatyki','Wykład','S55 111','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['12:30–14:00','Algebra liniowa z geometrią analityczną','Wykład','S55 111','mgr Janusz Grabski','Egzamin'],
+      ['14:15–15:45','Analiza matematyczna 1','Wykład','S55 111','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['16:00–17:30','Zajęcia z tutorem','Ćwiczenia · Ćw1S','S55 112','mgr inż. Karol Kaluga','Nie dotyczy']
+    ]},
+    {date:'2026-10-06',label:'Вторник · 6 октября',items:[
+      ['12:30–14:00','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena']
+    ]},
     {date:'2026-10-07',label:'Среда · 7 октября',items:[
       ['10:45–12:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
       ['12:30–14:00','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 216','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
       ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 216','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
-      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 212','mgr Janusz Grabski','Zaliczenie ocena']
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-10-08',label:'Четверг · 8 октября',free:true,items:[]},
+    {date:'2026-10-09',label:'Пятница · 9 октября · онлайн',remote:true,items:[
+      ['12:30–14:00','Analiza matematyczna 1','Wykład','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Wykład','Distance learning','mgr Janusz Grabski','Egzamin'],
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Wykład','Distance learning','mgr Janusz Grabski','Egzamin'],
+      ['17:45–19:15','Fizyka 1','Wykład','Distance learning','mgr Artur Rokosa','Egzamin']
+    ]},
+    {date:'2026-10-10',label:'Суббота · 10 октября',free:true,items:[]},
+    {date:'2026-10-11',label:'Воскресенье · 11 октября',free:true,items:[]},
+    {date:'2026-10-12',label:'Понедельник · 12 октября · онлайн',remote:true,items:[
+      ['09:00–10:30','Podstawy informatyki','Wykład','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['10:45–12:15','Podstawy informatyki','Wykład','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['12:30–14:00','Etyka inżyniera i prawo autorskie','Wykład','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena'],
+      ['14:15–15:45','Etyka inżyniera i prawo autorskie','Wykład','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena']
+    ]},
+    {date:'2026-10-13',label:'Вторник · 13 октября',items:[
+      ['12:30–14:00','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-10-14',label:'Среда · 14 октября',items:[
+      ['09:00–10:30','Fizyka 1','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['10:45–12:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['12:30–14:00','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','dr Ewa Gurbiel','Zaliczenie ocena'],
+      ['14:15–15:45','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','dr Ewa Gurbiel','Zaliczenie ocena']
+    ]},
+    {date:'2026-10-15',label:'Четверг · 15 октября',items:[
+      ['09:00–10:30','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','S47 119','mgr Magdalena Kowańdy','Zaliczenie'],
+      ['10:45–12:15','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','S47 119','mgr Magdalena Kowańdy','Zaliczenie']
     ]},
     {date:'2026-10-16',label:'Пятница · 16 октября · онлайн',remote:true,items:[
       ['12:30–14:00','Algorytmy i struktury danych','Wykład','Distance learning','dr Ewa Gurbiel','Egzamin'],
@@ -39,7 +81,7 @@
   function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1500)}
 
   function renderSchedule(){
-    $('#scheduleList').innerHTML=schedule.map(day=>`<article class="day-card"><header class="day-head"><h3>${esc(day.label)}</h3><span>${day.remote?'Microsoft Teams / Moodle':'DSW Wrocław'}</span></header>${day.items.map(i=>`<div class="lesson ${day.remote?'remote':''}"><div class="time">${esc(i[0])}</div><div class="subject">${esc(i[1])}<small>${esc(i[5])} — это форма итоговой аттестации, не экзамен в этот день</small></div><div class="type">${esc(i[2])}</div><div class="room">${esc(i[3])}</div><div class="teacher">${esc(i[4])}</div></div>`).join('')}</article>`).join('');
+    $('#scheduleList').innerHTML=schedule.map(day=>`<article class="day-card ${day.free?'free-day':''}"><header class="day-head"><h3>${esc(day.label)}</h3><span>${day.free?'Свободный день':day.remote?'Microsoft Teams / Moodle':'DSW Wrocław'}</span></header>${day.free?'<div class="empty">Занятий по расписанию нет.</div>':day.items.map(i=>`<div class="lesson ${day.remote?'remote':''}"><div class="time">${esc(i[0])}</div><div class="subject">${esc(i[1])}<small>${esc(i[5])} — это форма итоговой аттестации, не экзамен в этот день</small></div><div class="type">${esc(i[2])}</div><div class="room">${esc(i[3])}</div><div class="teacher">${esc(i[4])}</div></div>`).join('')}</article>`).join('');
   }
   function renderNotes(){
     const q=$('#search').value.trim().toLowerCase(), f=$('#subjectFilter').value;
