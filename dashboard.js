@@ -1,18 +1,12 @@
 (() => {
   const KEY='cloudpath-notes-v2';
-  const BUILTIN_KEY='cloudpath-builtins-v2';
   const subjects=[
     ['analysis','∑','Analiza matematyczna I'],['algebra','A','Algebra liniowa z geometrią analityczną'],['python','</>','Programowanie w języku Python 1'],['algorithms','{}','Algorytmy i struktury danych'],['physics','φ','Fizyka 1'],['intro','01','Podstawy informatyki'],['ethics','§','Etyka inżyniera i prawo autorskie'],['future','↗','Kompetencje przyszłości I'],['other','·','Inne']
   ];
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-  let notes=load(); let editingId=null;
+  let notes=load(), editingId=null;
 
-  function load(){
-    for(const k of [KEY,'cloudpath-notes-v1']){
-      try{const x=JSON.parse(localStorage.getItem(k));if(Array.isArray(x)&&x.length)return x}catch{}
-    }
-    return [];
-  }
+  function load(){for(const k of [KEY,'cloudpath-notes-v1']){try{const x=JSON.parse(localStorage.getItem(k));if(Array.isArray(x)&&x.length)return x}catch{}}return []}
   function save(){localStorage.setItem(KEY,JSON.stringify(notes))}
   function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
   function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
@@ -24,375 +18,98 @@
 
   const builtins=[
     {
-      id:'builtin-python-full-v2',title:'Python — полный конспект с нуля',subject:'python',date:'2026-10-03',tags:['python','база','шпаргалка'],updated:Date.now(),
-      content:`PYTHON — ПОЛНЫЙ КОНСПЕКТ С НУЛЯ
-
-1. База
-Python выполняет код сверху вниз. Отступы — часть синтаксиса.
-
-Переменные и типы:
-x = 10          # int
-y = 3.14        # float
-name = "Herman" # str
-ok = True       # bool
-value = None
-
-Проверка типа: type(x)
-Преобразование: int(), float(), str(), bool()
-
-2. Ввод и вывод
-print("Привет")
-name = input("Имя: ")
-age = int(input("Возраст: "))
-print(f"Привет, {name}. Тебе {age}")
-
-3. Операторы
-+ - * / // % **
-== != > < >= <=
-and or not
-
-4. Условия
-if age >= 18:
-    print("18+")
-elif age >= 16:
-    print("16+")
-else:
-    print("младше")
-
-5. Строки
-s = "Python"
-s[0], s[-1], s[1:4]
-len(s)
-s.lower(), s.upper(), s.strip(), s.replace("Py","My"), s.split()
-"-".join(["a","b"])
-
-6. Списки list
-nums = [10,20,30]
-nums.append(40)
-nums.insert(1,15)
-nums.remove(20)
-nums.pop()
-nums.sort()
-nums.reverse()
-nums[1:3]
-
-7. Кортеж tuple
-point=(3,4)
-Похож на список, но неизменяемый.
-
-8. Множество set
-s={1,2,3}
-s.add(4)
-Уникальные элементы. Проверка x in s обычно быстрая.
-Операции: a|b, a&b, a-b.
-
-9. Словарь dict
-user={"name":"Herman","age":19}
-user["name"]
-user.get("city","нет")
-user["city"]="Wrocław"
-for k,v in user.items():
-    print(k,v)
-
-10. for
-for i in range(5):
-    print(i)
-for i,item in enumerate(nums):
-    print(i,item)
-
-11. while
-x=0
-while x<5:
-    print(x)
-    x+=1
-break — выйти; continue — следующая итерация.
-
-12. Функции
-def add(a,b):
-    return a+b
-
-def hello(name="мир"):
-    print(f"Привет, {name}")
-
-13. Comprehensions
-squares=[x*x for x in range(10)]
-evens=[x for x in range(20) if x%2==0]
-d={x:x*x for x in range(5)}
-
-14. Полезные функции
-len, sum, min, max, sorted, range, enumerate, zip, any, all, round, abs.
-
-15. Ошибки
-try:
-    x=int(input())
-except ValueError:
-    print("Не число")
-finally:
-    print("готово")
-
-16. Файлы
-with open("data.txt","r",encoding="utf-8") as f:
-    text=f.read()
-with open("data.txt","w",encoding="utf-8") as f:
-    f.write("Hello")
-
-17. Модули
-import math
-print(math.sqrt(25))
-from math import pi
-
-18. JSON
-import json
-text=json.dumps({"a":1},ensure_ascii=False)
-data=json.loads(text)
-
-19. Классы
-class Student:
-    def __init__(self,name):
-        self.name=name
-    def hello(self):
-        return f"Привет, {self.name}"
-
-s=Student("Herman")
-
-20. Сортировка по ключу
-students.sort(key=lambda x:x["score"],reverse=True)
-
-21. Распаковка
-a,b=10,20
-a,b=b,a
-first,*middle,last=[1,2,3,4]
-
-22. *args и **kwargs
-def f(*args,**kwargs):
-    print(args,kwargs)
-
-23. Генераторы
-def count(n):
-    for i in range(n):
-        yield i
-
-24. Главный блок
-if __name__ == "__main__":
-    main()
-
-25. Частые ошибки
-= — присваивание, == — сравнение.
-input() возвращает str.
-Индексы начинаются с 0.
-Не забывать двоеточие и отступы.
-Не называть переменные list, str, sum.
-
-Для первого семестра главное: переменные, if, for/while, функции, строки, list/dict/set, файлы и исключения.`
+      id:'builtin-python-full-v2',builtin:true,icon:'🐍',title:'Python — полный конспект с нуля',subject:'python',date:'2026-10-03',tags:['python','база','шпаргалка'],updated:Date.now(),
+      summary:'От переменных и if до функций, коллекций, файлов, JSON и классов.',
+      topics:['Переменные','if / elif / else','for / while','Функции','list / dict / set','Файлы','Ошибки','ООП'],
+      content:'Python: переменные, типы, ввод/вывод, операторы, условия, строки, списки, tuple, set, dict, циклы, функции, comprehensions, исключения, файлы, модули, JSON, классы, сортировка, распаковка, генераторы.',
+      visual:[
+        {icon:'①',title:'Переменные и типы',text:'Переменная — имя для значения. Главные типы первого семестра:',chips:['int · 10','float · 3.14','str · "text"','bool · True','None'],code:'x = 10\nname = "Herman"\nok = True\nprint(type(x))'},
+        {icon:'②',title:'Условия',text:'Код выбирает ветку по условию. После if / elif / else ставится двоеточие, тело идёт с отступом.',code:'if age >= 18:\n    print("18+")\nelif age >= 16:\n    print("16+")\nelse:\n    print("младше")'},
+        {icon:'③',title:'Циклы',text:'for — когда перебираем элементы или диапазон. while — пока условие истинно.',code:'for i in range(5):\n    print(i)\n\nx = 0\nwhile x < 5:\n    x += 1'},
+        {icon:'④',title:'Функции',text:'Функция упаковывает повторяемую логику. return возвращает результат.',code:'def add(a, b):\n    return a + b\n\nresult = add(2, 3)'},
+        {icon:'⑤',title:'Коллекции',text:'Выбирай структуру под задачу.',grid:[['list','[1, 2, 3]','порядок + индексы'],['tuple','(1, 2)','фиксированные данные'],['set','{1, 2}','уникальность'],['dict','{"name":"Herman"}','ключ → значение']]},
+        {icon:'⑥',title:'Файлы и ошибки',text:'with сам закрывает файл; try/except позволяет обработать ошибку без падения программы.',code:'try:\n    with open("data.txt", encoding="utf-8") as f:\n        text = f.read()\nexcept FileNotFoundError:\n    print("Файл не найден")'},
+        {icon:'⑦',title:'Классы',text:'Класс — шаблон объектов. __init__ задаёт начальное состояние, self — текущий объект.',code:'class Student:\n    def __init__(self, name):\n        self.name = name\n\nstudent = Student("Herman")'},
+        {icon:'✓',title:'Что выучить первым',text:'Переменные → условия → циклы → функции → строки → list/dict/set → файлы → исключения.',accent:true}
+      ]
     },
     {
-      id:'builtin-data-structures-v2',title:'Структуры данных — полный базовый конспект',subject:'algorithms',date:'2026-10-03',tags:['структуры данных','алгоритмы','Big O'],updated:Date.now(),
-      content:`СТРУКТУРЫ ДАННЫХ — БАЗА
-
-Структура данных — способ организовать данные так, чтобы нужные операции были удобными и быстрыми.
-
-1. Big O
-O(1) — постоянное время.
-O(log n) — логарифмическое.
-O(n) — линейное.
-O(n log n) — хорошие сортировки.
-O(n²) — часто два вложенных цикла.
-
-2. Массив / Python list
-Доступ по индексу O(1).
-append — амортизированно O(1).
-Поиск значения O(n).
-Вставка/удаление в середине O(n).
-
-3. Связный список
-Узлы хранят значение и ссылку next; в двусвязном ещё prev.
-Вставка после известного узла O(1), доступ к i-му элементу O(n).
-
-4. Стек
-LIFO: последний вошёл — первый вышел.
-Python:
-stack=[]
-stack.append(x)
-x=stack.pop()
-
-5. Очередь
-FIFO: первый вошёл — первый вышел.
-from collections import deque
-q=deque()
-q.append(x)
-x=q.popleft()
-
-6. Deque
-Быстро добавляет/удаляет с обоих концов: append, appendleft, pop, popleft.
-
-7. Set
-Хранит уникальные элементы. Проверка x in set в среднем O(1).
-
-8. Dict / хеш-таблица
-Ключ -> значение. Получение, добавление, удаление в среднем O(1).
-Коллизия — разные ключи попали в одну область хеша.
-
-9. Дерево
-root — корень, parent — родитель, child — ребёнок, leaf — лист, subtree — поддерево.
-
-10. Бинарное дерево
-У узла максимум два ребёнка.
-
-11. BST
-Слева значения меньше, справа больше.
-В сбалансированном дереве поиск около O(log n), в вырожденном O(n).
-
-12. Обходы
-DFS: preorder, inorder, postorder.
-BFS: по уровням, обычно через очередь.
-
-13. Heap
-Min-heap быстро даёт минимум.
-Минимум O(1), push/pop O(log n).
-Python: heapq.heappush, heapq.heappop.
-
-14. Граф
-Вершины + рёбра. Бывает ориентированный/неориентированный, взвешенный/невзвешенный.
-Список смежности:
-graph={"A":["B","C"],"B":["A"]}
-
-15. DFS и BFS
-DFS — в глубину, стек/рекурсия.
-BFS — слоями, очередь. В невзвешенном графе BFS находит кратчайший путь по числу рёбер.
-
-16. Приоритетная очередь
-Извлекается элемент с лучшим приоритетом. Обычно реализуется heap.
-
-17. Trie
-Префиксное дерево для строк, поиска по префиксу и автодополнения.
-
-18. DSU / Union-Find
-Операции find и union. Проверяет, находятся ли элементы в одной компоненте.
-
-Как выбирать:
-индекс -> list
-уникальность / быстрый in -> set
-ключ-значение -> dict
-LIFO -> stack
-FIFO -> deque
-минимум/максимум -> heap
-иерархия -> tree
-связи -> graph
-
-Главная мысль: лучшей структуры вообще нет — структура выбирается под операции.`
+      id:'builtin-data-structures-v2',builtin:true,icon:'🧱',title:'Структуры данных — полный базовый конспект',subject:'algorithms',date:'2026-10-03',tags:['структуры данных','алгоритмы','Big O'],updated:Date.now(),
+      summary:'Как хранить данные и какую структуру выбирать под разные операции.',
+      topics:['Big O','Array / list','Stack','Queue','Hash table','Tree','Heap','Graph'],
+      content:'Структуры данных: Big O, массивы, связные списки, стек, очередь, deque, set, dict, дерево, BST, heap, граф, DFS, BFS, trie, DSU.',
+      visual:[
+        {icon:'⏱',title:'Big O — скорость роста',text:'Это не секунды, а то, как растёт число операций при увеличении n.',scale:[['O(1)','очень быстро'],['O(log n)','быстро'],['O(n)','линейно'],['O(n log n)','нормально для сортировки'],['O(n²)','становится тяжело']]},
+        {icon:'▦',title:'Массив / Python list',text:'Быстрый доступ по индексу, но вставка в середину требует сдвига.',grid:[['arr[i]','O(1)','доступ'],['append','≈ O(1)','в конец'],['x in arr','O(n)','поиск'],['insert','O(n)','середина']]},
+        {icon:'⇩',title:'Stack — стек',text:'LIFO: последний вошёл — первый вышел.',diagram:['A','B','C','↓ pop C'],code:'stack = []\nstack.append("A")\nstack.append("B")\nstack.pop()'},
+        {icon:'→',title:'Queue — очередь',text:'FIFO: первый вошёл — первый вышел.',diagram:['A','B','C','→ выходит A'],code:'from collections import deque\nq = deque()\nq.append("A")\nq.popleft()'},
+        {icon:'#',title:'Hash table / dict / set',text:'Хеш даёт быстрый доступ по ключу. В среднем поиск, добавление и удаление — O(1).',code:'user = {"name": "Herman", "age": 19}\nprint(user["name"])\n\nseen = {1, 2, 3}\nprint(2 in seen)'},
+        {icon:'🌳',title:'Дерево',text:'Иерархия: root → children → leaves.',tree:['root','├─ left','│  ├─ leaf','│  └─ leaf','└─ right']},
+        {icon:'△',title:'Heap',text:'Структура для быстрого минимума/максимума. push/pop — O(log n).',code:'import heapq\nh = []\nheapq.heappush(h, 5)\nheapq.heappush(h, 2)\nprint(heapq.heappop(h))  # 2'},
+        {icon:'◉',title:'Граф',text:'Вершины + рёбра. BFS идёт слоями, DFS — в глубину.',diagram:['A → B','A → C','B → D','C → D'],chips:['BFS = очередь','DFS = стек / рекурсия']},
+        {icon:'✓',title:'Как выбирать',grid:[['Нужен индекс','list',''],['Уникальность','set',''],['Ключ → значение','dict',''],['LIFO','stack',''],['FIFO','deque',''],['Минимум','heap',''],['Иерархия','tree',''],['Связи','graph','']],accent:true}
+      ]
     },
     {
-      id:'builtin-vectors-v2',title:'Векторы — с нуля: формулы и примеры',subject:'algebra',date:'2026-10-03',tags:['векторы','алгебра','формулы'],updated:Date.now(),
-      content:`ВЕКТОРЫ — С НУЛЯ
-
-Вектор — стрелка: у него есть длина, направление (kierunek) и ориентированность/сторона направления (zwrot).
-
-1. Координаты
-a=(x,y), в 3D a=(x,y,z).
-Например (3,4): 3 вправо по x и 4 вверх по y.
-
-2. Длина
-|a|=sqrt(x²+y²)
-В 3D: sqrt(x²+y²+z²).
-Пример: |(3,4)|=5.
-
-3. Нулевой вектор
-(0,0). Длина 0.
-
-4. Сложение
-(x1,y1)+(x2,y2)=(x1+x2,y1+y2)
-(2,1)+(3,4)=(5,5)
-
-5. Вычитание
-(5,4)-(2,1)=(3,3)
-
-6. Умножение на число
-k(x,y)=(kx,ky)
-2(3,4)=(6,8)
--(3,4)=(-3,-4)
-
-7. Вектор между точками
-A=(x1,y1), B=(x2,y2)
-AB=(x2-x1,y2-y1)
-
-8. Единичный вектор
-Имеет длину 1.
-a_hat=a/|a|
-Для (3,4): (3/5,4/5).
-
-9. Скалярное произведение
-a·b=x1*x2+y1*y2
-В 3D +z1*z2.
-
-10. Угол
-a·b=|a||b|cos(theta)
-cos(theta)=(a·b)/(|a||b|)
-
-11. Перпендикулярность
-Если a·b=0, ненулевые векторы перпендикулярны.
-(1,2)·(2,-1)=2-2=0.
-
-12. Параллельность
-b=k*a.
-Например (2,4)=2(1,2).
-
-13. Линейная комбинация
-v=c1*a+c2*b+...
-
-14. Линейная зависимость
-Один вектор можно выразить через другие. В 2D два ненулевых вектора зависимы, если параллельны.
-
-15. Базис
-Стандартный базис 2D:
-e1=(1,0), e2=(0,1)
-(x,y)=x*e1+y*e2.
-
-16. Проекция
-proj_b(a)=((a·b)/|b|²)b
-
-17. Векторное произведение в 3D
-a×b перпендикулярно обоим векторам.
-|a×b|=|a||b|sin(theta).
-
-Что надо уметь сейчас:
-читать координаты; находить длину; складывать/вычитать; умножать на число; строить AB; считать скалярное произведение; проверять перпендикулярность; находить угол; нормировать.
-
-Мини-примеры:
-|(6,8)|=10
-(2,5)+(3,-1)=(5,4)
-(1,2) и (2,-1) перпендикулярны.`
+      id:'builtin-vectors-v2',builtin:true,icon:'↗',title:'Векторы — с нуля: формулы и примеры',subject:'algebra',date:'2026-10-03',tags:['векторы','алгебра','формулы'],updated:Date.now(),
+      summary:'Стрелка, координаты, длина, сложение, скалярное произведение и угол.',
+      topics:['Координаты','Длина','Сложение','Умножение','Скалярное произведение','Угол','Базис'],
+      content:'Векторы: координаты, длина, нулевой вектор, сложение, вычитание, умножение на число, AB, единичный вектор, скалярное произведение, угол, перпендикулярность, параллельность, базис, проекция.',
+      visual:[
+        {icon:'↗',title:'Вектор = стрелка',text:'У вектора есть длина, kierunek (направление) и zwrot (куда именно по этому направлению).',vector:{x:3,y:4,label:'a = (3, 4)'}},
+        {icon:'📐',title:'Длина вектора',text:'Это обычный Пифагор.',formula:'|a| = √(x² + y²)',example:'a = (3,4) → |a| = √(9+16) = 5'},
+        {icon:'＋',title:'Сложение',formula:'(x₁,y₁) + (x₂,y₂) = (x₁+x₂, y₁+y₂)',example:'(2,1) + (3,4) = (5,5)',vectorPair:true},
+        {icon:'×',title:'Умножение на число',formula:'k(x,y) = (kx, ky)',example:'2(3,4) = (6,8)   ·   −(3,4) = (−3,−4)'},
+        {icon:'AB',title:'Вектор между точками',formula:'AB = (x₂−x₁, y₂−y₁)',example:'A=(1,2), B=(5,5) → AB=(4,3)'},
+        {icon:'•',title:'Скалярное произведение',formula:'a·b = x₁x₂ + y₁y₂',example:'(1,2)·(2,−1) = 2−2 = 0'},
+        {icon:'90°',title:'Перпендикулярность',text:'Если ненулевые векторы дают a·b = 0, они перпендикулярны.',formula:'a·b = 0  ⇒  a ⟂ b'},
+        {icon:'θ',title:'Угол между векторами',formula:'cos θ = (a·b) / (|a||b|)',text:'Сначала считаем скалярное произведение и длины, потом берём arccos.'},
+        {icon:'e',title:'Базис',text:'Стандартный базис плоскости состоит из двух единичных направлений.',chips:['e₁ = (1,0)','e₂ = (0,1)','(x,y)=x·e₁+y·e₂']},
+        {icon:'✓',title:'Минимум на сейчас',text:'Уметь: читать координаты → находить длину → складывать/вычитать → умножать на число → считать a·b → проверять перпендикулярность.',accent:true}
+      ]
     }
   ];
 
   function ensureBuiltins(){
-    const ids=new Set(notes.map(n=>n.id));
-    const missing=builtins.filter(n=>!ids.has(n.id));
-    if(missing.length){notes=[...missing,...notes];save()}
-    try{localStorage.setItem(BUILTIN_KEY,'1')}catch{}
+    const byId=new Map(notes.map(n=>[n.id,n]));
+    builtins.forEach(b=>{const old=byId.get(b.id);if(old)Object.assign(old,b);else notes.unshift({...b})});
+    save();
   }
 
+  function previewTopics(n){return (n.topics||[]).slice(0,5).map(t=>`<span class="topic-chip">${esc(t)}</span>`).join('')}
   function renderNotes(){
     const q=$('#search').value.trim().toLowerCase(), f=$('#subjectFilter').value;
-    const filtered=notes.filter(n=>(f==='all'||n.subject===f)&&(!q||[n.title,n.content,(n.tags||[]).join(' '),subjectName(n.subject)].join(' ').toLowerCase().includes(q))).sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.updated||0)-(a.updated||0));
-    $('#noteCount').textContent=notes.length;
-    $('#subjectCount').textContent=new Set(notes.map(n=>n.subject)).size;
-    $('#recentCount').textContent=notes.filter(n=>Date.now()-(n.updated||0)<7*864e5).length;
-    $('#notesList').innerHTML=filtered.length?filtered.map(n=>`<article class="note-card" data-id="${esc(n.id)}"><div class="note-date">${formatDate(n.date)}</div><div><h3>${esc(n.title)}</h3><p>${esc((n.content||'').replace(/\n+/g,' ').slice(0,180))}</p></div><div class="tags"><span class="tag">${esc(subjectIcon(n.subject))} ${esc(subjectName(n.subject))}</span>${(n.tags||[]).slice(0,2).map(t=>`<span class="tag">#${esc(t)}</span>`).join('')}</div></article>`).join(''):'<div class="empty">Пока нет конспектов.</div>';
-    $$('.note-card').forEach(el=>el.onclick=()=>openEditor(el.dataset.id));
+    const filtered=notes.filter(n=>(f==='all'||n.subject===f)&&(!q||[n.title,n.content,(n.tags||[]).join(' '),subjectName(n.subject),(n.topics||[]).join(' ')].join(' ').toLowerCase().includes(q))).sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.updated||0)-(a.updated||0));
+    $('#noteCount').textContent=notes.length; $('#subjectCount').textContent=new Set(notes.map(n=>n.subject)).size; $('#recentCount').textContent=notes.filter(n=>Date.now()-(n.updated||0)<7*864e5).length;
+    $('#notesList').innerHTML=filtered.length?filtered.map(n=>n.builtin?`<article class="note-card visual-card" data-id="${esc(n.id)}"><div class="visual-icon">${esc(n.icon||'📘')}</div><div class="visual-main"><div class="note-date">${formatDate(n.date)}</div><h3>${esc(n.title)}</h3><p>${esc(n.summary||n.content||'')}</p><div class="topic-row">${previewTopics(n)}</div></div><div class="open-pill">Открыть →</div></article>`:`<article class="note-card" data-id="${esc(n.id)}"><div class="note-date">${formatDate(n.date)}</div><div><h3>${esc(n.title)}</h3><p>${esc((n.content||'').replace(/\n+/g,' ').slice(0,180))}</p></div><div class="tags"><span class="tag">${esc(subjectIcon(n.subject))} ${esc(subjectName(n.subject))}</span>${(n.tags||[]).slice(0,2).map(t=>`<span class="tag">#${esc(t)}</span>`).join('')}</div></article>`).join(''):'<div class="empty">Пока нет конспектов. Нажми «Новый конспект» и создай первую запись.</div>';
+    $$('.note-card').forEach(el=>el.onclick=()=>{const n=notes.find(x=>x.id===el.dataset.id);n?.builtin?openReader(n):openEditor(el.dataset.id)});
   }
 
-  function openEditor(id=null){
-    editingId=id;const n=id?notes.find(x=>x.id===id):null;
-    $('#editorTitle').textContent=n?'Редактировать конспект':'Новый конспект';
-    $('#noteTitle').value=n?.title||'';$('#noteDate').value=n?.date||today();$('#noteSubject').value=n?.subject||'algorithms';$('#noteTags').value=(n?.tags||[]).join(', ');$('#noteContent').value=n?.content||'';$('#deleteBtn').hidden=!n;
-    $('#modal').classList.add('open');$('#modal').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>$('#noteTitle').focus(),30)
+  function visualSection(s){
+    const chips=s.chips?`<div class="visual-chips">${s.chips.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:'';
+    const formula=s.formula?`<div class="formula-box">${esc(s.formula)}</div>`:'';
+    const example=s.example?`<div class="example-box"><b>Пример</b>${esc(s.example)}</div>`:'';
+    const code=s.code?`<pre class="code-box"><code>${esc(s.code)}</code></pre>`:'';
+    const grid=s.grid?`<div class="mini-grid">${s.grid.map(r=>`<div>${r.map((c,i)=>`<span class="g${i}">${esc(c)}</span>`).join('')}</div>`).join('')}</div>`:'';
+    const scale=s.scale?`<div class="complexity-scale">${s.scale.map((r,i)=>`<div><b>${esc(r[0])}</b><span>${esc(r[1])}</span><i style="--w:${20+i*17}%"></i></div>`).join('')}</div>`:'';
+    const diagram=s.diagram?`<div class="diagram-row">${s.diagram.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:'';
+    const tree=s.tree?`<pre class="tree-box">${esc(s.tree.join('\n'))}</pre>`:'';
+    const vector=s.vector?`<div class="vector-demo"><svg viewBox="0 0 260 150" aria-label="Вектор ${esc(s.vector.label)}"><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z"/></marker></defs><line x1="28" y1="122" x2="230" y2="122" class="axis"/><line x1="28" y1="122" x2="28" y2="20" class="axis"/><line x1="28" y1="122" x2="180" y2="42" class="vline" marker-end="url(#arrow)"/><text x="184" y="36">${esc(s.vector.label)}</text></svg></div>`:'';
+    const pair=s.vectorPair?`<div class="vector-pair"><span>(2,1)</span><b>+</b><span>(3,4)</span><b>=</b><span>(5,5)</span></div>`:'';
+    return `<section class="lesson-block ${s.accent?'accent-block':''}"><div class="lesson-num">${esc(s.icon||'•')}</div><div class="lesson-content"><h3>${esc(s.title)}</h3>${s.text?`<p>${esc(s.text)}</p>`:''}${chips}${formula}${example}${code}${grid}${scale}${diagram}${tree}${vector}${pair}</div></section>`;
   }
+
+  function ensureReader(){
+    if($('#readerModal'))return;
+    document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="readerModal" aria-hidden="true"><article class="reader"><header class="reader-head"><div><span id="readerSubject"></span><h2 id="readerTitle"></h2></div><button class="button small" id="closeReader" type="button">✕</button></header><div class="reader-body" id="readerBody"></div></article></div>`);
+    $('#closeReader').onclick=closeReader; $('#readerModal').onclick=e=>{if(e.target.id==='readerModal')closeReader()};
+  }
+  function openReader(n){ensureReader();$('#readerSubject').textContent=subjectName(n.subject);$('#readerTitle').textContent=n.title;$('#readerBody').innerHTML=`<div class="reader-intro"><div class="reader-bigicon">${esc(n.icon||'📘')}</div><div><p>${esc(n.summary||'')}</p><div class="topic-row">${previewTopics(n)}</div></div></div>${(n.visual||[]).map(visualSection).join('')}`;$('#readerModal').classList.add('open');$('#readerModal').setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+  function closeReader(){const m=$('#readerModal');if(!m)return;m.classList.remove('open');m.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+
+  function openEditor(id=null){editingId=id;const n=id?notes.find(x=>x.id===id):null;$('#editorTitle').textContent=n?'Редактировать конспект':'Новый конспект';$('#noteTitle').value=n?.title||'';$('#noteDate').value=n?.date||today();$('#noteSubject').value=n?.subject||'algorithms';$('#noteTags').value=(n?.tags||[]).join(', ');$('#noteContent').value=n?.content||'';$('#deleteBtn').hidden=!n;$('#modal').classList.add('open');$('#modal').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>$('#noteTitle').focus(),30)}
   function closeEditor(){$('#modal').classList.remove('open');$('#modal').setAttribute('aria-hidden','true');document.body.style.overflow='';editingId=null}
-  function persist(){
-    const title=$('#noteTitle').value.trim();if(!title){toast('Добавь название');return}
-    const obj={id:editingId||uid(),title,date:$('#noteDate').value||today(),subject:$('#noteSubject').value,tags:$('#noteTags').value.split(',').map(x=>x.trim().replace(/^#/,'')).filter(Boolean),content:$('#noteContent').value,updated:Date.now()};
-    notes=editingId?notes.map(n=>n.id===editingId?obj:n):[obj,...notes];save();closeEditor();renderNotes();toast('Конспект сохранён')
-  }
+  function persist(){const title=$('#noteTitle').value.trim();if(!title){toast('Добавь название');return}const obj={id:editingId||uid(),title,date:$('#noteDate').value||today(),subject:$('#noteSubject').value,tags:$('#noteTags').value.split(',').map(x=>x.trim().replace(/^#/,'')).filter(Boolean),content:$('#noteContent').value,updated:Date.now()};notes=editingId?notes.map(n=>n.id===editingId?obj:n):[obj,...notes];save();closeEditor();renderNotes();toast('Конспект сохранён')}
   function exportNotes(){const blob=new Blob([JSON.stringify({version:2,exported:new Date().toISOString(),notes},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`cloudpath-notes-${today()}.json`;a.click();URL.revokeObjectURL(a.href)}
   function importNotes(file){const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);const x=Array.isArray(d)?d:d.notes;if(!Array.isArray(x))throw 0;notes=x;ensureBuiltins();save();renderNotes();toast('Конспекты импортированы')}catch{toast('Не удалось прочитать файл')}};r.readAsText(file)}
 
@@ -401,11 +118,11 @@ a×b перпендикулярно обоим векторам.
     $('#subjectFilter').innerHTML='<option value="all">Все предметы</option>'+subjects.map(([id,,name])=>`<option value="${id}">${esc(name)}</option>`).join('');
     $('#noteSubject').innerHTML=subjects.map(([id,icon,name])=>`<option value="${id}">${esc(icon)} ${esc(name)}</option>`).join('');
     $('#newNote').onclick=()=>openEditor();$('#closeEditor').onclick=closeEditor;$('#cancelBtn').onclick=closeEditor;$('#saveBtn').onclick=persist;
-    $('#deleteBtn').onclick=()=>{if(editingId&&confirm('Удалить этот конспект?')){notes=notes.filter(n=>n.id!==editingId);save();closeEditor();renderNotes();toast('Конспект удалён')}};
+    $('#deleteBtn').onclick=()=>{if(editingId&&confirm('Удалить этот конспект?')){notes=notes.filter(n=>n.id!==editingId);save();closeEditor();renderNotes();toast('Удалено')}};
     $('#search').addEventListener('input',renderNotes);$('#subjectFilter').addEventListener('change',renderNotes);
     $('#exportBtn').onclick=exportNotes;$('#importBtn').onclick=()=>$('#importFile').click();$('#importFile').onchange=e=>e.target.files[0]&&importNotes(e.target.files[0]);
     $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeEditor()});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#modal').classList.contains('open'))closeEditor();if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'&&$('#modal').classList.contains('open')){e.preventDefault();persist()}});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEditor();closeReader()}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'&&$('#modal').classList.contains('open')){e.preventDefault();persist()}});
     renderNotes();
   });
 })();
