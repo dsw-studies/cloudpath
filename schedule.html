@@ -11,7 +11,17 @@
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-<a class="skip-link" href="#main-content">Перейти к содержанию</a>
+<a class="skip-link" href="#main-content"
+   data-i18n-ru="Перейти к содержанию"
+   data-i18n-pl="Przejdź do treści"
+   data-i18n-en="Skip to content">Перейти к содержанию</a>
+
+<div id="langSwitcher" role="group" aria-label="Язык страницы">
+  <button class="lang-btn" data-lang="ru" type="button">RU</button>
+  <button class="lang-btn" data-lang="pl" type="button">PL</button>
+  <button class="lang-btn" data-lang="en" type="button">EN</button>
+</div>
+
 <nav class="toc" aria-label="Навигация CloudPath">
   <div class="brand">CloudPath</div>
   <a href="index.html">⌂ Учебный кабинет</a>
@@ -35,26 +45,59 @@
   <a href="resources.html">Ресурсы</a>
   <a href="university.html">ABC студента DSW Ideis</a>
 </nav>
+
 <main class="main" id="main-content">
   <header class="hero">
     <div class="eyebrow">DSW Wrocław · Informatyka · Ćw1S</div>
-    <h1>Расписание.</h1>
-    <p>Твой учебный план для группы 1: лекции WykS и занятия Ćw1S. Данные перенесены из актуального PDF DSW от 2 октября 2026.</p>
+    <h1 data-i18n-ru="Расписание." data-i18n-pl="Plan zajęć." data-i18n-en="Schedule.">Расписание.</h1>
+    <p
+      data-i18n-ru="Твой учебный план для группы 1: лекции WykS и занятия Ćw1S. Данные перенесены из актуального PDF DSW от 2 октября 2026."
+      data-i18n-pl="Twój plan dla grupy 1: wykłady WykS i zajęcia Ćw1S. Dane przeniesiono z aktualnego PDF DSW z 2 października 2026."
+      data-i18n-en="Your timetable for group 1: WykS lectures and Ćw1S classes. The data was copied from the current DSW PDF dated October 2, 2026."
+    >Твой учебный план для группы 1: лекции WykS и занятия Ćw1S. Данные перенесены из актуального PDF DSW от 2 октября 2026.</p>
     <div class="quick-links">
-      <a class="button primary" href="#scheduleList">К занятиям</a>
-      <a class="button" href="https://harmonogramy.ideis.pl/" target="_blank" rel="noopener">Официальный план ↗</a>
+      <a class="button primary" href="#scheduleList"
+         data-i18n-ru="К занятиям"
+         data-i18n-pl="Do zajęć"
+         data-i18n-en="Go to classes">К занятиям</a>
+      <a class="button" href="https://harmonogramy.ideis.pl/" target="_blank" rel="noopener"
+         data-i18n-ru="Официальный план ↗"
+         data-i18n-pl="Oficjalny plan ↗"
+         data-i18n-en="Official timetable ↗">Официальный план ↗</a>
     </div>
   </header>
+
   <div class="wrap">
     <section>
-      <div class="section-head"><div><div class="kicker">1–28 октября 2026</div><h2>Группа Ćw1S</h2></div></div>
-      <div class="notice"><b>Важно:</b> показываются WykS и Ćw1S. Строки Ćw2S скрыты. «Egzamin» и «Zaliczenie ocena» — форма итоговой аттестации предмета, а не экзамен в этот день.</div>
+      <div class="section-head">
+        <div>
+          <div class="kicker"
+               data-i18n-ru="1–28 октября 2026"
+               data-i18n-pl="1–28 października 2026"
+               data-i18n-en="October 1–28, 2026">1–28 октября 2026</div>
+          <h2 data-i18n-ru="Группа Ćw1S" data-i18n-pl="Grupa Ćw1S" data-i18n-en="Group Ćw1S">Группа Ćw1S</h2>
+        </div>
+      </div>
+
+      <div class="notice">
+        <b data-i18n-ru="Важно:" data-i18n-pl="Ważne:" data-i18n-en="Important:">Важно:</b>
+        <span
+          data-i18n-ru=" показываются WykS и Ćw1S. Строки Ćw2S скрыты. «Egzamin» и «Zaliczenie ocena» — форма итоговой аттестации предмета, а не экзамен в этот день."
+          data-i18n-pl=" pokazane są WykS i Ćw1S. Wiersze Ćw2S są ukryte. „Egzamin” i „Zaliczenie ocena” oznaczają formę zaliczenia przedmiotu, a nie egzamin tego dnia."
+          data-i18n-en=" WykS and Ćw1S are shown. Ćw2S rows are hidden. “Egzamin” and “Zaliczenie ocena” describe the course assessment form, not an exam on that day."
+        > показываются WykS и Ćw1S. Строки Ćw2S скрыты. «Egzamin» и «Zaliczenie ocena» — форма итоговой аттестации предмета, а не экзамен в этот день.</span>
+      </div>
+
       <div id="scheduleList" class="schedule-list"></div>
     </section>
   </div>
-  <footer>CloudPath · расписание DSW</footer>
+
+  <footer data-i18n-ru="CloudPath · расписание DSW"
+          data-i18n-pl="CloudPath · plan zajęć DSW"
+          data-i18n-en="CloudPath · DSW schedule">CloudPath · расписание DSW</footer>
 </main>
+
 <script src="schedule.js"></script>
-<script>if('serviceWorker'in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));</script>
+<script src="site-enhancements.js"></script>
 </body>
 </html>
