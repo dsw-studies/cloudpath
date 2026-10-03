@@ -10,13 +10,6 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="dashboard.css">
   <link rel="stylesheet" href="study-table.css">
-  <style>
-    #langSwitcher{position:fixed;top:14px;right:18px;z-index:9999;display:flex;gap:6px;padding:5px;border:1px solid rgba(126,146,168,.35);background:#0b1420;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
-    #langSwitcher .lang-btn{border:1px solid #2d4258;background:#111d2c;color:#9fb0c2;padding:7px 10px;border-radius:7px;cursor:pointer;font:700 11px ui-monospace,SFMono-Regular,Consolas,monospace}
-    #langSwitcher .lang-btn:hover{color:#e7ecf2;border-color:#4fd8c4}
-    #langSwitcher .lang-btn[aria-pressed="true"]{background:#4fd8c4;color:#071a18;border-color:#4fd8c4}
-    @media(max-width:900px){#langSwitcher{top:auto;right:10px;bottom:10px}}
-  </style>
 </head>
 <body>
 <a class="skip-link" href="#main-content" data-i18n-ru="Перейти к содержанию" data-i18n-pl="Przejdź do treści" data-i18n-en="Skip to content">Перейти к содержанию</a>
@@ -29,26 +22,26 @@
 
 <nav class="toc" aria-label="Навигация CloudPath">
   <div class="brand">CloudPath</div>
-  <a href="index.html" class="active" data-i18n-ru="⌂ Учебный кабинет" data-i18n-pl="⌂ Panel nauki" data-i18n-en="⌂ Study dashboard">⌂ Учебный кабинет</a>
-  <a href="schedule.html" data-i18n-ru="🗓 Расписание" data-i18n-pl="🗓 Plan zajęć" data-i18n-en="🗓 Schedule">🗓 Расписание</a>
-  <a href="glossary.html" data-i18n-ru="Глоссарий (чайник)" data-i18n-pl="Glosariusz (od zera)" data-i18n-en="Glossary (beginner)">Глоссарий (чайник)</a>
-  <a href="semesters.html" data-i18n-ru="Семестры 1–7" data-i18n-pl="Semestry 1–7" data-i18n-en="Semesters 1–7">Семестры 1–7</a>
-  <a href="specdeep.html" data-i18n-ru="Спец. курсы подробно" data-i18n-pl="Specjalizacje — szczegóły" data-i18n-en="Special courses — details">Спец. курсы подробно</a>
-  <a href="languages.html" data-i18n-ru="Языки" data-i18n-pl="Języki" data-i18n-en="Languages">Языки</a>
-  <a href="syntax.html" data-i18n-ru="Синтаксис языков" data-i18n-pl="Składnia języków" data-i18n-en="Language syntax">Синтаксис языков</a>
-  <a href="courses.html" data-i18n-ru="Бесплатные курсы" data-i18n-pl="Darmowe kursy" data-i18n-en="Free courses">Бесплатные курсы</a>
-  <a href="english.html" data-i18n-ru="Английский" data-i18n-pl="Angielski" data-i18n-en="English">Английский</a>
-  <a href="ai.html" data-i18n-ru="Работа с ИИ" data-i18n-pl="Praca z AI" data-i18n-en="Working with AI">Работа с ИИ</a>
-  <a href="tools.html" data-i18n-ru="Приложения" data-i18n-pl="Aplikacje" data-i18n-en="Apps">Приложения</a>
-  <a href="setup.html" data-i18n-ru="Установка с нуля" data-i18n-pl="Instalacja od zera" data-i18n-en="Setup from scratch">Установка с нуля</a>
-  <a href="certs.html" data-i18n-ru="Сертификаты" data-i18n-pl="Certyfikaty" data-i18n-en="Certificates">Сертификаты</a>
-  <a href="finance.html" data-i18n-ru="Финансы / RKM" data-i18n-pl="Finanse / RKM" data-i18n-en="Finance / RKM">Финансы / RKM</a>
-  <a href="housing.html" data-i18n-ru="Жильё" data-i18n-pl="Mieszkanie" data-i18n-en="Housing">Жильё</a>
-  <a href="parttime.html" data-i18n-ru="Подработка" data-i18n-pl="Praca dodatkowa" data-i18n-en="Part-time work">Подработка</a>
-  <a href="legal.html" data-i18n-ru="Легализация пребывания" data-i18n-pl="Legalizacja pobytu" data-i18n-en="Stay legalization">Легализация пребывания</a>
-  <a href="faq.html">FAQ</a>
-  <a href="resources.html" data-i18n-ru="Ресурсы" data-i18n-pl="Zasoby" data-i18n-en="Resources">Ресурсы</a>
-  <a href="university.html" data-i18n-ru="ABC студента DSW Ideis" data-i18n-pl="ABC studenta DSW Ideis" data-i18n-en="DSW Ideis student ABC">ABC студента DSW Ideis</a>
+  <a href="index.html" class="active">⌂ Учебный кабинет</a>
+  <a href="schedule.html">🗓 Расписание</a>
+  <a href="glossary.html">Глоссарий (чайник)</a>
+  <a href="semesters.html">Семестры 1–7</a>
+  <a href="specdeep.html">Спец. курсы подробно</a>
+  <a href="languages.html">Языки</a>
+  <a href="syntax.html">Синтаксис языков</a>
+  <a href="courses.html">Бесплатные курсы</a>
+  <a href="english.html">Английский</a>
+  <a href="ai.html">Работа с ИИ</a>
+  <a href="tools.html">Приложения</a>
+  <a href="setup.html">Установка с нуля</a>
+  <a href="certs.html">Сертификаты</a>
+  <a href="finance.html">Финансы / RKM</a>
+  <a href="housing.html">Жильё</a>
+  <a href="parttime.html">Подработка</a>
+  <a href="legal.html">Легализация пребывания</a>
+  <a href="faq.html">FAQ — если что-то пошло не так</a>
+  <a href="resources.html">Ресурсы</a>
+  <a href="university.html">ABC студента DSW Ideis</a>
 </nav>
 
 <main class="main" id="main-content">
@@ -120,32 +113,8 @@
 </div>
 <div class="toast" id="toast"></div>
 
-<script>
-  window.setLang = function(lang){
-    if(!['ru','pl','en'].includes(lang)) lang='ru';
-    document.documentElement.lang=lang;
-    document.querySelectorAll('[data-i18n-ru]').forEach(el=>{
-      const attr='data-i18n-'+lang;
-      const value=el.getAttribute(attr)||el.getAttribute('data-i18n-ru');
-      if(value!==null) el.textContent=value;
-    });
-    const placeholders={
-      ru:['Поиск по конспектам, предметам и тегам…','Фильтр по предмету'],
-      pl:['Szukaj w notatkach, przedmiotach i tagach…','Filtr według przedmiotu'],
-      en:['Search notes, subjects and tags…','Filter by subject']
-    };
-    const search=document.getElementById('search'); if(search) search.placeholder=placeholders[lang][0];
-    const filter=document.getElementById('subjectFilter'); if(filter) filter.setAttribute('aria-label',placeholders[lang][1]);
-    document.querySelectorAll('.lang-btn').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang?'true':'false'));
-    try{localStorage.setItem('cloudpath-language',lang)}catch(_){ }
-  };
-  document.querySelectorAll('#langSwitcher .lang-btn').forEach(b=>b.addEventListener('click',()=>window.setLang(b.dataset.lang)));
-  let lang='ru'; try{lang=localStorage.getItem('cloudpath-language')||'ru'}catch(_){ }
-  window.setLang(lang);
-</script>
 <script src="dashboard.js"></script>
 <script src="study-table.js"></script>
 <script src="site-enhancements.js"></script>
-<script>if('serviceWorker'in navigator&&location.protocol==='https:')window.addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));</script>
 </body>
 </html>
