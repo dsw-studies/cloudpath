@@ -10,42 +10,55 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="dashboard.css">
   <link rel="stylesheet" href="study-table.css">
+  <style>
+    #langSwitcher{position:fixed;top:14px;right:18px;z-index:9999;display:flex;gap:6px;padding:5px;border:1px solid rgba(126,146,168,.35);background:#0b1420;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+    #langSwitcher .lang-btn{border:1px solid #2d4258;background:#111d2c;color:#9fb0c2;padding:7px 10px;border-radius:7px;cursor:pointer;font:700 11px ui-monospace,SFMono-Regular,Consolas,monospace}
+    #langSwitcher .lang-btn:hover{color:#e7ecf2;border-color:#4fd8c4}
+    #langSwitcher .lang-btn[aria-pressed="true"]{background:#4fd8c4;color:#071a18;border-color:#4fd8c4}
+    @media(max-width:900px){#langSwitcher{top:auto;right:10px;bottom:10px}}
+  </style>
 </head>
 <body>
-<a class="skip-link" href="#main-content">Перейти к содержанию</a>
+<a class="skip-link" href="#main-content" data-i18n-ru="Перейти к содержанию" data-i18n-pl="Przejdź do treści" data-i18n-en="Skip to content">Перейти к содержанию</a>
+
+<div id="langSwitcher" role="group" aria-label="Язык страницы">
+  <button class="lang-btn" data-lang="ru" type="button">RU</button>
+  <button class="lang-btn" data-lang="pl" type="button">PL</button>
+  <button class="lang-btn" data-lang="en" type="button">EN</button>
+</div>
 
 <nav class="toc" aria-label="Навигация CloudPath">
   <div class="brand">CloudPath</div>
-  <a href="index.html" class="active">⌂ Учебный кабинет</a>
-  <a href="schedule.html">🗓 Расписание</a>
-  <a href="glossary.html">Глоссарий (чайник)</a>
-  <a href="semesters.html">Семестры 1–7</a>
-  <a href="specdeep.html">Спец. курсы подробно</a>
-  <a href="languages.html">Языки</a>
-  <a href="syntax.html">Синтаксис языков</a>
-  <a href="courses.html">Бесплатные курсы</a>
-  <a href="english.html">Английский</a>
-  <a href="ai.html">Работа с ИИ</a>
-  <a href="tools.html">Приложения</a>
-  <a href="setup.html">Установка с нуля</a>
-  <a href="certs.html">Сертификаты</a>
-  <a href="finance.html">Финансы / RKM</a>
-  <a href="housing.html">Жильё</a>
-  <a href="parttime.html">Подработка</a>
-  <a href="legal.html">Легализация пребывания</a>
-  <a href="faq.html">FAQ — если что-то пошло не так</a>
-  <a href="resources.html">Ресурсы</a>
-  <a href="university.html">ABC студента DSW Ideis</a>
+  <a href="index.html" class="active" data-i18n-ru="⌂ Учебный кабинет" data-i18n-pl="⌂ Panel nauki" data-i18n-en="⌂ Study dashboard">⌂ Учебный кабинет</a>
+  <a href="schedule.html" data-i18n-ru="🗓 Расписание" data-i18n-pl="🗓 Plan zajęć" data-i18n-en="🗓 Schedule">🗓 Расписание</a>
+  <a href="glossary.html" data-i18n-ru="Глоссарий (чайник)" data-i18n-pl="Glosariusz (od zera)" data-i18n-en="Glossary (beginner)">Глоссарий (чайник)</a>
+  <a href="semesters.html" data-i18n-ru="Семестры 1–7" data-i18n-pl="Semestry 1–7" data-i18n-en="Semesters 1–7">Семестры 1–7</a>
+  <a href="specdeep.html" data-i18n-ru="Спец. курсы подробно" data-i18n-pl="Specjalizacje — szczegóły" data-i18n-en="Special courses — details">Спец. курсы подробно</a>
+  <a href="languages.html" data-i18n-ru="Языки" data-i18n-pl="Języki" data-i18n-en="Languages">Языки</a>
+  <a href="syntax.html" data-i18n-ru="Синтаксис языков" data-i18n-pl="Składnia języków" data-i18n-en="Language syntax">Синтаксис языков</a>
+  <a href="courses.html" data-i18n-ru="Бесплатные курсы" data-i18n-pl="Darmowe kursy" data-i18n-en="Free courses">Бесплатные курсы</a>
+  <a href="english.html" data-i18n-ru="Английский" data-i18n-pl="Angielski" data-i18n-en="English">Английский</a>
+  <a href="ai.html" data-i18n-ru="Работа с ИИ" data-i18n-pl="Praca z AI" data-i18n-en="Working with AI">Работа с ИИ</a>
+  <a href="tools.html" data-i18n-ru="Приложения" data-i18n-pl="Aplikacje" data-i18n-en="Apps">Приложения</a>
+  <a href="setup.html" data-i18n-ru="Установка с нуля" data-i18n-pl="Instalacja od zera" data-i18n-en="Setup from scratch">Установка с нуля</a>
+  <a href="certs.html" data-i18n-ru="Сертификаты" data-i18n-pl="Certyfikaty" data-i18n-en="Certificates">Сертификаты</a>
+  <a href="finance.html" data-i18n-ru="Финансы / RKM" data-i18n-pl="Finanse / RKM" data-i18n-en="Finance / RKM">Финансы / RKM</a>
+  <a href="housing.html" data-i18n-ru="Жильё" data-i18n-pl="Mieszkanie" data-i18n-en="Housing">Жильё</a>
+  <a href="parttime.html" data-i18n-ru="Подработка" data-i18n-pl="Praca dodatkowa" data-i18n-en="Part-time work">Подработка</a>
+  <a href="legal.html" data-i18n-ru="Легализация пребывания" data-i18n-pl="Legalizacja pobytu" data-i18n-en="Stay legalization">Легализация пребывания</a>
+  <a href="faq.html">FAQ</a>
+  <a href="resources.html" data-i18n-ru="Ресурсы" data-i18n-pl="Zasoby" data-i18n-en="Resources">Ресурсы</a>
+  <a href="university.html" data-i18n-ru="ABC студента DSW Ideis" data-i18n-pl="ABC studenta DSW Ideis" data-i18n-en="DSW Ideis student ABC">ABC студента DSW Ideis</a>
 </nav>
 
 <main class="main" id="main-content">
   <header class="hero">
     <div class="eyebrow">DSW Wrocław · Informatyka · 1 semestr</div>
-    <h1>Учёба и конспекты.</h1>
-    <p>Личный учебный кабинет CloudPath: записи по предметам и короткий список вещей на пары.</p>
+    <h1 data-i18n-ru="Учёба и конспекты." data-i18n-pl="Nauka i notatki." data-i18n-en="Study and notes.">Учёба и конспекты.</h1>
+    <p data-i18n-ru="Личный учебный кабинет CloudPath: записи по предметам и короткий список вещей на пары." data-i18n-pl="Osobisty panel nauki CloudPath: notatki z przedmiotów i krótka lista rzeczy na zajęcia." data-i18n-en="Your CloudPath study dashboard: subject notes and a short list of things to bring to class.">Личный учебный кабинет CloudPath: записи по предметам и короткий список вещей на пары.</p>
     <div class="quick-links">
-      <a class="button primary" href="#notes">Конспекты</a>
-      <a class="button" href="#bag">Что брать</a>
+      <a class="button primary" href="#notes" data-i18n-ru="Конспекты" data-i18n-pl="Notatki" data-i18n-en="Notes">Конспекты</a>
+      <a class="button" href="#bag" data-i18n-ru="Что брать" data-i18n-pl="Co zabrać" data-i18n-en="What to bring">Что брать</a>
     </div>
   </header>
 
@@ -54,11 +67,11 @@
 
     <section id="notes">
       <div class="section-head">
-        <div><div class="kicker">Локально в браузере</div><h2>Конспекты</h2></div>
+        <div><div class="kicker" data-i18n-ru="Локально в браузере" data-i18n-pl="Lokalnie w przeglądarce" data-i18n-en="Stored locally in browser">Локально в браузере</div><h2 data-i18n-ru="Конспекты" data-i18n-pl="Notatki" data-i18n-en="Notes">Конспекты</h2></div>
         <div class="toolbar">
-          <button class="button small" id="importBtn" type="button">Импорт</button>
-          <button class="button small" id="exportBtn" type="button">Экспорт</button>
-          <button class="button primary small" id="newNote" type="button">＋ Новый конспект</button>
+          <button class="button small" id="importBtn" type="button" data-i18n-ru="Импорт" data-i18n-pl="Import" data-i18n-en="Import">Импорт</button>
+          <button class="button small" id="exportBtn" type="button" data-i18n-ru="Экспорт" data-i18n-pl="Eksport" data-i18n-en="Export">Экспорт</button>
+          <button class="button primary small" id="newNote" type="button" data-i18n-ru="＋ Новый конспект" data-i18n-pl="＋ Nowa notatka" data-i18n-en="＋ New note">＋ Новый конспект</button>
           <input id="importFile" type="file" accept="application/json" hidden>
         </div>
       </div>
@@ -68,29 +81,29 @@
         <select id="subjectFilter" class="select" aria-label="Фильтр по предмету"></select>
       </div>
       <div class="note-stats">
-        <div><b id="noteCount">0</b><span>конспектов</span></div>
-        <div><b id="subjectCount">0</b><span>предметов</span></div>
-        <div><b id="recentCount">0</b><span>обновлено за 7 дней</span></div>
+        <div><b id="noteCount">0</b><span data-i18n-ru="конспектов" data-i18n-pl="notatek" data-i18n-en="notes">конспектов</span></div>
+        <div><b id="subjectCount">0</b><span data-i18n-ru="предметов" data-i18n-pl="przedmiotów" data-i18n-en="subjects">предметов</span></div>
+        <div><b id="recentCount">0</b><span data-i18n-ru="обновлено за 7 дней" data-i18n-pl="zaktualizowano w 7 dni" data-i18n-en="updated in 7 days">обновлено за 7 дней</span></div>
       </div>
       <div id="notesList" class="notes-list"></div>
     </section>
 
     <section id="bag">
       <div class="section-head">
-        <div><div class="kicker">На обычный учебный день</div><h2>Что брать с собой</h2></div>
+        <div><div class="kicker" data-i18n-ru="На обычный учебный день" data-i18n-pl="Na zwykły dzień zajęć" data-i18n-en="For a normal study day">На обычный учебный день</div><h2 data-i18n-ru="Что брать с собой" data-i18n-pl="Co zabrać ze sobą" data-i18n-en="What to bring">Что брать с собой</h2></div>
       </div>
       <div class="bag-grid">
-        <article><span>💻</span><h3>Техника</h3><p>Ноутбук, зарядка для ноутбука, телефон, power bank, наушники.</p></article>
-        <article><span>✍️</span><h3>Для записей</h3><p>Ручка и небольшой блокнот — на случай, если ноутбук не нужен или сядет батарея.</p></article>
-        <article><span>🪪</span><h3>Документы</h3><p>Документ удостоверения личности и студенческий, когда его получишь.</p></article>
-        <article><span>🥤</span><h3>На длинный день</h3><p>Вода и перекус. Особенно когда пары идут почти подряд до вечера.</p></article>
-        <article><span>📍</span><h3>Перед выходом</h3><p>Сохрани скрин расписания и номера аудиторий. S55 = Strzegomska 55, S47 = Strzegomska 47.</p></article>
-        <article><span>🌐</span><h3>Distance learning</h3><p>Для онлайн-дней проверь Microsoft Teams, календарь, Outlook и Moodle заранее.</p></article>
+        <article><span>💻</span><h3 data-i18n-ru="Техника" data-i18n-pl="Sprzęt" data-i18n-en="Tech">Техника</h3><p data-i18n-ru="Ноутбук, зарядка для ноутбука, телефон, power bank, наушники." data-i18n-pl="Laptop, ładowarka do laptopa, telefon, power bank, słuchawki." data-i18n-en="Laptop, laptop charger, phone, power bank, headphones.">Ноутбук, зарядка для ноутбука, телефон, power bank, наушники.</p></article>
+        <article><span>✍️</span><h3 data-i18n-ru="Для записей" data-i18n-pl="Do notatek" data-i18n-en="For notes">Для записей</h3><p data-i18n-ru="Ручка и небольшой блокнот — на случай, если ноутбук не нужен или сядет батарея." data-i18n-pl="Długopis i mały notes — na wypadek, gdy laptop nie będzie potrzebny albo rozładuje się bateria." data-i18n-en="A pen and small notebook in case the laptop is not needed or the battery dies.">Ручка и небольшой блокнот — на случай, если ноутбук не нужен или сядет батарея.</p></article>
+        <article><span>🪪</span><h3 data-i18n-ru="Документы" data-i18n-pl="Dokumenty" data-i18n-en="Documents">Документы</h3><p data-i18n-ru="Документ удостоверения личности и студенческий, когда его получишь." data-i18n-pl="Dokument tożsamości i legitymacja studencka, gdy już ją otrzymasz." data-i18n-en="ID document and student ID once you receive it.">Документ удостоверения личности и студенческий, когда его получишь.</p></article>
+        <article><span>🥤</span><h3 data-i18n-ru="На длинный день" data-i18n-pl="Na długi dzień" data-i18n-en="For a long day">На длинный день</h3><p data-i18n-ru="Вода и перекус. Особенно когда пары идут почти подряд до вечера." data-i18n-pl="Woda i przekąska, szczególnie gdy zajęcia trwają prawie bez przerw do wieczora." data-i18n-en="Water and a snack, especially when classes run almost back-to-back until evening.">Вода и перекус. Особенно когда пары идут почти подряд до вечера.</p></article>
+        <article><span>📍</span><h3 data-i18n-ru="Перед выходом" data-i18n-pl="Przed wyjściem" data-i18n-en="Before leaving">Перед выходом</h3><p>S55 = Strzegomska 55 · S47 = Strzegomska 47</p></article>
+        <article><span>🌐</span><h3>Distance learning</h3><p>Microsoft Teams · Outlook · Moodle</p></article>
       </div>
     </section>
   </div>
 
-  <footer>CloudPath · личный учебный кабинет</footer>
+  <footer>CloudPath · DSW Ideis</footer>
 </main>
 
 <div class="modal" id="modal" aria-hidden="true">
@@ -107,6 +120,29 @@
 </div>
 <div class="toast" id="toast"></div>
 
+<script>
+  window.setLang = function(lang){
+    if(!['ru','pl','en'].includes(lang)) lang='ru';
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-i18n-ru]').forEach(el=>{
+      const attr='data-i18n-'+lang;
+      const value=el.getAttribute(attr)||el.getAttribute('data-i18n-ru');
+      if(value!==null) el.textContent=value;
+    });
+    const placeholders={
+      ru:['Поиск по конспектам, предметам и тегам…','Фильтр по предмету'],
+      pl:['Szukaj w notatkach, przedmiotach i tagach…','Filtr według przedmiotu'],
+      en:['Search notes, subjects and tags…','Filter by subject']
+    };
+    const search=document.getElementById('search'); if(search) search.placeholder=placeholders[lang][0];
+    const filter=document.getElementById('subjectFilter'); if(filter) filter.setAttribute('aria-label',placeholders[lang][1]);
+    document.querySelectorAll('.lang-btn').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang?'true':'false'));
+    try{localStorage.setItem('cloudpath-language',lang)}catch(_){ }
+  };
+  document.querySelectorAll('#langSwitcher .lang-btn').forEach(b=>b.addEventListener('click',()=>window.setLang(b.dataset.lang)));
+  let lang='ru'; try{lang=localStorage.getItem('cloudpath-language')||'ru'}catch(_){ }
+  window.setLang(lang);
+</script>
 <script src="dashboard.js"></script>
 <script src="study-table.js"></script>
 <script src="site-enhancements.js"></script>
