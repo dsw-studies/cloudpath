@@ -3,6 +3,29 @@
 
 body { text-rendering: optimizeLegibility; }
 
+/* The language switcher must never float over page controls/content. */
+body > #langSwitcher {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 40 !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 10px 18px !important;
+  margin: 0 !important;
+  background: #0d1826 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--line) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
 .skip-link {
   position: fixed;
   top: 10px;
@@ -117,12 +140,12 @@ body { text-rendering: optimizeLegibility; }
   .toc a { flex: 0 0 auto; margin: 0; padding: 7px 10px; border: 1px solid transparent; border-radius: 20px; }
   .toc a.active { border-color: var(--accent-dim); background: color-mix(in srgb, var(--accent) 9%, transparent); }
   .toc .ss-trigger { flex: 0 0 auto; width: auto; margin: 0 6px 0 0; }
-  #langSwitcher {
-    position: static !important;
-    justify-content: flex-end;
-    padding: 8px 14px;
-    background: #0d1826;
-    border-bottom: 1px solid var(--line);
+  body > #langSwitcher {
+    position: relative !important;
+    justify-content: flex-end !important;
+    padding: 8px 14px !important;
+    background: #0d1826 !important;
+    border-bottom: 1px solid var(--line) !important;
   }
   .wrap { padding-inline: 18px; }
   section { margin-top: 42px; }
