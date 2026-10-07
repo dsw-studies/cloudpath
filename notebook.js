@@ -1,6 +1,6 @@
 (() => {
   const KEY = 'cloudpath-notes-v1';
-  const BUILTIN_KEY = 'cloudpath-builtin-notes-v2-installed';
+  const BUILTIN_KEY = 'cloudpath-builtin-notes-v3-installed';
   const subjects = [
     ['analysis','∑','Analiza matematyczna I'],['algebra','A','Algebra liniowa'],['python','</>','Programowanie w języku Python'],
     ['algorithms','{}','Algorytmy i struktury danych'],['physics','φ','Fizyka'],['intro','01','Podstawy informatyki'],
@@ -28,6 +28,168 @@
   function installBuiltinNotes(){
     try { if(localStorage.getItem(BUILTIN_KEY)==='1') return; } catch(_) {}
     const builtins = [
+      {
+        id:'builtin-physics-vectors-formulas-v1',
+        title:'Физика — векторы: все основные формулы',
+        subject:'physics',date:'2026-10-07',tags:['векторы','силы','скорость','ускорение','формулы'],updated:Date.now(),
+        content:`ФИЗИКА — ВЕКТОРЫ: ОСНОВНЫЕ ФОРМУЛЫ
+
+1. Вектор по координатам
+A = (A_x, A_y)
+В 3D:
+A = (A_x, A_y, A_z)
+
+2. Модуль вектора
+|A| = sqrt(A_x² + A_y²)
+В 3D:
+|A| = sqrt(A_x² + A_y² + A_z²)
+
+3. Разложение по осям
+Если угол alpha измеряется от оси x:
+A_x = A cos(alpha)
+A_y = A sin(alpha)
+
+Для силы:
+F_x = F cos(alpha)
+F_y = F sin(alpha)
+
+Для скорости:
+v_x = v cos(alpha)
+v_y = v sin(alpha)
+
+4. Угол по компонентам
+tan(alpha) = A_y / A_x
+alpha = arctan(A_y / A_x)
+
+5. Сложение векторов
+R = A + B
+R_x = A_x + B_x
+R_y = A_y + B_y
+
+6. Вычитание векторов
+R = A - B
+R_x = A_x - B_x
+R_y = A_y - B_y
+
+7. Умножение вектора на число
+B = kA
+B_x = kA_x
+B_y = kA_y
+
+Если k<0, направление меняется на противоположное.
+
+8. Скалярное произведение
+A·B = A_x B_x + A_y B_y
+Также:
+A·B = |A||B|cos(alpha)
+
+Отсюда:
+cos(alpha) = (A·B)/(|A||B|)
+
+Если A·B=0, векторы перпендикулярны.
+
+9. Второй закон Ньютона
+F = ma
+
+По осям:
+F_x = ma_x
+F_y = ma_y
+
+Отсюда:
+a_x = F_x/m
+a_y = F_y/m
+
+Если дана результирующая сила:
+a = F_result/m
+
+10. Скорость
+v = Delta r / Delta t
+
+По координатам:
+v_x = Delta x / Delta t
+v_y = Delta y / Delta t
+
+Модуль:
+|v| = sqrt(v_x² + v_y²)
+
+11. Изменение скорости
+Delta v = v_2 - v_1
+
+По координатам:
+Delta v_x = v_2x - v_1x
+Delta v_y = v_2y - v_1y
+
+12. Ускорение
+a = Delta v / Delta t
+
+По координатам:
+a_x = Delta v_x / Delta t
+a_y = Delta v_y / Delta t
+
+Модуль:
+|a| = sqrt(a_x² + a_y²)
+
+13. Равномерное движение
+s = vt
+По осям:
+x = x_0 + v_x t
+y = y_0 + v_y t
+
+14. Равноускоренное движение
+v = v_0 + at
+s = v_0 t + (a t²)/2
+v² = v_0² + 2as
+
+По осям:
+v_x = v_0x + a_x t
+v_y = v_0y + a_y t
+
+15. Бросок под углом (без сопротивления воздуха)
+v_0x = v_0 cos(alpha)
+v_0y = v_0 sin(alpha)
+
+По горизонтали:
+x = v_0x t
+
+По вертикали:
+y = v_0y t - g t²/2
+
+Вертикальная скорость:
+v_y = v_0y - gt
+
+Дальность:
+R = v_0² sin(2alpha) / g
+
+16. Полезные значения
+sin30° = 1/2
+cos30° = sqrt(3)/2 ≈ 0.866
+
+sin45° = sqrt(2)/2 ≈ 0.707
+cos45° = sqrt(2)/2 ≈ 0.707
+
+sin60° = sqrt(3)/2 ≈ 0.866
+cos60° = 1/2
+
+17. Быстрый алгоритм задачи
+1) Нарисуй оси x и y.
+2) Нарисуй вектор.
+3) Если дан модуль и угол — разложи через cos/sin.
+4) Все силы/скорости складывай отдельно по x и y.
+5) Найди итоговый вектор.
+6) Модуль — через sqrt(x²+y²).
+7) Угол — через arctan(y/x).
+
+Мини-шпаргалка:
+A_x = A cos(alpha)
+A_y = A sin(alpha)
+|A| = sqrt(A_x² + A_y²)
+alpha = arctan(A_y/A_x)
+R_x = A_x + B_x
+R_y = A_y + B_y
+F = ma
+a = Delta v / Delta t
+Delta v = v_2 - v_1`
+      },
       {
         id:'builtin-algebra-matrices-gauss-v1',
         title:'Алгебра — матрицы, Гаусс, определители и обратная матрица',
