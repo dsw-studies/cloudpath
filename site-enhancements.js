@@ -187,8 +187,15 @@
       let path;
       try { path = new URL(link.getAttribute('href'), location.href).pathname.split('/').pop() || 'index.html'; }
       catch (_) { return; }
+
+      // Prefer the translation stored directly on the navigation link.
+      // This keeps the sidebar reliable on dashboard/schedule pages even
+      // when another script has already changed the link text.
+      const dataKey = `i18n${lang.charAt(0).toUpperCase()}${lang.slice(1)}`;
+      const direct = link.dataset[dataKey];
       const labels = navLabels[path];
-      if (labels) link.textContent = pick(labels, lang);
+      const translated = direct || (labels ? pick(labels, lang) : null);
+      if (translated) link.textContent = translated;
     });
   }
 
