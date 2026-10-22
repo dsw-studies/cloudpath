@@ -100,6 +100,206 @@
       ['12:30–14:00','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 216','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
       ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 216','mgr inż. Mateusz Hyk','Zaliczenie ocena']
     ]}
+
+    {date:'2026-10-29',free:true,items:[]},
+    {date:'2026-10-30',remote:true,items:[
+      ['10:45–12:15','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['12:30–14:00','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin'],
+      ['16:00–17:30','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin']
+    ]},
+    {date:'2026-11-04',items:[
+      ['11:30–13:00','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','dr Ewa Gurbiel','Zaliczenie ocena'],
+      ['13:15–14:45','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','dr Ewa Gurbiel','Zaliczenie ocena'],
+      ['15:10–18:15','Analiza matematyczna 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-05',free:true,items:[]},
+    {date:'2026-11-06',remote:true,items:[
+      ['10:45–12:15','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-09',remote:true,items:[
+      ['10:45–12:15','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['12:30–14:00','Algorytmy i struktury danych','Wykład · WykS','Distance learning','dr Ewa Gurbiel','Egzamin'],
+      ['9:00–10:30','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-10',free:true,items:[]},
+    {date:'2026-11-12',items:[
+      ['12:30–14:00','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-13',remote:true,items:[
+      ['10:45–12:15','Algorytmy i struktury danych','Wykład · WykS','Distance learning','dr Ewa Gurbiel','Egzamin'],
+      ['12:30–14:00','Algorytmy i struktury danych','Wykład · WykS','Distance learning','dr Ewa Gurbiel','Egzamin'],
+      ['14:15–15:45','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin'],
+      ['16:00–17:30','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['17:45–19:15','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin']
+    ]},
+    {date:'2026-11-16',remote:true,items:[
+      ['9:00–10:30','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-17',items:[
+      ['12:30–14:00','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-18',items:[
+      ['9:45–11:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['11:30–13:15','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','dr Ewa Gurbiel','Zaliczenie ocena'],
+      ['13:15–15:00','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','dr Ewa Gurbiel','Zaliczenie ocena'],
+      ['15:05–18:15','Analiza matematyczna 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-19',free:true,items:[]},
+    {date:'2026-11-20',remote:true,items:[
+      ['10:45–12:15','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['12:30–14:00','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin'],
+      ['16:00–17:30','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin'],
+      ['17:45–19:15','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin']
+    ]},
+    {date:'2026-11-23',free:true,items:[]},
+    {date:'2026-11-24',items:[
+      ['12:30–14:00','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-25',items:[
+      ['9:00–10:30','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['10:45–12:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['12:30–14:00','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 208','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 208','mgr inż. Mateusz Hyk','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-26',items:[
+      ['9:00–10:30','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Magdalena Kowańdy','Zaliczenie'],
+      ['10:45–12:15','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Magdalena Kowańdy','Zaliczenie']
+    ]},
+    {date:'2026-11-27',items:[
+      ['10:45–12:15','Programowanie w języku Python 1','Wykład · WykS','S47 8','mgr inż. Mateusz Hyk','Zaliczenie ocena']
+    ]},
+    {date:'2026-11-30',remote:true,items:[
+      ['9:00–10:30','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['10:45–12:15','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['12:30–14:00','Algorytmy i struktury danych','Wykład · WykS','Distance learning','dr Ewa Gurbiel','Egzamin'],
+      ['14:15–15:45','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena'],
+      ['16:00–17:30','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena']
+    ]},
+    {date:'2026-12-01',items:[
+      ['10:45–12:15','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 217','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['12:30–14:00','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-12-02',free:true,items:[]},
+    {date:'2026-12-03',free:true,items:[]},
+    {date:'2026-12-04',remote:true,items:[
+      ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin'],
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin'],
+      ['17:45–19:15','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin']
+    ]},
+    {date:'2026-12-07',free:true,items:[]},
+    {date:'2026-12-08',items:[
+      ['12:30–14:00','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['16:00–17:30','Analiza matematyczna 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-12-09',items:[
+      ['9:00–10:30','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['10:45–12:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['12:30–14:00','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 208','mgr inż. Mateusz Hyk','Zaliczenie ocena']
+    ]},
+    {date:'2026-12-10',free:true,items:[]},
+    {date:'2026-12-11',remote:true,items:[
+      ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin'],
+      ['16:00–17:30','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin'],
+      ['17:45–19:15','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin']
+    ]},
+    {date:'2026-12-14',remote:true,items:[
+      ['9:00–10:30','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['10:45–12:15','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena']
+    ]},
+    {date:'2026-12-15',items:[
+      ['12:30–14:00','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2026-12-16',items:[
+      ['10:45–12:15','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','dr Ewa Gurbiel','Zaliczenie ocena'],
+      ['12:30–14:00','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','dr Ewa Gurbiel','Zaliczenie ocena'],
+      ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 208','mgr inż. Mateusz Hyk','Zaliczenie ocena']
+    ]},
+    {date:'2026-12-18',remote:true,items:[
+      ['10:45–12:15','Algorytmy i struktury danych','Wykład · WykS','Distance learning','dr Ewa Gurbiel','Egzamin'],
+      ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin']
+    ]},
+    {date:'2027-01-04',remote:true,items:[
+      ['9:00–10:30','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['10:45–12:15','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['12:30–14:00','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena'],
+      ['14:15–15:45','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena']
+    ]},
+    {date:'2027-01-05',free:true,items:[]},
+    {date:'2027-01-07',items:[
+      ['9:00–10:30','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Magdalena Kowańdy','Zaliczenie'],
+      ['10:45–12:15','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Magdalena Kowańdy','Zaliczenie']
+    ]},
+    {date:'2027-01-08',remote:true,items:[
+      ['9:00–10:30','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['10:45–12:15','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin'],
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin']
+    ]},
+    {date:'2027-01-11',free:true,items:[]},
+    {date:'2027-01-12',items:[
+      ['12:30–14:00','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 217','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['16:00–17:30','Analiza matematyczna 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2027-01-13',items:[
+      ['9:00–10:30','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['10:45–12:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
+      ['12:30–14:00','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 119','dr Ewa Gurbiel','Zaliczenie ocena'],
+      ['14:15–15:45','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 119','dr Ewa Gurbiel','Zaliczenie ocena']
+    ]},
+    {date:'2027-01-14',free:true,items:[]},
+    {date:'2027-01-15',remote:true,items:[
+      ['10:45–12:15','Algorytmy i struktury danych','Wykład · WykS','Distance learning','dr Ewa Gurbiel','Egzamin'],
+      ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['16:00–17:30','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin'],
+      ['17:45–19:15','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin']
+    ]},
+    {date:'2027-01-19',items:[
+      ['10:45–12:15','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 217','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['12:30–14:00','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2027-01-20',items:[
+      ['9:00–10:30','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena']
+    ]},
+    {date:'2027-01-22',remote:true,items:[
+      ['10:45–12:15','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin'],
+      ['16:00–17:30','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin']
+    ]},
+    {date:'2027-01-25',free:true,items:[]},
+    {date:'2027-01-26',free:true,items:[]},
+    {date:'2027-01-27',items:[
+      ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','S55 111','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
+    {date:'2027-01-28',items:[
+      ['10:45–12:15','Algorytmy i struktury danych','Wykład · WykS','S55 111','dr Ewa Gurbiel','Egzamin'],
+      ['12:30–14:00','Algorytmy i struktury danych','Wykład · WykS','S55 111','dr Ewa Gurbiel','Egzamin'],
+      ['14:15–15:45','Programowanie w języku Python 1','Wykład · WykS','S47 311','mgr inż. Mateusz Hyk','Zaliczenie ocena']
+    ]},
+    {date:'2027-01-29',items:[
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Wykład · WykS','S55 111','mgr Janusz Grabski','Egzamin'],
+      ['16:00–17:30','Fizyka 1','Wykład · WykS','S55 111','mgr Artur Rokosa','Egzamin']
+    ]}
   ];
 
   const copy = {
