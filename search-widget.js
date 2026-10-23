@@ -15,7 +15,12 @@
   }
   function ui(){
     var all = window.SITE_SEARCH_UI || {};
-    return all[lang()] || all.ru || {};
+    var defaults = {
+      ru:{trigger:'Поиск по сайту',placeholder:'Найти конспект, тему или страницу…',nav_updown:'выбрать',nav_enter:'открыть',nav_esc:'закрыть',k_page:'Страница',k_section:'Раздел'},
+      pl:{trigger:'Szukaj w serwisie',placeholder:'Znajdź notatkę, temat lub stronę…',nav_updown:'wybierz',nav_enter:'otwórz',nav_esc:'zamknij',k_page:'Strona',k_section:'Sekcja'},
+      en:{trigger:'Search site',placeholder:'Find a note, topic or page…',nav_updown:'choose',nav_enter:'open',nav_esc:'close',k_page:'Page',k_section:'Section'}
+    };
+    return Object.assign({},defaults[lang()] || defaults.ru,all[lang()] || all.ru || {});
   }
   function kindLabel(k){
     var u = ui();
@@ -104,8 +109,9 @@
     if(triggerBtn){
       var span = triggerBtn.querySelector('.ss-trigger-label');
       if(span) span.textContent = ui().trigger || '🔎 Search';
+      triggerBtn.setAttribute('aria-label',ui().trigger);
     }
-    if(input) input.setAttribute('placeholder', ui().placeholder || '');
+    if(input){input.setAttribute('placeholder',ui().placeholder);input.setAttribute('aria-label',ui().placeholder);}
     if(overlay){
       var foot = overlay.querySelector('#siteSearchFoot');
       if(foot){
@@ -142,6 +148,7 @@
       '</div>';
     document.body.appendChild(overlay);
     input = overlay.querySelector('#siteSearchInput');
+    input.setAttribute('aria-label',ui().placeholder);
     resultsEl = overlay.querySelector('#siteSearchResults');
 
     overlay.addEventListener('mousedown', function(e){ if(e.target === overlay) closeSearch(); });
