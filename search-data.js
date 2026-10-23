@@ -19,3 +19,7 @@ window.SITE_SEARCH_INDEX = (window.SITE_SEARCH_INDEX || []).concat([
   {"p": "faq.html", "a": "faq-tech", "t": "Потерял mLegitymacja или ELS", "s": "mObywatel, перевыпуск в деканате", "k": "sub"},
   {"p": "faq.html", "a": "faq-general", "t": "🧭 Общее", "s": "к кому обращаться, глоссарий, прогресс чек-листа", "k": "section"}
 ]);
+
+window.SITE_SEARCH_INDEX = window.SITE_SEARCH_INDEX.filter(x => x.p !== "index.html");
+window.SITE_SEARCH_INDEX.push({"p": "lessons-2026-10-23.html", "a": "python", "t": "Python — конспект лекции 23 октября", "s": "Польские определения и русские объяснения: коллекции, строки, форматирование, время и случайные числа. Списки кортежи словари множества f-string reverse sorted perf_counter seed", "k": "section"},{"p": "lessons-2026-10-23.html", "a": "math", "t": "Теория множеств — конспект 23 октября", "s": "Декартово произведение, пошаговое доказательство и индексированные семейства. Схемы и перевод с польского. teoria mnogości индекс объединение пересечение пары", "k": "section"},{"p": "physics-list-1.html", "a": "", "t": "Физика I — подробные решения задач 1.1–1.26", "s": "Последний подробный PDF: все 26 задач на польском, доступные по номерам, и скачивание исходного файла. Fizyka lista zadania jednostki wektory prędkość przyspieszenie", "k": "section"});
+window.SITE_PAGES = window.SITE_PAGES.filter(x=>x.p!=="index.html").concat([{p:"index.html",t:"Учебный кабинет"},{p:"schedule.html",t:"Расписание"},{p:"lessons-2026-10-23.html",t:"Конспекты 23 октября"},{p:"physics-list-1.html",t:"Физика: задачи 1–26"}]);

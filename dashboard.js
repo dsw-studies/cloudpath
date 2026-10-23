@@ -7,18 +7,18 @@
   let notes=load(), editingId=null;
 
   function load(){for(const k of [KEY,'cloudpath-notes-v1']){try{const x=JSON.parse(localStorage.getItem(k));if(Array.isArray(x)&&x.length)return x}catch{}}return []}
-  function save(){localStorage.setItem(KEY,JSON.stringify(notes))}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(notes));return true}catch{toast('Не удалось сохранить: память браузера недоступна или заполнена. Экспортируй конспекты.');return false}}
   function esc(v=''){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
   function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
-  function today(){return new Date().toISOString().slice(0,10)}
+  function today(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Warsaw',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
   function formatDate(s){if(!s)return'';return new Date(s+'T12:00:00').toLocaleDateString('ru-RU',{day:'2-digit',month:'short',year:'numeric'})}
   function subjectName(id){return subjects.find(s=>s[0]===id)?.[2]||'Inne'}
   function subjectIcon(id){return subjects.find(s=>s[0]===id)?.[1]||'·'}
   function toast(msg){const t=$('#toast');if(!t)return;t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1500)}
 
-  const builtins=[
+  const builtins=[{"id": "builtin-python-2026-10-23", "builtin": true, "icon": "🐍", "title": "Python — конспект лекции 23 октября", "subject": "python", "date": "2026-10-23", "tags": ["python", "коллекции", "строки", "JSON", "datetime", "math", "random"], "topics": ["list / tuple", "dict / JSON", "set", "строки", "модули"], "summary": "Польские определения и русские объяснения: коллекции, строки, форматирование, время и случайные числа.", "content": "Списки кортежи словари множества f-string reverse sorted perf_counter seed", "href": "lessons-2026-10-23.html#python", "updated": 1792756800000}, {"id": "builtin-sets-2026-10-23", "builtin": true, "icon": "∑", "title": "Теория множеств — конспект 23 октября", "subject": "analysis", "date": "2026-10-23", "tags": ["множества", "доказательства", "iloczyn kartezjański"], "topics": ["Декартово произведение", "Распределительный закон", "Семейства множеств"], "summary": "Декартово произведение, пошаговое доказательство и индексированные семейства. Схемы и перевод с польского.", "content": "teoria mnogości индекс объединение пересечение пары", "href": "lessons-2026-10-23.html#math", "updated": 1792756800000}, {"id": "builtin-physics-list1-2026-10-14", "builtin": true, "icon": "φ", "title": "Физика I — подробные решения задач 1.1–1.26", "subject": "physics", "date": "2026-10-14", "tags": ["физика", "решения", "кинематика", "векторы"], "topics": ["Единицы SI", "Векторы", "Графики", "Кинематика", "Rzut ukośny"], "summary": "Последний подробный PDF: все 26 задач на польском, доступные по номерам, и скачивание исходного файла.", "content": "Fizyka lista zadania jednostki wektory prędkość przyspieszenie", "href": "physics-list-1.html", "updated": 1792756800000},
     {
-      id:'builtin-algebra-matrices-v3',builtin:true,icon:'▦',title:'Алгебра — матрицы, Гаусс, определители и обратная матрица',subject:'algebra',date:'2026-10-05',tags:['матрицы','Гаусс','определитель','обратная'],updated:Date.now(),
+      id:'builtin-algebra-matrices-v3',builtin:true,icon:'▦',title:'Алгебра — матрицы, Гаусс, определители и обратная матрица',subject:'algebra',date:'2026-10-05',tags:['матрицы','Гаусс','определитель','обратная'],updated:1791345600000,
       summary:'Матрицы, умножение, метод Гаусса, определители, типы решений и обратная матрица.',
       topics:['Матрицы','Умножение','Гаусс','Определитель','A⁻¹'],
       content:'Матрицы: размеры, умножение, метод Гаусса, бесконечно много решений/нет решений, определители, треугольные матрицы, обратная матрица и Гаусс–Жордан.',
@@ -32,7 +32,7 @@
       ]
     },
     {
-      id:'builtin-analysis-series-v3',builtin:true,icon:'∑',title:'Матан — производные и числовые ряды',subject:'analysis',date:'2026-10-05',tags:['производные','ряды','Даламбер','Лейбниц'],updated:Date.now(),
+      id:'builtin-analysis-series-v3',builtin:true,icon:'∑',title:'Матан — производные и числовые ряды',subject:'analysis',date:'2026-10-05',tags:['производные','ряды','Даламбер','Лейбниц'],updated:1791345600000,
       summary:'Производные, геометрические и p-ряды, признаки Даламбера, сравнения и Лейбница.',
       topics:['Производные','Геом. ряд','p-ряд','Даламбер','Лейбниц','СА/СУ'],
       content:'Производные и числовые ряды: правило произведения, дроби, геометрический ряд, p-ряд, необходимое условие, Даламбер, сравнение, Лейбниц, абсолютная и условная сходимость.',
@@ -47,7 +47,7 @@
       ]
     },
     {
-      id:'builtin-intro-numeral-systems-v3',builtin:true,icon:'01',title:'Системы счисления — 2, 8, 10, 16, дроби, ZM/U1/U2',subject:'intro',date:'2026-10-06',tags:['двоичная','восьмеричная','hex','U1','U2'],updated:Date.now(),
+      id:'builtin-intro-numeral-systems-v3',builtin:true,icon:'01',title:'Системы счисления — 2, 8, 10, 16, дроби, ZM/U1/U2',subject:'intro',date:'2026-10-06',tags:['двоичная','восьмеричная','hex','U1','U2'],updated:1791345600000,
       summary:'Переводы между системами, арифметика, дроби, отрицательные числа и машина Тьюринга.',
       topics:['2/8/10/16','Дроби','+ − × ÷','ZM','U1','U2','Turing'],
       content:'Системы счисления 2/8/10/16: перевод через степени и деление с остатком, группировка битов, дроби, арифметика, ZM/U1/U2, машина Тьюринга.',
@@ -62,7 +62,7 @@
       ]
     },
     {
-      id:'builtin-physics-vectors-v3',builtin:true,icon:'φ',title:'Физика — векторы: основные формулы',subject:'physics',date:'2026-10-07',tags:['векторы','силы','скорость','ускорение','формулы'],updated:Date.now(),
+      id:'builtin-physics-vectors-v3',builtin:true,icon:'φ',title:'Физика — векторы: основные формулы',subject:'physics',date:'2026-10-07',tags:['векторы','силы','скорость','ускорение','формулы'],updated:1791345600000,
       summary:'Разложение по осям, силы, скорость, ускорение, угол и второй закон Ньютона.',
       topics:['Fx/Fy','Модуль','Угол','F=ma','Скорость','Ускорение'],
       content:'Физика: векторы, компоненты, модуль, угол, сложение и вычитание, скалярное произведение, второй закон Ньютона, скорость и ускорение.',
@@ -78,7 +78,7 @@
       ]
     },
     {
-      id:'builtin-python-full-v2',builtin:true,icon:'🐍',title:'Python — полный конспект с нуля',subject:'python',date:'2026-10-03',tags:['python','база','шпаргалка'],updated:Date.now(),
+      id:'builtin-python-full-v2',builtin:true,icon:'🐍',title:'Python — полный конспект с нуля',subject:'python',date:'2026-10-03',tags:['python','база','шпаргалка'],updated:1791345600000,
       summary:'От переменных и if до функций, коллекций, файлов, JSON и классов.',
       topics:['Переменные','if / elif / else','for / while','Функции','list / dict / set','Файлы','Ошибки','ООП'],
       content:'Python: переменные, типы, ввод/вывод, операторы, условия, строки, списки, tuple, set, dict, циклы, функции, comprehensions, исключения, файлы, модули, JSON, классы, сортировка, распаковка, генераторы.',
@@ -94,7 +94,7 @@
       ]
     },
     {
-      id:'builtin-data-structures-v2',builtin:true,icon:'🧱',title:'Структуры данных — полный базовый конспект',subject:'algorithms',date:'2026-10-03',tags:['структуры данных','алгоритмы','Big O'],updated:Date.now(),
+      id:'builtin-data-structures-v2',builtin:true,icon:'🧱',title:'Структуры данных — полный базовый конспект',subject:'algorithms',date:'2026-10-03',tags:['структуры данных','алгоритмы','Big O'],updated:1791345600000,
       summary:'Как хранить данные и какую структуру выбирать под разные операции.',
       topics:['Big O','Array / list','Stack','Queue','Hash table','Tree','Heap','Graph'],
       content:'Структуры данных: Big O, массивы, связные списки, стек, очередь, deque, set, dict, дерево, BST, heap, граф, DFS, BFS, trie, DSU.',
@@ -111,7 +111,7 @@
       ]
     },
     {
-      id:'builtin-vectors-v2',builtin:true,icon:'↗',title:'Векторы — с нуля: формулы и примеры',subject:'algebra',date:'2026-10-03',tags:['векторы','алгебра','формулы'],updated:Date.now(),
+      id:'builtin-vectors-v2',builtin:true,icon:'↗',title:'Векторы — с нуля: формулы и примеры',subject:'algebra',date:'2026-10-03',tags:['векторы','алгебра','формулы'],updated:1791345600000,
       summary:'Стрелка, координаты, длина, сложение, скалярное произведение и угол.',
       topics:['Координаты','Длина','Сложение','Умножение','Скалярное произведение','Угол','Базис'],
       content:'Векторы: координаты, длина, нулевой вектор, сложение, вычитание, умножение на число, AB, единичный вектор, скалярное произведение, угол, перпендикулярность, параллельность, базис, проекция.',
@@ -141,9 +141,11 @@
     const q=$('#search').value.trim().toLowerCase(), f=$('#subjectFilter').value;
     const filtered=notes.filter(n=>(f==='all'||n.subject===f)&&(!q||[n.title,n.content,(n.tags||[]).join(' '),subjectName(n.subject),(n.topics||[]).join(' ')].join(' ').toLowerCase().includes(q))).sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.updated||0)-(a.updated||0));
     $('#noteCount').textContent=notes.length; $('#subjectCount').textContent=new Set(notes.map(n=>n.subject)).size; $('#recentCount').textContent=notes.filter(n=>Date.now()-(n.updated||0)<7*864e5).length;
-    $('#notesList').innerHTML=filtered.length?filtered.map(n=>n.builtin?`<article class="note-card visual-card" data-id="${esc(n.id)}"><div class="visual-icon">${esc(n.icon||'📘')}</div><div class="visual-main"><div class="note-date">${formatDate(n.date)}</div><h3>${esc(n.title)}</h3><p>${esc(n.summary||n.content||'')}</p><div class="topic-row">${previewTopics(n)}</div></div><div class="open-pill">Открыть →</div></article>`:`<article class="note-card" data-id="${esc(n.id)}"><div class="note-date">${formatDate(n.date)}</div><div><h3>${esc(n.title)}</h3><p>${esc((n.content||'').replace(/\n+/g,' ').slice(0,180))}</p></div><div class="tags"><span class="tag">${esc(subjectIcon(n.subject))} ${esc(subjectName(n.subject))}</span>${(n.tags||[]).slice(0,2).map(t=>`<span class="tag">#${esc(t)}</span>`).join('')}</div></article>`).join(''):'<div class="empty">Пока нет конспектов. Нажми «Новый конспект» и создай первую запись.</div>';
-    $$('.note-card').forEach(el=>el.onclick=()=>{const n=notes.find(x=>x.id===el.dataset.id);n?.builtin?openReader(n):openEditor(el.dataset.id)});
+    $('#notesList').innerHTML=filtered.length?filtered.map(n=>n.builtin?`<article class="note-card visual-card" data-id="${esc(n.id)}" role="button" tabindex="0"><div class="visual-icon">${esc(n.icon||'📘')}</div><div class="visual-main"><div class="note-date">${formatDate(n.date)}</div><h3>${esc(n.title)}</h3><p>${esc(n.summary||n.content||'')}</p><div class="topic-row">${previewTopics(n)}</div></div><div class="open-pill">Открыть →</div></article>`:`<article class="note-card" data-id="${esc(n.id)}" role="button" tabindex="0"><div class="note-date">${formatDate(n.date)}</div><div><h3>${esc(n.title)}</h3><p>${esc((n.content||'').replace(/\n+/g,' ').slice(0,180))}</p></div><div class="tags"><span class="tag">${esc(subjectIcon(n.subject))} ${esc(subjectName(n.subject))}</span>${(n.tags||[]).slice(0,2).map(t=>`<span class="tag">#${esc(t)}</span>`).join('')}</div></article>`).join(''):'<div class="empty">Пока нет конспектов. Нажми «Новый конспект» и создай первую запись.</div>';
+    $$('.note-card').forEach(el=>el.onclick=()=>{const n=notes.find(x=>x.id===el.dataset.id);n?.href?location.assign(n.href):n?.builtin?openReader(n):openEditor(el.dataset.id)});
   }
+
+  document.addEventListener('keydown',e=>{const card=e.target.closest('.note-card');if(card && (e.key==='Enter'||e.key===' ')){e.preventDefault();card.click()}});
 
   function visualSection(s){
     const chips=s.chips?`<div class="visual-chips">${s.chips.map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:'';
@@ -171,7 +173,7 @@
   function closeEditor(){$('#modal').classList.remove('open');$('#modal').setAttribute('aria-hidden','true');document.body.style.overflow='';editingId=null}
   function persist(){const title=$('#noteTitle').value.trim();if(!title){toast('Добавь название');return}const obj={id:editingId||uid(),title,date:$('#noteDate').value||today(),subject:$('#noteSubject').value,tags:$('#noteTags').value.split(',').map(x=>x.trim().replace(/^#/,'')).filter(Boolean),content:$('#noteContent').value,updated:Date.now()};notes=editingId?notes.map(n=>n.id===editingId?obj:n):[obj,...notes];save();closeEditor();renderNotes();toast('Конспект сохранён')}
   function exportNotes(){const blob=new Blob([JSON.stringify({version:2,exported:new Date().toISOString(),notes},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`cloudpath-notes-${today()}.json`;a.click();URL.revokeObjectURL(a.href)}
-  function importNotes(file){const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);const x=Array.isArray(d)?d:d.notes;if(!Array.isArray(x))throw 0;notes=x;ensureBuiltins();save();renderNotes();toast('Конспекты импортированы')}catch{toast('Не удалось прочитать файл')}};r.readAsText(file)}
+  function importNotes(file){const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);const x=Array.isArray(d)?d:d.notes;if(!Array.isArray(x))throw 0;if(!x.every(n=>n && typeof n.id==='string' && typeof n.title==='string' && (n.tags===undefined || Array.isArray(n.tags))))throw 0;const merged=new Map(notes.map(n=>[n.id,n]));x.forEach(n=>merged.set(n.id,n));notes=[...merged.values()];ensureBuiltins();save();renderNotes();toast('Конспекты импортированы')}catch{toast('Не удалось прочитать файл')}};r.readAsText(file)}
 
   document.addEventListener('DOMContentLoaded',()=>{
     ensureBuiltins();

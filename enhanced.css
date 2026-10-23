@@ -233,3 +233,13 @@ body.lesson-page > footer {
   body.lesson-page > main,
   body.lesson-page > footer { margin-left: auto; margin-right: auto; }
 }
+
+/* Shared navigation must not inherit article-nav margins or width constraints. */
+body > nav.toc { margin:0; max-width:none; box-sizing:border-box; gap:0; }
+.note-card[role="button"]:focus-visible { outline:3px solid #4fd8c4; outline-offset:4px; }
+.physics-task { margin:12px 0; border:1px solid #30445b; border-radius:14px; background:#111d2c; }
+.physics-task summary { padding:18px; cursor:pointer; font-weight:650; color:#bde2ff; }
+.physics-text { white-space:pre-wrap; overflow-wrap:anywhere; padding:0 20px 22px; line-height:1.75; }
+.physics-task:target { outline:2px solid #4fd8c4; }
+@media(max-width:850px){body > nav.toc { display:block; } .physics-text { padding:0 14px 18px; font-size:14px; }}
+@media print {body > nav.toc,#langSwitcher,.quick-links{display:none!important}body > nav.toc ~ .main{margin-left:0!important}.physics-task{break-inside:avoid}}

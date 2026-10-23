@@ -373,11 +373,7 @@
   }
 
   function localToday() {
-    const d = new Date();
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
-    return `${y}-${m}-${day}`;
+    return new Intl.DateTimeFormat('en-CA', {timeZone:'Europe/Warsaw',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
   }
 
   function capitalize(value) {
@@ -432,7 +428,7 @@
           `).join('');
 
       return `
-        <article class="day-card ${day.free ? 'free-day' : ''}" ${isToday ? 'style="outline:2px solid currentColor;outline-offset:3px"' : ''}>
+        <article id="day-${day.date}" class="day-card ${day.free ? 'free-day' : ''}" ${isToday ? 'style="outline:2px solid currentColor;outline-offset:3px"' : ''}>
           <header class="day-head"><h3>${header}</h3><span>${esc(status)}</span></header>
           ${body}
         </article>
@@ -444,5 +440,10 @@
   schedule.sort((a,b)=>a.date.localeCompare(b.date));
   schedule.forEach(day=>day.items.sort((a,b)=>a[0].localeCompare(b[0],'en',{numeric:true})));
   render();
+  const upcoming = schedule.find(day=>day.date>=localToday() && day.items.length);
+  const nextLink = document.getElementById('nextClass');
+  if(nextLink && upcoming) nextLink.href = '#day-'+upcoming.date;
+  const mainLink = document.querySelector('a[href="#next-class"]');
+  if(mainLink && upcoming) mainLink.href = '#day-'+upcoming.date;
   window.addEventListener('cloudpath:language', event => render(event.detail?.lang || readLanguage()));
 })();

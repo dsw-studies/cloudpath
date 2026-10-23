@@ -1,7 +1,9 @@
-const CACHE = 'cloudpath-v11';
+const CACHE = 'cloudpath-v12';
 const CORE = [
   '/',
   '/index.html',
+  '/lessons-2026-10-23.html',
+  '/physics-list-1.html',
   '/dashboard.css',
   '/dashboard.js',
   '/dashboard-i18n.js',
@@ -26,7 +28,7 @@ self.addEventListener('install', event => event.waitUntil(
 
 self.addEventListener('activate', event => event.waitUntil(
   caches.keys()
-    .then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key))))
+    .then(keys => Promise.all(keys.filter(key => key.startsWith('cloudpath-') && key !== CACHE).map(key => caches.delete(key))))
     .then(() => self.clients.claim())
 ));
 
