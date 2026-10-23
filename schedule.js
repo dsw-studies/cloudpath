@@ -113,16 +113,19 @@
       ['13:15–14:45','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','dr Ewa Gurbiel','Zaliczenie ocena'],
       ['15:10–18:15','Analiza matematyczna 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
     ]},
-    {date:'2026-11-05',free:true,items:[]},
+    {date:'2026-11-05',items:[
+      ['09:00–10:30','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','mgr Magdalena Kowańdy','Zaliczenie'],
+      ['10:45–12:15','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','mgr Magdalena Kowańdy','Zaliczenie']
+    ]},
     {date:'2026-11-06',remote:true,items:[
       ['10:45–12:15','Programowanie w języku Python 1','Wykład · WykS','Distance learning','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
       ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena'],
       ['14:15–15:45','Analiza matematyczna 1','Wykład · WykS','Distance learning','mgr Janusz Grabski','Zaliczenie ocena']
     ]},
     {date:'2026-11-09',remote:true,items:[
+      ['09:00–10:30','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
       ['10:45–12:15','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
-      ['12:30–14:00','Algorytmy i struktury danych','Wykład · WykS','Distance learning','dr Ewa Gurbiel','Egzamin'],
-      ['9:00–10:30','Podstawy informatyki','Wykład · WykS','Distance learning','mgr inż. Wiktor Ziętara','Zaliczenie ocena']
+      ['12:30–14:00','Algorytmy i struktury danych','Wykład · WykS','Distance learning','dr Ewa Gurbiel','Egzamin']
     ]},
     {date:'2026-11-10',free:true,items:[]},
     {date:'2026-11-12',items:[
@@ -240,7 +243,11 @@
       ['12:30–14:00','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena'],
       ['14:15–15:45','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena']
     ]},
-    {date:'2027-01-05',free:true,items:[]},
+    {date:'2027-01-05',items:[
+      ['12:30–14:00','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 208','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 208','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
+      ['16:00–17:30','Analiza matematyczna 1','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
     {date:'2027-01-07',items:[
       ['9:00–10:30','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Magdalena Kowańdy','Zaliczenie'],
       ['10:45–12:15','Kompetencje przyszłości 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Magdalena Kowańdy','Zaliczenie']
@@ -252,7 +259,10 @@
       ['14:15–15:45','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin'],
       ['16:00–17:30','Algebra liniowa z geometrią analityczną','Wykład · WykS','Distance learning','mgr Janusz Grabski','Egzamin']
     ]},
-    {date:'2027-01-11',free:true,items:[]},
+    {date:'2027-01-11',remote:true,items:[
+      ['09:00–10:30','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena'],
+      ['10:45–12:15','Etyka inżyniera i prawo autorskie','Wykład · WykS','Distance learning','dr inż. Joanna Nowicka','Zaliczenie ocena']
+    ]},
     {date:'2027-01-12',items:[
       ['12:30–14:00','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','mgr Janusz Grabski','Zaliczenie ocena'],
       ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 217','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
@@ -287,7 +297,11 @@
       ['16:00–17:30','Fizyka 1','Wykład · WykS','Distance learning','mgr Artur Rokosa','Egzamin']
     ]},
     {date:'2027-01-25',free:true,items:[]},
-    {date:'2027-01-26',free:true,items:[]},
+    {date:'2027-01-26',items:[
+      ['10:45–12:15','Podstawy informatyki','Wykład · WykS','S55 111','mgr inż. Wiktor Ziętara','Zaliczenie ocena'],
+      ['12:30–14:00','Analiza matematyczna 1','Ćwiczenia · Ćw1S','S47 212 · prac. matematyczna/ratownicza','mgr Janusz Grabski','Zaliczenie ocena'],
+      ['14:15–15:45','Algebra liniowa z geometrią analityczną','Ćwiczenia · Ćw1S','S47 312 - prac. matematyczna','mgr Janusz Grabski','Zaliczenie ocena']
+    ]},
     {date:'2027-01-27',items:[
       ['12:30–14:00','Analiza matematyczna 1','Wykład · WykS','S55 111','mgr Janusz Grabski','Zaliczenie ocena']
     ]},
@@ -302,6 +316,7 @@
     ]}
   ];
 
+  // PDF: Plany (2).pdf, export 2026-10-22, first group Ćw1S + common WykS.
   const copy = {
     ru: {
       locale:'ru-RU',
@@ -425,6 +440,9 @@
     }).join('');
   }
 
+  // Keep chronology stable even when source rows were entered out of order.
+  schedule.sort((a,b)=>a.date.localeCompare(b.date));
+  schedule.forEach(day=>day.items.sort((a,b)=>a[0].localeCompare(b[0],'en',{numeric:true})));
   render();
   window.addEventListener('cloudpath:language', event => render(event.detail?.lang || readLanguage()));
 })();
