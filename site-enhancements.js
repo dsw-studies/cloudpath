@@ -12,6 +12,7 @@
   const navLabels = {
     'index.html': ['⌂ Учебный кабинет', '⌂ Panel nauki', '⌂ Study dashboard'],
     'schedule.html': ['🗓 Расписание', '🗓 Plan zajęć', '🗓 Schedule'],
+    'lessons-2026-10-23.html': ['Конспект 23.10', 'Notatki 23.10', 'Notes 23 Oct'],
     'glossary.html': ['Глоссарий (чайник)', 'Słowniczek (dla początkujących)', 'Glossary (beginner)'],
     'semesters.html': ['Семестры 1–7', 'Semestry 1–7', 'Semesters 1–7'],
     'specdeep.html': ['Спец. курсы подробно', 'Kursy specjalizacyjne szczegółowo', 'Specialization courses in detail'],
@@ -130,19 +131,7 @@
   const idx = lang => LANGS.indexOf(lang);
   const pick = (tr, lang) => tr[Math.max(0, idx(lang))] || tr[0];
 
-  // A single navigation component for all CloudPath pages, including legacy pages.
-  // Build it from the same canonical list rather than relying on stale page markup.
-  const unifiedSidebarCss = document.createElement('style');
-  unifiedSidebarCss.textContent = `
-    .toc{position:fixed!important;left:0!important;top:0!important;bottom:0!important;width:250px!important;max-width:250px!important;height:100vh!important;overflow-y:auto!important;padding:24px 16px!important;background:#0d1826!important;border-right:1px solid #223349!important;z-index:30!important;display:block!important;box-sizing:border-box!important}
-    .toc .brand{display:block!important;font:800 18px Consolas,monospace!important;color:#4fd8c4!important;letter-spacing:.08em!important;margin:0 10px 18px!important}
-    .toc a{display:block!important;text-decoration:none!important;color:#7e92a8!important;padding:8px 10px!important;border-radius:8px!important;font-size:13px!important;line-height:1.5!important;margin:2px 0!important;background:transparent!important;border:0!important;box-shadow:none!important;width:auto!important;text-align:left!important}
-    .toc a:hover,.toc a.active{background:#152536!important;color:#e7ecf2!important}
-    .toc a.active{color:#4fd8c4!important}
-    @media(max-width:850px){.toc{position:relative!important;width:100%!important;max-width:none!important;height:auto!important;max-height:210px!important;overflow:auto!important;border-right:0!important;border-bottom:1px solid #223349!important}.main{margin-left:0!important}}
-    @media(min-width:851px){body:has(>.toc)>.main{margin-left:250px!important}}
-  `;
-  document.head.appendChild(unifiedSidebarCss);
+  // Navigation markup is generated below; presentation belongs to enhanced.css.
   const canonicalNav = document.querySelector('.toc');
   if(canonicalNav){
     const currentPage = location.pathname.split('/').pop() || 'index.html';
