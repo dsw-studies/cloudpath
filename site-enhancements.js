@@ -2,6 +2,33 @@
   if (window.__cloudpathEnhancementsLoaded) return;
   window.__cloudpathEnhancementsLoaded = true;
 
+  // Legacy pages still carry their original inline CSS. Load the current
+  // CloudPath design last so every section uses the same shell as Schedule.
+  const ensureSharedStylesheet = (file) => {
+    const alreadyLoaded = [...document.querySelectorAll('link[rel="stylesheet"]')]
+      .some((link) => {
+        try { return new URL(link.href, location.href).pathname.endsWith(`/${file}`); }
+        catch { return false; }
+      });
+    if (alreadyLoaded) return;
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = `${file}?v=20261023-6`;
+    document.head.append(link);
+  };
+  ensureSharedStylesheet('dashboard.css');
+  ensureSharedStylesheet('enhanced.css');
+
+  // Keep the original CloudPath icon on every page.
+  let favicon = document.querySelector('link[rel~="icon"]');
+  if (!favicon) {
+    favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    document.head.append(favicon);
+  }
+  favicon.type = 'image/svg+xml';
+  favicon.href = 'cloudpath-icon.svg';
+
   const LANGS = ['ru', 'pl', 'en'];
   const langMeta = {
     ru: { label: 'Русский', switcher: 'Язык страницы', top: 'Наверх' },
@@ -161,7 +188,7 @@
     #langSwitcher .lang-btn{border:1px solid #2d4258!important;background:#111d2c!important;color:#9fb0c2!important;padding:7px 10px!important;border-radius:7px!important;cursor:pointer!important;font:700 11px ui-monospace,SFMono-Regular,Consolas,monospace!important;box-shadow:none!important}
     #langSwitcher .lang-btn:hover{color:#e7ecf2!important;border-color:#4fd8c4!important}
     #langSwitcher .lang-btn[aria-pressed="true"]{background:#4fd8c4!important;color:#071a18!important;border-color:#4fd8c4!important}
-    @media(max-width:900px){#langSwitcher{top:auto!important;right:10px!important;bottom:10px!important}}
+    @media(max-width:900px){#langSwitcher{top:10px!important;right:10px!important;bottom:auto!important}}
   `;
   document.head.append(style);
 
@@ -312,20 +339,9 @@
     main.tabIndex = -1;
   }
 
-  if (!document.querySelector('.back-to-top')) {
-    const button = document.createElement('button');
-    button.className = 'back-to-top';
-    button.type = 'button';
-    button.textContent = '↑';
-    document.body.append(button);
-    const syncButton = () => button.classList.toggle('visible', window.scrollY > 600);
-    const syncTopLabel = () => button.setAttribute('aria-label', langMeta[currentLang].top);
-    window.addEventListener('scroll', syncButton, { passive: true });
-    window.addEventListener('cloudpath:language', syncTopLabel);
-    syncButton();
-    syncTopLabel();
-    button.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
+  // The language control is the only floating utility. A separate “back to
+  // top” arrow made the pages noisier and duplicated normal browser scrolling.
+  document.querySelectorAll('.back-to-top').forEach(button => button.remove());
 
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(() => {}));
