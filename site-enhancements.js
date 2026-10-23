@@ -15,7 +15,7 @@
     'physics-list-1.html': ['Физика · задачи 1–26', 'Fizyka · zadania 1–26', 'Physics · problems 1–26'],
     'lessons-2026-10-23.html': ['Конспект 23.10', 'Notatki 23.10', 'Notes 23 Oct'],
     'laplace-2026-10-23.html': ['Лаплас · 23.10', 'Laplace · 23.10', 'Laplace · 23 Oct'],
-    'study-materials.html': ['Материалы Moodle', 'Materiały Moodle', 'Moodle materials'],
+    'study-materials.html': ['Учебные материалы', 'Materiały do nauki', 'Study materials'],
     'glossary.html': ['Глоссарий (чайник)', 'Słowniczek (dla początkujących)', 'Glossary (beginner)'],
     'semesters.html': ['Семестры 1–7', 'Semestry 1–7', 'Semesters 1–7'],
     'specdeep.html': ['Спец. курсы подробно', 'Kursy specjalizacyjne szczegółowo', 'Specialization courses in detail'],

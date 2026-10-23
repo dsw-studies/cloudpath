@@ -1,8 +1,10 @@
-const CACHE = 'cloudpath-v15';
+const CACHE = 'cloudpath-v16';
 const CORE = [
   '/',
   '/index.html',
   '/lessons-2026-10-23.html',
+  '/laplace-2026-10-23.html',
+  '/study-materials.html',
   '/physics-list-1.html',
   '/dashboard.css',
   '/dashboard.js',
