@@ -1,0 +1,45 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Матрицы — разложение Лапласа · CloudPath</title><link rel="stylesheet" href="dashboard.css"><link rel="stylesheet" href="enhanced.css"><style>.lecture{max-width:940px;margin:auto;padding:32px 22px 90px;line-height:1.75}.lecture h1{font-size:clamp(28px,4vw,42px)}.lecture h2{margin-top:36px}.lecture .panel{padding:20px;border:1px solid #345069;border-radius:12px;background:#122235;margin:18px 0}.lecture pre{overflow:auto;line-height:1.5;padding:18px;border-radius:10px;background:#0b1826;color:#dcebf3}.lecture code{font-family:Consolas,monospace}.lecture .tag{color:#86d9c4}.lecture details{margin:15px 0}.lecture summary{cursor:pointer;font-weight:bold}.lecture .muted{opacity:.75}.lecture a{color:#78e6d5}</style></head><body><nav class="toc" aria-label="Навигация CloudPath"></nav><main class="main"><article class="lecture"><p class="tag">23.10.2026 · Математика · запись 16:50 · ~38 минут</p><h1>Определители: алгебраические дополнения и разложение Лапласа</h1><p class="muted">Подробный двуязычный конспект по субтитрам записи Bandicam 16-50-59-806. Материал продолжает конспект занятия 23 октября. В автоматической расшифровке есть неточности, поэтому математические обозначения приведены в стандартной форме.</p><p><a href="lessons-2026-10-23.html">← Основной конспект 23 октября</a> · <a href="index.html#notes">Конспекты</a></p>
+<section><h2>1. Минор и алгебраическое дополнение / Minor i dopełnienie algebraiczne</h2><div class="panel"><p><b>RU.</b> Для элемента a<sub>ij</sub> квадратной матрицы вычеркни строку i и столбец j. Определитель оставшейся матрицы называется минором M<sub>ij</sub>. Алгебраическое дополнение:</p><p><strong>D<sub>ij</sub> = (−1)<sup>i+j</sup> · M<sub>ij</sub></strong></p><p><b>PL.</b> Aby wyznaczyć minor M<sub>ij</sub>, skreślamy i-ty wiersz i j-tą kolumnę, a następnie obliczamy wyznacznik pozostałej macierzy. Dopełnienie algebraiczne:</p><p><strong>D<sub>ij</sub> = (−1)<sup>i+j</sup> · M<sub>ij</sub></strong></p></div><p><b>Знак / Znak:</b> если i+j чётное / parzyste, знак «+»; если нечётное / nieparzyste, знак «−».</p><pre>+  −  +  −
+−  +  −  +
++  −  +  −
+−  +  −  +</pre><h3>Пример / Przykład</h3><pre>A = | 1  0   2 |
+    | 5  6  −1 |
+    | 4  0   3 |</pre><p><b>RU.</b> Найдём D<sub>21</sub>: удаляем вторую строку и первый столбец. Остаётся матрица [[0, 2], [0, 3]]. Её определитель равен 0·3 − 2·0 = 0. Следовательно, D<sub>21</sub> = (−1)<sup>3</sup>·0 = <b>0</b>.</p><p><b>PL.</b> Wyznaczamy D<sub>21</sub>: skreślamy drugi wiersz i pierwszą kolumnę. Pozostaje [[0, 2], [0, 3]], której wyznacznik wynosi 0. Zatem D<sub>21</sub> = (−1)<sup>3</sup>·0 = <b>0</b>.</p></section>
+<section><h2>2. Разложение Лапласа / Rozwinięcie Laplace’a</h2><div class="panel"><p><b>По строке i / Względem i-tego wiersza:</b></p><p><strong>det(A) = Σ<sub>k=1…n</sub> a<sub>ik</sub> · D<sub>ik</sub></strong></p><p><b>По столбцу j / Względem j-tej kolumny:</b></p><p><strong>det(A) = Σ<sub>k=1…n</sub> a<sub>kj</sub> · D<sub>kj</sub></strong></p></div><p><b>RU.</b> Выбираем любую одну строку или любой один столбец. Каждый элемент умножаем на его алгебраическое дополнение, результаты складываем. Ответ одинаков при любом выборе, если вычисления верны. Для матрицы 3×3 также можно применить правило Саррюса, но для 4×4 оно напрямую не подходит.</p><p><b>PL.</b> Wybieramy dowolny wiersz albo dowolną kolumnę. Mnożymy kolejne elementy przez ich dopełnienia algebraiczne i sumujemy wyniki. Otrzymany wyznacznik nie zależy od wybranego wiersza ani kolumny. Reguła Sarrusa dotyczy macierzy 3×3, nie 4×4.</p></section>
+<section><h2>3. Пример 3×3: результат 17 / Przykład 3×3: wynik 17</h2><pre>C = |  1   4   6 |
+    | −1   3   0 |
+    |  2  −3   5 |</pre><p><b>Разложение по второй строке / Rozwinięcie względem drugiego wiersza:</b></p><pre>D₂₁ = (−1)³ · | 4   6 | = −(20 + 18) = −38
+                |−3   5 |
+
+D₂₂ = (−1)⁴ · | 1   6 | = 5 − 12 = −7
+                | 2   5 |
+
+D₂₃ = (−1)⁵ · | 1   4 | = −(−3 − 8) = 11
+                | 2  −3 |
+
+det(C) = (−1)·(−38) + 3·(−7) + 0·11
+       = 38 − 21 = 17</pre><p><b>Проверка по первому столбцу / Sprawdzenie względem pierwszej kolumny:</b></p><pre>D₁₁ = | 3   0 | = 15
+      |−3   5 |
+
+D₂₁ = −38
+
+D₃₁ = | 4   6 | = −18
+      | 3   0 |
+
+det(C) = 1·15 + (−1)·(−38) + 2·(−18)
+       = 15 + 38 − 36 = 17</pre><p><b>RU.</b> Оба разложения дают 17. Это полезная проверка правильности знаков и миноров.</p><p><b>PL.</b> Oba rozwinięcia dają 17. To dobry sposób sprawdzenia znaków i minorów.</p></section>
+<section><h2>4. Пример 4×4: результат 90 / Przykład 4×4: wynik 90</h2><p>В расшифровке при перечислении элементов встречаются оговорки; ниже приведена матрица, которую преподаватель использует в итоговой проверке.</p><pre>E = | 1   2   3   4 |
+    | 0  −1   0   2 |
+    | 0   0   3   0 |
+    | 5   4   1   2 |</pre><p><b>RU.</b> Выбираем третью строку (0, 0, 3, 0). Три слагаемых равны нулю, поэтому остаётся только элемент a<sub>33</sub> = 3. Знак (−1)<sup>3+3</sup> положительный.</p><p><b>PL.</b> Wybieramy trzeci wiersz (0, 0, 3, 0), ponieważ zawiera trzy zera. Pozostaje tylko składnik z a<sub>33</sub> = 3, ze znakiem dodatnim.</p><pre>det(E) = 3 · (−1)⁶ · | 1   2   4 |
+                        | 0  −1   2 |
+                        | 5   4   2 |
+
+       = 3 · det(B)</pre><p>Для B используем правило Саррюса / Dla B stosujemy regułę Sarrusa:</p><pre>det(B) = 1·(−1)·2 + 2·2·5 + 4·0·4
+       − 5·(−1)·4 − 4·2·1 − 2·0·2
+       = −2 + 20 + 0 + 20 − 8 − 0
+       = 30
+
+det(E) = 3 · 30 = 90</pre><p><b>RU.</b> Преподаватель проверил ответ матричным калькулятором: 90. Важное замечание: внешний множитель 3 нельзя просто умножить на каждый элемент подматрицы — здесь умножается значение её определителя.</p><p><b>PL.</b> Prowadzący sprawdził wynik kalkulatorem macierzy: 90. Ważne: współczynnik 3 mnoży wartość wyznacznika, a nie każdy element macierzy osobno.</p></section>
+<section><h2>5. Как решать на контрольной / Jak rozwiązywać na kolokwium</h2><div class="panel"><p><b>RU:</b> 1) Убедись, что матрица квадратная. 2) Найди строку или столбец с наибольшим количеством нулей. 3) Для каждого ненулевого элемента вычеркни его строку и столбец. 4) Определи знак (−1)<sup>i+j</sup>. 5) Вычисли миноры. 6) Сложи произведения. 7) Проверь результат другим способом.</p><p><b>PL:</b> 1) Sprawdź, czy macierz jest kwadratowa. 2) Wybierz wiersz lub kolumnę z największą liczbą zer. 3) Dla niezerowych elementów skreśl odpowiedni wiersz i kolumnę. 4) Ustal znak (−1)<sup>i+j</sup>. 5) Oblicz minory. 6) Zsumuj iloczyny. 7) Sprawdź wynik inną metodą.</p></div><p><b>Запомни / Zapamiętaj:</b> разложение Лапласа работает для квадратных матриц любого порядка; выбор строки с нулями экономит вычисления. На следующем занятии преподаватель обещал завершить тему определителей и показать ещё один метод.</p></section>
+<section><h2>6. Самопроверка / Samokontrola</h2><details><summary>Почему выгодно выбирать строку с нулями? / Dlaczego wybieramy wiersz z zerami?</summary><p>Потому что нулевые элементы дают нулевые слагаемые, и соответствующие миноры вычислять не нужно. / Ponieważ składniki z zerami znikają.</p></details><details><summary>Какой знак у D₂₁? / Jaki znak ma D₂₁?</summary><p>Отрицательный: (−1)^(2+1) = −1. / Ujemny.</p></details><details><summary>Чему равен det(C)? / Ile wynosi det(C)?</summary><p>17.</p></details><details><summary>Чему равен det(E)? / Ile wynosi det(E)?</summary><p>90.</p></details></section><p><a href="index.html#notes">← Вернуться к конспектам</a></p></article><footer>CloudPath · DSW Ideis</footer></main><script src="site-enhancements.js"></script></body></html>
