@@ -130,7 +130,7 @@
     }
   ];
 
-  builtins.splice(2,0,{id:'builtin-algebra-2026-10-23',builtin:true,icon:'▦',title:'Линейная алгебра — матрицы 23 октября',subject:'algebra',date:'2026-10-23',tags:['матрицы','алгебра','умножение'],topics:['Размер матрицы','Сложение','Скаляр','Произведение матриц'],summary:'Определение матрицы, действия и пошаговый алгоритм умножения с проверкой размеров.',content:'macierz wiersz kolumna dodawanie mnożenie skalar iloczyn macierzy',href:'lessons-2026-10-23.html#algebra',updated:1792767600000});
+  builtins.splice(2,0,{id:'builtin-algebra-2026-10-23',builtin:true,icon:'▦',title:'Линейная алгебра — матрицы и определители 23 октября',subject:'algebra',date:'2026-10-23',tags:['матрицы','алгебра','определитель'],topics:['Действия с матрицами','Симметричность','Определитель','Правило Саррюса'],summary:'Матрицы, их произведение, симметричность, свойства определителя и вычисления для 2×2 и 3×3.',content:'macierz symetryczna antysymetryczna wyznacznik determinant Sarrus iloczyn macierzy',href:'lessons-2026-10-23.html#algebra',updated:1792771200000});
 
   function ensureBuiltins(){
     const byId=new Map(notes.map(n=>[n.id,n]));
