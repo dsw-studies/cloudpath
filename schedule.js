@@ -99,7 +99,7 @@
       ['10:45–12:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
       ['12:30–14:00','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 216','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
       ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 216','mgr inż. Mateusz Hyk','Zaliczenie ocena']
-    ]}
+    ]},
 
     {date:'2026-10-29',free:true,items:[]},
     {date:'2026-10-30',remote:true,items:[
