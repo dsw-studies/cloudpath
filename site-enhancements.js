@@ -14,7 +14,24 @@
     'schedule.html': ['🗓 Расписание', '🗓 Plan zajęć', '🗓 Schedule'],
     'lectures.html': ['📖 Конспекты', '📖 Notatki', '📖 Notes'],
     'tasks.html': ['✓ Задачи', '✓ Zadania', '✓ Tasks'],
-    'study-hub.html': ['◈ Полезное', '◈ Przydatne', '◈ Useful']
+    'glossary.html': ['Глоссарий (чайник)', 'Słowniczek (dla początkujących)', 'Glossary (beginner)'],
+    'semesters.html': ['Семестры 1–7', 'Semestry 1–7', 'Semesters 1–7'],
+    'specdeep.html': ['Спец. курсы подробно', 'Kursy specjalizacyjne szczegółowo', 'Specialization courses in detail'],
+    'languages.html': ['Языки', 'Języki', 'Languages'],
+    'syntax.html': ['Синтаксис языков', 'Składnia języków', 'Language syntax'],
+    'courses.html': ['Бесплатные курсы', 'Darmowe kursy', 'Free courses'],
+    'english.html': ['Английский', 'Angielski', 'English'],
+    'ai.html': ['Работа с ИИ', 'Praca z AI', 'Working with AI'],
+    'tools.html': ['Приложения', 'Aplikacje', 'Apps'],
+    'setup.html': ['Установка с нуля', 'Instalacja od zera', 'Setup from scratch'],
+    'certs.html': ['Сертификаты', 'Certyfikaty', 'Certificates'],
+    'finance.html': ['Финансы / RKM', 'Finanse / RKM', 'Finance / RKM'],
+    'housing.html': ['Жильё', 'Mieszkanie', 'Housing'],
+    'parttime.html': ['Подработка', 'Praca dodatkowa', 'Part-time work'],
+    'legal.html': ['Легализация пребывания', 'Legalizacja pobytu', 'Stay legalization'],
+    'faq.html': ['FAQ — если что-то пошло не так', 'FAQ — gdy coś pójdzie nie tak', 'FAQ — if something goes wrong'],
+    'resources.html': ['Ресурсы', 'Zasoby', 'Resources'],
+    'university.html': ['ABC студента DSW Ideis', 'ABC studenta DSW Ideis', 'DSW Ideis student ABC']
   };
 
   const globalText = {
