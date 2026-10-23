@@ -91,7 +91,7 @@
     apply();
     const host=document.getElementById('notesList');
     if(host){
-      new MutationObserver(()=>apply()).observe(host,{childList:true,subtree:true});
+      new MutationObserver(()=>apply()).observe(host,{childList:true});
     }
     const filter=document.getElementById('subjectFilter');
     if(filter) new MutationObserver(()=>apply()).observe(filter,{childList:true});
