@@ -130,6 +130,29 @@
   const idx = lang => LANGS.indexOf(lang);
   const pick = (tr, lang) => tr[Math.max(0, idx(lang))] || tr[0];
 
+  // A single navigation component for all CloudPath pages, including legacy pages.
+  // Build it from the same canonical list rather than relying on stale page markup.
+  const unifiedSidebarCss = document.createElement('style');
+  unifiedSidebarCss.textContent = `
+    .toc{position:fixed!important;left:0!important;top:0!important;bottom:0!important;width:250px!important;max-width:250px!important;height:100vh!important;overflow-y:auto!important;padding:24px 16px!important;background:#0d1826!important;border-right:1px solid #223349!important;z-index:30!important;display:block!important;box-sizing:border-box!important}
+    .toc .brand{display:block!important;font:800 18px Consolas,monospace!important;color:#4fd8c4!important;letter-spacing:.08em!important;margin:0 10px 18px!important}
+    .toc a{display:block!important;text-decoration:none!important;color:#7e92a8!important;padding:8px 10px!important;border-radius:8px!important;font-size:13px!important;line-height:1.5!important;margin:2px 0!important;background:transparent!important;border:0!important;box-shadow:none!important;width:auto!important;text-align:left!important}
+    .toc a:hover,.toc a.active{background:#152536!important;color:#e7ecf2!important}
+    .toc a.active{color:#4fd8c4!important}
+    @media(max-width:850px){.toc{position:relative!important;width:100%!important;max-width:none!important;height:auto!important;max-height:210px!important;overflow:auto!important;border-right:0!important;border-bottom:1px solid #223349!important}.main{margin-left:0!important}}
+    @media(min-width:851px){body:has(>.toc)>.main{margin-left:250px!important}}
+  `;
+  document.head.appendChild(unifiedSidebarCss);
+  const canonicalNav = document.querySelector('.toc');
+  if(canonicalNav){
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    const navHtml = Object.entries(navLabels).map(([href,labels])=>{
+      const active=href===currentPage?' class="active" aria-current="page"':'';
+      return '<a href="'+href+'"'+active+' data-i18n-ru="'+labels[0]+'" data-i18n-pl="'+labels[1]+'" data-i18n-en="'+labels[2]+'">'+labels[0]+'</a>';
+    }).join('');
+    canonicalNav.innerHTML='<div class="brand">CloudPath</div>'+navHtml;
+  }
+
   const nav = document.querySelector('.toc');
   if (nav) {
     nav.setAttribute('aria-label', 'Основная навигация');
