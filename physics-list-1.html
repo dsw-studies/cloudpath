@@ -448,4 +448,10 @@
  • Podstaw liczby wraz z jednostkami.
  • Sprawdź jednostkę końcową i rząd wielkości.
  • W zadaniu wektorowym podaj zarówno składowe, jak i moduł/kierunek, jeśli są wymagane.
- • Jeśli treść dopuszcza wiele wyników albo wymaga założenia, jawnie to zaznacz.</div></details></section></div><footer>CloudPath · Fizyka I</footer></main><script src="site-enhancements.js?v=20261023-3"></script><script src="search-data.js?v=20261023-3"></script><script src="search-widget.js?v=20261023-3"></script></body></html>
+ • Jeśli treść dopuszcza wiele wyników albo wymaga założenia, jawnie to zaznacz.</div></details></section></div><footer>CloudPath · Fizyka I</footer></main><script src="site-enhancements.js?v=20261023-3"></script><script src="search-data.js?v=20261023-3"></script><script src="search-widget.js?v=20261023-3"></script><script>
+const pdfLink=document.querySelector('a[download]');
+if(pdfLink && pdfLink.href.startsWith('data:application/pdf;base64,')){
+ const bytes=Uint8Array.from(atob(pdfLink.href.split(',')[1]),c=>c.charCodeAt(0));
+ pdfLink.href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
+}
+</script></body></html>
