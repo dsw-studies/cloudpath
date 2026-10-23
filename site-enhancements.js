@@ -5,15 +5,18 @@
   // Legacy pages still carry their original inline CSS. Load the current
   // CloudPath design last so every section uses the same shell as Schedule.
   const ensureSharedStylesheet = (file) => {
-    const alreadyLoaded = [...document.querySelectorAll('link[rel="stylesheet"]')]
-      .some((link) => {
+    const current = [...document.querySelectorAll('link[rel="stylesheet"]')]
+      .find((link) => {
         try { return new URL(link.href, location.href).pathname.endsWith(`/${file}`); }
         catch { return false; }
       });
-    if (alreadyLoaded) return;
+    if (current) {
+      current.href = `${file}?v=20261023-7`;
+      return;
+    }
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `${file}?v=20261023-6`;
+    link.href = `${file}?v=20261023-7`;
     document.head.append(link);
   };
   ensureSharedStylesheet('dashboard.css');
@@ -184,11 +187,20 @@
 
   const style = document.createElement('style');
   style.textContent = `
+    html,body,*{scrollbar-width:none!important;-ms-overflow-style:none!important}
+    html::-webkit-scrollbar,body::-webkit-scrollbar,*::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+    body>nav.toc{position:fixed!important;inset:0 auto 0 0!important;display:block!important;width:250px!important;height:100vh!important;padding:24px 16px!important;margin:0!important;overflow-x:hidden!important;overflow-y:auto!important;background:#0d1826!important;border:0!important;border-right:1px solid #223349!important;border-radius:0!important;z-index:50!important;box-sizing:border-box!important;white-space:normal!important}
+    body>nav.toc .brand{display:block!important;width:auto!important;margin:0 10px 18px!important;padding:0!important;color:#4fd8c4!important;font:800 18px/1.5 "SFMono-Regular",Consolas,"Liberation Mono",monospace!important;letter-spacing:.08em!important;text-transform:none!important;background:none!important;border:0!important}
+    body>nav.toc .brand::before,body>nav.toc .brand::after{content:none!important;display:none!important}
+    body>nav.toc a{display:block!important;width:auto!important;margin:2px 0!important;padding:8px 10px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:#7e92a8!important;font:400 13px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif!important;letter-spacing:normal!important;text-transform:none!important;text-decoration:none!important;box-shadow:none!important;white-space:normal!important}
+    body>nav.toc a:hover,body>nav.toc a.active{color:#e7ecf2!important;background:#152536!important;border:0!important;text-decoration:none!important}
+    body>nav.toc a.active{color:#4fd8c4!important}
+    body>nav.toc~.main{margin-left:250px!important}
     #langSwitcher{position:fixed!important;top:14px!important;right:18px!important;bottom:auto!important;z-index:9999!important;display:flex!important;gap:5px!important;padding:5px!important;border:1px solid rgba(126,146,168,.34)!important;background:rgba(11,20,32,.96)!important;backdrop-filter:blur(10px);border-radius:10px!important;box-shadow:0 8px 28px rgba(0,0,0,.35)!important}
     #langSwitcher .lang-btn{border:1px solid #2d4258!important;background:#111d2c!important;color:#9fb0c2!important;padding:7px 10px!important;border-radius:7px!important;cursor:pointer!important;font:700 11px ui-monospace,SFMono-Regular,Consolas,monospace!important;box-shadow:none!important}
     #langSwitcher .lang-btn:hover{color:#e7ecf2!important;border-color:#4fd8c4!important}
     #langSwitcher .lang-btn[aria-pressed="true"]{background:#4fd8c4!important;color:#071a18!important;border-color:#4fd8c4!important}
-    @media(max-width:900px){#langSwitcher{top:10px!important;right:10px!important;bottom:auto!important}}
+    @media(max-width:850px){body>nav.toc{position:relative!important;inset:auto!important;width:100%!important;height:auto!important;max-height:190px!important;padding:12px 14px!important;border-right:0!important;border-bottom:1px solid #223349!important}body>nav.toc .brand{margin-bottom:8px!important}body>nav.toc~.main{margin-left:0!important}#langSwitcher{top:10px!important;right:10px!important;bottom:auto!important}}
   `;
   document.head.append(style);
 

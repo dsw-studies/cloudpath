@@ -1,6 +1,14 @@
 /* Shared polish and accessibility layer for CloudPath. */
 :root { color-scheme: dark; }
 
+/* Keep scrolling enabled while hiding browser chrome on every page and panel. */
+html, body, * { scrollbar-width: none; -ms-overflow-style: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 body { text-rendering: optimizeLegibility; }
 
 /* The language switcher must never float over page controls/content. */
@@ -169,8 +177,9 @@ body > nav.toc {
   border-right: 1px solid #223349;
   border-bottom: 0;
   z-index: 50;
-  scrollbar-width: auto;
+  scrollbar-width: none;
 }
+body > nav.toc::-webkit-scrollbar { display: none; width: 0; height: 0; }
 body > nav.toc .brand {
   display: block;
   width: auto;
