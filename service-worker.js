@@ -1,4 +1,4 @@
-const CACHE = 'cloudpath-v18';
+const CACHE = 'cloudpath-v19';
 const CORE = [
   '/',
   '/index.html',
