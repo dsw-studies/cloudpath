@@ -11,12 +11,12 @@
         catch { return false; }
       });
     if (current) {
-      current.href = `${file}?v=20261024-1`;
+      current.href = `${file}?v=20261024-2`;
       return;
     }
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `${file}?v=20261024-1`;
+    link.href = `${file}?v=20261024-2`;
     document.head.append(link);
   };
   ensureSharedStylesheet('dashboard.css');
