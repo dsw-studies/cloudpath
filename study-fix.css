@@ -36,3 +36,51 @@ body {
 .pdf-panel {
   color: var(--study-text);
 }
+
+.bundle-files {
+  margin: 28px 0;
+  overflow: hidden;
+  border: 1px solid #31546b;
+  border-radius: 18px;
+  background: #0c1926;
+}
+
+.bundle-file-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px;
+}
+
+.bundle-file-list button {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 13px;
+  border: 1px solid #29495e;
+  border-radius: 12px;
+  background: #112337;
+  color: #e7ecf2;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bundle-file-list button:hover,
+.bundle-file-list button.active {
+  border-color: #4fbda9;
+  background: #17384a;
+}
+
+.bundle-file-list button > span {
+  color: #72d5c5;
+  font: 800 12px ui-monospace, Consolas, monospace;
+}
+
+.bundle-file-list strong { overflow-wrap: anywhere; }
+.bundle-file-list small { color: #86a8ba; white-space: nowrap; }
+.pdf-panel-head a { color: #76dfcf; font-weight: 800; text-decoration: none; }
+
+@media (max-width: 760px) {
+  .bundle-file-list { grid-template-columns: 1fr; }
+}
