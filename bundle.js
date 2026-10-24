@@ -26,37 +26,43 @@
   const id = new URLSearchParams(location.search).get('id');
   const bundle = BUNDLES[id];
   const page = document.querySelector('#bundlePage');
-  if (!bundle) {
-    document.title = 'Материал не найден — CloudPath';
-    page.innerHTML = '<header class="material-hero"><p class="material-subject">CloudPath</p><h1>Материал не найден</h1><p>Вернись к конспектам и выбери другую подборку.</p></header>';
-    return;
-  }
-
-  document.title = `${bundle.title} — CloudPath`;
-  document.querySelector('#bundleSubject').textContent = bundle.subject;
-  document.querySelector('#bundleTitle').textContent = bundle.title;
-  document.querySelector('#bundleDescription').textContent = bundle.description;
-  document.querySelector('#bundleSummary').textContent = bundle.summary;
-  document.querySelector('#fileCount').textContent = `${bundle.files.length} ${bundle.files.length === 1 ? 'документ' : 'документов'}`;
-
-  const list = document.querySelector('#bundleFileList');
-  const viewer = document.querySelector('#bundleViewer');
-  const viewerTitle = document.querySelector('#viewerTitle');
-  const download = document.querySelector('#downloadPdf');
-  const openFile = (file, button) => {
-    viewer.src = file.file;
-    viewerTitle.textContent = file.title;
-    download.href = file.file;
-    download.setAttribute('download', '');
-    list.querySelectorAll('button').forEach(x => x.classList.remove('active'));
-    button.classList.add('active');
+  if (!bundle) { document.title='Материал не найден — CloudPath'; page.innerHTML='<h1>Материал не найден</h1><a href="lectures.html">Вернуться к конспектам</a>'; return; }
+  document.title=bundle.title+' — CloudPath';
+  document.querySelector('#bundleSubject').textContent=bundle.subject;
+  document.querySelector('#bundleTitle').textContent=bundle.title;
+  document.querySelector('#bundleDescription').textContent=bundle.description;
+  document.querySelector('#bundleSummary').textContent=bundle.summary;
+  const content=document.querySelector('#bundleContent'), sources=document.querySelector('#bundleSources');
+  const map={
+    'ascii-unicode.pdf':['Кодовая точка и кодировка','Unicode назначает символам номера, а UTF-8/16/32 определяют байтовое представление. Один символ не обязан занимать один байт.','\\text{UTF-8: } U+0000..U+007F \\to 1\\text{ байт}','ASCII — лишь небольшой исторический набор; UTF-8 сохраняет ASCII-совместимость и расширяется для других письменностей.'],
+    'number-systems-cheatsheet.pdf':['Перевод между основаниями','Для целого числа дели на новое основание и собирай остатки снизу вверх. Для обратного перевода суммируй цифры с весами разрядов.','(a_na_{n-1}\\ldots a_0)_b=\\sum a_i b^i','75₁₀: 75÷16=4 остаток 11(B), 4÷16=0 остаток 4; значит 75₁₀=4B₁₆.'],
+    'number-system-conversion.pdf':['Алгоритм конверсии','Основание задаёт вес каждого разряда. Проверяй вычисление обратным переводом в десятичную запись.','(101101)_2=1\\cdot2^5+0\\cdot2^4+1\\cdot2^3+1\\cdot2^2+0\\cdot2+1=45','Чтобы двоичное число перевести в восьмеричное, сгруппируй биты по три; для hex — по четыре.'],
+    'binary-system.pdf':['Двоичная запись','В системе основания 2 разрешены цифры 0 и 1; каждый следующий разряд справа имеет вдвое больший вес.','(1101)_2=8+4+0+1=13_{10}','Двоичный разряд удобно мыслить как выключатель: 0 — вклад отсутствует, 1 — вес степени двойки включён.'],
+    'ternary-system.pdf':['Троичная запись','Троичная система использует цифры 0, 1 и 2. Значение разряда растёт в три раза при движении влево.','(102)_3=1\\cdot3^2+0\\cdot3+2=11_{10}','Для проверки всегда раскрой число в сумму степеней основания.'],
+    'octal-system.pdf':['Восьмеричная система','Основание 8 позволяет кодировать каждую цифру тремя битами, поскольку 8=2³.','(66)_8=6\\cdot8+6=54_{10}=110110_2','Связь с двоичной записью особенно удобна при чтении битовых масок и старых форматов.'],
+    'hex-system.pdf':['Шестнадцатеричная система','Цифры A–F означают десятичные значения 10–15. Одна hex-цифра представляет ровно четыре бита.','(4B)_{16}=4\\cdot16+11=75_{10}','Например, двоичная тетрада 1010 соответствует A, а 1111 — F.'],
+    'arithmetic-operations.pdf':['Арифметика в позиционной системе','Перенос в следующий разряд происходит, когда сумма цифр достигает основания b; заём при вычитании добавляет b к текущему разряду.','(a+b)_b: \\text{если }a+b\\ge b, \\text{запиши }a+b-b\\text{ и перенеси }1','В двоичной системе 1+1=10₂: в текущем разряде 0, перенос 1.'],
+    'boolean-algebra.pdf':['Булева алгебра','Булевы переменные принимают значения 0 или 1. Операции И, ИЛИ и НЕ образуют выражения логики.','x\\land1=x,\\quad x\\lor0=x,\\quad x\\land\\neg x=0','Законы де Моргана: отрицание конъюнкции равно дизъюнкции отрицаний, и наоборот.'],
+    'logic-gates.pdf':['Логические элементы','Вентиль реализует логическую операцию электрической схемой. AND выдаёт 1 лишь когда оба входа равны 1; OR — когда хотя бы один вход 1.','\\operatorname{NAND}(x,y)=\\neg(x\\land y)','NAND универсален: из NAND можно построить NOT, AND и OR.'],
+    'logic-functions.pdf':['Функция и схема','Таблица истинности перечисляет выход для каждой комбинации входов. Затем выражение упрощают булевыми тождествами и собирают из вентилей.','f(x,y)=x\\land\\neg y','Для двух входов всего 2²=4 строки таблицы. Сверь каждый выход схемы с таблицей, а не только один пример.'],
+    'message-encryption.pdf':['Шифр и ключ','Шифрование преобразует исходное сообщение в шифротекст с помощью алгоритма и ключа. Безопасность не должна зависеть от секретности алгоритма.','E_k(m)=c,\\qquad D_k(c)=m','Шифр Цезаря сдвигает буквы по модулю размера алфавита; малое пространство ключей легко перебрать.'],
+    'intro-cryptography.pdf':['Классическая криптография','Классические шифры показывают подстановку, перестановку и модульную арифметику, но не защищают современную переписку.','c=(m+k)\\bmod 26','Сдвиг Цезаря шифрует буквы по кольцу; частотный анализ помогает ломать простую подстановку.'],
+    'formal-grammar.pdf':['Формальная грамматика','Грамматика задаёт правила порождения строк из алфавита. Нетерминал заменяется по продукции, пока не получена строка из терминальных символов.','G=(N,\\Sigma,P,S)','Например, S→aSb | ε порождает строки aⁿbⁿ: ε, ab, aabb, aaabbb.'],
+    'computer-security.pdf':['Модель безопасности','Политика безопасности описывает активы, угрозы, допустимые действия и меры защиты. Сначала определяют риск, затем выбирают контроль.','\\text{Риск}\\approx\\text{вероятность угрозы}\\times\\text{ущерб}','Защита в глубину сочетает уровни: учётные данные, обновления, резервирование, ограничение доступа и обучение пользователей.'],
+    'cryptology-08.pdf':['Обмен ключом Диффи — Хеллмана','Две стороны могут согласовать общий секрет по открытому каналу. Основа — сложность дискретного логарифмирования в подходящей группе.','A=g^a\\bmod p,\\quad B=g^b\\bmod p,\\quad K=B^a=A^b\\bmod p','Без аутентификации обмен уязвим для посредника; DH сам по себе не подтверждает личность собеседника.'],
+    'cryptology-01-02.pdf':['Термины криптологии','Криптография строит способы защиты, криптоанализ изучает их слабости. Открытый текст превращается в шифротекст и должен корректно восстанавливаться.','D_k(E_k(m))=m','Определи модель угроз: что знает атакующий и какую цель он преследует. От этого зависит оценка схемы.'],
+    'cryptology-03.pdf':['Логические функции в криптологии','Булевы функции применяют в построении преобразований над битами. Нелинейные комбинации затрудняют восстановление входа по наблюдениям.','x\\oplus0=x,\\quad x\\oplus1=\\neg x','XOR особенно нагляден: одинаковые биты дают 0, разные — 1. Повторное XOR тем же ключом возвращает исходный бит.'],
+    'cryptology-04-05.pdf':['Симметричная и открытая криптография','В симметричной схеме стороны делят секретный ключ. В асимметричной используют связанную пару открытого и закрытого ключей.','\\text{симметрично: } E_k,D_k;\\qquad\\text{асимметрично: }(pk,sk)','Симметричное шифрование обычно эффективно для данных; открытый ключ помогает обмену и цифровой подписи.'],
+    'cryptology-06-07.pdf':['Блочные шифры','Блочный шифр преобразует блок фиксированного размера с ключом; режим работы связывает множество блоков сообщения.','C_i=E_k(P_i\\oplus C_{i-1})','Не переиспользуй nonce/IV там, где режим требует уникальности; детали безопасности зависят от корректного режима.'],
+    'foundations-overview.pdf':['Карта основ информатики','Информатика изучает представление, преобразование и передачу информации. Абстракции помогают описывать вычисления независимо от конкретного устройства.','\\text{ввод}\\to\\text{представление}\\to\\text{алгоритм}\\to\\text{результат}','Связывай темы: системы счисления описывают представление, логика — условия, алгоритмы — шаги обработки.'],
+    'theoretical-foundations.pdf':['Теоретические основы','Модели вычислений и формальные языки позволяют строго рассуждать о том, какие задачи можно решить и как описать алгоритм.','\\text{алфавит}\\to\\text{строки}\\to\\text{язык}\\to\\text{распознаватель}','Отделяй синтаксис (какие строки допустимы) от семантики (что эти строки означают).'],
+    'binary-arithmetic-lecture.pdf':['Целые числа и двоичная арифметика','Разрядная сетка ограничена числом битов. Для знакового U2 диапазон n-битного числа асимметричен.','-2^{n-1}\\le x\\le2^{n-1}-1','При сложении двух n-битных чисел следи за переполнением: битовый результат может выйти за представимый диапазон.']
   };
-  bundle.files.forEach((file, index) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.innerHTML = `<span>${String(index + 1).padStart(2, '0')}</span><strong>${file.title}</strong><small>${file.pages} стр.</small>`;
-    button.addEventListener('click', () => openFile(file, button));
-    list.append(button);
-    if (index === 0) openFile(file, button);
+  const fallback=['Главная идея','Сначала выдели понятия и их связи, затем проверь их на конкретном примере. Не заучивай отдельный ответ без алгоритма.','\\text{определение}\\to\\text{метод}\\to\\text{пример}\\to\\text{проверка}','Сформулируй своими словами, что означает каждый символ и почему операция допустима.'];
+  bundle.files.forEach((file,i)=>{
+    const c=map[file.file.split('/').pop()]||fallback, card=document.createElement('article'); card.className='lesson-card';
+    card.innerHTML='<span class="lesson-number">'+String(i+1).padStart(2,'0')+'</span><h2>'+file.title+': '+c[0]+'</h2><p>'+c[1]+'</p><div class="formula">\\['+c[2]+'\\]</div><p class="worked-example"><b>Пример и пояснение.</b> '+c[3]+'</p><a class="source-link" href="'+file.file+'" target="_blank" rel="noopener">Исходный PDF · '+file.pages+' стр. ↗</a>';
+    content.append(card);
   });
+  const math=document.createElement('script'); window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}}; math.src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'; math.defer=true; document.head.append(math);
 })();

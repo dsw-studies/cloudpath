@@ -1,4 +1,4 @@
-const CACHE = 'cloudpath-v24';
+const CACHE = 'cloudpath-v25';
 const CORE = [
   '/',
   '/index.html',
@@ -6,6 +6,9 @@ const CORE = [
   '/laplace-2026-10-23.html',
   '/study-materials.html',
   '/physics-list-1.html',
+  '/algebra-list-1.html',
+  '/analysis-list-1.html',
+  '/analysis-list-2.html',
   '/dashboard.css',
   '/dashboard.js',
   '/dashboard-i18n.js',
@@ -20,6 +23,8 @@ const CORE = [
   '/material.js',
   '/bundle.html',
   '/bundle.js',
+  '/authored-study.css',
+  '/physics-authored.js',
   '/study-hub.html',
   '/schedule.js',
   '/enhanced.css',

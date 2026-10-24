@@ -358,4 +358,10 @@
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(() => {}));
   }
+
+  if (location.pathname.endsWith('/physics-list-1.html') || location.pathname === '/physics-list-1.html') {
+    const authored = document.createElement('script');
+    authored.src = 'physics-authored.js?v=20261024-1';
+    document.body.append(authored);
+  }
 })();
