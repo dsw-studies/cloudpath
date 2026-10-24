@@ -1,4 +1,9 @@
 (() => {
+  const contrastFix = document.createElement('link');
+  contrastFix.rel = 'stylesheet';
+  contrastFix.href = 'study-fix.css?v=20261024-1';
+  document.head.append(contrastFix);
+
   const MATERIALS = {
     'physics-lecture-1': {section:'lectures',subject:'Fizyka 1',title:'Величины, единицы и векторы',description:'Физические величины, размерности, единицы СИ, скаляры и векторы.',summary:'Лекционный PDF: основные физические величины, работа с единицами измерения и введение в векторное описание.',drive:'1-Zs7LVd_IhENqi_fAwSvdy4QkfkPMcAJ'},
     'physics-lecture-2': {section:'lectures',subject:'Fizyka 1',title:'Кинематика',description:'Перемещение, скорость, ускорение и описание движения.',summary:'Лекционный PDF по кинематике: положение тела, траектория, перемещение, скорость и ускорение.',drive:'1mBoCvUiGlxvyvGdBAOEBcs5WBJWrdD2w'},
