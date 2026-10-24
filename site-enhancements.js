@@ -11,12 +11,12 @@
         catch { return false; }
       });
     if (current) {
-      current.href = `${file}?v=20261024-2`;
+      current.href = `${file}?v=20261024-3`;
       return;
     }
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `${file}?v=20261024-2`;
+    link.href = `${file}?v=20261024-3`;
     document.head.append(link);
   };
   ensureSharedStylesheet('dashboard.css');
@@ -43,6 +43,7 @@
     'index.html': ['⌂ Главная', '⌂ Start', '⌂ Home'],
     'schedule.html': ['🗓 Расписание', '🗓 Plan zajęć', '🗓 Schedule'],
     'lectures.html': ['📖 Конспекты', '📖 Notatki', '📖 Notes'],
+    'tasks.html': ['✓ Задания', '✓ Zadania', '✓ Tasks'],
     'glossary.html': ['Глоссарий (чайник)', 'Słowniczek (dla początkujących)', 'Glossary (beginner)'],
     'semesters.html': ['Семестры 1–7', 'Semestry 1–7', 'Semesters 1–7'],
     'specdeep.html': ['Спец. курсы подробно', 'Kursy specjalizacyjne szczegółowo', 'Specialization courses in detail'],
