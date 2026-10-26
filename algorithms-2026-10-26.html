@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Алгоритмы сортировки и рекурсия · CloudPath</title>
+  <link rel="stylesheet" href="dashboard.css?v=20261024-1"><link rel="stylesheet" href="enhanced.css?v=20261024-2">
+  <style>
+    .lecture{max-width:980px;margin:auto;padding:30px 22px 90px;line-height:1.72}.lecture h1{font-size:clamp(28px,4vw,44px);line-height:1.15}.lecture h2{margin-top:38px}.lecture h3{margin-top:25px}.panel{padding:20px;border:1px solid #345069;border-radius:14px;background:#122235;margin:18px 0}.formula{font:600 1.08rem/1.7 Georgia,serif;text-align:center;padding:14px;background:#0b1826;border-radius:10px;color:#dff7f0}.lecture pre{overflow:auto;padding:16px;border-radius:10px;background:#0b1826;color:#dcebf3;line-height:1.5}.tag,.muted{opacity:.75}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}.mini{padding:15px;border:1px solid #345069;border-radius:12px;background:#102031}.lecture a{color:#78e6d5}
+  </style>
+</head>
+<body><nav class="toc" aria-label="Навигация CloudPath"></nav><main class="main"><article class="lecture">
+  <p class="tag">26.10.2026 · Algorytmy i struktury danych · части 1–2 записи</p>
+  <h1>Алгоритмы поиска, разделяй-и-властвуй и сортировка</h1>
+  <p class="muted">Конспект объединяет две полученные части записи. Польские формулировки преподавателя местами распознаны неточно, поэтому обозначения и псевдокод приведены в стандартном виде.</p>
+  <p><a href="lectures.html">← К списку конспектов</a> · <a href="index.html#notes">Учебный кабинет</a></p>
+
+  <section><h2>1. Главная идея лекции / Główna idea</h2>
+    <div class="panel"><b>RU.</b> Алгоритм нужно оценивать не только по математической красоте, но и по корректности реализации, ограничениям компьютера и объёму входных данных. Для маленьких массивов простой алгоритм часто безопаснее: его легче проверить и в нём меньше ошибок. Для больших массивов выигрыш от правильной асимптотики становится огромным.<br><br><b>PL.</b> Algorytm oceniamy także przez poprawność implementacji, ograniczenia komputera i rozmiar danych. Dla małych danych prostsze rozwiązanie bywa lepsze, a dla dużych decyduje złożoność.</div>
+  </section>
+
+  <section><h2>2. Линейный и бинарный поиск</h2>
+    <p>Линейный поиск проверяет элементы один за другим. В худшем случае он делает <b>n</b> сравнений.</p>
+    <p>Бинарный поиск работает только в отсортированном массиве: на каждом шаге отбрасывается половина диапазона.</p>
+    <div class="formula">T<sub>linear</sub>(n)=O(n), &nbsp;&nbsp; T<sub>binary</sub>(n)=O(log<sub>2</sub>n)</div>
+    <pre>left = 0; right = n - 1
+while left &lt;= right:
+    mid = left + (right - left) // 2
+    if a[mid] == x: return mid
+    if a[mid] &lt; x: left = mid + 1
+    else: right = mid - 1
+return не найдено</pre>
+    <p><b>Важно:</b> проверка середины и выбор правильной половины должны быть согласованы. Ошибка в знаке сравнения или границе диапазона даёт неправильный результат или бесконечный цикл.</p>
+  </section>
+
+  <section><h2>3. Поиск минимума и максимума</h2>
+    <p>Для минимума начальное значение берём из первого элемента. Для каждого следующего элемента сравниваем его с текущим минимумом:</p>
+    <pre>min = a[0]
+for i = 1 … n-1:
+    if a[i] &lt; min:
+        min = a[i]</pre>
+    <p>Частая ошибка — поставить условие <code>min &gt; a[i]</code> наоборот или сравнивать не с текущим минимумом. Сравнение выполняется почти всегда, а присваивание — только при улучшении результата.</p>
+    <div class="grid"><div class="mini"><b>Линейный просмотр</b><br>Минимум: до n−1 сравнений.<br>Максимум: до n−1 сравнений.</div><div class="mini"><b>Попарный метод</b><br>Сравниваем элементы парами, меньший отправляем кандидатам минимума, больший — кандидатам максимума.</div></div>
+  </section>
+
+  <section><h2>4. Принцип «разделяй и властвуй»</h2>
+    <p>Задача разбивается на меньшие подзадачи. К каждой применяется тот же алгоритм, затем результаты объединяются. Это особенно естественно вместе с рекурсией.</p>
+    <div class="formula">T(n)=2T(n/2)+O(n) &nbsp;⇒&nbsp; T(n)=O(n log n)</div>
+    <p>Базовый случай рекурсии: массив длины 0 или 1 уже отсортирован.</p>
+  </section>
+
+  <section><h2>5. Сортировка слиянием / Merge sort</h2>
+    <ol><li>Разделить массив на две части.</li><li>Рекурсивно отсортировать обе части.</li><li>Слить два отсортированных массива, каждый раз выбирая меньший первый элемент.</li></ol>
+    <pre>mergeSort(A):
+    if length(A) &lt;= 1: return A
+    B, C = split(A)
+    return merge(mergeSort(B), mergeSort(C))</pre>
+    <p>При стабильном слиянии, если элементы равны, сначала берётся элемент из левой части. Так сохраняется исходный порядок равных элементов.</p>
+  </section>
+
+  <section><h2>6. Быстрая сортировка / Quick sort</h2>
+    <p>Выбирается опорный элемент (pivot), после чего массив разделяется на элементы, меньшие или равные pivot, и элементы, большие pivot. Выбор pivot влияет на скорость.</p>
+    <div class="formula">Средний случай: O(n log n) &nbsp;·&nbsp; худший случай: O(n²)</div>
+    <p>Если каждый раз выбирать самый маленький или самый большой элемент, разбиение получается неравномерным и рекурсия становится глубокой. Случайный или медианный pivot обычно надёжнее.</p>
+  </section>
+
+  <section><h2>7. Стабильность сортировки</h2>
+    <p>Сортировка стабильна, если равные ключи сохраняют взаимный порядок. Сортировка выбором обычно нестабильна: обмен найденного минимума с первым элементом может перескочить через равный элемент.</p>
+    <div class="panel"><b>Пример:</b> обозначим равные ключи как <code>2ₐ</code> и <code>2ᵦ</code>. Если до сортировки порядок <code>2ₐ, 2ᵦ</code>, нестабильный обмен может дать <code>2ᵦ, 2ₐ</code>.</div>
+  </section>
+
+  <section><h2>8. Что проверить в своей реализации</h2>
+    <ul><li>пустой массив и массив из одного элемента;</li><li>уже отсортированный и обратно отсортированный массив;</li><li>повторяющиеся элементы;</li><li>чётное и нечётное количество элементов;</li><li>границы индексов и условие остановки рекурсии;</li><li>переполнение при вычислении середины: использовать <code>left + (right-left)//2</code>.</li></ul>
+  </section>
+  <section><h2>9. Размер входных данных и сложность</h2>
+    <p>Размер данных — это не только длина массива. В разных задачах им может быть число элементов, вершин или рёбер графа, размер матрицы и т. п. Время работы алгоритма рассматривается как функция размера входа <code>n</code>, обычно в худшем случае.</p>
+    <div class="formula">T(n) — число элементарных операций; нас интересует скорость роста T(n) при больших n</div>
+    <p>Константные множители и младшие слагаемые обычно не определяют класс роста: <code>3n+7 = O(n)</code>, <code>2n²+n+4 = O(n²)</code>, <code>0,1n log n+30n = O(n log n)</code>.</p>
+    <div class="grid"><div class="mini"><b>O(1)</b><br>константное время; не зависит от n.</div><div class="mini"><b>O(log n)</b><br>каждый шаг уменьшает задачу, например бинарный поиск.</div><div class="mini"><b>O(n)</b><br>один проход по данным.</div><div class="mini"><b>O(n log n)</b><br>типичный класс эффективных сортировок.</div><div class="mini"><b>O(n²)</b><br>двойной проход; часто простые сортировки.</div><div class="mini"><b>O(2ⁿ)</b><br>экспоненциальный рост; быстро становится непрактичным.</div></div>
+  </section>
+  <section><h2>10. Нотация Big‑O</h2>
+    <p>Формально <code>f(n)=O(g(n))</code>, если существуют константы <code>C&gt;0</code> и <code>n₀</code>, такие что для всех <code>n≥n₀</code> выполняется:</p>
+    <div class="formula">0 ≤ f(n) ≤ C · g(n)</div>
+    <p>Например, для <code>f(n)=2n−1</code> можно взять <code>C=2</code> и <code>n₀=1</code>, потому что <code>2n−1≤2n</code>. Поэтому <code>2n−1=O(n)</code>.</p>
+    <p><b>Практический смысл:</b> более быстрый компьютер не всегда компенсирует худший алгоритм. Алгоритм <code>O(n²)</code> на машине, которая в 1000 раз быстрее, всё равно может проиграть алгоритму <code>O(n log n)</code> на более медленной машине при достаточно большом <code>n</code>.</p>
+  </section>
+  <section><h2>Краткая памятка / Ściąga</h2><div class="panel"><b>Поиск:</b> линейный — O(n), бинарный — O(log n) и требует сортировки.<br><b>Merge sort:</b> стабилен, O(n log n), требует дополнительной памяти.<br><b>Quick sort:</b> обычно быстрый, но в худшем случае O(n²); важен pivot.<br><b>Разделяй и властвуй:</b> меньшие подзадачи + объединение результата.<br><b>Главная проверка:</b> корректность сравнений, границ и базового случая рекурсии.</div></section>
+  <p><a href="lectures.html">← Вернуться к конспектам</a></p>
+</article><footer>CloudPath · DSW Ideis</footer></main><script src="site-enhancements.js?v=20261024-3"></script></body></html>
