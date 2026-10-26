@@ -11,12 +11,12 @@
         catch { return false; }
       });
     if (current) {
-      current.href = `${file}?v=20261024-3`;
+      current.href = `${file}?v=20261026-1`;
       return;
     }
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `${file}?v=20261024-3`;
+    link.href = `${file}?v=20261026-1`;
     document.head.append(link);
   };
   ensureSharedStylesheet('dashboard.css');
@@ -361,7 +361,7 @@
 
   if (location.pathname.endsWith('/physics-list-1.html') || location.pathname === '/physics-list-1.html') {
     const authored = document.createElement('script');
-    authored.src = 'physics-authored.js?v=20261024-1';
+    authored.src = 'physics-authored.js?v=20261026-1';
     document.body.append(authored);
   }
 })();

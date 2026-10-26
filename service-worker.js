@@ -1,4 +1,4 @@
-const CACHE = 'cloudpath-v27';
+const CACHE = 'cloudpath-v28';
 const CORE = [
   '/',
   '/index.html',
@@ -33,7 +33,8 @@ const CORE = [
   '/search-data.js',
   '/search-widget.js',
   '/glossary-tooltips.js',
-  '/cloudpath-icon.svg'
+  '/cloudpath-icon.svg',
+  '/404.html'
 ];
 
 self.addEventListener('install', event => event.waitUntil(
@@ -49,14 +50,20 @@ self.addEventListener('activate', event => event.waitUntil(
 ));
 
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET' || new URL(event.request.url).origin !== location.origin) return;
+  const url = new URL(event.request.url);
+  if (event.request.method !== 'GET' || url.origin !== location.origin) return;
+  // Large PDFs and partial (Range) responses are not worth caching: they bloat
+  // storage and cache.put() rejects 206 responses anyway.
+  const cacheable = !url.pathname.endsWith('.pdf') && !event.request.headers.has('range');
   event.respondWith(
     fetch(event.request)
       .then(response => {
-        const copy = response.clone();
-        if (response.ok) caches.open(CACHE).then(cache => cache.put(event.request, copy)).catch(() => {});
+        if (cacheable && response.status === 200 && response.type === 'basic') {
+          const copy = response.clone();
+          caches.open(CACHE).then(cache => cache.put(event.request, copy)).catch(() => {});
+        }
         return response;
       })
-      .catch(() => caches.match(event.request).then(hit => hit || (event.request.mode === 'navigate' ? caches.match('/') : Response.error())))
+      .catch(() => caches.match(event.request, { ignoreSearch: true }).then(hit => hit || (event.request.mode === 'navigate' ? caches.match('/') : Response.error())))
   );
 });
