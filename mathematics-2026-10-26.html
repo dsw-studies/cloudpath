@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Отдельный конспект по математике: действительные числа, степени и вычисления.">
+<meta name="theme-color" content="#0b1420"><meta name="robots" content="noindex,nofollow,noarchive">
+<title>Математика: числа и степени — CloudPath</title>
+<link rel="icon" href="cloudpath-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="dashboard.css?v=20261026-1"><link rel="stylesheet" href="enhanced.css?v=20261026-1">
+<style>
+.math-page{max-width:980px;margin:auto;padding:28px 22px 90px;line-height:1.72}.math-page h1{font-size:clamp(28px,4vw,44px);line-height:1.15}.math-page h2{margin-top:34px}.math-page h3{margin-top:24px}.math-panel{padding:18px;border:1px solid #345069;border-radius:14px;background:#122235;margin:16px 0}.math-formula{font:600 1.08rem/1.8 Georgia,serif;text-align:center;padding:13px;background:#0b1826;border-radius:10px;color:#dff7f0;margin:12px 0;overflow-wrap:anywhere}.math-table{width:100%;border-collapse:collapse;margin:12px 0}.math-table th,.math-table td{padding:9px 10px;border-bottom:1px solid #345069;text-align:left;vertical-align:top}.math-table th{color:#a9c9ff}.math-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.math-mini{padding:14px;border:1px solid #345069;border-radius:12px;background:#102031}.math-muted{opacity:.78}.langbar{display:flex;gap:8px;justify-content:flex-end;margin:0 0 16px}.langbar button{border:1px solid #345069;background:#122235;color:#e8edf5;border-radius:999px;padding:8px 13px;cursor:pointer}.langbar button[aria-pressed=true]{background:#23515a;border-color:#72d8c5}.lang-pl{display:none}.show-pl .lang-ru{display:none}.show-pl .lang-pl{display:block}.math-page a{color:#78e6d5}.warn{border-left:4px solid #e5b65d}
+@media(max-width:600px){.math-page{padding:20px 14px 60px}.math-panel{padding:14px}.math-table th,.math-table td{padding:7px;font-size:.93rem}}
+</style></head>
+<body><nav class="toc" aria-label="Навигация CloudPath"></nav><main class="main"><article class="math-page">
+<div class="langbar" aria-label="Перевод страницы"><button type="button" data-set-lang="ru" aria-pressed="true">Русский</button><button type="button" data-set-lang="pl" aria-pressed="false">Polski</button></div>
+<div class="lang-ru">
+<p class="math-muted">26 октября 2026 · Математика · отдельный раздел</p>
+<h1>Действительные числа и степени</h1>
+<p>Конспект отделяет математические темы от курса «Алгоритмы и структуры данных». Основа — присланные расшифровки занятий: числовые множества, свойства степеней и вычислительные примеры.</p>
+<p><a href="lectures.html">← Ко всем конспектам</a></p>
+<div class="math-panel warn"><b>Границы материала.</b> В расшифровках также перечислен план курса: дроби, погрешности, проценты, интервалы, уравнения и неравенства с модулем, функции и системы. Здесь подробно разобраны только темы, которые есть в доступном тексте. Расшифровка файла от 17:36 длиннее соответствующего видео, поэтому её полноту нужно проверить.</div>
+<section><h2>1. Числовые множества</h2>
+<p>Числа объединяются во вложенные множества:</p>
+<div class="math-formula">ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ</div>
+<div class="math-grid">
+<div class="math-mini"><b>ℕ — натуральные</b><p>В этой лекции сюда включён ноль: 0, 1, 2, 3, …</p></div>
+<div class="math-mini"><b>ℤ — целые</b><p>Натуральные числа, ноль и противоположные им числа: …, −2, −1, 0, 1, 2, …</p></div>
+<div class="math-mini"><b>ℚ — рациональные</b><p>Числа вида <i>m/n</i>, где <i>m,n</i> — целые и <i>n ≠ 0</i>. Например, −3/4 и 5.</p></div>
+<div class="math-mini"><b>ℝ \ ℚ — иррациональные</b><p>Действительные числа, которые нельзя представить отношением двух целых чисел, например √2 и π.</p></div>
+</div>
+<p><b>Простые числа.</b> Натуральное число простое, если имеет ровно два положительных делителя: 1 и само себя. Число 1 не является ни простым, ни составным; первое простое число — 2.</p>
+</section>
+<section><h2>2. Степени: правила вычислений</h2>
+<p>Для ненулевого основания и целых показателей действуют правила:</p>
+<table class="math-table"><thead><tr><th>Правило</th><th>Формула</th><th>Пример</th></tr></thead><tbody>
+<tr><td>Умножение одинаковых оснований</td><td>a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup></td><td>2<sup>3</sup> · 2<sup>4</sup> = 2<sup>7</sup></td></tr>
+<tr><td>Деление одинаковых оснований</td><td>a<sup>m</sup> / a<sup>n</sup> = a<sup>m−n</sup></td><td>5<sup>6</sup> / 5<sup>3</sup> = 5<sup>3</sup></td></tr>
+<tr><td>Степень степени</td><td>(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></td><td>(2<sup>3</sup>)<sup>2</sup> = 2<sup>6</sup></td></tr>
+<tr><td>Нулевой показатель</td><td>a<sup>0</sup> = 1, если a ≠ 0</td><td>7<sup>0</sup> = 1</td></tr>
+<tr><td>Отрицательный показатель</td><td>a<sup>−n</sup> = 1/a<sup>n</sup></td><td>2<sup>−3</sup> = 1/8</td></tr>
+<tr><td>Одинаковый показатель</td><td>a<sup>n</sup> · b<sup>n</sup> = (ab)<sup>n</sup></td><td>2<sup>3</sup> · 5<sup>3</sup> = 10<sup>3</sup></td></tr>
+<tr><td>Дробный показатель</td><td>a<sup>n/m</sup> = <sup>m</sup>√(a<sup>n</sup>)</td><td>8<sup>1/3</sup> = 2</td></tr>
+</tbody></table>
+<p class="math-muted">Для корней в действительных числах учитывай область определения: например, корень чётной степени от отрицательного числа не является действительным.</p>
+</section>
+<section><h2>3. Разбор примеров</h2>
+<div class="math-panel"><b>Пример A. Представить одним степенным выражением</b><div class="math-formula">0,125<sup>3</sup> · 32<sup>−2</sup></div><p>Преобразуем числа к основанию 2: 0,125 = 1/8 = 2<sup>−3</sup>, а 32 = 2<sup>5</sup>.</p><div class="math-formula">(2<sup>−3</sup>)<sup>3</sup> · (2<sup>5</sup>)<sup>−2</sup> = 2<sup>−9</sup> · 2<sup>−10</sup> = <b>2<sup>−19</sup></b></div></div>
+<div class="math-panel"><b>Пример B. Свести к общей основе</b><div class="math-formula">(0,4)<sup>7</sup> · (2,5)<sup>−4</sup> / (2/5)<sup>5</sup></div><p>0,4 = 2/5, а 2,5 = 5/2 = (2/5)<sup>−1</sup>. Поэтому (2,5)<sup>−4</sup> = (2/5)<sup>4</sup>.</p><div class="math-formula">(2/5)<sup>7</sup> · (2/5)<sup>4</sup> / (2/5)<sup>5</sup> = (2/5)<sup>7+4−5</sup> = <b>(2/5)<sup>6</sup></b></div></div>
+<div class="math-panel"><b>Пример C. Сократить большие степени до вычисления</b><div class="math-formula">(5<sup>6</sup> + 20·5<sup>4</sup>) / (2·5<sup>6</sup> − 100·5<sup>3</sup>)</div><p>В числителе и знаменателе выносим 5<sup>3</sup>:</p><div class="math-formula">[5<sup>3</sup>(5<sup>3</sup> + 20·5)] / [5<sup>3</sup>(2·5<sup>3</sup> − 100)] = 225/150 = <b>3/2</b></div></div>
+</section>
+<section><h2>4. Что ещё заявлено в плане занятия</h2><p>По расшифровке преподаватель перечисляет, но не успевает полностью разобрать в доступном фрагменте:</p><ul><li>порядок действий, дроби и приближения;</li><li>абсолютную и относительную погрешность;</li><li>алгебраические выражения и формулы сокращённого умножения;</li><li>интервалы и проценты;</li><li>уравнения и неравенства с модулем;</li><li>понятие функции, графики и линейную функцию;</li><li>системы линейных уравнений и неравенств.</li></ul><p>Эти темы нужно оформлять отдельными блоками после сверки с полными материалами, а не выдавать список плана за готовый конспект.</p></section>
+<section><h2>5. Самопроверка</h2><ol><li>К какому множеству относится −7: ℕ, ℤ, ℚ или ℝ?</li><li>Вычисли: 3<sup>4</sup> · 3<sup>−2</sup>.</li><li>Представь 0,2<sup>3</sup> · 5<sup>−2</sup> одной степенью с основанием 5.</li><li>Почему выражение 4<sup>0</sup> равно 1, а 0<sup>0</sup> в этих правилах не определено?</li></ol><details><summary>Показать ответы</summary><ol><li>−7 ∈ ℤ; также −7 ∈ ℚ и ℝ.</li><li>3<sup>2</sup> = 9.</li><li>0,2 = 1/5 = 5<sup>−1</sup>; итог 5<sup>−5</sup>.</li><li>Правило a<sup>0</sup> = 1 применяется при a ≠ 0.</li></ol></details></section>
+<p><a href="lectures.html">← К списку конспектов</a></p>
+</div>
+<div class="lang-pl">
+<p class="math-muted">26 października 2026 · Matematyka · osobny dział</p>
+<h1>Liczby rzeczywiste i potęgi</h1>
+<p>Ta notatka jest oddzielona od przedmiotu „Algorytmy i struktury danych”. Opiera się na przesłanych transkrypcjach: zbiorach liczbowych, prawach działań na potęgach i przykładach obliczeniowych.</p>
+<p><a href="lectures.html">← Wszystkie notatki</a></p>
+<div class="math-panel warn"><b>Zakres materiału.</b> Transkrypcje wymieniają też plan kursu: ułamki, błędy przybliżeń, procenty, przedziały, równania i nierówności z wartością bezwzględną, funkcje oraz układy. Poniżej szczegółowo opracowano tylko zagadnienia obecne w dostępnym tekście. Transkrypcja pliku z 17:36 jest dłuższa od odpowiadającego jej filmu, więc jej kompletność wymaga weryfikacji.</div>
+<section><h2>1. Zbiory liczbowe</h2><p>Zbiory liczb są zagnieżdżone:</p><div class="math-formula">ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ</div>
+<div class="math-grid"><div class="math-mini"><b>ℕ — liczby naturalne</b><p>W tym wykładzie zero jest zaliczone do ℕ: 0, 1, 2, 3, …</p></div><div class="math-mini"><b>ℤ — liczby całkowite</b><p>Liczby naturalne, zero i liczby przeciwne: …, −2, −1, 0, 1, 2, …</p></div><div class="math-mini"><b>ℚ — liczby wymierne</b><p>Liczby postaci m/n, gdzie m,n są całkowite i n ≠ 0. Przykłady: −3/4 i 5.</p></div><div class="math-mini"><b>ℝ \ ℚ — liczby niewymierne</b><p>Liczby rzeczywiste, których nie można zapisać jako ilorazu dwóch liczb całkowitych, np. √2 i π.</p></div></div>
+<p><b>Liczby pierwsze.</b> Liczba naturalna jest pierwsza, jeśli ma dokładnie dwa dodatnie dzielniki: 1 i samą siebie. Liczba 1 nie jest ani pierwsza, ani złożona; najmniejszą liczbą pierwszą jest 2.</p></section>
+<section><h2>2. Potęgi: reguły obliczeń</h2><p>Dla niezerowej podstawy oraz całkowitych wykładników obowiązują następujące reguły:</p>
+<table class="math-table"><thead><tr><th>Reguła</th><th>Wzór</th><th>Przykład</th></tr></thead><tbody>
+<tr><td>Mnożenie potęg o tej samej podstawie</td><td>a<sup>m</sup> · a<sup>n</sup> = a<sup>m+n</sup></td><td>2<sup>3</sup> · 2<sup>4</sup> = 2<sup>7</sup></td></tr>
+<tr><td>Dzielenie potęg o tej samej podstawie</td><td>a<sup>m</sup> / a<sup>n</sup> = a<sup>m−n</sup></td><td>5<sup>6</sup> / 5<sup>3</sup> = 5<sup>3</sup></td></tr>
+<tr><td>Potęga potęgi</td><td>(a<sup>m</sup>)<sup>n</sup> = a<sup>mn</sup></td><td>(2<sup>3</sup>)<sup>2</sup> = 2<sup>6</sup></td></tr>
+<tr><td>Wykładnik zerowy</td><td>a<sup>0</sup> = 1, gdy a ≠ 0</td><td>7<sup>0</sup> = 1</td></tr>
+<tr><td>Wykładnik ujemny</td><td>a<sup>−n</sup> = 1/a<sup>n</sup></td><td>2<sup>−3</sup> = 1/8</td></tr>
+<tr><td>Ten sam wykładnik</td><td>a<sup>n</sup> · b<sup>n</sup> = (ab)<sup>n</sup></td><td>2<sup>3</sup> · 5<sup>3</sup> = 10<sup>3</sup></td></tr>
+<tr><td>Wykładnik ułamkowy</td><td>a<sup>n/m</sup> = <sup>m</sup>√(a<sup>n</sup>)</td><td>8<sup>1/3</sup> = 2</td></tr>
+</tbody></table><p class="math-muted">W zbiorze liczb rzeczywistych trzeba uwzględnić dziedzinę pierwiastka: pierwiastek parzystego stopnia z liczby ujemnej nie jest liczbą rzeczywistą.</p></section>
+<section><h2>3. Przykłady z rozwiązaniem</h2>
+<div class="math-panel"><b>Przykład A. Zapisz jako jedną potęgę</b><div class="math-formula">0,125<sup>3</sup> · 32<sup>−2</sup></div><p>Zapisujemy liczby przy podstawie 2: 0,125 = 1/8 = 2<sup>−3</sup>, a 32 = 2<sup>5</sup>.</p><div class="math-formula">(2<sup>−3</sup>)<sup>3</sup> · (2<sup>5</sup>)<sup>−2</sup> = 2<sup>−9</sup> · 2<sup>−10</sup> = <b>2<sup>−19</sup></b></div></div>
+<div class="math-panel"><b>Przykład B. Sprowadź do wspólnej podstawy</b><div class="math-formula">(0,4)<sup>7</sup> · (2,5)<sup>−4</sup> / (2/5)<sup>5</sup></div><p>0,4 = 2/5, a 2,5 = 5/2 = (2/5)<sup>−1</sup>. Zatem (2,5)<sup>−4</sup> = (2/5)<sup>4</sup>.</p><div class="math-formula">(2/5)<sup>7</sup> · (2/5)<sup>4</sup> / (2/5)<sup>5</sup> = (2/5)<sup>7+4−5</sup> = <b>(2/5)<sup>6</sup></b></div></div>
+<div class="math-panel"><b>Przykład C. Skróć potęgi przed obliczeniem</b><div class="math-formula">(5<sup>6</sup> + 20·5<sup>4</sup>) / (2·5<sup>6</sup> − 100·5<sup>3</sup>)</div><p>Wyłączamy 5<sup>3</sup> przed nawias w liczniku i mianowniku:</p><div class="math-formula">[5<sup>3</sup>(5<sup>3</sup> + 20·5)] / [5<sup>3</sup>(2·5<sup>3</sup> − 100)] = 225/150 = <b>3/2</b></div></div>
+</section>
+<section><h2>4. Tematy wymienione w planie zajęć</h2><p>Transkrypcja wymienia, ale nie omawia w pełni w dostępnym fragmencie:</p><ul><li>kolejność działań, ułamki i przybliżenia;</li><li>błąd bezwzględny i względny;</li><li>wyrażenia algebraiczne i wzory skróconego mnożenia;</li><li>przedziały i procenty;</li><li>równania i nierówności z wartością bezwzględną;</li><li>pojęcie funkcji, wykresy i funkcja liniowa;</li><li>układy równań i nierówności liniowych.</li></ul><p>Te zagadnienia należy opracować w kolejnych częściach po sprawdzeniu pełnych materiałów — listy planu nie traktujemy jako gotowej notatki.</p></section>
+<section><h2>5. Samokontrola</h2><ol><li>Do jakich zbiorów należy −7?</li><li>Oblicz: 3<sup>4</sup> · 3<sup>−2</sup>.</li><li>Zapisz 0,2<sup>3</sup> · 5<sup>−2</sup> jako jedną potęgę o podstawie 5.</li><li>Dlaczego 4<sup>0</sup> = 1, ale reguła nie obejmuje 0<sup>0</sup>?</li></ol><details><summary>Pokaż odpowiedzi</summary><ol><li>−7 ∈ ℤ, a więc także ℚ i ℝ.</li><li>3<sup>2</sup> = 9.</li><li>0,2 = 1/5 = 5<sup>−1</sup>; wynik 5<sup>−5</sup>.</li><li>Wzór a<sup>0</sup> = 1 stosuje się dla a ≠ 0.</li></ol></details></section>
+<p><a href="lectures.html">← Wszystkie notatki</a></p>
+</div>
+</article></main>
+<script src="site-enhancements.js?v=20261026-1"></script>
+<script>
+document.querySelectorAll('[data-set-lang]').forEach(button=>button.addEventListener('click',()=>{const isPl=button.dataset.setLang==='pl';document.body.classList.toggle('show-pl',isPl);document.documentElement.lang=isPl?'pl':'ru';document.querySelectorAll('[data-set-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));}));
+</script></body></html>
