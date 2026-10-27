@@ -91,7 +91,7 @@
   const current=subjects.find(s=>s.id===selected)||null;select.value=current?current.id:'all';
   select.addEventListener('change',()=>{location.href=select.value==='all'?'practice.html':`practice.html?subject=${encodeURIComponent(select.value)}`;});
   title.textContent=current?`${current.name} · ${current.ru}`:'Все предметы';note.textContent=current?current.note:'Выбери любой из предметов ниже: отдельная страница курса откроет только его тренировочные наборы. В каждой теме есть пример, подборка прошлых упражнений и генератор задач по трём уровням сложности.';
-  eyebrow.textContent=current?'Тренировочная страница предмета':'7 предметов · выбирай тему и тренируйся';
+  eyebrow.textContent=current?'Тренировочная страница предмета':'3 направления · выбирай предмет и тему';
   if(!current){
     const groupSpecs=[['Математика',['algebra','analysis']],['Информатика',['algorithms','python','foundations','crypto']],['Физика',['physics']]];
     topics.innerHTML=`<div class="course-grid">${groupSpecs.map(([label,ids])=>`<article class="course-card subject-group"><span class="count">Тренировка по темам и генерация задач</span><h2>${label}</h2><div class="group-links">${ids.map(id=>{const s=subjects.find(x=>x.id===id),n=(bank[id]||[]).length;return `<a href="practice.html?subject=${id}">${s.name}<br><span>${s.ru} · ${n} типов</span></a>`;}).join('')}</div></article>`).join('')}</div>`;
