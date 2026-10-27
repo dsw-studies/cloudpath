@@ -1,4 +1,4 @@
-const CACHE = 'cloudpath-v34';
+const CACHE = 'cloudpath-v35';
 const CORE = [
   '/',
   '/index.html',
@@ -18,6 +18,7 @@ const CORE = [
   '/study-table.js',
   '/schedule.html',
   '/lectures.html',
+  '/quadratic-functions-2026-10-27.html',
   '/tasks.html',
   '/practice.html',
   '/practice.js',
