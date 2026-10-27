@@ -44,7 +44,7 @@
     'schedule.html': ['🗓 Расписание', '🗓 Plan zajęć', '🗓 Schedule'],
     'lectures.html': ['📖 Конспекты', '📖 Notatki', '📖 Notes'],
     'tasks.html': ['✓ Задания', '✓ Zadania', '✓ Tasks'],
-    'practice.html': ['✍ Тренировка', '✍ Ćwiczenia', '✍ Practice'],
+    'practice.html': ['✍ Тренировочные задания', '✍ Ćwiczenia', '✍ Practice'],
     'glossary.html': ['Глоссарий (чайник)', 'Słowniczek (dla początkujących)', 'Glossary (beginner)'],
     'semesters.html': ['Семестры 1–7', 'Semestry 1–7', 'Semesters 1–7'],
     'specdeep.html': ['Спец. курсы подробно', 'Kursy specjalizacyjne szczegółowo', 'Specialization courses in detail'],
