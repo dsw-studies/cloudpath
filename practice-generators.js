@@ -122,8 +122,8 @@
     }
     if (subject === 'algorithms') {
       if (/бинарный поиск/i.test(title)) {
-        const arr=Array.from({length:7},(_,i)=>i*2+1),target=pick(arr),idx=arr.indexOf(target);
-        return task('Выполни бинарный поиск числа '+target+' в массиве ['+arr.join(', ')+']. Сколько сравнений с серединой потребуется?','Индекс '+idx+' (нумерация с 0); '+(Math.ceil(Math.log2(idx+1))||1)+' сравнений.','На каждом шаге сравниваем ключ с серединой и отбрасываем половину диапазона. Массив отсортирован; позиция элемента — '+idx+'.');
+        const arr=Array.from({length:7},(_,i)=>i*2+1),target=pick(arr),idx=arr.indexOf(target);let left=0,right=arr.length-1,steps=0;while(left<=right){steps++;const mid=Math.floor((left+right)/2);if(arr[mid]===target)break;if(arr[mid]<target)left=mid+1;else right=mid-1;}
+        return task('Выполни бинарный поиск числа '+target+' в массиве ['+arr.join(', ')+']. Сколько сравнений с серединой потребуется?','Индекс '+idx+' (нумерация с 0); '+steps+' сравнени'+(steps===1?'е':'я')+'.','На каждом шаге сравниваем ключ с серединой и отбрасываем половину диапазона. Массив отсортирован; элемент найден по индексу '+idx+' после '+steps+' сравнения.');
       }
       if (/минимум и максимум/i.test(title)) {const arr=Array.from({length:5},()=>rnd(lo,hi));return task('Найди минимум и максимум массива ['+arr.join(', ')+'].','min='+Math.min(...arr)+', max='+Math.max(...arr),'Последовательно сравни каждый элемент с текущими min и max. После просмотра всех пяти чисел получаем указанные значения.');}
       if (/рекурсия/i.test(title)) {x=level==='hard'?rnd(6,9):level==='medium'?rnd(4,6):rnd(2,4);let f=1;for(let i=2;i<=x;i++)f*=i;return task('Вычисли '+x+'! рекурсивно и укажи базовый случай.',String(f),'Базовый случай: 0!=1. Рекуррентное правило n!=n·(n−1)!. Поэтому '+x+'! = '+x+'·'+(x-1)+'·…·1 = '+f+'.');}
