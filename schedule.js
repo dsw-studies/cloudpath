@@ -166,7 +166,7 @@
       ['12:30–14:00','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
       ['14:15–15:45','Podstawy informatyki','Ćwiczenia · Ćw1S','S47 210','mgr inż. Mateusz Hyk','Zaliczenie ocena']
     ]},
-    {date:'2026-11-25',items:[
+    {date:'2026-11-25',controls:true,items:[
       ['9:00–10:30','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
       ['10:45–12:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
       ['12:30–14:00','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 208','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
@@ -268,7 +268,7 @@
       ['14:15–15:45','Programowanie w języku Python 1','Ćwiczenia · Ćw1S','S47 217','mgr inż. Mateusz Hyk','Zaliczenie ocena'],
       ['16:00–17:30','Analiza matematyczna 1','Ćwiczenia · Ćw1S','matematyczna/r','mgr Janusz Grabski','Zaliczenie ocena']
     ]},
-    {date:'2027-01-13',items:[
+    {date:'2027-01-13',controls:true,items:[
       ['9:00–10:30','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
       ['10:45–12:15','Fizyka 1','Ćwiczenia · Ćw1S','S47 119','mgr Artur Rokosa','Zaliczenie ocena'],
       ['12:30–14:00','Algorytmy i struktury danych','Ćwiczenia · Ćw1S','S47 119','dr Ewa Gurbiel','Zaliczenie ocena'],
@@ -323,6 +323,7 @@
       remote:'онлайн',
       today:'сегодня',
       free:'Свободный день',
+      physicsTest:'Контрольная работа · Физика 1',
       noClasses:'Для группы Ćw1S занятий по этому плану нет.',
       campus:'DSW Wrocław',
       remotePlace:'Онлайн',
@@ -335,6 +336,7 @@
       remote:'online',
       today:'dzisiaj',
       free:'Dzień wolny',
+      physicsTest:'Kolokwium · Fizyka 1',
       noClasses:'Dla grupy Ćw1S nie ma zajęć w tym planie.',
       campus:'DSW Wrocław',
       remotePlace:'Zajęcia zdalne',
@@ -347,6 +349,7 @@
       remote:'online',
       today:'today',
       free:'Free day',
+      physicsTest:'Test · Physics 1',
       noClasses:'There are no classes for group Ćw1S in this timetable.',
       campus:'DSW Wrocław',
       remotePlace:'Online',
@@ -430,6 +433,7 @@
       return `
         <article id="day-${day.date}" class="day-card ${day.free ? 'free-day' : ''}" ${isToday ? 'style="outline:2px solid currentColor;outline-offset:3px"' : ''}>
           <header class="day-head"><h3>${header}</h3><span>${esc(status)}</span></header>
+          ${day.controls ? `<div class="notice" role="note"><b>${esc(t.physicsTest)}</b></div>` : ''}
           ${body}
         </article>
       `;
