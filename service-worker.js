@@ -1,4 +1,4 @@
-const CACHE = 'cloudpath-v35';
+const CACHE = 'cloudpath-v36';
 const CORE = [
   '/',
   '/index.html',
@@ -18,6 +18,22 @@ const CORE = [
   '/study-table.js',
   '/schedule.html',
   '/lectures.html',
+  '/lecture-math.css',
+  '/october-math-practice.js',
+  '/polynomials-vieta-2026-10-27.html',
+  '/rational-functions-2026-10-28.html',
+  '/logarithms-2026-10-28.html',
+  '/sequences-2026-10-28.html',
+  '/limits-series-2026-10-28.html',
+  '/assets/math-20261028/geometric.svg',
+  '/assets/math-20261028/hyperbola.svg',
+  '/assets/math-20261028/limit.svg',
+  '/assets/math-20261028/logs.svg',
+  '/assets/math-20261028/polynomial.svg',
+  '/assets/math-20261028/rational-sign.svg',
+  '/assets/math-20261028/sequence-quadratic.svg',
+  '/assets/math-20261028/series.svg',
+
   '/quadratic-functions-2026-10-27.html',
   '/tasks.html',
   '/practice.html',
