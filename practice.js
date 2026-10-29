@@ -1,6 +1,6 @@
 (() => {
   const subjects = [
-    {id:'algorithms', name:'Algorytmy i struktury danych', ru:'Алгоритмы и структуры данных', note:'Основа: конспект и записи занятий по поиску, минимуму/максимуму, рекурсии, сортировкам, Big‑O и графам. В каждой теме ниже ровно 10 коротких задач.'},
+    {id:'algorithms', name:'Algorytmy i struktury danych', ru:'Алгоритмы и структуры данных', note:'Основа: конспект и записи занятий по поиску, минимуму/максимуму, рекурсии, сортировкам, Big‑O и графам. Создавай задачи по нужному типу и сохраняй свой прогресс.'},
     {id:'algebra', name:'Algebra liniowa z geometrią analityczną', ru:'Линейная алгебра с аналитической геометрией', note:'Основа: конспекты о матрицах и определителях, разложение Лапласа и Lista 1. В упражнениях есть вычисления и проверка условий выполнимости.'},
     {id:'analysis', name:'Analiza matematyczna 1', ru:'Математический анализ 1', note:'Основа: Lista 1 «Rachunek zdań i kwantyfikatorów», Lista 2 «Algebra zbiorów» и конспект занятия. Типы задач соответствуют этим материалам.'},
     {id:'python', name:'Programowanie w języku Python 1', ru:'Программирование на Python 1', note:'Основа: конспект о списках, кортежах, словарях, множествах, строках и стандартных модулях. Сортировки и классы не добавлял: в этой записи они не подтверждены.'},
@@ -146,24 +146,12 @@
   subjects.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=`${s.name} — ${s.ru}`;select.append(o);});
   const current=subjects.find(s=>s.id===selected)||null;select.value=current?current.id:'all';
   select.addEventListener('change',()=>{location.href=select.value==='all'?'practice.html':`practice.html?subject=${encodeURIComponent(select.value)}`;});
-  title.textContent=current?`${current.name} · ${current.ru}`:'Все предметы';note.textContent=current?current.note:'Выбери любой из предметов ниже: отдельная страница курса откроет только его тренировочные наборы. В каждой теме есть упражнения с разбором; в наборах с генератором можно выбрать сложность.';
+  title.textContent=current?`${current.name} · ${current.ru}`:'Все предметы';note.textContent=current?current.note:'Выбери любой из предметов ниже: отдельная страница курса откроет только его генераторы задач. Создавай задачи, отмечай решённые и удаляй ненужные.';
   eyebrow.textContent=current?'Тренировочная страница предмета':'3 направления · выбирай предмет и тему';
   if(!current){
     const groupSpecs=[['Математика',['algebra','analysis','mathematics']],['Информатика',['algorithms','python','foundations','crypto']],['Физика',['physics']]];
     topics.innerHTML=`<div class="course-grid">${groupSpecs.map(([label,ids])=>`<article class="course-card subject-group"><span class="count">Тренировка по темам и генерация задач</span><h2>${label}</h2><div class="group-links">${ids.map(id=>{const s=subjects.find(x=>x.id===id),n=(bank[id]||[]).length;return `<a href="practice.html?subject=${id}">${s.name}<br><span>${s.ru} · ${n} типов</span></a>`;}).join('')}</div></article>`).join('')}</div>`;
     topicNav.innerHTML='';progress.textContent='';return;
   }
-  const data=bank[current.id]||[];let solved=0,total=data.reduce((n,t)=>n+t.items.length,0);const key=`cloudpath-practice-${current.id}-done`;let done={};try{done=JSON.parse(localStorage.getItem(key)||'{}')}catch{}
-  progress.textContent=`${data.length} типов задач · ${total} упражнений · решено отмечено: ${Object.values(done).filter(Boolean).length}/${total}`;
-  const topicId=(t,i)=>t.id||`type-${i+1}`;
-  topicNav.innerHTML=data.map((t,i)=>`<a class="pill" href="#${topicId(t,i)}">${i+1}. ${t.title}</a>`).join('');
-  topics.innerHTML=data.map((t,ti)=>`<details class="topic" id="${topicId(t,ti)}"><summary>${ti+1}. ${t.title} <span class="count">${t.items.length} задач${t.generator===false?'':' + генератор'}</span></summary><div class="topic-body">${t.blurb?`<p class="muted">${t.blurb}</p>`:''}${t.lesson?`<p><a class="back" href="${t.lesson}.html">Вернуться к конспекту →</a></p>`:''}${t.items.map((x,qi)=>{const id=t.id?`${t.id}-${qi}`:`${ti}-${qi}`;return `<article class="exercise"><div class="exercise-head"><span>${qi===0?"Пример типа":"Задача "+(qi+1)+" из "+t.items.length}</span><label><input class="done" type="checkbox" data-id="${id}" ${done[id]?'checked':''}> Решил(а)</label></div><h3>${x.q}</h3><details class="answer"><summary>Показать ответ и разбор</summary><p><b>Ответ:</b> ${x.a}</p><div class="answer-explanation">${x.w}</div></details></article>`}).join('')}</div>${t.generator===false?'':`<section class="generator" data-topic-index="${ti}"><h3>Бесконечная тренировка</h3><p class="muted">Выбери сложность. Новая задача будет сгенерирована по этому типу; решение появится по кнопке.</p><label>Сложность <select class="gen-level"><option value="basic">Базовая</option><option value="medium">Средняя</option><option value="hard">Сложная</option></select></label> <button class="generate" type="button">Сгенерировать задачу</button><div class="generated"></div></section>`}</details>`).join('');
-  function openLinkedTopic(){
-    const raw=location.hash.slice(1), numeric=raw.match(/^type-(\d+)$/);
-    const target=document.getElementById(raw)||(numeric&&data[Number(numeric[1])-1]?document.getElementById(topicId(data[Number(numeric[1])-1],Number(numeric[1])-1)):null);
-    if(target&&target.classList.contains('topic')){target.open=true;requestAnimationFrame(()=>target.scrollIntoView({block:'start'}));}
-  }
-  openLinkedTopic();window.addEventListener('hashchange',openLinkedTopic);
-  topics.addEventListener('click',e=>{const btn=e.target.closest('.generate');if(!btn)return;const panel=btn.closest('.generator'),ti=Number(panel.dataset.topicIndex),t=data[ti],level=panel.querySelector('.gen-level').value;const item=(window.CLOUDPATH_EXTRA_GENERATOR&&window.CLOUDPATH_EXTRA_GENERATOR.make(current.id,t.title,level))||window.CLOUDPATH_GENERATORS.make(current.id,t.title,level);const out=panel.querySelector('.generated');out.innerHTML='<article class="exercise generated-exercise"><div class="exercise-head"><span>Новая задача · '+level+'</span></div><h3>'+esc(item.q)+'</h3><details class="answer"><summary>Показать ответ и разбор</summary><p><b>Ответ:</b> '+esc(item.a)+'</p><p>'+esc(item.w)+'</p></details></article>';});
-  topics.addEventListener('change',e=>{if(!e.target.matches('.done'))return;done[e.target.dataset.id]=e.target.checked;localStorage.setItem(key,JSON.stringify(done));const count=Object.values(done).filter(Boolean).length;progress.textContent=`${data.length} типов задач · ${total} упражнений · решено отмечено: ${count}/${total}`;});
+  window.CloudPathPracticeSession({current, subjects, bank, topics, topicNav, progress, esc});
 })();
