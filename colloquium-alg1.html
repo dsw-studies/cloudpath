@@ -8,6 +8,7 @@ textarea,.ivs input[type=text]{background:#102333;color:#e8f3fa;border:1px solid
 .ivs{display:grid;gap:8px;margin:10px 0}.ivs label{display:flex;gap:10px;align-items:center}.ivs input{flex:1}
 table.ct{border-collapse:collapse;margin:10px 0}.ct td,.ct th{border:1px solid #29495e;padding:4px 12px;text-align:center}.ct td.bad{background:#4a1f1f;color:#ffb3b3}
 .hdr{border:1px solid #29495e;border-radius:12px;padding:14px;margin:12px 0;background:#0e2030}
+.lesson-card mjx-container{color:#e8f3fa}.sol{margin-top:10px}
 </style><style>.lesson-card table.mx{width:auto!important;display:inline-table;border-left:2px solid #74ddcb;border-right:2px solid #74ddcb;border-radius:6px;margin:0 6px;vertical-align:middle;border-collapse:collapse}.lesson-card table.mx td{border:0!important;padding:2px 12px;text-align:center;color:#e8f3fa}.lesson-card table.mx{background:none}.sol{margin-top:10px}</style>
 <header class="topbar"><div><h1>Коллоквиум · Matematyka 1 (алгебра)</h1><p class="muted">Образец Kolokwium 1 от 17.11.2026 (wersja A, 30 минут) с решением и генератор новых вариантов. Темы: прямая на плоскости, матрицы, определители.</p></div></header>
 <section class="lesson-card" id="intro">
@@ -27,17 +28,22 @@ table.ct{border-collapse:collapse;margin:10px 0}.ct td,.ct th{border:1px solid #
 <p><b>b) параллельная через E:</b> тот же нормальный вектор [2, −4]. 2(x−1) − 4(y−1) = 0 ⇒ 2x − 4y + 2 = 0 ⇒ <b>x − 2y + 1 = 0</b> (y = ½x + ½ ✓, E: 1−2+1=0).</p>
 
 <h3>Zadanie 2 (5 pkt): A (2×3), B (3×3), C (3×2)</h3>
-<p>A = <table class="mx"><tr><td>1</td><td>3</td><td>0</td></tr><tr><td>0</td><td>−1</td><td>4</td></tr></table> B = <table class="mx"><tr><td>1</td><td>4</td><td>7</td></tr><tr><td>2</td><td>−1</td><td>0</td></tr><tr><td>5</td><td>−2</td><td>8</td></tr></table> C = <table class="mx"><tr><td>1</td><td>−2</td></tr><tr><td>0</td><td>7</td></tr><tr><td>−1</td><td>4</td></tr></table></p>
-<p><b>a) A − 3Cᵀ.</b> Cᵀ (2×3) = <table class="mx"><tr><td>1</td><td>0</td><td>−1</td></tr><tr><td>−2</td><td>7</td><td>4</td></tr></table> 3Cᵀ = <table class="mx"><tr><td>3</td><td>0</td><td>−3</td></tr><tr><td>−6</td><td>21</td><td>12</td></tr></table> A − 3Cᵀ = <b><table class="mx"><tr><td>−2</td><td>3</td><td>3</td></tr><tr><td>6</td><td>−22</td><td>−8</td></tr></table></b> (размеры совпадают: 2×3).</p>
-<p><b>b) AB:</b> 2×3 · 3×3 — столбцы A (3) = строки B (3), результат 2×3. Строка 1: [1·1+3·2+0·5, 1·4+3·(−1)+0·(−2), 1·7+3·0+0·8] = [7, 1, 7]. Строка 2: [0·1+(−1)·2+4·5, 0·4+(−1)(−1)+4(−2), 0·7+(−1)·0+4·8] = [18, −7, 32]. <b>AB = <table class="mx"><tr><td>7</td><td>1</td><td>7</td></tr><tr><td>18</td><td>−7</td><td>32</td></tr></table></b>.</p>
+<p>A = \(\begin{bmatrix}1&amp;3&amp;0\\0&amp;-1&amp;4\end{bmatrix}\) B = \(\begin{bmatrix}1&amp;4&amp;7\\2&amp;-1&amp;0\\5&amp;-2&amp;8\end{bmatrix}\) C = \(\begin{bmatrix}1&amp;-2\\0&amp;7\\-1&amp;4\end{bmatrix}\)</p>
+<p><b>a) A − 3Cᵀ.</b> Cᵀ (2×3) = \(\begin{bmatrix}1&amp;0&amp;-1\\-2&amp;7&amp;4\end{bmatrix}\) 3Cᵀ = \(\begin{bmatrix}3&amp;0&amp;-3\\-6&amp;21&amp;12\end{bmatrix}\) A − 3Cᵀ = <b>\(\begin{bmatrix}-2&amp;3&amp;3\\6&amp;-22&amp;-8\end{bmatrix}\)</b> (размеры совпадают: 2×3).</p>
+<p><b>b) AB:</b> размеры \(2\times3\) и \(3\times3\): число столбцов A равно числу строк B, поэтому произведение определено, результат \(2\times3\). Каждый элемент — строка A на столбец B:</p>
+\[ AB=\begin{bmatrix}1\cdot1+3\cdot2+0\cdot5 & 1\cdot4+3\cdot(-1)+0\cdot(-2) & 1\cdot7+3\cdot0+0\cdot8\\ 0\cdot1+(-1)\cdot2+4\cdot5 & 0\cdot4+(-1)(-1)+4\cdot(-2) & 0\cdot7+(-1)\cdot0+4\cdot8\end{bmatrix}=\begin{bmatrix}7&1&7\\18&-7&32\end{bmatrix} \]
 <p><b>c) CB:</b> C — 3×2, B — 3×3. Столбцов у C (2) ≠ строк у B (3), поэтому <b>произведение CB не определено</b>.</p>
 
 <h3>Zadanie 3 (5 pkt)</h3>
-<p><b>a)</b> X = <table class="mx"><tr><td>2</td><td>0</td><td>3</td><td>−5</td></tr><tr><td>1</td><td>0</td><td>4</td><td>−1</td></tr><tr><td>0</td><td>−1</td><td>0</td><td>0</td></tr><tr><td>2</td><td>0</td><td>0</td><td>1</td></tr></table> Раскладываем по 3-й строке (единственный ненулевой элемент −1 в столбце 2): det X = (−1)·(−1)^(3+2)·M = M, где M — минор без 3-й строки и 2-го столбца: M = <table class="mx"><tr><td>2</td><td>3</td><td>−5</td></tr><tr><td>1</td><td>4</td><td>−1</td></tr><tr><td>2</td><td>0</td><td>1</td></tr></table> По Саррюсу: 2·4·1 + 3·(−1)·2 + (−5)·1·0 − [(−5)·4·2 + 2·(−1)·0 + 3·1·1] = (8 − 6 + 0) − (−40 + 0 + 3) = 2 + 37 = 39. Либо разложением по 1-му столбцу: 2(4−0) − 3(1+2) − 5(0−8) = 8 − 9 + 40 = 39. <b>det X = 39.</b></p>
+<p><b>a)</b> Раскладываем по 3-й строке: в ней единственный ненулевой элемент \(-1\) (столбец 2), знак \((-1)^{3+2}=-1\).</p>
+\[ X=\begin{bmatrix}2&0&3&-5\\1&0&4&-1\\0&-1&0&0\\2&0&0&1\end{bmatrix},\qquad \det X=(-1)\cdot(-1)^{3+2}\cdot M=M,\quad M=\begin{vmatrix}2&3&-5\\1&4&-1\\2&0&1\end{vmatrix} \]
+<p>По правилу Саррюса:</p>
+\[ M=(2\cdot4\cdot1+3\cdot(-1)\cdot2+(-5)\cdot1\cdot0)-((-5)\cdot4\cdot2+2\cdot(-1)\cdot0+3\cdot1\cdot1)=2-(-37)=39 \]
+<p>Проверка разложением по 1-му столбцу: \(2(4-0)-1\cdot(3\cdot1-(-5)\cdot0)+2\cdot(3\cdot(-1)-(-5)\cdot4)=8-3+2\cdot17=39\). <b>\(\det X=39\).</b></p>
 <p><b>b)</b> det(D²⁰²⁷) = (det D)²⁰²⁷ = (−1)²⁰²⁷ = <b>−1</b> (нечётная степень). det(3D) = 3⁴·det D = 81·(−1) = <b>−81</b> (порядок матрицы 4: умножение на k умножает каждую из 4 строк на k).</p>
 <p class="muted">Ключевые свойства: det(AB)=det A·det B; det(Aᵀ)=det A; det(kA)=kⁿ·det A; при разложении по строке знак (−1)^(i+j).</p>
 </section>
-<script src="texify.js?v=20261116-3"></script>
-<script src="colloquium-alg1.js?v=20261116-3"></script>
+<script src="texify.js?v=20261116-5"></script>
+<script src="colloquium-alg1.js?v=20261116-5"></script>
 <script>window.addEventListener('load',function(){document.querySelectorAll('.lesson-card').forEach(function(x){if(!x.closest('#app'))window.texify(x)})});</script>
 </main><script src="site-enhancements.js?v=20261116-1"></script><script src="search-data.js?v=20261116-1"></script><script src="search-widget.js?v=20261116-1"></script></body></html>

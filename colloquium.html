@@ -8,6 +8,7 @@ textarea,.ivs input[type=text]{background:#102333;color:#e8f3fa;border:1px solid
 .ivs{display:grid;gap:8px;margin:10px 0}.ivs label{display:flex;gap:10px;align-items:center}.ivs input{flex:1}
 table.ct{border-collapse:collapse;margin:10px 0}.ct td,.ct th{border:1px solid #29495e;padding:4px 12px;text-align:center}.ct td.bad{background:#4a1f1f;color:#ffb3b3}
 .hdr{border:1px solid #29495e;border-radius:12px;padding:14px;margin:12px 0;background:#0e2030}
+.lesson-card mjx-container{color:#e8f3fa}.sol{margin-top:10px}
 </style>
 <header class="topbar"><div><h1>Коллоквиум по Analiza matematyczna I</h1><p class="muted">Пробный коллоквиум в формате Janusz Grabski (30 минут, 15 баллов) и бесконечный генератор новых вариантов.</p></div></header>
 <section class="lesson-card" id="intro">
@@ -24,10 +25,10 @@ table.ct{border-collapse:collapse;margin:10px 0}.ct td,.ct th{border:1px solid #
 <h3>Zadanie 1 (5 pkt): P/F — верно +1, неверно −1, нет ответа 0</h3>
 <ol>
 <li>„Wrocław był stolicą Polski” jest zdaniem w sensie logiki matematycznej. → <b>P</b>. Высказывание — это утверждение, у которого есть значение истинности. Здесь оно ложное (или истинное, в зависимости от эпохи), но значение у него есть, поэтому это высказывание.</li>
-<li>Wykresem funkcji zdaniowej φ(x,y): x&gt;0 ∧ y&lt;0 jest cały układ OXY. → <b>F</b>. Условие задаёт только IV четверть (x&gt;0 и y&lt;0, без осей).</li>
-<li>Zaprzeczeniem ∀x∈ℝ: x³&gt;1 jest ∃x∈ℝ: x³&lt;1. → <b>F</b>. Правильное отрицание: ∃x∈ℝ: x³ ≤ 1. Потерян случай равенства (x=1).</li>
-<li>Iloczyn kartezjański dwóch zbiorów może być zbiorem jednoelementowym. → <b>P</b>. Например, {a}×{b} = {(a,b)}.</li>
-<li>Dla Fₙ=(−n, 1+1/n), n∈ℕ₊: ⋃ₙFₙ=(−∞, 2). → <b>P</b>. Левые концы −n уходят в −∞. Правый конец 1+1/n наибольший при n=1 и равен 2, при этом F₁=(−1, 2) открыт справа, поэтому 2 в объединение не входит.</li>
+<li>Wykresem funkcji zdaniowej φ(x, y): x &gt; 0 ∧ y &lt; 0 jest cały układ OXY. → <b>F</b>. Условие задаёт только IV четверть (x &gt; 0 и y &lt; 0, без осей).</li>
+<li>Zaprzeczeniem ∀x ∈ ℝ: x³ &gt; 1 jest ∃x ∈ ℝ: x³ &lt; 1. → <b>F</b>. Правильное отрицание: ∃x ∈ ℝ: x³ ≤ 1. Потерян случай равенства (x = 1).</li>
+<li>Iloczyn kartezjański dwóch zbiorów może być zbiorem jednoelementowym. → <b>P</b>. Например, {a} × {b} = {(a, b)}.</li>
+<li>Dla Fₙ = (−n, 1 + 1/n), n ∈ ℕ₊: ⋃ₙ Fₙ = (−∞, 2). → <b>P</b>. Левые концы −n уходят в −∞. Правый конец 1 + 1/n наибольший при n = 1 и равен 2, при этом F₁ = (−1, 2) открыт справа, поэтому 2 в объединение не входит.</li>
 </ol>
 <p><b>Ответ: P, F, F, P, P.</b></p>
 
@@ -39,8 +40,8 @@ table.ct{border-collapse:collapse;margin:10px 0}.ct td,.ct th{border:1px solid #
 <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table>
 <p>В последнем столбце везде 1, значит выражение <b>является тавтологией</b> (это известный закон: импликация эквивалентна ∼p ∨ q).</p>
 
-<h3>Zadanie 3 (5 pkt): A=[√2, +∞), B=(−2, 4), C=[−2, 5]</h3>
-<p>Порядок точек на оси: −2 &lt; √2≈1,41 &lt; 4 &lt; 5. Отмечаем: A — луч от √2 вправо (√2 включена), B — отрезок от −2 до 4 без концов, C — отрезок от −2 до 5 с концами.</p>
+<h3>Zadanie 3 (5 pkt): A = [√2, +∞), B = (−2, 4), C = [−2, 5]</h3>
+<p>Порядок точек на оси: −2 &lt; √2 ≈ 1,41 &lt; 4 &lt; 5. Отмечаем: A — луч от √2 вправо (√2 включена), B — отрезок от −2 до 4 без концов, C — отрезок от −2 до 5 с концами.</p>
 <ul>
 <li>A ∪ B = <b>(−2, +∞)</b> — слева начинается B (−2 не входит ни в A, ни в B), справа A уходит в бесконечность.</li>
 <li>A ∩ C = <b>[√2, 5]</b>.</li>
@@ -49,7 +50,7 @@ table.ct{border-collapse:collapse;margin:10px 0}.ct td,.ct th{border:1px solid #
 </ul>
 <p class="muted">Оценка: по баллам за задание ориентируйся на полноту: рисунок оси, верный результат каждой из четырёх операций, обработка концов.</p>
 </section>
-<script src="texify.js?v=20261116-3"></script>
-<script src="colloquium-an1.js?v=20261116-3"></script>
+<script src="texify.js?v=20261116-5"></script>
+<script src="colloquium-an1.js?v=20261116-5"></script>
 <script>window.addEventListener('load',function(){document.querySelectorAll('.lesson-card').forEach(function(x){if(!x.closest('#app'))window.texify(x)})});</script>
 </main><script src="site-enhancements.js?v=20261116-1"></script><script src="search-data.js?v=20261116-1"></script><script src="search-widget.js?v=20261116-1"></script></body></html>

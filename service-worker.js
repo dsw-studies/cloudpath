@@ -1,4 +1,4 @@
-const CACHE = 'cloudpath-v45';
+const CACHE = 'cloudpath-v46';
 const CORE = [
   '/practice-random.js',
   '/practice-sheets.js',

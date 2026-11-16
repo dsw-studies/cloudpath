@@ -9,7 +9,7 @@
   const tr = M => M[0].map((_, j) => M.map(row => row[j]));
   const mul = (A, B) => A.map(row => B[0].map((_, j) => row.reduce((s, v, k) => s + v * B[k][j], 0)));
   const dims = M => `${M.length}×${M[0].length}`;
-  const mx = M => `<table class="mx">${M.map(row => `<tr>${row.map(v => `<td>${S(v)}</td>`).join('')}</tr>`).join('')}</table>`;
+  const mx = M => '\\(\\begin{bmatrix}' + M.map(row => row.map(v => String(v)).join('&amp;')).join('\\\\') + '\\end{bmatrix}\\)';
   const det = M => M.length === 1 ? M[0][0] : M.length === 2 ? M[0][0] * M[1][1] - M[0][1] * M[1][0] : M[0].reduce((s, v, j) => s + (j % 2 ? -1 : 1) * v * det(M.slice(1).map(row => row.filter((_, c) => c !== j))), 0);
   const eq = (a, b, c) => { const t = []; if (a) t.push((a === 1 ? '' : a === -1 ? '−' : S(a)) + 'x'); if (b) t.push((b > 0 && t.length ? '+ ' : b < 0 ? '− ' : '') + (Math.abs(b) === 1 ? '' : Math.abs(b)) + 'y'); if (c) t.push((c > 0 ? '+ ' : '− ') + Math.abs(c)); return t.join(' ').replace(/^\+ /, '') + ' = 0'; };
 
