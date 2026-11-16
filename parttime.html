@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Подработка студента в Польше: сайты вакансий, агентства и IT-работа.">
+<meta name="theme-color" content="#0B1420">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Подработка — CloudPath</title>
+<link rel="icon" href="/cloudpath-icon.svg" type="image/svg+xml">
+<style>
+
+  :root{
+    --bg: #0B1420;
+    --panel: #111D2C;
+    --panel-2: #16243570;
+    --line: #223349;
+    --text: #E7ECF2;
+    --muted: #7E92A8;
+    --accent: #4FD8C4;
+    --accent-dim: #2A5A54;
+    --amber: #F2B84B;
+    --violet: #8B7CF6;
+    --mono: "SF Mono","JetBrains Mono","Fira Code",Consolas,monospace;
+    --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); line-height:1.5;
+    padding:0 0 80px 0;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  .toc{
+    position:fixed; top:0; left:0; height:100vh; width:200px;
+    background:#0D1826; border-right:1px solid var(--line);
+    padding:28px 18px; overflow-y:auto; z-index:50;
+    scrollbar-width:none; -ms-overflow-style:none;
+  }
+  .toc::-webkit-scrollbar{display:none;}
+  .toc .brand{font-family:var(--mono); color:var(--accent); font-size:12px; letter-spacing:.08em; margin-bottom:22px; text-transform:uppercase;}
+  .toc a{
+    display:block; color:var(--muted); font-size:13px; padding:7px 0;
+    border-left:2px solid transparent; padding-left:10px; margin-left:-11px;
+  }
+  .toc a:hover, .toc a.active{color:var(--accent); border-left-color:var(--accent); text-decoration:none;}
+  .main{margin-left:200px;}
+  @media (max-width:820px){
+    .toc{position:static; width:auto; height:auto; border-right:none; border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:4px 16px;}
+    .toc .brand{width:100%;}
+    .main{margin-left:0;}
+  }
+
+  .hero{ padding:64px 24px 48px; max-width:980px; margin:0 auto; border-bottom:1px solid var(--line); }
+  .eyebrow{
+    font-family:var(--mono); color:var(--accent); font-size:13px;
+    letter-spacing:.12em; text-transform:uppercase; margin-bottom:14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:"●"; color:var(--amber); font-size:10px;}
+  h1{ font-size:clamp(32px,5vw,52px); margin:0 0 12px; letter-spacing:-.02em; font-weight:700; }
+  .hero p{color:var(--muted); font-size:17px; max-width:640px; margin:0;}
+  .hero-stats{ display:flex; gap:32px; margin-top:36px; flex-wrap:wrap; }
+  .stat{font-family:var(--mono);}
+  .stat b{display:block; font-size:26px; color:var(--accent); font-weight:600;}
+  .stat span{color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em;}
+
+  .wrap{max-width:980px; margin:0 auto; padding:0 24px;}
+
+  section{margin-top:64px; scroll-margin-top:24px;}
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:22px; }
+  .section-head h2{ font-size:22px; margin:0; font-weight:700; }
+  .section-head .tag{
+    font-family:var(--mono); color:var(--muted); font-size:12px;
+    border:1px solid var(--line); padding:3px 9px; border-radius:20px;
+  }
+
+  .pipeline{position:relative; padding-left:28px;}
+  .pipeline::before{
+    content:""; position:absolute; left:6px; top:6px; bottom:6px;
+    width:2px; background:linear-gradient(var(--accent), var(--violet));
+    opacity:.35;
+  }
+  .stage{position:relative; margin-bottom:14px;}
+  .stage::before{
+    content:""; position:absolute; left:-28px; top:22px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent);
+  }
+  .stage-head{
+    background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; cursor:pointer; display:flex; justify-content:space-between;
+    align-items:center; gap:16px;
+  }
+  .stage-head:hover{border-color:var(--accent-dim);}
+  .stage-head .l{display:flex; align-items:center; gap:14px;}
+  .stage-num{ font-family:var(--mono); color:var(--accent); font-size:13px; min-width:64px; }
+  .stage-title{font-weight:600; font-size:15px;}
+  .stage-meta{font-family:var(--mono); color:var(--muted); font-size:12px; white-space:nowrap;}
+  .stage-body{
+    display:none; padding:18px 20px 6px 20px; margin-top:2px;
+    background:var(--panel-2); border:1px solid var(--line); border-top:none;
+    border-radius:0 0 12px 12px;
+  }
+  .stage.open .stage-body{display:block;}
+  .stage.open .stage-head{border-radius:12px 12px 0 0;}
+  .stage.open .chev{transform:rotate(90deg);}
+  .chev{transition:transform .15s ease; color:var(--muted);}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:14px;}
+  th{
+    text-align:left; font-family:var(--mono); font-weight:500; color:var(--muted);
+    font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+    padding:6px 10px; border-bottom:1px solid var(--line);
+  }
+  td{padding:8px 10px; border-bottom:1px solid #1b2a3c;}
+  tr.spec td:first-child{color:var(--accent);}
+  .badge{ font-family:var(--mono); font-size:11px; padding:1px 7px; border-radius:4px; }
+  .badge.E{background:#4a2130; color:#ff9baf;}
+  .badge.O{background:#173a33; color:var(--accent);}
+  .badge.ZAL{background:#2a2a3f; color:#b7aef0;}
+  .practice-note{
+    font-family:var(--mono); font-size:12.5px; color:var(--amber);
+    border-left:2px solid var(--amber); padding:8px 12px; margin-top:10px;
+    background:#2a220f40;
+  }
+
+  .res-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px;}
+  .res-card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px; }
+  .res-card h3{ margin:0 0 12px; font-size:14px; display:flex; align-items:center; gap:8px; }
+  .res-card ul{list-style:none; margin:0; padding:0;}
+  .res-card li{margin-bottom:9px; font-size:13.5px;}
+  .res-card li span{display:block; color:var(--muted); font-size:11.5px; font-family:var(--mono);}
+
+  .checklist{display:flex; flex-direction:column; gap:8px;}
+  .check-item{
+    display:flex; align-items:center; gap:12px; background:var(--panel);
+    border:1px solid var(--line); border-radius:10px; padding:12px 16px;
+  }
+  .check-item .box{ width:18px; height:18px; border:2px solid var(--accent-dim); border-radius:5px; flex:none; }
+  .check-item b{font-size:14px;}
+  .check-item span{color:var(--muted); font-size:12px; font-family:var(--mono); margin-left:auto;}
+
+  .fin-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px;}
+  .fin-card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+  .fin-card .amount{font-family:var(--mono); color:var(--amber); font-size:20px; font-weight:600;}
+  .fin-card .lbl{color:var(--muted); font-size:12.5px; margin-top:4px;}
+
+  .callout{
+    border:1px solid var(--accent-dim); background:#0f2320; border-radius:12px;
+    padding:18px 20px; font-size:13.5px; color:#c9e8e2; margin-top:16px;
+  }
+  .callout b{color:var(--accent);}
+
+  footer{
+    max-width:980px; margin:80px auto 0; padding:24px; border-top:1px solid var(--line);
+    color:var(--muted); font-family:var(--mono); font-size:12px; text-align:center;
+  }
+  code{background:#182839; padding:1px 6px; border-radius:4px; font-family:var(--mono); font-size:12px;}
+
+  .term-card{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+  .term-card h3{margin:0 0 10px; font-size:13.5px; color:var(--violet); text-transform:uppercase; letter-spacing:.04em;}
+  .term-card dl{margin:0;}
+  .term-card dt{font-family:var(--mono); color:var(--accent); font-size:13.5px; font-weight:600; margin-top:10px;}
+  .term-card dt:first-child{margin-top:0;}
+  .term-card dd{margin:3px 0 0; color:var(--text); font-size:13px; line-height:1.5;}
+
+  .subj-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:14px;}
+  .subj-card h3{margin:0 0 6px; font-size:15px; color:var(--accent);}
+  .subj-card .simple{color:var(--text); font-size:13.5px; margin:6px 0;}
+  .subj-card .why{color:var(--muted); font-size:12.5px; font-style:italic; margin:6px 0 10px;}
+  .subj-card .learn{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .subj-card .learn a{ font-family:var(--mono); font-size:11.5px; border:1px solid var(--line); border-radius:20px; padding:4px 10px; }
+
+  .ai-step{ display:flex; gap:16px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 20px; margin-bottom:12px; }
+  .ai-step .n{ font-family:var(--mono); color:var(--violet); font-size:22px; font-weight:700; min-width:34px; }
+  .ai-step h3{margin:0 0 6px; font-size:14.5px;}
+  .ai-step p{margin:0 0 8px; font-size:13.5px; color:var(--text);}
+  .ai-step .prompt{ font-family:var(--mono); font-size:12px; color:var(--amber); background:#2a220f40; border-left:2px solid var(--amber); padding:8px 12px; border-radius:4px; }
+
+  .progress-wrap{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 22px; margin-bottom:22px;}
+  .progress-top{display:flex; justify-content:space-between; align-items:baseline; font-family:var(--mono); font-size:13px; color:var(--muted);}
+  .progress-top b{color:var(--accent); font-size:20px;}
+  .progress-bar-bg{height:10px; background:#0d1826; border-radius:6px; overflow:hidden; margin-top:10px; border:1px solid var(--line);}
+  .progress-bar-fill{height:100%; background:linear-gradient(90deg,var(--accent),var(--violet)); width:0%; transition:width .25s ease;}
+  .progress-actions{margin-top:10px;}
+  .progress-actions button{
+    font-family:var(--mono); font-size:11.5px; background:transparent; color:var(--muted);
+    border:1px solid var(--line); border-radius:20px; padding:5px 12px; cursor:pointer;
+  }
+  .progress-actions button:hover{color:var(--accent); border-color:var(--accent-dim);}
+
+  .todo-group{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:14px 18px; margin-bottom:12px;}
+  .todo-group h4{font-family:var(--mono); color:var(--violet); font-size:12.5px; margin:2px 0 10px; text-transform:uppercase; letter-spacing:.05em; display:flex; justify-content:space-between;}
+  .todo-group h4 .cnt{color:var(--muted); text-transform:none; letter-spacing:0;}
+  .todo-item{display:flex; align-items:center; gap:10px; padding:7px 4px; border-bottom:1px solid #1b2a3c; font-size:13.5px;}
+  .todo-item:last-child{border-bottom:none;}
+  .todo-item input[type=checkbox]{width:16px; height:16px; accent-color:var(--accent); flex:none; cursor:pointer;}
+  .todo-item label{cursor:pointer; flex:1;}
+  .todo-item.done label{color:var(--muted); text-decoration:line-through;}
+
+  .lang-card{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin-bottom:16px;}
+  .lang-card h3{margin:0 0 4px; font-size:15px; color:var(--accent);}
+  .lang-card .desc{color:var(--muted); font-size:12.5px; margin:0 0 12px;}
+  pre.code{
+    background:#0d1826; border:1px solid var(--line); border-radius:8px;
+    padding:14px 16px; overflow-x:auto; font-family:var(--mono); font-size:12.5px;
+    line-height:1.65; color:#cfe4ff; margin:0 0 10px;
+  }
+  pre.code .cm{color:#5d7893;}
+
+  .grammar-table{width:100%; border-collapse:collapse; font-size:13px; margin-bottom:10px;}
+  .grammar-table th{text-align:left; font-family:var(--mono); color:var(--muted); font-size:11px; text-transform:uppercase; padding:6px 10px; border-bottom:1px solid var(--line);}
+  .grammar-table td{padding:8px 10px; border-bottom:1px solid #1b2a3c; vertical-align:top;}
+  .grammar-table td.formula{font-family:var(--mono); color:var(--accent); font-size:12.5px;}
+/* --- показываем все разделы (мультистраничный сайт) --- */
+  .toc a{cursor:pointer;}
+  .toc .tab-hint{
+    font-family:var(--mono); color:var(--muted); font-size:10.5px; opacity:.6;
+    margin-top:18px; padding-top:14px; border-top:1px solid var(--line); line-height:1.5;
+  }
+  @media (max-width:820px){ .toc .tab-hint{display:none;} }
+
+</style>
+<link rel="stylesheet" href="enhanced.css?v=20261026-1">
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Перейти к содержанию</a>
+
+<div id="langSwitcher" style="position:fixed; top:14px; right:18px; z-index:200; display:flex; gap:6px;">
+  <button class="lang-btn" data-lang="ru" onclick="setLang('ru')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">RU</button>
+  <button class="lang-btn" data-lang="pl" onclick="setLang('pl')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">PL</button>
+  <button class="lang-btn" data-lang="en" onclick="setLang('en')" style="background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:7px 10px; font-family:var(--mono); font-size:12px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.3); transition:background .15s,color .15s,border-color .15s;">EN</button>
+</div>
+
+<nav class="toc" aria-label="Навигация CloudPath"><div class="brand">CloudPath</div><a href="index.html" data-i18n-ru="⌂ Учебный кабинет" data-i18n-pl="⌂ Panel nauki" data-i18n-en="⌂ Study dashboard">⌂ Учебный кабинет</a><a href="schedule.html" data-i18n-ru="🗓 Расписание" data-i18n-pl="🗓 Plan zajęć" data-i18n-en="🗓 Schedule">🗓 Расписание</a><a href="physics-list-1.html" data-i18n-ru="Физика · задачи 1–26" data-i18n-pl="Fizyka · zadania 1–26" data-i18n-en="Physics · problems 1–26">Физика · задачи 1–26</a><a href="lessons-2026-10-23.html" data-i18n-ru="Конспект 23.10" data-i18n-pl="Notatki 23.10" data-i18n-en="Notes 23 Oct">Конспект 23.10</a><a href="glossary.html" data-i18n-ru="Глоссарий (чайник)" data-i18n-pl="Słowniczek (dla początkujących)" data-i18n-en="Glossary (beginner)">Глоссарий (чайник)</a><a href="semesters.html" data-i18n-ru="Семестры 1–7" data-i18n-pl="Semestry 1–7" data-i18n-en="Semesters 1–7">Семестры 1–7</a><a href="specdeep.html" data-i18n-ru="Спец. курсы подробно" data-i18n-pl="Kursy specjalizacyjne szczegółowo" data-i18n-en="Specialization courses in detail">Спец. курсы подробно</a><a href="languages.html" data-i18n-ru="Языки" data-i18n-pl="Języki" data-i18n-en="Languages">Языки</a><a href="syntax.html" data-i18n-ru="Синтаксис языков" data-i18n-pl="Składnia języków" data-i18n-en="Language syntax">Синтаксис языков</a><a href="courses.html" data-i18n-ru="Бесплатные курсы" data-i18n-pl="Darmowe kursy" data-i18n-en="Free courses">Бесплатные курсы</a><a href="english.html" data-i18n-ru="Английский" data-i18n-pl="Angielski" data-i18n-en="English">Английский</a><a href="ai.html" data-i18n-ru="Работа с ИИ" data-i18n-pl="Praca z AI" data-i18n-en="Working with AI">Работа с ИИ</a><a href="tools.html" data-i18n-ru="Приложения" data-i18n-pl="Aplikacje" data-i18n-en="Apps">Приложения</a><a href="setup.html" data-i18n-ru="Установка с нуля" data-i18n-pl="Instalacja od zera" data-i18n-en="Setup from scratch">Установка с нуля</a><a href="certs.html" data-i18n-ru="Сертификаты" data-i18n-pl="Certyfikaty" data-i18n-en="Certificates">Сертификаты</a><a href="finance.html" data-i18n-ru="Финансы / RKM" data-i18n-pl="Finanse / RKM" data-i18n-en="Finance / RKM">Финансы / RKM</a><a href="housing.html" data-i18n-ru="Жильё" data-i18n-pl="Mieszkanie" data-i18n-en="Housing">Жильё</a><a href="parttime.html" class="active" aria-current="page" data-i18n-ru="Подработка" data-i18n-pl="Praca dodatkowa" data-i18n-en="Part-time work">Подработка</a><a href="legal.html" data-i18n-ru="Легализация пребывания" data-i18n-pl="Legalizacja pobytu" data-i18n-en="Stay legalization">Легализация пребывания</a><a href="faq.html" data-i18n-ru="FAQ — если что-то пошло не так" data-i18n-pl="FAQ — gdy coś pójdzie nie tak" data-i18n-en="FAQ — if something goes wrong">FAQ — если что-то пошло не так</a><a href="resources.html" data-i18n-ru="Ресурсы" data-i18n-pl="Zasoby" data-i18n-en="Resources">Ресурсы</a><a href="university.html" data-i18n-ru="ABC студента DSW Ideis" data-i18n-pl="ABC studenta DSW Ideis" data-i18n-en="DSW Ideis student ABC">ABC студента DSW Ideis</a></nav>
+
+<div class="main">
+
+
+
+<div class="wrap">
+
+<section id="parttime">
+
+  <div class="section-head"><h1>Подработка</h1><span class="tag">поиск работы, агентства, юр. нюансы</span></div>
+
+  <div class="res-grid">
+    <div class="res-card">
+      <h3>💼 Общие job-борды</h3>
+      <ul>
+        <li><a href="https://www.pracuj.pl" target="_blank" rel="noopener noreferrer">Pracuj.pl</a><span>крупнейший польский сайт вакансий</span></li>
+        <li><a href="https://www.olx.pl/praca/" target="_blank" rel="noopener noreferrer">OLX Praca</a><span>подработки, склады, курьеры, разовые</span></li>
+        <li><a href="https://www.gowork.pl" target="_blank" rel="noopener noreferrer">GoWork.pl</a><span>вакансии + отзывы о работодателях</span></li>
+        <li><a href="https://pl.indeed.com" target="_blank" rel="noopener noreferrer">Indeed.pl</a><span>агрегатор со всей Польши</span></li>
+        <li><a href="https://pl.jooble.org" target="_blank" rel="noopener noreferrer">Jooble</a><span>ещё один агрегатор</span></li>
+        <li><a href="https://www.aplikuj.pl" target="_blank" rel="noopener noreferrer">Aplikuj.pl</a><span>часто студенческие вакансии</span></li>
+      </ul>
+    </div>
+    <div class="res-card">
+      <h3>👨‍💻 IT-специфичные</h3>
+      <ul>
+        <li><a href="https://nofluffjobs.com" target="_blank" rel="noopener noreferrer">No Fluff Jobs</a><span>вилки зарплат сразу в вакансии</span></li>
+        <li><a href="https://justjoin.it" target="_blank" rel="noopener noreferrer">Just Join IT</a><span>стажировки и junior-позиции</span></li>
+        <li><a href="https://bulldogjob.pl" target="_blank" rel="noopener noreferrer">Bulldogjob</a><span>польский IT-рынок</span></li>
+        <li><a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">LinkedIn Jobs</a><span>фильтр по Wrocław + remote</span></li>
+        <li><span>Искать теги: <code>stażysta</code>, <code>junior</code>, <code>intern</code>, <code>praktykant</code></span></li>
+      </ul>
+    </div>
+    <div class="res-card">
+      <h3>🏢 Кадровые агентства</h3>
+      <ul>
+        <li><a href="https://www.randstad.pl" target="_blank" rel="noopener noreferrer">Randstad</a><span>склады, офис, IT</span></li>
+        <li><a href="https://www.adeccogroup.com/pl-pl/" target="_blank" rel="noopener noreferrer">Adecco</a></li>
+        <li><a href="https://www.manpowergroup.pl" target="_blank" rel="noopener noreferrer">ManpowerGroup</a></li>
+        <li><a href="https://www.gigroup.pl" target="_blank" rel="noopener noreferrer">Gi Group</a></li>
+        <li><span>Хороший вариант, если ещё нет опыта / польского на уровне B2</span></li>
+      </ul>
+    </div>
+    <div class="res-card">
+      <h3>🎓 Через университет и комьюнити</h3>
+      <ul>
+        <li><span>Biuro Karier i Praktyk DSW — <code>biuro.karier.wroclaw@ideis.pl</code>, база вакансий и практик</span></li>
+        <li><span>Erasmus Student Network (ESN) Wrocław — группы для иностранных студентов, часто делятся вакансиями</span></li>
+        <li><span>Facebook-группы: «Praca Wrocław», «Praca dla studentów Wrocław», «Українці у Вроцлаві — робота»</span></li>
+        <li><span>Telegram-каналы для украинцев/иностранцев во Вроцлаве с подработками</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="term-card" style="margin-top:16px;">
+    <h3>Юридические нюансы для студента</h3>
+    <dl>
+      <dt>Умова zlecenie (договор поручения)</dt><dd>Самый частый формат подработки. Если студент младше 26 лет — работодатель не платит за него взносы ZUS (соцстрах), поэтому такие вакансии особенно охотно предлагают студентам.</dd>
+      <dt>Ulga dla młodych (льгота для молодых)</dt><dd>Доход до 26 лет освобождён от PIT (подоходного налога) в пределах годового лимита (~85 528 zł/год, сумму стоит перепроверять на актуальный год). На практике часто означает зарплату «на руки» без вычета налога.</dd>
+      <dt>PIT-2 / оформление</dt><dd>При устройстве попросят PESEL, номер счёta и, если нужно, подписать PIT-2 — уточнять у работодателя, что именно требуется под конкретный тип договора.</dd>
+      <dt>Легальность</dt><dd>Для иностранцев вне ЕС — подработка легальна в рамках учёбы (студенческий статус даёт право работать без отдельного разрешения на работу), но лучше уточнять актуальные правила на <a href="https://www.gov.pl" target="_blank" rel="noopener noreferrer">gov.pl</a> или в Welcome Center уни.</dd>
+    </dl>
+  </div>
+
+  <div class="callout">
+    <b>Совет:</b> на 1–2 курсе, пока польский и английский ещё подтягиваются, проще заходить через кадровые агентства (склад, логистика, колл-центр с русским/украинским языком) или подработки через ESN/уни. С 3 курса, когда появляется база (Python, Linux, сети), уже реально целиться в IT-стажировки на No Fluff Jobs и Just Join IT — они прямо помечены как <code>junior</code>/<code>intern</code>.
+  </div>
+
+</section>
+
+<section id="cv-interview">
+
+  <div class="section-head"><h2>Резюме / CV и подготовка к собеседованию</h2><span class="tag">шаблон, вопросы, LinkedIn</span></div>
+
+  <div class="term-card">
+    <h3>Структура CV для junior/intern в IT (1 страница)</h3>
+    <dl>
+      <dt>Header</dt><dd>Имя, город (Wrocław), телефон, email, ссылки на GitHub и LinkedIn — без фото и даты рождения (в польском/западном CV это не принято и иногда даже фильтруется рекрутером как риск дискриминации).</dd>
+      <dt>Summary (2–3 строки)</dt><dd>Кто ты и что ищешь: например «Informatyka student at DSW (Cloud Computing specialization), looking for a junior/intern role in cloud or backend development». Без воды и штампов вроде «ответственный командный игрок».</dd>
+      <dt>Skills</dt><dd>Список технологий по категориям: Languages (Python, SQL, ...), Cloud (AWS/Azure basics, Docker), Tools (Git, Linux, VS Code). Указывай только то, чем реально пользовался на практике/в проекте.</dd>
+      <dt>Projects</dt><dd>2–4 проекта с GitHub-ссылками (см. раздел «Портфолио по семестрам» на странице «Семестры 1–7») — самый весомый раздел для студента без опыта работы, часто важнее, чем Education.</dd>
+      <dt>Experience / Praktyka zawodowa</dt><dd>Университетские практики (Praktyka zawodowa I–IV) и подработки — даже нерелевантный опыт показывает надёжность; для IT-практик распиши конкретные задачи и технологии.</dd>
+      <dt>Education</dt><dd>DSW Wrocław, Informatyka, специализация Cloud Computing, ожидаемый год выпуска. Ниже — оконченная школа, если места хватает.</dd>
+      <dt>Languages</dt><dd>Уровень по CEFR (например Polish — B1, English — B2) — рекрутеры в Польше почти всегда смотрят на этот пункт в первую очередь.</dd>
+    </dl>
+  </div>
+
+  <div class="callout">
+    <b>Формат:</b> одна страница, PDF (не .docx — при открытии на другом устройстве может «поехать» вёрстка), нейтральный шаблон без ярких цветов и таблиц-картинок (многие ATS-системы не распознают текст в таблицах/картинках). Можно собрать в Canva, Novoresume или прямо в Google Docs по шаблону.
+  </div>
+
+  <div class="res-grid" style="margin-top:16px;">
+    <div class="res-card">
+      <h3>💬 Технические вопросы</h3>
+      <ul>
+        <li><span>Разница между списком/массивом и словарём/хэш-таблицей, когда что использовать</span></li>
+        <li><span>Что такое REST API, чем GET отличается от POST</span></li>
+        <li><span>Что такое Git, разница между <code>git merge</code> и <code>git rebase</code></span></li>
+        <li><span>Разница между процессом и потоком (thread)</span></li>
+        <li><span>Что такое Docker-контейнер и чем он отличается от виртуальной машины</span></li>
+        <li><span>Как ты дебажишь код, если он не работает и не выдаёт ошибку</span></li>
+        <li><span>Небольшая live-coding задача (FizzBuzz-уровня на 1–2 курсе, посложнее — ближе к практике)</span></li>
+      </ul>
+    </div>
+    <div class="res-card">
+      <h3>🧠 Поведенческие вопросы</h3>
+      <ul>
+        <li><span>Расскажи о проекте, которым гордишься — что делал именно ты</span></li>
+        <li><span>Расскажи о ситуации, когда что-то пошло не так — что сделал</span></li>
+        <li><span>Почему выбрал именно эту специализацию/эту компанию</span></li>
+        <li><span>Как справляешься с дедлайнами и приоритизацией задач</span></li>
+        <li><span>Есть ли у тебя вопросы ко мне? — всегда готовь 2–3 вопроса про команду/стек/onboarding</span></li>
+        <li><span>Используй структуру STAR (Situation → Task → Action → Result) для ответов на «расскажи о случае, когда...»</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="checklist" style="margin-top:16px;">
+    <div class="check-item"><div class="box"></div><b>Заголовок профиля</b><span>не просто «Student», а «Informatyka Student · Cloud Computing @ DSW Wrocław» — видно специализацию сразу</span></div>
+    <div class="check-item"><div class="box"></div><b>Фото профиля</b><span>нейтральное, деловое, лицо крупным планом — профили без фото рекрутеры открывают заметно реже</span></div>
+    <div class="check-item"><div class="box"></div><b>About / О себе</b><span>3–5 предложений: кто ты, что изучаешь, что ищешь, ссылка на GitHub</span></div>
+    <div class="check-item"><div class="box"></div><b>Опыт и проекты</b><span>дублируй пункты из CV — практики, pet-проекты, сертификаты (AWS/Azure) сразу отображаются как badges</span></div>
+    <div class="check-item"><div class="box"></div><b>Открыт к предложениям</b><span>включи "Open to Work" (можно скрыть от текущего работодателя, если он у тебя есть) и укажи интересующие роли</span></div>
+    <div class="check-item"><div class="box"></div><b>Сеть контактов</b><span>добавляй одногруппников, преподавателей, коллег с практики — LinkedIn Jobs сильно завязан на 2-е соединение (друг друга)</span></div>
+    <div class="check-item"><div class="box"></div><b>Активность</b><span>иногда репость/комментируй посты по теме Cloud/DevOps — алгоритм чаще показывает активные профили рекрутерам</span></div>
+  </div>
+
+</section>
+
+</div>
+
+<footer>plan.roadmap · DSW Informatyka · Cloud Computing specialization · 2026/2027–2029/2030</footer>
+
+</div>
+
+
+
+
+<script>
+const I18N_PL = {"⌂ Учебный кабинет": "⌂ Panel nauki", "Глоссарий (чайник)": "Słowniczek (dla początkujących)", "Семестры 1–7": "Semestry 1–7", "Спец. курсы подробно": "Kursy specjalizacyjne szczegółowo", "Языки": "Języki", "Синтаксис языков": "Składnia języków", "Бесплатные курсы": "Darmowe kursy", "Английский": "Angielski", "Работа с ИИ": "Praca z AI", "Приложения": "Aplikacje", "Установка с нуля": "Instalacja od zera", "Сертификаты": "Certyfikaty", "Финансы / RKM": "Finanse / RKM", "Подработка": "Dorabianie", "Ресурсы": "Zasoby", "ABC студента DSW Ideis": "ABC studenta DSW Ideis", "Легализация пребывания": "Legalizacja pobytu", "FAQ — если что-то пошло не так": "FAQ — jeśli coś poszło nie tak", "поиск работы, агентства, юр. нюансы": "szukanie pracy, agencje, niuanse prawne", "💼 Общие job-борды": "💼 Ogólne portale z ofertami pracy", "крупнейший польский сайт вакансий": "największy polski serwis z ofertami pracy", "подработки, склады, курьеры, разовые": "dorywcze prace, magazyny, kurierzy, jednorazowe", "вакансии + отзывы о работодателях": "oferty pracy + opinie o pracodawcach", "агрегатор со всей Польши": "agregator ofert z całej Polski", "ещё один агрегатор": "kolejny agregator", "часто студенческие вакансии": "często oferty dla studentów", "👨‍💻 IT-специфичные": "👨‍💻 Specyficzne dla IT", "вилки зарплат сразу в вакансии": "widełki płacowe od razu w ogłoszeniu", "стажировки и junior-позиции": "staże i stanowiska junior", "польский IT-рынок": "polski rynek IT", "фильтр по Wrocław + remote": "filtr po Wrocław + remote", "Искать теги:": "Szukaj tagów:", "🏢 Кадровые агентства": "🏢 Agencje pracy", "склады, офис, IT": "magazyny, biuro, IT", "Хороший вариант, если ещё нет опыта / польского на уровне B2": "Dobra opcja, jeśli nie masz jeszcze doświadczenia / polskiego na poziomie B2", "🎓 Через университет и комьюнити": "🎓 Przez uczelnię i społeczność", ", база вакансий и практик": ", baza ofert pracy i praktyk", "Erasmus Student Network (ESN) Wrocław — группы для иностранных студентов, часто делятся вакансиями": "Erasmus Student Network (ESN) Wrocław — grupy dla studentów zagranicznych, często udostępniają oferty pracy", "Facebook-группы: «Praca Wrocław», «Praca dla studentów Wrocław», «Українці у Вроцлаві — робота»": "Grupy na Facebooku: „Praca Wrocław”, „Praca dla studentów Wrocław”, „Українці у Вроцлаві — робота”", "Telegram-каналы для украинцев/иностранцев во Вроцлаве с подработками": "Kanały na Telegramie dla Ukraińców/cudzoziemców we Wrocławiu z ofertami dorywczej pracy", "Юридические нюансы для студента": "Niuanse prawne dla studenta", "Умова zlecenie (договор поручения)": "Umowa zlecenie", "Самый частый формат подработки. Если студент младше 26 лет — работодатель не платит за него взносы ZUS (соцстрах), поэтому такие вакансии особенно охотно предлагают студентам.": "Najczęstsza forma dorabiania. Jeśli student ma mniej niż 26 lat — pracodawca nie płaci za niego składek ZUS, dlatego takie oferty są chętnie kierowane do studentów.", "Ulga dla młodych (льгота для молодых)": "Ulga dla młodych", "Доход до 26 лет освобождён от PIT (подоходного налога) в пределах годового лимита (~85 528 zł/год, сумму стоит перепроверять на актуальный год). На практике часто означает зарплату «на руки» без вычета налога.": "Dochód do 26. roku życia jest zwolniony z PIT w ramach rocznego limitu (~85 528 zł/rok, kwotę warto zweryfikować na bieżący rok). W praktyce często oznacza to wypłatę „na rękę” bez potrącenia podatku.", "PIT-2 / оформление": "PIT-2 / formalności", "При устройстве попросят PESEL, номер счёta и, если нужно, подписать PIT-2 — уточнять у работодателя, что именно требуется под конкретный тип договора.": "Przy zatrudnieniu poproszą o PESEL, numer konta i, jeśli trzeba, o podpisanie PIT-2 — warto dopytać pracodawcę, co dokładnie jest wymagane przy danym typie umowy.", "Легальность": "Legalność", "Для иностранцев вне ЕС — подработка легальна в рамках учёбы (студенческий статус даёт право работать без отдельного разрешения на работу), но лучше уточнять актуальные правила на": "Dla cudzoziemców spoza UE — dorabianie jest legalne w ramach studiów (status studenta daje prawo do pracy bez osobnego zezwolenia na pracę), ale lepiej sprawdzić aktualne przepisy na", "или в Welcome Center уни.": "lub w Welcome Center uczelni.", "Совет:": "Rada:", "на 1–2 курсе, пока польский и английский ещё подтягиваются, проще заходить через кадровые агентства (склад, логистика, колл-центр с русским/украинским языком) или подработки через ESN/уни. С 3 курса, когда появляется база (Python, Linux, сети), уже реально целиться в IT-стажировки на No Fluff Jobs и Just Join IT — они прямо помечены как": "na 1–2 roku, dopóki polski i angielski są jeszcze na dorobku, łatwiej jest zacząć przez agencje pracy (magazyn, logistyka, call center z językiem rosyjskim/ukraińskim) lub dorywcze prace przez ESN/uczelnię. Od 3 roku, gdy pojawia się baza (Python, Linux, sieci), realne staje się celowanie w staże IT na No Fluff Jobs i Just Join IT — są tam wprost oznaczone jako", "Подработка — CloudPath": "Dorabianie — CloudPath", "Резюме / CV и подготовка к собеседованию": "CV i przygotowanie do rozmowy kwalifikacyjnej", "шаблон, вопросы, LinkedIn": "szablon, pytania, LinkedIn", "Структура CV для junior/intern в IT (1 страница)": "Struktura CV dla junior/intern w IT (1 strona)", "Header": "Header", "Имя, город (Wrocław), телефон, email, ссылки на GitHub и LinkedIn — без фото и даты рождения (в польском/западном CV это не принято и иногда даже фильтруется рекрутером как риск дискриминации).": "Imię i nazwisko, miasto (Wrocław), telefon, e-mail, linki do GitHub i LinkedIn — bez zdjęcia i daty urodzenia (w polskim/zachodnim CV to nieprzyjęte i czasem nawet odrzucane przez rekrutera jako ryzyko dyskryminacji).", "Summary (2–3 строки)": "Summary (2–3 linijki)", "Кто ты и что ищешь: например «Informatyka student at DSW (Cloud Computing specialization), looking for a junior/intern role in cloud or backend development». Без воды и штампов вроде «ответственный командный игрок».": "Kim jesteś i czego szukasz: np. „Informatyka student at DSW (Cloud Computing specialization), looking for a junior/intern role in cloud or backend development”. Bez lania wody i frazesów typu „odpowiedzialny gracz zespołowy”.", "Skills": "Skills", "Список технологий по категориям: Languages (Python, SQL, ...), Cloud (AWS/Azure basics, Docker), Tools (Git, Linux, VS Code). Указывай только то, чем реально пользовался на практике/в проекте.": "Lista technologii wg kategorii: Languages (Python, SQL, ...), Cloud (AWS/Azure basics, Docker), Tools (Git, Linux, VS Code). Podawaj tylko to, czego naprawdę używałeś w praktyce/projekcie.", "Projects": "Projects", "2–4 проекта с GitHub-ссылками (см. раздел «Портфолио по семестрам» на странице «Семестры 1–7») — самый весомый раздел для студента без опыта работы, часто важнее, чем Education.": "2–4 projekty z linkami do GitHub (zob. sekcję „Portfolio po semestrach” na stronie „Semestry 1–7”) — najważniejsza sekcja dla studenta bez doświadczenia zawodowego, często ważniejsza niż Education.", "Experience / Praktyka zawodowa": "Experience / Praktyka zawodowa", "Университетские практики (Praktyka zawodowa I–IV) и подработки — даже нерелевантный опыт показывает надёжность; для IT-практик распиши конкретные задачи и технологии.": "Praktyki uczelniane (Praktyka zawodowa I–IV) i dorabianie — nawet niezwiązane doświadczenie pokazuje rzetelność; przy praktykach IT rozpisz konkretne zadania i technologie.", "Education": "Education", "DSW Wrocław, Informatyka, специализация Cloud Computing, ожидаемый год выпуска. Ниже — оконченная школа, если места хватает.": "DSW Wrocław, Informatyka, specjalizacja Cloud Computing, spodziewany rok ukończenia. Niżej — ukończona szkoła, jeśli starczy miejsca.", "Languages": "Languages", "Уровень по CEFR (например Polish — B1, English — B2) — рекрутеры в Польше почти всегда смотрят на этот пункт в первую очередь.": "Poziom wg CEFR (np. Polish — B1, English — B2) — rekruterzy w Polsce prawie zawsze patrzą na ten punkt w pierwszej kolejności.", "Формат:": "Format:", "одна страница, PDF (не .docx — при открытии на другом устройстве может «поехать» вёрстка), нейтральный шаблон без ярких цветов и таблиц-картинок (многие ATS-системы не распознают текст в таблицах/картинках). Можно собрать в Canva, Novoresume или прямо в Google Docs по шаблону.": "jedna strona, PDF (nie .docx — przy otwarciu na innym urządzeniu może „rozjechać się” układ), neutralny szablon bez jaskrawych kolorów i tabel-obrazków (wiele systemów ATS nie rozpoznaje tekstu w tabelach/obrazkach). Można zrobić w Canva, Novoresume lub bezpośrednio w Google Docs wg szablonu.", "💬 Технические вопросы": "💬 Pytania techniczne", "Разница между списком/массивом и словарём/хэш-таблицей, когда что использовать": "Różnica między listą/tablicą a słownikiem/hash-tabelą, kiedy czego używać", "Что такое REST API, чем GET отличается от POST": "Czym jest REST API, czym GET różni się od POST", "Что такое Git, разница между": "Czym jest Git, różnica między", "и": "a", "Разница между процессом и потоком (thread)": "Różnica między procesem a wątkiem (thread)", "Что такое Docker-контейнер и чем он отличается от виртуальной машины": "Czym jest kontener Docker i czym różni się od maszyny wirtualnej", "Как ты дебажишь код, если он не работает и не выдаёт ошибку": "Jak debugujesz kod, jeśli nie działa i nie zwraca błędu", "Небольшая live-coding задача (FizzBuzz-уровня на 1–2 курсе, посложнее — ближе к практике)": "Małe zadanie live-coding (poziom FizzBuzz na 1–2 roku, trudniejsze — bliżej praktyki)", "🧠 Поведенческие вопросы": "🧠 Pytania behawioralne", "Расскажи о проекте, которым гордишься — что делал именно ты": "Opowiedz o projekcie, z którego jesteś dumny — co dokładnie robiłeś Ty", "Расскажи о ситуации, когда что-то пошло не так — что сделал": "Opowiedz o sytuacji, gdy coś poszło nie tak — co zrobiłeś", "Почему выбрал именно эту специализацию/эту компанию": "Dlaczego wybrałeś właśnie tę specjalizację/tę firmę", "Как справляешься с дедлайнами и приоритизацией задач": "Jak radzisz sobie z terminami i priorytetyzacją zadań", "Есть ли у тебя вопросы ко мне? — всегда готовь 2–3 вопроса про команду/стек/onboarding": "Czy masz do mnie pytania? — zawsze przygotuj 2–3 pytania o zespół/stack/onboarding", "Используй структуру STAR (Situation → Task → Action → Result) для ответов на «расскажи о случае, когда...»": "Używaj struktury STAR (Situation → Task → Action → Result) do odpowiedzi na „opowiedz o sytuacji, gdy...”", "Заголовок профиля": "Nagłówek profilu", "не просто «Student», а «Informatyka Student · Cloud Computing @ DSW Wrocław» — видно специализацию сразу": "nie tylko „Student”, tylko „Informatyka Student · Cloud Computing @ DSW Wrocław” — od razu widać specjalizację", "Фото профиля": "Zdjęcie profilowe", "нейтральное, деловое, лицо крупным планом — профили без фото рекрутеры открывают заметно реже": "neutralne, biznesowe, twarz z bliska — profile bez zdjęcia rekruterzy otwierają zauważalnie rzadziej", "About / О себе": "About / O mnie", "3–5 предложений: кто ты, что изучаешь, что ищешь, ссылка на GitHub": "3–5 zdań: kim jesteś, co studiujesz, czego szukasz, link do GitHub", "Опыт и проекты": "Doświadczenie i projekty", "дублируй пункты из CV — практики, pet-проекты, сертификаты (AWS/Azure) сразу отображаются как badges": "duplikuj punkty z CV — praktyki, projekty własne, certyfikaty (AWS/Azure) od razu wyświetlają się jako badges", "Открыт к предложениям": "Otwarty na oferty", "включи \"Open to Work\" (можно скрыть от текущего работодателя, если он у тебя есть) и укажи интересующие роли": "włącz „Open to Work” (można ukryć przed obecnym pracodawcą, jeśli go masz) i wskaż interesujące role", "Сеть контактов": "Sieć kontaktów", "добавляй одногруппников, преподавателей, коллег с практики — LinkedIn Jobs сильно завязан на 2-е соединение (друг друга)": "dodawaj kolegów z roku, wykładowców, znajomych z praktyki — LinkedIn Jobs mocno opiera się na 2. stopniu połączeń", "Активность": "Aktywność", "иногда репость/комментируй посты по теме Cloud/DevOps — алгоритм чаще показывает активные профили рекрутерам": "od czasu do czasu udostępniaj/komentuj posty o Cloud/DevOps — algorytm częściej pokazuje aktywne profile rekruterom"};
+const I18N_EN = {"⌂ Учебный кабинет": "⌂ Study dashboard", "Глоссарий (чайник)": "Glossary (for beginners)", "Семестры 1–7": "Semesters 1–7", "Спец. курсы подробно": "Specialization courses in detail", "Языки": "Languages", "Синтаксис языков": "Language syntax", "Бесплатные курсы": "Free courses", "Английский": "English", "Работа с ИИ": "Working with AI", "Приложения": "Apps", "Установка с нуля": "Setup from scratch", "Сертификаты": "Certificates", "Финансы / RKM": "Finance / RKM", "Подработка": "Side jobs", "Ресурсы": "Resources", "ABC студента DSW Ideis": "ABC of a DSW Ideis student", "Легализация пребывания": "Residence legalization", "FAQ — если что-то пошло не так": "FAQ — if something went wrong", "поиск работы, агентства, юр. нюансы": "job hunting, agencies, legal nuances", "💼 Общие job-борды": "💼 General job boards", "крупнейший польский сайт вакансий": "the biggest Polish job site", "подработки, склады, курьеры, разовые": "side jobs, warehouses, couriers, one-off gigs", "вакансии + отзывы о работодателях": "job listings + employer reviews", "агрегатор со всей Польши": "an aggregator covering all of Poland", "ещё один агрегатор": "another aggregator", "часто студенческие вакансии": "often has student jobs", "👨‍💻 IT-специфичные": "👨‍💻 IT-specific", "вилки зарплат сразу в вакансии": "salary ranges shown right in the listing", "стажировки и junior-позиции": "internships and junior positions", "польский IT-рынок": "the Polish IT market", "фильтр по Wrocław + remote": "filter by Wrocław + remote", "Искать теги:": "Search for tags:", "🏢 Кадровые агентства": "🏢 Staffing agencies", "склады, офис, IT": "warehouses, office, IT", "Хороший вариант, если ещё нет опыта / польского на уровне B2": "A good option if you don't have experience yet / Polish at B2 level", "🎓 Через университет и комьюнити": "🎓 Through the university and community", ", база вакансий и практик": ", a database of jobs and internships", "Erasmus Student Network (ESN) Wrocław — группы для иностранных студентов, часто делятся вакансиями": "Erasmus Student Network (ESN) Wrocław — groups for international students, often share job openings", "Facebook-группы: «Praca Wrocław», «Praca dla studentów Wrocław», «Українці у Вроцлаві — робота»": "Facebook groups: \"Praca Wrocław\", \"Praca dla studentów Wrocław\", \"Українці у Вроцлаві — робота\"", "Telegram-каналы для украинцев/иностранцев во Вроцлаве с подработками": "Telegram channels for Ukrainians/foreigners in Wrocław with side-job listings", "Юридические нюансы для студента": "Legal nuances for a student", "Умова zlecenie (договор поручения)": "Umowa zlecenie (contract of mandate)", "Самый частый формат подработки. Если студент младше 26 лет — работодатель не платит за него взносы ZUS (соцстрах), поэтому такие вакансии особенно охотно предлагают студентам.": "The most common form of side job. If the student is under 26, the employer doesn't pay ZUS (social insurance) contributions for them, which is why such jobs are especially often offered to students.", "Ulga dla młodych (льгота для молодых)": "Ulga dla młodych (relief for young people)", "Доход до 26 лет освобождён от PIT (подоходного налога) в пределах годового лимита (~85 528 zł/год, сумму стоит перепроверять на актуальный год). На практике часто означает зарплату «на руки» без вычета налога.": "Income up to age 26 is exempt from PIT (income tax) within an annual limit (~85,528 zł/year — double-check the current-year figure). In practice this often means getting your pay \"in hand\" with no tax withheld.", "PIT-2 / оформление": "PIT-2 / paperwork", "При устройстве попросят PESEL, номер счёta и, если нужно, подписать PIT-2 — уточнять у работодателя, что именно требуется под конкретный тип договора.": "When you're hired, they'll ask for your PESEL, account number, and, if needed, to sign a PIT-2 — check with the employer exactly what's required for that specific type of contract.", "Легальность": "Legality", "Для иностранцев вне ЕС — подработка легальна в рамках учёбы (студенческий статус даёт право работать без отдельного разрешения на работу), но лучше уточнять актуальные правила на": "For non-EU foreigners, side work is legal as part of your studies (student status gives you the right to work without a separate work permit), but it's best to check the current rules on", "или в Welcome Center уни.": "or at the university's Welcome Center.", "Совет:": "Tip:", "на 1–2 курсе, пока польский и английский ещё подтягиваются, проще заходить через кадровые агентства (склад, логистика, колл-центр с русским/украинским языком) или подработки через ESN/уни. С 3 курса, когда появляется база (Python, Linux, сети), уже реально целиться в IT-стажировки на No Fluff Jobs и Just Join IT — они прямо помечены как": "in year 1–2, while your Polish and English are still catching up, it's easier to get in through staffing agencies (warehouse, logistics, a call center with Russian/Ukrainian) or side jobs via ESN/the university. From year 3, once you have a base (Python, Linux, networking), it's realistic to aim for IT internships on No Fluff Jobs and Just Join IT — they're clearly tagged as", "Подработка — CloudPath": "Side jobs — CloudPath", "Резюме / CV и подготовка к собеседованию": "Resume / CV and interview prep", "шаблон, вопросы, LinkedIn": "template, questions, LinkedIn", "Структура CV для junior/intern в IT (1 страница)": "CV structure for a junior/intern IT role (1 page)", "Header": "Header", "Имя, город (Wrocław), телефон, email, ссылки на GitHub и LinkedIn — без фото и даты рождения (в польском/западном CV это не принято и иногда даже фильтруется рекрутером как риск дискриминации).": "Name, city (Wrocław), phone, email, links to GitHub and LinkedIn — no photo or date of birth (that's not customary on a Polish/Western CV, and recruiters sometimes even screen it out as a discrimination risk).", "Summary (2–3 строки)": "Summary (2–3 lines)", "Кто ты и что ищешь: например «Informatyka student at DSW (Cloud Computing specialization), looking for a junior/intern role in cloud or backend development». Без воды и штампов вроде «ответственный командный игрок».": "Who you are and what you're looking for: e.g. \"Informatyka student at DSW (Cloud Computing specialization), looking for a junior/intern role in cloud or backend development.\" No filler or clichés like \"responsible team player.\"", "Skills": "Skills", "Список технологий по категориям: Languages (Python, SQL, ...), Cloud (AWS/Azure basics, Docker), Tools (Git, Linux, VS Code). Указывай только то, чем реально пользовался на практике/в проекте.": "A list of technologies by category: Languages (Python, SQL, ...), Cloud (AWS/Azure basics, Docker), Tools (Git, Linux, VS Code). Only list things you've actually used in practice or in a project.", "Projects": "Projects", "2–4 проекта с GitHub-ссылками (см. раздел «Портфолио по семестрам» на странице «Семестры 1–7») — самый весомый раздел для студента без опыта работы, часто важнее, чем Education.": "2–4 projects with GitHub links (see the \"Portfolio by semester\" section on the \"Semesters 1–7\" page) — the most important section for a student with no work experience, often more important than Education.", "Experience / Praktyka zawodowa": "Experience / Praktyka zawodowa", "Университетские практики (Praktyka zawodowa I–IV) и подработки — даже нерелевантный опыт показывает надёжность; для IT-практик распиши конкретные задачи и технологии.": "University internships (Praktyka zawodowa I–IV) and side jobs — even unrelated experience shows reliability; for IT internships, spell out concrete tasks and technologies.", "Education": "Education", "DSW Wrocław, Informatyka, специализация Cloud Computing, ожидаемый год выпуска. Ниже — оконченная школа, если места хватает.": "DSW Wrocław, Informatyka, Cloud Computing specialization, expected graduation year. Below that, your finished school, if there's room.", "Languages": "Languages", "Уровень по CEFR (например Polish — B1, English — B2) — рекрутеры в Польше почти всегда смотрят на этот пункт в первую очередь.": "CEFR level (e.g. Polish — B1, English — B2) — recruiters in Poland almost always check this line first.", "Формат:": "Format:", "одна страница, PDF (не .docx — при открытии на другом устройстве может «поехать» вёрстка), нейтральный шаблон без ярких цветов и таблиц-картинок (многие ATS-системы не распознают текст в таблицах/картинках). Можно собрать в Canva, Novoresume или прямо в Google Docs по шаблону.": "one page, PDF (not .docx — the layout can break when opened on another device), a neutral template without bright colors or table/image layouts (many ATS systems can't read text inside tables/images). You can put it together in Canva, Novoresume, or directly in Google Docs from a template.", "💬 Технические вопросы": "💬 Technical questions", "Разница между списком/массивом и словарём/хэш-таблицей, когда что использовать": "The difference between a list/array and a dictionary/hash table, and when to use each", "Что такое REST API, чем GET отличается от POST": "What a REST API is, and how GET differs from POST", "Что такое Git, разница между": "What Git is, the difference between", "и": "and", "Разница между процессом и потоком (thread)": "The difference between a process and a thread", "Что такое Docker-контейнер и чем он отличается от виртуальной машины": "What a Docker container is and how it differs from a virtual machine", "Как ты дебажишь код, если он не работает и не выдаёт ошибку": "How you debug code that doesn't work and doesn't throw an error", "Небольшая live-coding задача (FizzBuzz-уровня на 1–2 курсе, посложнее — ближе к практике)": "A small live-coding task (FizzBuzz-level in year 1–2, harder as you get closer to your internship)", "🧠 Поведенческие вопросы": "🧠 Behavioral questions", "Расскажи о проекте, которым гордишься — что делал именно ты": "Tell me about a project you're proud of — what exactly did you do", "Расскажи о ситуации, когда что-то пошло не так — что сделал": "Tell me about a time something went wrong — what did you do", "Почему выбрал именно эту специализацию/эту компанию": "Why did you choose this specialization/this company", "Как справляешься с дедлайнами и приоритизацией задач": "How do you handle deadlines and prioritizing tasks", "Есть ли у тебя вопросы ко мне? — всегда готовь 2–3 вопроса про команду/стек/onboarding": "Do you have any questions for me? — always prepare 2–3 questions about the team/stack/onboarding", "Используй структуру STAR (Situation → Task → Action → Result) для ответов на «расскажи о случае, когда...»": "Use the STAR structure (Situation → Task → Action → Result) for \"tell me about a time when...\" answers", "Заголовок профиля": "Profile headline", "не просто «Student», а «Informatyka Student · Cloud Computing @ DSW Wrocław» — видно специализацию сразу": "not just \"Student,\" but \"Informatyka Student · Cloud Computing @ DSW Wrocław\" — the specialization is visible right away", "Фото профиля": "Profile photo", "нейтральное, деловое, лицо крупным планом — профили без фото рекрутеры открывают заметно реже": "neutral, business-like, a close-up of your face — recruiters open profiles without a photo noticeably less often", "About / О себе": "About", "3–5 предложений: кто ты, что изучаешь, что ищешь, ссылка на GitHub": "3–5 sentences: who you are, what you're studying, what you're looking for, a link to GitHub", "Опыт и проекты": "Experience and projects", "дублируй пункты из CV — практики, pet-проекты, сертификаты (AWS/Azure) сразу отображаются как badges": "duplicate the entries from your CV — internships, pet projects, certificates (AWS/Azure) show up right away as badges", "Открыт к предложениям": "Open to work", "включи \"Open to Work\" (можно скрыть от текущего работодателя, если он у тебя есть) и укажи интересующие роли": "turn on \"Open to Work\" (you can hide it from your current employer if you have one) and list the roles you're interested in", "Сеть контактов": "Your network", "добавляй одногруппников, преподавателей, коллег с практики — LinkedIn Jobs сильно завязан на 2-е соединение (друг друга)": "add classmates, instructors, and colleagues from your internship — LinkedIn Jobs relies heavily on 2nd-degree connections", "Активность": "Activity", "иногда репость/комментируй посты по теме Cloud/DevOps — алгоритм чаще показывает активные профили рекрутерам": "occasionally repost/comment on Cloud/DevOps posts — the algorithm surfaces active profiles to recruiters more often"};
+let currentLang = 'ru';
+const __i18nNodes = [];
+(function initI18nNodes(){
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(node){
+      const p = node.parentElement;
+      if(!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if(tag === 'SCRIPT' || tag === 'STYLE') return NodeFilter.FILTER_REJECT;
+      if(p.closest && p.closest('#langSwitcher')) return NodeFilter.FILTER_REJECT;
+      if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let n;
+  while(n = walker.nextNode()) __i18nNodes.push({node: n, orig: n.nodeValue});
+})();
+const LANG_DICT = {pl: I18N_PL, en: I18N_EN};
+function setLang(lang){
+  currentLang = lang;
+  __i18nNodes.forEach(function(item){
+    if(currentLang === 'ru'){
+      item.node.nodeValue = item.orig;
+    } else {
+      const dict = LANG_DICT[currentLang];
+      const key = item.orig.trim();
+      if(dict[key]){
+        item.node.nodeValue = item.orig.replace(key, dict[key]);
+      } else {
+        item.node.nodeValue = item.orig;
+      }
+    }
+  });
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    const active = b.dataset.lang === currentLang;
+    b.style.background = active ? 'var(--accent)' : 'var(--panel)';
+    b.style.color = active ? '#062622' : 'var(--text)';
+    b.style.borderColor = active ? 'var(--accent)' : 'var(--line)';
+    b.style.fontWeight = active ? '700' : '400';
+  });
+}
+setLang('ru');
+</script>
+<script src="search-data.js?v=20261026-1"></script>
+<script src="search-widget.js?v=20261026-1"></script>
+<script src="glossary-tooltips.js?v=20261026-1"></script>
+<script src="site-enhancements.js?v=20261026-1"></script>
+</body>
+</html>
