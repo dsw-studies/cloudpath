@@ -21,6 +21,10 @@
 - Визуальная проверка в браузере не делалась (локальные файлы недоступны панели); проверен только баланс тегов.
 - Не обновлены `?v=` у старых страниц; новые используют `20261116-1`.
 
+## Коллоквиумы (16.11.2026)
+- `colloquium.html` + `colloquium-an1.js` — Analiza matematyczna I (образец wersja A + генератор: P/F, тавтология, промежутки).
+- `colloquium-alg1.html` + `colloquium-alg1.js` — Matematyka 1 (образец от 17.11 + генератор: прямые, матрицы, det).
+
 ## Генераторы (scratchpad, могут быть очищены)
 `D:\DevTemp\claude\1749d964b6bf66df\76b42cb9-...\scratchpad\`: shell.py, gen_list2.py, gen_lect.py, gen_an2.py, gen_inf.py, gen_theory.py, gen_arch.py.
 
