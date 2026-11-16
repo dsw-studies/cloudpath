@@ -11,6 +11,8 @@
   - **Информатика**: `informatics-list-1.html` (группа 1, задачи 1–7), `informatics-notes.html` (единицы памяти, носители, шпаргалка), `informatics-theory.html` (скрипт: Хомский, автоматы, P/NP и др.), `informatics-architecture.html` (лекция 1 «Od bitu do komputera»).
 - Ссылки: `tasks.html`, `lectures.html`; `search-data.js` (SITE_PAGES); `service-worker.js` → `cloudpath-v31` + новые страницы в CORE.
 
+- GitHub: репозиторий `dsw-studies/cloudpath`, ветка `main`. Моя версия слита с удалённой (практика и математика с GitHub сохранены; tasks/lectures/search-data/service-worker — база с GitHub + мои карточки, кэш v40). Пуш делает пользователь вручную (в оболочке Claude нет входа в GitHub).
+
 ## Не сделано / ограничения
 - `material.js`: часть соответствий Drive-id подозрительна, не правилась.
 - Информатика: «Podstawy informatyki 2025» — только силлабус (вошёл в theory); не разобраны тематические zip-архивы.
