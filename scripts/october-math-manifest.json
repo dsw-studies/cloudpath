@@ -1,0 +1,188 @@
+{
+  "pages": [
+    {
+      "slug": "polynomials-vieta-2026-10-27",
+      "title": "Формулы Виета, параметр и многочлены",
+      "description": "От суммы корней до схемы Горнера: объяснения и разбор примеров занятия."
+    },
+    {
+      "slug": "rational-functions-2026-10-28",
+      "title": "Рациональные функции: область определения и неравенства",
+      "description": "Материал 27–28 октября: от гиперболы до дробей с модулем и составных выражений."
+    },
+    {
+      "slug": "logarithms-2026-10-28",
+      "title": "Степени, логарифмы и показательные уравнения",
+      "description": "Смысл логарифма, смена основания и подробные вычисления с проверкой ограничений."
+    },
+    {
+      "slug": "sequences-2026-10-28",
+      "title": "Последовательности и прогрессии",
+      "description": "Как доказывать монотонность, находить общий член и считать конечную сумму."
+    },
+    {
+      "slug": "limits-series-2026-10-28",
+      "title": "Пределы последовательностей и геометрический ряд",
+      "description": "Главная степень n, бесконечные пределы и уравнения с условием сходимости."
+    }
+  ],
+  "topics": [
+    {
+      "id": "vieta-sums",
+      "title": "Формулы Виета: сумма, произведение и знаки",
+      "count": 10,
+      "lesson": "polynomials-vieta-2026-10-27"
+    },
+    {
+      "id": "vieta-expressions",
+      "title": "Виет: выражения через корни",
+      "count": 10,
+      "lesson": "polynomials-vieta-2026-10-27"
+    },
+    {
+      "id": "quadratic-parameter",
+      "title": "Параметр и число корней",
+      "count": 10,
+      "lesson": "polynomials-vieta-2026-10-27"
+    },
+    {
+      "id": "biquadratic",
+      "title": "Биквадратные уравнения",
+      "count": 10,
+      "lesson": "polynomials-vieta-2026-10-27"
+    },
+    {
+      "id": "poly-grouping",
+      "title": "Многочлены: группировка и знак",
+      "count": 10,
+      "lesson": "polynomials-vieta-2026-10-27"
+    },
+    {
+      "id": "horner-practice",
+      "title": "Горнер: извлечение линейного множителя",
+      "count": 10,
+      "lesson": "polynomials-vieta-2026-10-27"
+    },
+    {
+      "id": "rational-domain",
+      "title": "Рациональные функции: область и сокращение",
+      "count": 10,
+      "lesson": "rational-functions-2026-10-28"
+    },
+    {
+      "id": "hyperbola-practice",
+      "title": "Гипербола: асимптоты и нули",
+      "count": 10,
+      "lesson": "rational-functions-2026-10-28"
+    },
+    {
+      "id": "fraction-division",
+      "title": "Деление рациональных выражений",
+      "count": 10,
+      "lesson": "rational-functions-2026-10-28"
+    },
+    {
+      "id": "rational-signs",
+      "title": "Рациональные неравенства: метод интервалов",
+      "count": 10,
+      "lesson": "rational-functions-2026-10-28"
+    },
+    {
+      "id": "absolute-fractions",
+      "title": "Модуль в знаменателе",
+      "count": 10,
+      "lesson": "rational-functions-2026-10-28"
+    },
+    {
+      "id": "logs-basic",
+      "title": "Логарифмы: определение",
+      "count": 10,
+      "lesson": "logarithms-2026-10-28"
+    },
+    {
+      "id": "logs-rules",
+      "title": "Логарифмы: объединение выражений",
+      "count": 10,
+      "lesson": "logarithms-2026-10-28"
+    },
+    {
+      "id": "logs-base",
+      "title": "Логарифмы: смена основания",
+      "count": 10,
+      "lesson": "logarithms-2026-10-28"
+    },
+    {
+      "id": "logs-equations",
+      "title": "Логарифмические уравнения: переменное основание",
+      "count": 10,
+      "lesson": "logarithms-2026-10-28"
+    },
+    {
+      "id": "exp-equations",
+      "title": "Показательные уравнения: общее основание",
+      "count": 10,
+      "lesson": "logarithms-2026-10-28"
+    },
+    {
+      "id": "exp-substitution",
+      "title": "Показательные уравнения: замена переменной",
+      "count": 10,
+      "lesson": "logarithms-2026-10-28"
+    },
+    {
+      "id": "sequence-monotonic",
+      "title": "Последовательности: доказательство монотонности",
+      "count": 10,
+      "lesson": "sequences-2026-10-28"
+    },
+    {
+      "id": "arithmetic-term",
+      "title": "Арифметическая прогрессия: член и сумма",
+      "count": 10,
+      "lesson": "sequences-2026-10-28"
+    },
+    {
+      "id": "arithmetic-recover",
+      "title": "Арифметическая прогрессия: два члена",
+      "count": 10,
+      "lesson": "sequences-2026-10-28"
+    },
+    {
+      "id": "geometric-finite",
+      "title": "Геометрическая прогрессия: конечная сумма",
+      "count": 10,
+      "lesson": "sequences-2026-10-28"
+    },
+    {
+      "id": "limits-rational",
+      "title": "Пределы: равные степени",
+      "count": 10,
+      "lesson": "limits-series-2026-10-28"
+    },
+    {
+      "id": "limits-degrees",
+      "title": "Пределы: разные степени",
+      "count": 10,
+      "lesson": "limits-series-2026-10-28"
+    },
+    {
+      "id": "series-convergence",
+      "title": "Геометрический ряд: область сходимости",
+      "count": 10,
+      "lesson": "limits-series-2026-10-28"
+    },
+    {
+      "id": "series-equations",
+      "title": "Уравнения с геометрическим рядом",
+      "count": 10,
+      "lesson": "limits-series-2026-10-28"
+    }
+  ],
+  "sources": {
+    "27_video": "Board and slide review; SRT filename does not match",
+    "28_1742_video": "Matches SRT named 27 October",
+    "28_1857_video": "Matches 18:57 SRT; content begins 08:24",
+    "28_1927_video": "Limits transcript named 17:42; supplied 19:27 SRT is duplicate"
+  },
+  "practice_count": 250
+}
