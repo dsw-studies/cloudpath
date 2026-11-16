@@ -12,6 +12,7 @@
 - Ссылки: `tasks.html`, `lectures.html`; `search-data.js` (SITE_PAGES); `service-worker.js` → `cloudpath-v31` + новые страницы в CORE.
 
 - GitHub: репозиторий `dsw-studies/cloudpath`, ветка `main`. Моя версия слита с удалённой (практика и математика с GitHub сохранены; tasks/lectures/search-data/service-worker — база с GitHub + мои карточки, кэш v40). Пуш делает пользователь вручную (в оболочке Claude нет входа в GitHub).
+- Практика: practice-sheets.js — 17 типов генераторов «как в листах» (физика, анализ, алгебра, информатика), подключён в practice.html, кэш v41.
 
 ## Не сделано / ограничения
 - `material.js`: часть соответствий Drive-id подозрительна, не правилась.
