@@ -26,7 +26,7 @@
   const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT', 'MJX-CONTAINER', 'SVG', 'CODE', 'PRE']);
   const process = text => {
     if (text.includes('\\(') || !STRONG.test(text)) return null;
-    const parts = text.split(/(\s+)/), cls = parts.map(p => /^\s*$/.test(p) ? 'S' : /^[·•|]$/.test(p) ? 'P' : (STRONG.test(p) && !CYR.test(p)) ? 'M' : isN(p) ? 'N' : 'P');
+    const parts = text.split(/(\s+)/), cls = parts.map(p => /^\s*$/.test(p) ? 'S' : /^([·•|]|[a-eа-я]\))$/.test(p) ? 'P' : (STRONG.test(p) && !CYR.test(p)) ? 'M' : isN(p) ? 'N' : 'P');
     const out = []; let i = 0, changed = false;
     while (i < parts.length) {
       if (cls[i] === 'S' || cls[i] === 'P') { out.push(parts[i]); i++; continue; }
