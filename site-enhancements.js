@@ -44,6 +44,8 @@
     'schedule.html': ['🗓 Расписание', '🗓 Plan zajęć', '🗓 Schedule'],
     'lectures.html': ['📖 Конспекты', '📖 Notatki', '📖 Notes'],
     'tasks.html': ['✓ Задания', '✓ Zadania', '✓ Tasks'],
+    'colloquium-alg1.html': ['📝 Коллоквиум · алгебра', '📝 Kolokwium · algebra', '📝 Colloquium · algebra'],
+    'colloquium.html': ['📝 Коллоквиум · матанализ', '📝 Kolokwium · analiza', '📝 Colloquium · analysis'],
     'practice.html': ['✍ Тренировочные задания', '✍ Ćwiczenia', '✍ Practice'],
     'glossary.html': ['Глоссарий (чайник)', 'Słowniczek (dla początkujących)', 'Glossary (beginner)'],
     'semesters.html': ['Семестры 1–7', 'Semestry 1–7', 'Semesters 1–7'],
