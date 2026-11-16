@@ -55,7 +55,7 @@
 <p>det X = ${S(v)}·(${sg > 0 ? '+1' : '−1'})·${S(m)} = <b>${total}</b>.</p>
 <p><b>b)</b> det(Dⁿ) = (det D)ⁿ, так как det(AB)=det A·det B. det(D^${n}) = (${S(d)})^${n} = <b>${dn}</b>.</p>
 <p>det(kD) = kⁿ·det D для матрицы n-го порядка, здесь порядок 4: det(${k}D) = ${k}⁴·(${S(d)}) = ${k ** 4}·(${S(d)}) = <b>${S(k ** 4 * d)}</b>.</p>`;
-    return { stmt: `a) Proszę obliczyć wyznacznik macierzy X = ${mx(X)} b) Wiedząc, że macierz D jest macierzą czwartego stopnia oraz det(D) = ${S(d)}, proszę obliczyć wartości: det(D<sup>${n}</sup>) oraz det(${k}D).`, sol };
+    return { stmt: `a) Proszę obliczyć wyznacznik macierzy X = ${mx(X)} b) Wiedząc, że macierz D jest macierzą czwartego stopnia oraz det(D) = ${S(d)}, proszę obliczyć wartości: det(D^${n}) oraz det(${k}D).`, sol };
   }
 
   let V = null, timer = null, left = 1800;
@@ -69,6 +69,7 @@
 <div><button class="button primary" id="bStart" type="button">Старт таймера</button> <button class="button" id="bStop" type="button">Пауза</button> <button class="button" id="bNew" type="button">Новый вариант</button></div></div>
 ${V.t.map((t, i) => `<section class="lesson-card"><span class="lesson-number">ZADANIE ${i + 1} · 5 pkt</span><p>${t.stmt}</p><textarea rows="4" placeholder="Решай на бумаге, потом сверяйся…"></textarea><div><button class="button primary sh" data-i="${i}" type="button">Показать решение</button></div><div class="sol" id="sol${i}" hidden>${t.sol}</div></section>`).join('')}`;
     tick();
+    if (window.texify) texify(app);
     app.querySelector('#bStart').onclick = () => { if (left <= 0) left = 1800; stop(); timer = setInterval(() => { left--; tick(); if (left <= 0) stop(); }, 1000); };
     app.querySelector('#bStop').onclick = stop;
     app.querySelector('#bNew').onclick = build;

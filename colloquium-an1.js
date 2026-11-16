@@ -84,7 +84,7 @@
     }
     const taut = rows.every(x => x.val), names = n === 3 ? ['p', 'q', 'r'] : ['p', 'q'];
     const bad = rows.filter(x => !x.val);
-    const L0 = txt.split(' ' + op + ' ')[0], R0 = txt.split(' ' + op + ' ').slice(1).join(' ' + op + ' ');
+    let dep = 0, cut = -1; for (let i = 0; i < txt.length; i++) { const c = txt[i]; if ('([{'.includes(c)) dep++; else if (')]}'.includes(c)) dep--; else if (c === op && dep === 0) { cut = i; break; } } const L0 = txt.slice(0, cut).trim(), R0 = txt.slice(cut + 1).trim();
     return {
       txt, taut,
       sol: `<p>Строим таблицу истинности (1 — истина, 0 — ложь). Левая часть: <b>${esc(L0)}</b>, правая: <b>${esc(R0)}</b>, главная связка «${op}».</p>
@@ -157,6 +157,7 @@ ${V.s.map((s, i) => `<div class="stmt" data-i="${i}"><p>${i + 1}. ${esc(s[0])}</
 <div><button class="button primary" id="bShow3" type="button">Показать решение</button></div><div id="sol3" hidden>${V.t3.sol}</div></section>
 <section class="lesson-card"><h2>Итог</h2><p>Задание 1: <span id="t1">—</span> · Задание 2 (самооценка 0–5): <input id="m2" type="number" min="0" max="5" value="0" style="width:60px"> · Задание 3 (самооценка 0–5): <input id="m3" type="number" min="0" max="5" value="0" style="width:60px"></p><p><b id="total">Сумма: —</b></p></section>`;
     tick();
+    if (window.texify) texify(app);
     const sum = () => { const t1 = V.score1; const m2 = +document.getElementById('m2').value || 0, m3 = +document.getElementById('m3').value || 0; document.getElementById('total').textContent = `Сумма: ${(t1 == null ? 0 : t1) + m2 + m3} / 15` + (t1 == null ? ' (задание 1 ещё не проверено)' : ''); };
     app.querySelector('#bStart').onclick = () => { if (left <= 0) left = 1800; start(); };
     app.querySelector('#bStop').onclick = stop;
@@ -167,6 +168,7 @@ ${V.s.map((s, i) => `<div class="stmt" data-i="${i}"><p>${i + 1}. ${esc(s[0])}</
       const norm = x => x.replace(/\s+/g, '').replace(/\\sqrt|sqrt/g, '√').replace(/inf(inity)?/gi, '∞').replace(/-/g, '−').replace(/\+∞/g, '∞').replace(/\+/g, '');
       const marks = V.t3.results.map(([n, v], i) => { const u = app.querySelector(`[data-iv="${i}"]`).value; return u.trim() ? (norm(u) === norm(v) || norm(u) === norm(v).replace(/∞/g, '+∞') ? '✓' : '✗') : '·'; });
       sol.insertAdjacentHTML('afterbegin', `<p class="muted">Автосравнение с твоими ответами (по записи): ${V.t3.results.map(([n], i) => `${esc(n)} ${marks[i]}`).join(' · ')}. Значок ✗ может означать лишь другую форму записи — сверь вручную.</p>`);
+      if (window.texify) texify(sol);
     };
     app.querySelector('#bCheck1').onclick = () => {
       let pts = 0;
@@ -178,6 +180,7 @@ ${V.s.map((s, i) => `<div class="stmt" data-i="${i}"><p>${i + 1}. ${esc(s[0])}</
         box.classList.remove('okk', 'nok'); box.classList.add(!val ? 'nok' : ok ? 'okk' : 'nok');
         why.hidden = false; why.innerHTML = `<b>Правильно: ${s[1] ? 'P' : 'F'}</b>${val ? (ok ? ' (+1)' : ' (−1)') : ' (0)'} — ${esc(s[2])}`;
       });
+      if (window.texify) texify(app.querySelector('.lesson-card'));
       V.score1 = pts; document.getElementById('score1').textContent = `${pts} / 5`; document.getElementById('t1').textContent = `${pts} / 5`; sum();
     };
     app.querySelectorAll('#m2,#m3').forEach(x => x.addEventListener('input', sum));
