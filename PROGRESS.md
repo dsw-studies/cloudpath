@@ -103,3 +103,9 @@
 - Механизм: `content-i18n.js` (подгружается из site-enhancements.js) берёт `i18n/<страница>.json` ({pl:{ключ:html}, en:{...}}; ключи — id карточек, `h1`, `lead`, `notice`, `links`) и подменяет блоки при переключении языка. SW v68; версия site-enhancements.js?v=20261117-2 на всех страницах.
 - Исходники переводов: `D:\lectures_work\tr\<страница>.py` (PL, EN); сборка `python -X utf8 -I D:\lectures_work\tr_build.py <страница>`.
 - Переведены на PL/EN ВСЕ страницы: 10 ключевых (i18n/*.json, режим ключей) + 61 блочным режимом (content-i18n.js, `{blocks:{pl,en}}`; исходники D:\lectures_work\seg, segtr, seg_build.py). Известно: h1 части страниц (faq, glossary, resources, university) в EN остался польским — доработать.
+
+## 2026-11-18: стипендия, меню, домен
+- Страница `stypendium.html` («Стипендия ректора», i18n/stypendium.json). В меню (navLabels в site-enhancements.js) добавлены «🌱 …с нуля» (python-basics, asd-zero, physics-zero) и «💰 Стипендия». SW v73.
+- Зеркало: https://cloudpath.netlify.app (каждый пуш тратит кредиты Netlify, 300/мес).
+- Домен: `cloudpath.engineer` (Name.com, студ. оффер, до 17.11.2027, автопродление ВЫКЛ, продление 64,99 $). DNS: 4×A (185.199.108–111.153) + CNAME www → dsw-studies.github.io. Файл `CNAME` в репо. GitHub Pages: DNS check in progress; осталось включить Enforce HTTPS, когда станет доступно.
+- Осталось: h1 в EN на faq/glossary/resources/university; дата коллоквиума по физике; план к сессии (нужны даты экзаменов).
