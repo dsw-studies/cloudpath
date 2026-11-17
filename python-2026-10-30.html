@@ -1,0 +1,117 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Физика I: конспект лекций 1–4 — единицы, векторы, кинематика, динамика."><meta name="robots" content="noindex,nofollow,noarchive"><title>Python 30.10: функции, файлы, генераторы</title><link rel="icon" href="cloudpath-icon.svg"><link rel="stylesheet" href="dashboard.css?v=20261026-1"><link rel="stylesheet" href="enhanced.css?v=20261026-1"><link rel="stylesheet" href="authored-study.css?v=20261026-1"><style>.physics-task.authored-task{display:block}.lesson-card{margin:16px 0}.lesson-card h3{margin:16px 0 6px;color:#74ddcb}.lesson-card ul{color:#c1d1dc;line-height:1.7;padding-left:20px}.lesson-card table{border-collapse:collapse;width:100%;margin:10px 0;color:#c1d1dc}.lesson-card td,.lesson-card th{border:1px solid #29495e;padding:6px 10px;text-align:left}.lesson-card th{background:#102333}</style><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]]},svg:{fontCache:"global"}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script><style>details.qa{border:1px solid #304a60;border-radius:10px;margin:8px 0;background:#0b1825}details.qa>summary{cursor:pointer;padding:10px 14px;color:#dceaf2;font-weight:600}details.qa>div{padding:0 14px 12px;color:#c4d4e0}pre{background:#0b1825;border:1px solid #304a60;border-radius:10px;padding:12px 14px;overflow-x:auto}pre code{font:13px/1.55 ui-monospace,Consolas,monospace;color:#dceaf2}.out{color:#6edac7}</style></head><body><nav class="toc" aria-label="Навигация CloudPath"><div class="brand">CloudPath</div><a href="index.html" data-i18n-ru="⌂ Учебный кабинет" data-i18n-pl="⌂ Panel nauki" data-i18n-en="⌂ Study dashboard">⌂ Учебный кабинет</a><a href="schedule.html" data-i18n-ru="🗓 Расписание" data-i18n-pl="🗓 Plan zajęć" data-i18n-en="🗓 Schedule">🗓 Расписание</a><a href="colloquium-alg1.html" data-i18n-ru="📝 Коллоквиум · алгебра" data-i18n-pl="📝 Kolokwium · algebra" data-i18n-en="📝 Colloquium · algebra">📝 Коллоквиум · алгебра</a><a href="colloquium.html" data-i18n-ru="📝 Коллоквиум · матанализ" data-i18n-pl="📝 Kolokwium · analiza" data-i18n-en="📝 Colloquium · analysis">📝 Коллоквиум · матанализ</a><a href="physics-lectures.html" aria-current="page" data-i18n-ru="Физика · конспект 1–4" data-i18n-pl="Fizyka · notatki 1–4" data-i18n-en="Physics · lectures 1–4">Физика · конспект 1–4</a><a href="physics-list-1.html" data-i18n-ru="Физика · задачи 1–26" data-i18n-pl="Fizyka · zadania 1–26" data-i18n-en="Physics · problems 1–26">Физика · задачи 1–26</a><a href="physics-list-2.html" data-i18n-ru="Физика · задачи 2.1–2.17" data-i18n-pl="Fizyka · zadania 2.1–2.17" data-i18n-en="Physics · problems 2.1–2.17">Физика · задачи 2.1–2.17</a><a href="physics-list-3.html" data-i18n-ru="Физика · задачи 3.1–3.20" data-i18n-pl="Fizyka · zadania 3.1–3.20" data-i18n-en="Physics · problems 3.1–3.20">Физика · задачи 3.1–3.20</a><a href="physics-lectures-5.html" data-i18n-ru="Физика · лекция 5 (колебания)" data-i18n-pl="Fizyka · wykład 5 (drgania)" data-i18n-en="Physics · lecture 5 (oscillations)">Физика · лекция 5 (колебания)</a><a href="python-basics.html" data-i18n-ru="Python с нуля" data-i18n-pl="Python od zera" data-i18n-en="Python from scratch">Python с нуля</a><a href="colloquium-phys.html" data-i18n-ru="Коллоквиум · Физика" data-i18n-pl="Kolokwium · Fizyka" data-i18n-en="Colloquium · Physics">Коллоквиум · Физика</a><a href="informatics-review.html" data-i18n-ru="Информатика: повтор" data-i18n-pl="Informatyka: powtórka" data-i18n-en="Informatics review">Информатика: повтор</a><a href="python-trainer.html" data-i18n-ru="Python: тренажёр" data-i18n-pl="Python: trener" data-i18n-en="Python trainer">Python: тренажёр</a><a href="informatics-2026-11-09.html" data-i18n-ru="Информатика 09.11" data-i18n-pl="Informatyka 09.11" data-i18n-en="Informatics 09.11">Информатика 09.11</a><a href="python-2026-11-06.html" data-i18n-ru="Python 06.11" data-i18n-pl="Python 06.11" data-i18n-en="Python 06.11">Python 06.11</a><a href="licenses-2026-11-16.html" data-i18n-ru="Лицензии ПО 16.11" data-i18n-pl="Licencje 16.11" data-i18n-en="Licenses 16.11">Лицензии ПО 16.11</a><a href="algebra-2026-11-13.html" data-i18n-ru="Алгебра 13.11" data-i18n-pl="Algebra 13.11" data-i18n-en="Algebra 13.11">Алгебра 13.11</a><a href="analysis-2026-11-13.html" data-i18n-ru="Анализ 13.11" data-i18n-pl="Analiza 13.11" data-i18n-en="Analysis 13.11">Анализ 13.11</a><a href="python-2026-10-30.html" data-i18n-ru="Python 30.10" data-i18n-pl="Python 30.10" data-i18n-en="Python 30.10">Python 30.10</a><a href="asd-zero.html" data-i18n-ru="ASD с нуля" data-i18n-pl="ASD od zera" data-i18n-en="ASD from scratch">ASD с нуля</a><a href="physics-zero.html" data-i18n-ru="Физика с нуля (листы 1–2)" data-i18n-pl="Fizyka od zera (listy 1–2)" data-i18n-en="Physics from scratch (lists 1–2)">Физика с нуля (листы 1–2)</a><a href="algorithms-2026-11-13.html" data-i18n-ru="ASD · графы и MST (13.11)" data-i18n-pl="ASD · grafy i MST (13.11)" data-i18n-en="ASD · graphs and MST (13 Nov)">ASD · графы и MST (13.11)</a><a href="informatics-notes.html" data-i18n-ru="Информатика · конспект" data-i18n-pl="Informatyka · notatki" data-i18n-en="Informatics · notes">Информатика · конспект</a><a href="informatics-list-1.html" data-i18n-ru="Информатика · задачи гр.1" data-i18n-pl="Informatyka · zadania gr.1" data-i18n-en="Informatics · group 1 tasks">Информатика · задачи гр.1</a><a href="lessons-2026-10-23.html" data-i18n-ru="Конспект 23.10" data-i18n-pl="Notatki 23.10" data-i18n-en="Notes 23 Oct">Конспект 23.10</a><a href="glossary.html" data-i18n-ru="Глоссарий (чайник)" data-i18n-pl="Słowniczek (dla początkujących)" data-i18n-en="Glossary (beginner)">Глоссарий (чайник)</a><a href="semesters.html" data-i18n-ru="Семестры 1–7" data-i18n-pl="Semestry 1–7" data-i18n-en="Semesters 1–7">Семестры 1–7</a><a href="specdeep.html" data-i18n-ru="Спец. курсы подробно" data-i18n-pl="Kursy specjalizacyjne szczegółowo" data-i18n-en="Specialization courses in detail">Спец. курсы подробно</a><a href="languages.html" data-i18n-ru="Языки" data-i18n-pl="Języki" data-i18n-en="Languages">Языки</a><a href="syntax.html" data-i18n-ru="Синтаксис языков" data-i18n-pl="Składnia języków" data-i18n-en="Language syntax">Синтаксис языков</a><a href="courses.html" data-i18n-ru="Бесплатные курсы" data-i18n-pl="Darmowe kursy" data-i18n-en="Free courses">Бесплатные курсы</a><a href="english.html" data-i18n-ru="Английский" data-i18n-pl="Angielski" data-i18n-en="English">Английский</a><a href="ai.html" data-i18n-ru="Работа с ИИ" data-i18n-pl="Praca z AI" data-i18n-en="Working with AI">Работа с ИИ</a><a href="tools.html" data-i18n-ru="Приложения" data-i18n-pl="Aplikacje" data-i18n-en="Apps">Приложения</a><a href="setup.html" data-i18n-ru="Установка с нуля" data-i18n-pl="Instalacja od zera" data-i18n-en="Setup from scratch">Установка с нуля</a><a href="certs.html" data-i18n-ru="Сертификаты" data-i18n-pl="Certyfikaty" data-i18n-en="Certificates">Сертификаты</a><a href="finance.html" data-i18n-ru="Финансы / RKM" data-i18n-pl="Finanse / RKM" data-i18n-en="Finance / RKM">Финансы / RKM</a><a href="housing.html" data-i18n-ru="Жильё" data-i18n-pl="Mieszkanie" data-i18n-en="Housing">Жильё</a><a href="parttime.html" data-i18n-ru="Подработка" data-i18n-pl="Praca dodatkowa" data-i18n-en="Part-time work">Подработка</a><a href="legal.html" data-i18n-ru="Легализация пребывания" data-i18n-pl="Legalizacja pobytu" data-i18n-en="Stay legalization">Легализация пребывания</a><a href="faq.html" data-i18n-ru="FAQ — если что-то пошло не так" data-i18n-pl="FAQ — gdy coś pójdzie nie tak" data-i18n-en="FAQ — if something goes wrong">FAQ — если что-то пошло не так</a><a href="resources.html" data-i18n-ru="Ресурсы" data-i18n-pl="Zasoby" data-i18n-en="Resources">Ресурсы</a><a href="university.html" data-i18n-ru="ABC студента DSW Ideis" data-i18n-pl="ABC studenta DSW Ideis" data-i18n-en="DSW Ideis student ABC">ABC студента DSW Ideis</a></nav><main class="main" id="main-content"><header class="hero"><div class="eyebrow">Python · 30.10</div><h1>Python 30.10: функции, рекурсия, файлы, lambda, генераторы.</h1><p>Лекция 30.10 (после неё на 06.11 был <a href="python-2026-11-06.html">map, re, структуры данных</a>). Все примеры кода запущены, показан реальный вывод. Основы — <a href="python-basics.html">Python с нуля</a>, практика — <a href="python-trainer.html">тренажёр</a>.</p><div class="quick-links"><a class="button primary" href="#f1">Функции</a><a class="button" href="#f3">Рекурсия</a><a class="button" href="#f6">Файлы</a><a class="button" href="#f9">Генераторы</a></div></header><div class="wrap"><div class="notice">Конспект по записи (Whisper, польский), включены четыре файла с лекции; повторы и отвлечения опущены.</div><section class="authored-content"><div class="lesson-card" id="f1"><span class="lesson-number">1</span><h2>Функции: локальные переменные и возврат нескольких значений</h2><p>Переменная, созданная <b>внутри функции</b>, <b>локальная</b>: существует только пока функция выполняется. Снаружи на неё сослаться нельзя (будет <code>NameError</code>). Если нужно, чтобы значение жило дальше, его либо делают глобальным (если оно нужно из разных мест), либо <b>возвращают</b> через <code>return</code>. Лектор отдельно подчеркнул: внутри функции обычно не печатают (<code>print</code>), а возвращают результат, чтобы функцию можно было использовать в разных местах.</p>
+<p>Чтобы вернуть несколько значений, перечисляют их через запятую: Python возвращает <b>кортеж (tuple)</b>; скобки не обязательны. Можно принять результат в две переменные сразу (распаковка) или вернуть список.</p><pre><code>def split_name(name):
+    first = name.capitalize()
+    return first, len(first)
+res = split_name(&quot;ola&quot;)
+print(res, type(res).__name__)
+a, b = split_name(&quot;marek&quot;)
+print(a, b)
+try:
+    print(first)
+except NameError:
+    print(&quot;first снаружи недоступна&quot;)</code></pre><pre><code class="out"># вывод:
+(&#x27;Ola&#x27;, 3) tuple
+Marek 5
+first снаружи недоступна</code></pre><p><b>Совет лектора:</b> одна функция — одна задача. Например, для квадратного уравнения отдельная функция для дискриминанта (delta) и отдельная для корней, которая вызывает первую.</p></div><div class="lesson-card" id="f2"><span class="lesson-number">2</span><h2>Глобальные и локальные, nonlocal</h2><p>Если снаружи есть <code>x</code> и внутри функции создаётся другая <code>x</code>, то внутри функции видна локальная, снаружи остаётся глобальная; это две разные переменные. Чтобы изменить глобальную изнутри, нужно слово <code>global</code>. Функцию можно определить внутри другой функции; чтобы внутренняя меняла переменную внешней, используется <code>nonlocal</code>.</p><pre><code>x = 10
+def f():
+    x = 5
+    return x
+print(f(), x)
+def g():
+    global x
+    x = 99
+g()
+print(x)
+def outer():
+    n = 0
+    def inner():
+        nonlocal n
+        n += 1
+    inner(); inner()
+    return n
+print(outer())</code></pre><pre><code class="out"># вывод:
+5 10
+99
+2</code></pre><p><i>Уточнение к записи:</i> лектор говорил, что к локальной переменной «можно добраться, пока функция работает» (например, из вложенной функции). Это так для вложенных функций, но после завершения функции её локальные переменные недоступны.</p></div><div class="lesson-card" id="f3"><span class="lesson-number">3</span><h2>Рекурсия</h2><p>Рекурсия — функция вызывает саму себя. Нужны <b>условие остановки</b> и шаг к нему. Компьютер хранит вызовы как <b>дерево</b>/стек: чтобы посчитать \(n\)-й элемент, нужны предыдущие, ветви растут до \(n\), а потом результаты собираются обратно. Поэтому рекурсия не всегда лучшее решение (медленно и тратит память, особенно числа Фибоначчи без запоминания).</p>
+<p>Факториал можно считать и циклом: <code>for i in range(1, n + 1)</code>, умножая результат. На занятии лектор сначала ошибся, поставив начальное значение 0: умножение на ноль даёт 0, начинать надо с 1. Единого «лучшего» варианта нет, возможны ещё списки и списковые выражения.</p><pre><code>def fact_rec(n):
+    if n &lt;= 1:
+        return 1
+    return n * fact_rec(n - 1)
+def fact_loop(n):
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+print(fact_rec(6), fact_loop(6))
+def fib(n):
+    return n if n &lt; 2 else fib(n - 1) + fib(n - 2)
+print([fib(i) for i in range(10)])</code></pre><pre><code class="out"># вывод:
+720 720
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</code></pre></div><div class="lesson-card" id="f4"><span class="lesson-number">4</span><h2>Модули и пакеты</h2><ul><li><code>import math</code> подключает весь модуль (файл с кодом), <code>from math import pow</code> только нужную часть (для <code>math</code> лектор не советует).</li>
+<li><b>Стандартные модули</b> написаны создателями Python (math, os, csv, random и т. д.). Свой модуль — любой ваш файл <code>.py</code>; путь указывают от <b>корня проекта</b>. Корень лучше ставить выше всех файлов проекта: подниматься «наверх» из подпапок неудобно. В консоли это <code>cd ..</code>, в путях <code>../</code>.</li>
+<li><b>Пакет</b> — папка-пространство имён, обычно с файлом <code>__init__.py</code>. Без него импорт иногда тоже работает, но с ним проще.</li>
+<li>В Google Colab (где всё в одном ноутбуке) своих модулей-файлов не покажешь, это делают в PyCharm/VS Code.</li></ul></div><div class="lesson-card" id="f5"><span class="lesson-number">5</span><h2>Исключения: try / except</h2><p>Код, где возможна ошибка, кладут в <code>try</code>, а реакцию на конкретную ошибку в <code>except ИмяОшибки</code>. Если проверку можно сделать через <code>if</code>, это быстрее; исключения хороши для редких событий. Всё, что использует результат <code>try</code>, должно находиться внутри этого блока (иначе переменной может не быть). Хорошая привычка: сначала присвоить переменной начальное значение (например 0): не инициализированная переменная в разных языках ведёт себя по-разному или даёт ошибку. Python покажет имя ошибки, но иногда исключение нужно определить самому.</p><pre><code>def safe_div(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return None
+print(safe_div(6, 3), safe_div(1, 0))
+try:
+    int(&quot;abc&quot;)
+except ValueError as e:
+    print(&quot;ValueError:&quot;, e)</code></pre><pre><code class="out"># вывод:
+2.0 None
+ValueError: invalid literal for int() with base 10: &#x27;abc&#x27;</code></pre></div><div class="lesson-card" id="f6"><span class="lesson-number">6</span><h2>Файлы: open, read, with, os, csv</h2><ul><li><code>open(имя, режим)</code>: <code>"r"</code> чтение, <code>"w"</code> запись (затирает), <code>"a"</code> добавление, <code>"r+"</code> чтение и запись. Файл нужно закрыть: <code>close()</code>.</li>
+<li><code>read()</code> весь текст (или заданное число символов), <code>readline()</code> одну строку, <code>readlines()</code> список всех строк.</li>
+<li><code>with open(...) as f:</code> закрывает файл автоматически (но ошибку «файл не найден» не обрабатывает: для этого try/except).</li>
+<li>Если файл занят другой программой (как временный файл Excel), открыть его нельзя: сначала закрыть там.</li>
+<li>Модуль <code>os</code>: <code>os.path.exists</code>, <code>os.remove</code> (удалить файл), <code>mkdir</code>/<code>rmdir</code> (папки). Часто сначала проверяют <code>exists</code>.</li>
+<li><b>CSV</b>: текст, где строки делят переносом, а значения разделителем (запятая или точка с запятой). Пустое значение всё равно нужно обозначать (две запятые подряд), иначе значения «сдвинутся». В Python есть модуль <code>csv</code> (<code>csv.reader(f, delimiter=...)</code>).</li></ul><pre><code>import os, csv, tempfile
+path = os.path.join(tempfile.gettempdir(), &quot;demo_lecture.txt&quot;)
+with open(path, &quot;w&quot;, encoding=&quot;utf8&quot;) as f:
+    f.write(&quot;a,1\nb,2\n&quot;)
+with open(path, encoding=&quot;utf8&quot;) as f:
+    print(f.readlines())
+with open(path, encoding=&quot;utf8&quot;) as f:
+    print([row for row in csv.reader(f, delimiter=&quot;,&quot;)])
+print(os.path.exists(path))
+os.remove(path)
+print(os.path.exists(path))</code></pre><pre><code class="out"># вывод:
+[&#x27;a,1\n&#x27;, &#x27;b,2\n&#x27;]
+[[&#x27;a&#x27;, &#x27;1&#x27;], [&#x27;b&#x27;, &#x27;2&#x27;]]
+True
+False</code></pre></div><div class="lesson-card" id="f7"><span class="lesson-number">7</span><h2>match / case и enumerate</h2><p><b>match / case</b> (с Python 3.10) — «переключатель»: сравнивает значение с образцами. Подходит для меню и распознавания символов; быстрее <code>if</code> не станет, но читать проще. <code>case _</code> — вариант «по умолчанию». Принимает и числа, и строки, и шаблоны (списки, словари).</p>
+<p><b>enumerate</b> даёт индекс вместе с элементом при обходе.</p><pre><code>def day(n):
+    match n:
+        case 1:
+            return &quot;понедельник&quot;
+        case 6 | 7:
+            return &quot;выходной&quot;
+        case _:
+            return &quot;другой день&quot;
+print(day(1), day(7), day(3))
+for i, name in enumerate([&quot;Ola&quot;, &quot;Ewa&quot;], start=1):
+    print(i, name)</code></pre><pre><code class="out"># вывод:
+понедельник выходной другой день
+1 Ola
+2 Ewa</code></pre></div><div class="lesson-card" id="f8"><span class="lesson-number">8</span><h2>lambda</h2><p>Анонимная функция в одну строку: <code>lambda x, y: x + y</code>. Удобна, когда функция нужна на месте: в <code>map</code>, <code>filter</code>, <code>reduce</code> и как ключ сортировки. Для простых операций коротко и читаемо; в сложных случаях лучше обычная <code>def</code>. Её можно присвоить переменной и вызвать как функцию.</p><pre><code>add = lambda x, y: x + y
+print(add(2, 3))
+users = {&quot;ola&quot;: 30, &quot;ewa&quot;: 22, &quot;jan&quot;: 41}
+print(sorted(users.items(), key=lambda kv: kv[1]))
+print(list(filter(lambda n: n % 2 == 0, range(10))))</code></pre><pre><code class="out"># вывод:
+5
+[(&#x27;ewa&#x27;, 22), (&#x27;ola&#x27;, 30), (&#x27;jan&#x27;, 41)]
+[0, 2, 4, 6, 8]</code></pre></div><div class="lesson-card" id="f9"><span class="lesson-number">9</span><h2>Генераторы</h2><p>Обычная функция возвращает всё сразу; <b>генератор</b> отдаёт значения <b>по одному</b> и «забывает» прошлые (слово <code>yield</code>). Выигрыш: почти не тратит память, поэтому подходит для огромных последовательностей (список в 2–3 раза больше оперативной памяти просто не поместится). <code>yield from</code> передаёт значения из другой последовательности. Пример знакомого: <code>range</code> не хранит все числа (строго говоря, это «ленивая последовательность», а не генератор, но идея та же); если напечатать <code>range(1, 10)</code>, увидишь не числа, а объект; <code>list(range(1, 10))</code> даёт список.</p><pre><code>def squares(n):
+    for i in range(n):
+        yield i * i
+g = squares(5)
+print(g.__class__.__name__)
+print(next(g), next(g))
+print(list(g))
+print(range(1, 10))
+print(list(range(1, 10)))</code></pre><pre><code class="out"># вывод:
+generator
+0 1
+[4, 9, 16]
+range(1, 10)
+[1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre></div><div class="lesson-card" id="f10"><span class="lesson-number">10</span><h2>Проверь себя</h2><details class="qa"><summary>Что вернёт return a, b?</summary><div>Кортеж из двух значений; его можно распаковать: <code>x, y = f()</code>.</div></details><details class="qa"><summary>Зачем нужно условие остановки в рекурсии?</summary><div>Без него функция вызывает себя бесконечно (переполнение стека).</div></details><details class="qa"><summary>Что делает with open(...)?</summary><div>Закрывает файл автоматически после блока; не заменяет try/except для «файл не найден».</div></details><details class="qa"><summary>Чем yield отличается от return?</summary><div>return завершает функцию, yield отдаёт очередное значение и продолжает с того же места при следующем запросе.</div></details><details class="qa"><summary>Чем global отличается от nonlocal?</summary><div>global — переменная верхнего уровня файла; nonlocal — переменная внешней функции.</div></details><details class="qa"><summary>Зачем case _ в match?</summary><div>Это вариант «все остальные» (как else).</div></details></div></section></div><footer>CloudPath · Fizyka I · notatki</footer></main><script src="site-enhancements.js?v=20261116-1"></script><script src="search-data.js?v=20261116-1"></script><script src="search-widget.js?v=20261116-1"></script></body></html>
