@@ -368,3 +368,5 @@
     document.body.append(authored);
   }
 })();
+
+(function () { const s = document.createElement('script'); s.src = 'content-i18n.js?v=1'; document.body.append(s); })();

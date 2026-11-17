@@ -98,3 +98,8 @@
 ## 2026-11-17: сверка записей с конспектами
 - Все записи 30.10–16.11 покрыты страницами: 30.10 (python/physics/mathematics), 06.11 (python), 09.11 (informatics, включая 11-18 про шины), 13.11 (physics-lectures-5, algorithms-2026-11-13, analysis, algebra), 16.11 (licenses; 13-31 пуста).
 - Не сделано: перевод контента на PL/EN, дата коллоквиума по физике, Karta przedmiotu/Moodle, пункт тренажёра в меню index.html.
+
+## 2026-11-17: перевод содержимого страниц PL/EN
+- Механизм: `content-i18n.js` (подгружается из site-enhancements.js) берёт `i18n/<страница>.json` ({pl:{ключ:html}, en:{...}}; ключи — id карточек, `h1`, `lead`, `notice`, `links`) и подменяет блоки при переключении языка. SW v68; версия site-enhancements.js?v=20261117-2 на всех страницах.
+- Исходники переводов: `D:\lectures_work\tr\<страница>.py` (PL, EN); сборка `python -X utf8 -I D:\lectures_work\tr_build.py <страница>`.
+- Переведены: licenses-2026-11-16, analysis-2026-11-13, algebra-2026-11-13, mathematics-2026-10-30. Осталось: physics-2026-10-30, python-2026-10-30/06, algorithms-2026-11-13, informatics-2026-11-09, physics-lectures-5 и др.
