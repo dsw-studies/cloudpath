@@ -1,4 +1,4 @@
-const CACHE = 'cloudpath-v56';
+const CACHE = 'cloudpath-v57';
 const CORE = [
   '/practice-random.js',
   '/practice-sheets.js',
@@ -17,6 +17,7 @@ const CORE = [
   '/physics-lectures-5.html',
   '/python-basics.html',
   '/informatics-review.html',
+  '/python-trainer.html',
   '/asd-zero.html',
   '/physics-zero.html',
   '/algorithms-2026-11-13.html',
