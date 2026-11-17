@@ -1,0 +1,100 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Физика I: конспект лекций 1–4 — единицы, векторы, кинематика, динамика."><meta name="robots" content="noindex,nofollow,noarchive"><title>Python 06.11: структуры данных</title><link rel="icon" href="cloudpath-icon.svg"><link rel="stylesheet" href="dashboard.css?v=20261026-1"><link rel="stylesheet" href="enhanced.css?v=20261026-1"><link rel="stylesheet" href="authored-study.css?v=20261026-1"><style>.physics-task.authored-task{display:block}.lesson-card{margin:16px 0}.lesson-card h3{margin:16px 0 6px;color:#74ddcb}.lesson-card ul{color:#c1d1dc;line-height:1.7;padding-left:20px}.lesson-card table{border-collapse:collapse;width:100%;margin:10px 0;color:#c1d1dc}.lesson-card td,.lesson-card th{border:1px solid #29495e;padding:6px 10px;text-align:left}.lesson-card th{background:#102333}</style><script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]],displayMath:[["\\[","\\]"]]},svg:{fontCache:"global"}};</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script><style>details.qa{border:1px solid #304a60;border-radius:10px;margin:8px 0;background:#0b1825}details.qa>summary{cursor:pointer;padding:10px 14px;color:#dceaf2;font-weight:600}details.qa>div{padding:0 14px 12px;color:#c4d4e0}pre{background:#0b1825;border:1px solid #304a60;border-radius:10px;padding:12px 14px;overflow-x:auto}pre code{font:13px/1.55 ui-monospace,Consolas,monospace;color:#dceaf2}.out{color:#6edac7}</style></head><body><nav class="toc" aria-label="Навигация CloudPath"><div class="brand">CloudPath</div><a href="index.html" data-i18n-ru="⌂ Учебный кабинет" data-i18n-pl="⌂ Panel nauki" data-i18n-en="⌂ Study dashboard">⌂ Учебный кабинет</a><a href="schedule.html" data-i18n-ru="🗓 Расписание" data-i18n-pl="🗓 Plan zajęć" data-i18n-en="🗓 Schedule">🗓 Расписание</a><a href="colloquium-alg1.html" data-i18n-ru="📝 Коллоквиум · алгебра" data-i18n-pl="📝 Kolokwium · algebra" data-i18n-en="📝 Colloquium · algebra">📝 Коллоквиум · алгебра</a><a href="colloquium.html" data-i18n-ru="📝 Коллоквиум · матанализ" data-i18n-pl="📝 Kolokwium · analiza" data-i18n-en="📝 Colloquium · analysis">📝 Коллоквиум · матанализ</a><a href="physics-lectures.html" aria-current="page" data-i18n-ru="Физика · конспект 1–4" data-i18n-pl="Fizyka · notatki 1–4" data-i18n-en="Physics · lectures 1–4">Физика · конспект 1–4</a><a href="physics-list-1.html" data-i18n-ru="Физика · задачи 1–26" data-i18n-pl="Fizyka · zadania 1–26" data-i18n-en="Physics · problems 1–26">Физика · задачи 1–26</a><a href="physics-list-2.html" data-i18n-ru="Физика · задачи 2.1–2.17" data-i18n-pl="Fizyka · zadania 2.1–2.17" data-i18n-en="Physics · problems 2.1–2.17">Физика · задачи 2.1–2.17</a><a href="physics-list-3.html" data-i18n-ru="Физика · задачи 3.1–3.20" data-i18n-pl="Fizyka · zadania 3.1–3.20" data-i18n-en="Physics · problems 3.1–3.20">Физика · задачи 3.1–3.20</a><a href="physics-lectures-5.html" data-i18n-ru="Физика · лекция 5 (колебания)" data-i18n-pl="Fizyka · wykład 5 (drgania)" data-i18n-en="Physics · lecture 5 (oscillations)">Физика · лекция 5 (колебания)</a><a href="python-basics.html" data-i18n-ru="Python с нуля" data-i18n-pl="Python od zera" data-i18n-en="Python from scratch">Python с нуля</a><a href="colloquium-phys.html" data-i18n-ru="Коллоквиум · Физика" data-i18n-pl="Kolokwium · Fizyka" data-i18n-en="Colloquium · Physics">Коллоквиум · Физика</a><a href="informatics-review.html" data-i18n-ru="Информатика: повтор" data-i18n-pl="Informatyka: powtórka" data-i18n-en="Informatics review">Информатика: повтор</a><a href="python-trainer.html" data-i18n-ru="Python: тренажёр" data-i18n-pl="Python: trener" data-i18n-en="Python trainer">Python: тренажёр</a><a href="informatics-2026-11-09.html" data-i18n-ru="Информатика 09.11" data-i18n-pl="Informatyka 09.11" data-i18n-en="Informatics 09.11">Информатика 09.11</a><a href="asd-zero.html" data-i18n-ru="ASD с нуля" data-i18n-pl="ASD od zera" data-i18n-en="ASD from scratch">ASD с нуля</a><a href="physics-zero.html" data-i18n-ru="Физика с нуля (листы 1–2)" data-i18n-pl="Fizyka od zera (listy 1–2)" data-i18n-en="Physics from scratch (lists 1–2)">Физика с нуля (листы 1–2)</a><a href="algorithms-2026-11-13.html" data-i18n-ru="ASD · графы и MST (13.11)" data-i18n-pl="ASD · grafy i MST (13.11)" data-i18n-en="ASD · graphs and MST (13 Nov)">ASD · графы и MST (13.11)</a><a href="informatics-notes.html" data-i18n-ru="Информатика · конспект" data-i18n-pl="Informatyka · notatki" data-i18n-en="Informatics · notes">Информатика · конспект</a><a href="informatics-list-1.html" data-i18n-ru="Информатика · задачи гр.1" data-i18n-pl="Informatyka · zadania gr.1" data-i18n-en="Informatics · group 1 tasks">Информатика · задачи гр.1</a><a href="lessons-2026-10-23.html" data-i18n-ru="Конспект 23.10" data-i18n-pl="Notatki 23.10" data-i18n-en="Notes 23 Oct">Конспект 23.10</a><a href="glossary.html" data-i18n-ru="Глоссарий (чайник)" data-i18n-pl="Słowniczek (dla początkujących)" data-i18n-en="Glossary (beginner)">Глоссарий (чайник)</a><a href="semesters.html" data-i18n-ru="Семестры 1–7" data-i18n-pl="Semestry 1–7" data-i18n-en="Semesters 1–7">Семестры 1–7</a><a href="specdeep.html" data-i18n-ru="Спец. курсы подробно" data-i18n-pl="Kursy specjalizacyjne szczegółowo" data-i18n-en="Specialization courses in detail">Спец. курсы подробно</a><a href="languages.html" data-i18n-ru="Языки" data-i18n-pl="Języki" data-i18n-en="Languages">Языки</a><a href="syntax.html" data-i18n-ru="Синтаксис языков" data-i18n-pl="Składnia języków" data-i18n-en="Language syntax">Синтаксис языков</a><a href="courses.html" data-i18n-ru="Бесплатные курсы" data-i18n-pl="Darmowe kursy" data-i18n-en="Free courses">Бесплатные курсы</a><a href="english.html" data-i18n-ru="Английский" data-i18n-pl="Angielski" data-i18n-en="English">Английский</a><a href="ai.html" data-i18n-ru="Работа с ИИ" data-i18n-pl="Praca z AI" data-i18n-en="Working with AI">Работа с ИИ</a><a href="tools.html" data-i18n-ru="Приложения" data-i18n-pl="Aplikacje" data-i18n-en="Apps">Приложения</a><a href="setup.html" data-i18n-ru="Установка с нуля" data-i18n-pl="Instalacja od zera" data-i18n-en="Setup from scratch">Установка с нуля</a><a href="certs.html" data-i18n-ru="Сертификаты" data-i18n-pl="Certyfikaty" data-i18n-en="Certificates">Сертификаты</a><a href="finance.html" data-i18n-ru="Финансы / RKM" data-i18n-pl="Finanse / RKM" data-i18n-en="Finance / RKM">Финансы / RKM</a><a href="housing.html" data-i18n-ru="Жильё" data-i18n-pl="Mieszkanie" data-i18n-en="Housing">Жильё</a><a href="parttime.html" data-i18n-ru="Подработка" data-i18n-pl="Praca dodatkowa" data-i18n-en="Part-time work">Подработка</a><a href="legal.html" data-i18n-ru="Легализация пребывания" data-i18n-pl="Legalizacja pobytu" data-i18n-en="Stay legalization">Легализация пребывания</a><a href="faq.html" data-i18n-ru="FAQ — если что-то пошло не так" data-i18n-pl="FAQ — gdy coś pójdzie nie tak" data-i18n-en="FAQ — if something goes wrong">FAQ — если что-то пошло не так</a><a href="resources.html" data-i18n-ru="Ресурсы" data-i18n-pl="Zasoby" data-i18n-en="Resources">Ресурсы</a><a href="university.html" data-i18n-ru="ABC студента DSW Ideis" data-i18n-pl="ABC studenta DSW Ideis" data-i18n-en="DSW Ideis student ABC">ABC студента DSW Ideis</a></nav><main class="main" id="main-content"><header class="hero"><div class="eyebrow">Python · 06.11</div><h1>Python 06.11: map, regex, структуры данных, копирование.</h1><p>Продолжение курса (прошлый раз закончили генераторами). Все примеры кода на этой странице я запустил, показан реальный вывод. Основы — в <a href="python-basics.html">Python с нуля</a>, практика — в <a href="python-trainer.html">тренажёре</a>.</p><div class="quick-links"><a class="button primary" href="#p1">map/filter</a><a class="button" href="#p2">re</a><a class="button" href="#p4">Стек/очередь</a><a class="button" href="#p6">collections</a><a class="button" href="#p7">Копирование</a></div></header><div class="wrap"><div class="notice">Конспект по записи лекции (Whisper, польский); часть рассуждений лектора про ИИ, веб-архитектуру и т. п. опущена. Углублённо структуры данных будут на ASD.</div><section class="authored-content"><div class="lesson-card" id="p1"><span class="lesson-number">1</span><h2>map и filter</h2><p><b>map(функция, коллекция)</b> применяет функцию к каждому элементу, <b>filter(условие, коллекция)</b> оставляет только подходящие. Оба возвращают «ленивый» итератор: чтобы увидеть результат, оборачивают в <code>list(...)</code> (иначе увидишь только адрес объекта). Обычно в них передают <b>lambda</b> (короткая безымянная функция).</p><pre><code>nums = [1, 2, 3, 4]
+sq = list(map(lambda x: x * x, nums))
+print(sq)
+names = [&quot;Ola&quot;, &quot;Marek&quot;, &quot;Ewa&quot;, &quot;Jan&quot;, &quot;Karolina&quot;]
+three = list(filter(lambda s: len(s) == 3, names))
+print(three)
+books = [(&quot;A&quot;, 300), (&quot;B&quot;, 120), (&quot;C&quot;, 210)]
+print(sorted(books, key=lambda b: b[1]))</code></pre><pre><code class="out"># вывод:
+[1, 4, 9, 16]
+[&#x27;Ola&#x27;, &#x27;Ewa&#x27;, &#x27;Jan&#x27;]
+[(&#x27;B&#x27;, 120), (&#x27;C&#x27;, 210), (&#x27;A&#x27;, 300)]</code></pre><p><b>== и is.</b> <code>==</code> сравнивает <i>значения</i>; <code>is</code> — один ли это объект в памяти (на лекции говорилось «три равно», как в JavaScript; в Python для этого <code>is</code>). Два одинаковых по содержимому списка равны по <code>==</code>, но это разные объекты.</p><pre><code>a = [1, 2]
+b = [1, 2]
+print(a == b, a is b)</code></pre><pre><code class="out"># вывод:
+True False</code></pre></div><div class="lesson-card" id="p2"><span class="lesson-number">2</span><h2>Регулярные выражения (модуль re)</h2><p>Модуль <code>re</code> нужен для поиска по шаблону в тексте (парсинг сайтов, валидация, grep в Linux на следующем семестре, автоматизация тестов). Шаблон пишут как <b>сырую строку</b> <code>r"..."</code> (приставка <code>b"..."</code> — это байты, например в RSA).</p>
+<table><thead><tr><th>Функция</th><th>Что делает</th></tr></thead><tbody>
+<tr><td><code>re.match(p, s)</code></td><td>совпадение с <b>началом</b> строки</td></tr>
+<tr><td><code>re.search(p, s)</code></td><td>первое совпадение где угодно</td></tr>
+<tr><td><code>re.findall(p, s)</code></td><td>список всех совпадений</td></tr>
+<tr><td><code>re.finditer(p, s)</code></td><td>итератор совпадений (можно посчитать)</td></tr>
+<tr><td><code>re.sub(p, new, s)</code></td><td>найти и заменить (как Ctrl+H)</td></tr>
+<tr><td><code>re.split(p, s)</code></td><td>разбить строку по шаблону</td></tr>
+<tr><td><code>re.compile(p)</code></td><td>заранее скомпилировать шаблон, если он используется много раз (быстрее)</td></tr>
+</tbody></table><pre><code>import re
+text = &quot;tel 123-456, tel 789-012&quot;
+print(re.findall(r&quot;\d{3}-\d{3}&quot;, text))
+print(re.sub(r&quot;\d&quot;, &quot;#&quot;, &quot;a1b22&quot;))
+print(re.split(r&quot;,\s*&quot;, &quot;a, b,c&quot;))
+mail = re.compile(r&quot;^[\w.]+@[\w.]+\.[a-z]{2,}$&quot;)
+print(bool(mail.match(&quot;jan@dsw.edu.pl&quot;)), bool(mail.match(&quot;jan@@x&quot;)))</code></pre><pre><code class="out"># вывод:
+[&#x27;123-456&#x27;, &#x27;789-012&#x27;]
+a#b##
+[&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]
+True False</code></pre></div><div class="lesson-card" id="p3"><span class="lesson-number">3</span><h2>Документация функции (docstring)</h2><p>Тройные кавычки сразу под <code>def</code> — это <b>docstring</b>. В PyCharm и VS Code он показывается при наведении на функцию в любом месте проекта (в Colab, где всё в одном файле, это не заметно).</p><pre><code>def area(a, b):
+    &quot;&quot;&quot;Площадь прямоугольника: a * b.&quot;&quot;&quot;
+    return a * b
+print(area.__doc__)
+print(area(3, 4))</code></pre><pre><code class="out"># вывод:
+Площадь прямоугольника: a * b.
+12</code></pre></div><div class="lesson-card" id="p4"><span class="lesson-number">4</span><h2>Стек и очередь</h2><p><b>Стек</b> (stack) — LIFO: последний пришёл — первый ушёл. Операции: <b>push</b> (положить), <b>pop</b> (снять верхний), empty/full. Нужен для вызовов функций, отмены, обхода графа в глубину. В Python стек — обычный список: <code>append</code> и <code>pop()</code> (снимает <b>последний</b> элемент).</p>
+<p><b>Очередь</b> (queue) — FIFO: первый пришёл — первый ушёл (enqueue — добавить в конец, dequeue — взять с начала); буфер между программами. Лучше брать <code>collections.deque</code>, у неё <code>popleft()</code> быстрый, а у списка <code>pop(0)</code> медленный.</p><pre><code>stack = []
+stack.append(1); stack.append(2); stack.append(3)
+print(stack.pop(), stack)
+from collections import deque
+q = deque()
+q.append(&quot;a&quot;); q.append(&quot;b&quot;); q.append(&quot;c&quot;)
+print(q.popleft(), list(q))</code></pre><pre><code class="out"># вывод:
+3 [1, 2]
+a [&#x27;b&#x27;, &#x27;c&#x27;]</code></pre></div><div class="lesson-card" id="p5"><span class="lesson-number">5</span><h2>array, дерево, связный список, куча, граф</h2><ul>
+<li><b>array</b> (модуль <code>array</code>) — массив с <b>одним заданным типом</b> (<code>"i"</code> — целые), в отличие от списка, который принимает что угодно; неверный тип даст <code>TypeError</code>. Для больших числовых вычислений используют <b>NumPy</b> (основа машинного обучения).</li>
+<li><b>Бинарное дерево поиска (BST)</b>: слева меньшие, справа большие значения, поэтому искать быстро (путь короткий). Минус: при вставке/удалении дерево перестраивается, значит оно хорошо там, где данные меняются редко. Деревья используются в индексах БД, файловых системах и в хэш-деревьях (Merkle) в блокчейне и IPFS.</li>
+<li><b>Связный список</b>: узлы, каждый ссылается на следующий.</li>
+<li><b>Куча (heap)</b> — разновидность дерева (см. <a href="algorithms-2026-11-13.html">ASD 13.11</a>); в Python модуль <code>heapq</code>.</li>
+<li><b>Граф</b>: вершины и рёбра; хранят словарём «вершина → соседи». Поиск кратчайшего пути, карты, рекомендации друзей. Для больших графов используют графовые БД (<b>Neo4j</b>, ArangoDB).</li>
+</ul><pre><code>from array import array
+a = array(&quot;i&quot;, [1, 2, 3])
+a.append(4)
+print(a, a[0])
+try:
+    a.append(&quot;x&quot;)
+except TypeError as e:
+    print(&quot;TypeError&quot;)
+graph = {&quot;A&quot;: [&quot;B&quot;, &quot;C&quot;], &quot;B&quot;: [&quot;A&quot;], &quot;C&quot;: [&quot;A&quot;]}
+print(graph[&quot;A&quot;])</code></pre><pre><code class="out"># вывод:
+array(&#x27;i&#x27;, [1, 2, 3, 4]) 1
+TypeError
+[&#x27;B&#x27;, &#x27;C&#x27;]</code></pre></div><div class="lesson-card" id="p6"><span class="lesson-number">6</span><h2>Специальные словари: collections</h2><ul>
+<li><b>defaultdict</b>: если ключа нет, значение создаётся автоматически (нет ошибки KeyError при подсчётах и группировке).</li>
+<li><b>Counter</b>: подсчёт, сколько раз встречается каждый элемент.</li>
+<li><b>ChainMap</b>: несколько словарей как один (поиск по очереди).</li>
+<li><b>deque</b>, OrderedDict, UserDict/UserList — прочее.</li>
+<li>Хэш-таблица (<code>dict</code>): ключ превращается в хэш, по нему значение находится мгновенно.</li>
+</ul><pre><code>from collections import defaultdict, Counter, ChainMap
+g = defaultdict(list)
+for w in [&quot;ala&quot;, &quot;ola&quot;, &quot;ewa&quot;, &quot;adam&quot;]:
+    g[w[0]].append(w)
+print(dict(g))
+users = [{&quot;age&quot;: 17}, {&quot;age&quot;: 21}, {&quot;age&quot;: 30}]
+print(Counter(u[&quot;age&quot;] &gt;= 18 for u in users))
+print(Counter(&quot;banana&quot;))
+cm = ChainMap({&quot;a&quot;: 1}, {&quot;a&quot;: 9, &quot;b&quot;: 2})
+print(cm[&quot;a&quot;], cm[&quot;b&quot;])</code></pre><pre><code class="out"># вывод:
+{&#x27;a&#x27;: [&#x27;ala&#x27;, &#x27;adam&#x27;], &#x27;o&#x27;: [&#x27;ola&#x27;], &#x27;e&#x27;: [&#x27;ewa&#x27;]}
+Counter({True: 2, False: 1})
+Counter({&#x27;a&#x27;: 3, &#x27;n&#x27;: 2, &#x27;b&#x27;: 1})
+1 2</code></pre><p>На лекции приводился пример с JSON пользователей (логин, возраст…): подсчёт «сколько старше 18» удобно делать <code>Counter</code>. Тяжёлые вычисления можно переложить на сервер БД: у неё свой процессор и память; хуже всего считать на стороне клиента (frontend).</p></div><div class="lesson-card" id="p7"><span class="lesson-number">7</span><h2>Копирование: переменная — это ссылка</h2><p>Переменная в Python — <b>ссылка (указатель)</b> на объект в памяти, а не сама ячейка. Присваивание <code>b = a</code> не копирует список, обе переменные указывают на один и тот же объект. Виды копии:</p>
+<ul><li><code>b = a</code> — тот же объект;</li><li><code>a.copy()</code> / <code>copy.copy(a)</code> — <b>поверхностная</b> копия: новый внешний список, но вложенные объекты общие;</li><li><code>copy.deepcopy(a)</code> — <b>глубокая</b>, полностью независимый клон.</li></ul><pre><code>import copy
+a = [1, 2, [10, 20]]
+b = a
+c = a.copy()
+d = copy.deepcopy(a)
+a.append(3)
+a[2].append(30)
+print(&quot;a&quot;, a)
+print(&quot;b&quot;, b)
+print(&quot;c&quot;, c)
+print(&quot;d&quot;, d)</code></pre><pre><code class="out"># вывод:
+a [1, 2, [10, 20, 30], 3]
+b [1, 2, [10, 20, 30], 3]
+c [1, 2, [10, 20, 30]]
+d [1, 2, [10, 20]]</code></pre><p>Вывод: <code>b</code> изменился целиком, <code>c</code> получил общий вложенный список ([10, 20, 30]), а <code>d</code> не изменился совсем. Если сомневаешься — делай <code>deepcopy</code>.</p></div><div class="lesson-card" id="p8"><span class="lesson-number">8</span><h2>Проверь себя</h2><details class="qa"><summary>Что вернёт map(...) без list()?</summary><div>Итератор (объект с адресом), а не список; значения видны после <code>list(...)</code>.</div></details><details class="qa"><summary>Чем отличаются стек и очередь?</summary><div>Стек — LIFO (последний вошёл, первый вышел), очередь — FIFO.</div></details><details class="qa"><summary>Чем deepcopy отличается от copy?</summary><div>copy копирует только внешний уровень, вложенные объекты остаются общими; deepcopy клонирует всё.</div></details><details class="qa"><summary>Чем == отличается от is?</summary><div><code>==</code> сравнивает значения, <code>is</code> — тождественность объектов.</div></details><details class="qa"><summary>Когда использовать defaultdict?</summary><div>Когда ключа может не быть и нужно автоматически создать начальное значение (список, число).</div></details><details class="qa"><summary>Чем плох BST при частых изменениях?</summary><div>Вставка и удаление требуют перестроения дерева, что дорого на больших объёмах.</div></details><details class="qa"><summary>Что делает re.sub?</summary><div>Находит фрагменты по шаблону и заменяет их на указанную строку.</div></details></div></section></div><footer>CloudPath · Fizyka I · notatki</footer></main><script src="site-enhancements.js?v=20261116-1"></script><script src="search-data.js?v=20261116-1"></script><script src="search-widget.js?v=20261116-1"></script></body></html>
