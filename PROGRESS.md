@@ -102,4 +102,4 @@
 ## 2026-11-17: перевод содержимого страниц PL/EN
 - Механизм: `content-i18n.js` (подгружается из site-enhancements.js) берёт `i18n/<страница>.json` ({pl:{ключ:html}, en:{...}}; ключи — id карточек, `h1`, `lead`, `notice`, `links`) и подменяет блоки при переключении языка. SW v68; версия site-enhancements.js?v=20261117-2 на всех страницах.
 - Исходники переводов: `D:\lectures_work\tr\<страница>.py` (PL, EN); сборка `python -X utf8 -I D:\lectures_work\tr_build.py <страница>`.
-- Переведены: informatics-2026-11-09, algorithms-2026-11-13, python-2026-11-06, python-2026-10-30, physics-2026-10-30, licenses-2026-11-16, analysis-2026-11-13, algebra-2026-11-13, mathematics-2026-10-30. Осталось: physics-lectures-5 и др.
+- Переведены: physics-lectures-5, informatics-2026-11-09, algorithms-2026-11-13, python-2026-11-06, python-2026-10-30, physics-2026-10-30, licenses-2026-11-16, analysis-2026-11-13, algebra-2026-11-13, mathematics-2026-10-30. Осталось: остальные авторские страницы (physics-list-*, physics-lectures, physics-zero, asd-zero, informatics-*, python-basics, analysis/algebra-list и др.).
