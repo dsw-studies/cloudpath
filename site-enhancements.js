@@ -369,4 +369,4 @@
   }
 })();
 
-(function () { const s = document.createElement('script'); s.src = 'content-i18n.js?v=1'; document.body.append(s); })();
+(function () { const s = document.createElement('script'); s.src = 'content-i18n.js?v=2'; document.body.append(s); })();
