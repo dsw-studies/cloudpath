@@ -116,3 +116,5 @@
 - Внимание: Oświadczenie studenta (Podstawy informatyki) просрочено с 30.09.
 
 - Добавлен `student-guide.html` (справочник из презентации тьютора: даты сессии, контакты, системы); SW v75. Остальные PDF (Karty przedmiotu, Python) на D:\ не найдены.
+
+- Добавлен `subject-cards.html` (карты Fizyka и Podstawy informatyki из PDF); SW v76. Нет: Karta Kompetencje, Python «Podstawy lista».
