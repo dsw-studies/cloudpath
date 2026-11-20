@@ -114,3 +114,5 @@
 - Новая страница `deadlines.html` (сроки из Moodle, правила зачёта Физики, Kompetencje, переписка); добавлена в navLabels, SW (cloudpath-v74), search-data.
 - Не сделано: PDF (Karty przedmiotu, Python «Podstawy lista», тьютор) не прочитаны; даты Python Zad3/4 и Kompetencje; порог BHP.
 - Внимание: Oświadczenie studenta (Podstawy informatyki) просрочено с 30.09.
+
+- Добавлен `student-guide.html` (справочник из презентации тьютора: даты сессии, контакты, системы); SW v75. Остальные PDF (Karty przedmiotu, Python) на D:\ не найдены.

@@ -48,6 +48,7 @@
     'asd-zero.html': ['🌱 ASD с нуля', '🌱 ASD od zera', '🌱 ASD from scratch'],
     'physics-zero.html': ['🌱 Физика с нуля', '🌱 Fizyka od zera', '🌱 Physics from scratch'],
     'deadlines.html': ['⏰ Сроки и зачёты', '⏰ Terminy i zaliczenia', '⏰ Deadlines & credits'],
+    'student-guide.html': ['🎓 Справочник студента', '🎓 Poradnik studenta', '🎓 Student guide'],
     'stypendium.html': ['💰 Стипендия ректора', '💰 Stypendium rektora', '💰 Rector scholarship'],
     'colloquium-alg1.html': ['📝 Коллоквиум · алгебра', '📝 Kolokwium · algebra', '📝 Colloquium · algebra'],
     'colloquium.html': ['📝 Коллоквиум · матанализ', '📝 Kolokwium · analiza', '📝 Colloquium · analysis'],
