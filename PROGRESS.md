@@ -109,3 +109,8 @@
 - Зеркало: https://cloudpath.netlify.app (каждый пуш тратит кредиты Netlify, 300/мес).
 - Домен: `cloudpath.engineer` (Name.com, студ. оффер, до 17.11.2027, автопродление ВЫКЛ, продление 64,99 $). DNS: 4×A (185.199.108–111.153) + CNAME www → dsw-studies.github.io. Файл `CNAME` в репо. GitHub Pages: DNS check in progress; осталось включить Enforce HTTPS, когда станет доступно.
 - Осталось: h1 в EN на faq/glossary/resources/university; дата коллоквиума по физике; план к сессии (нужны даты экзаменов).
+
+## 2026-11-20: сроки и зачёты
+- Новая страница `deadlines.html` (сроки из Moodle, правила зачёта Физики, Kompetencje, переписка); добавлена в navLabels, SW (cloudpath-v74), search-data.
+- Не сделано: PDF (Karty przedmiotu, Python «Podstawy lista», тьютор) не прочитаны; даты Python Zad3/4 и Kompetencje; порог BHP.
+- Внимание: Oświadczenie studenta (Podstawy informatyki) просрочено с 30.09.
