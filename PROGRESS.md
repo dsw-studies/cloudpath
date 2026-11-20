@@ -118,3 +118,7 @@
 - Добавлен `student-guide.html` (справочник из презентации тьютора: даты сессии, контакты, системы); SW v75. Остальные PDF (Karty przedmiotu, Python) на D:\ не найдены.
 
 - Добавлен `subject-cards.html` (карты Fizyka и Podstawy informatyki из PDF); SW v76. Нет: Karta Kompetencje, Python «Podstawy lista».
+
+## 2026-11-20 — Python (ООП)
+- `python-2026-11-20.html`: конспект двух пар (3 записи Whisper), примеры кода проверены; в меню/SW (v77)/поиске.
+- Осталось: PL/EN-переводы страницы (пока только RU); запись `bandicam 14-36-21-417.mp4` — расшифровать после остановки записи.
