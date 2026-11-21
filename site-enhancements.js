@@ -50,6 +50,7 @@
     'deadlines.html': ['⏰ Сроки и зачёты', '⏰ Terminy i zaliczenia', '⏰ Deadlines & credits'],
     'student-guide.html': ['🎓 Справочник студента', '🎓 Poradnik studenta', '🎓 Student guide'],
     'subject-cards.html': ['📋 Карты предметов', '📋 Karty przedmiotów', '📋 Course cards'],
+    'physics-plan-2026-11-25.html': ['📅 План: коллоквиум физика 25.11', '📅 Plan: kolokwium z fizyki 25.11', '📅 Plan: physics colloquium 25 Nov'],
     'physics-2026-11-20.html': ['⚙️ Физика 20.11', '⚙️ Fizyka 20.11', '⚙️ Physics 20 Nov'],
     'python-2026-11-20.html': ['🐍 Python 20.11 · ООП', '🐍 Python 20.11 · OOP', '🐍 Python 20.11 · OOP'],
     'stypendium.html': ['💰 Стипендия ректора', '💰 Stypendium rektora', '💰 Rector scholarship'],
